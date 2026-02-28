@@ -1,0 +1,477 @@
+import { css } from '@emotion/css';
+import { DataFrame, getFrameDisplayName, GrafanaTheme2, StandardEditorProps } from '@grafana/data';
+import {
+  Button,
+  Combobox,
+  ComboboxOption,
+  Field,
+  Icon,
+  InlineField,
+  InlineFieldRow,
+  Switch,
+  useStyles2,
+} from '@grafana/ui';
+import { DragDropContext, Draggable, Droppable, DropResult } from '@hello-pangea/dnd';
+import React, { useMemo, useState } from 'react';
+import {
+  DisplayEntry,
+  FieldDisplayEntry,
+  HostViewerOptions,
+  JoinDisplayEntry,
+  JoinKeyPair,
+} from '../../types';
+import { FieldCombobox } from './FieldCombobox';
+import { SuggestionsFromEditorContext, TemplatePatternInput } from './TemplatePatternEditor';
+
+const JOIN_OPTION_VALUE = '__join__';
+
+const getStyles = (theme: GrafanaTheme2) => ({
+  dragHandle: css({
+    cursor: 'grab',
+    color: theme.colors.text.secondary,
+    '&:hover': {
+      color: theme.colors.text.primary,
+    },
+  }),
+  entryRow: css({
+    alignItems: 'center',
+  }),
+  entryLabelSecondary: css({
+    color: theme.colors.text.secondary,
+  }),
+  entryBody: css({
+    padding: theme.spacing(1, 0, 1, 2),
+    borderLeftWidth: 1,
+    borderLeftStyle: 'solid',
+    borderLeftColor: theme.colors.border.weak,
+  }),
+  keyPairRow: css({
+    alignItems: 'center',
+  }),
+  arrow: css({
+    color: theme.colors.text.secondary,
+    userSelect: 'none',
+  }),
+});
+
+interface DisplayEntriesEditorProps {
+  value: DisplayEntry[];
+  onChange: (entries: DisplayEntry[]) => void;
+  allFrames: DataFrame[];
+  primaryFieldOptions: Array<ComboboxOption<string>>;
+}
+
+export const DisplayEntriesEditor: React.FC<DisplayEntriesEditorProps> = ({
+  value,
+  onChange,
+  allFrames,
+  primaryFieldOptions,
+}) => {
+  const fieldComboboxOptions = useMemo((): Array<ComboboxOption<string>> => {
+    return [
+      ...primaryFieldOptions,
+      {
+        value: JOIN_OPTION_VALUE,
+        label: 'Join from another frame',
+        description: 'Join data from a secondary data frame',
+      },
+    ];
+  }, [primaryFieldOptions]);
+
+  const hiddenValues = useMemo(
+    () => value.filter((e): e is FieldDisplayEntry => e.type === 'field').map((e) => e.field),
+    [value]
+  );
+
+  const onDragEnd = (result: DropResult) => {
+    if (!result.destination) {
+      return;
+    }
+    const update = [...value];
+    const [moved] = update.splice(result.source.index, 1);
+    update.splice(result.destination.index, 0, moved);
+    onChange(update);
+  };
+
+  return (
+    <>
+      <DragDropContext onDragEnd={onDragEnd}>
+        <Droppable droppableId="entries" direction="vertical">
+          {(provided) => (
+            <div ref={provided.innerRef} {...provided.droppableProps}>
+              {value.map((entry, i) => (
+                <Draggable key={entry.id} draggableId={entry.id} index={i}>
+                  {(provided) => (
+                    <div ref={provided.innerRef} {...provided.draggableProps}>
+                      <EntryEditorRow
+                        value={entry}
+                        allFrames={allFrames}
+                        primaryFieldOptions={primaryFieldOptions}
+                        fieldComboboxOptions={fieldComboboxOptions}
+                        hiddenValues={hiddenValues}
+                        onChange={(updated) =>
+                          onChange(value.map((e, k) => (k === i ? updated : e)))
+                        }
+                        onDelete={() => onChange(value.filter((_, k) => k !== i))}
+                        dragHandleProps={provided.dragHandleProps}
+                      />
+                    </div>
+                  )}
+                </Draggable>
+              ))}
+              {provided.placeholder}
+            </div>
+          )}
+        </Droppable>
+      </DragDropContext>
+      <InlineFieldRow style={value.length === 0 ? undefined : { flexFlow: 'row-reverse' }}>
+        <InlineField>
+          <Button
+            variant={value.length === 0 ? 'primary' : 'secondary'}
+            icon={value.length === 0 ? undefined : 'plus'}
+            aria-label="Add entry"
+            title="Add entry"
+            onClick={() =>
+              onChange([
+                ...value,
+                {
+                  id: crypto.randomUUID(),
+                  type: 'field',
+                  field: '',
+                  overridesBorderColor: false,
+                } satisfies FieldDisplayEntry,
+              ])
+            }
+          >
+            {value.length === 0 ? 'Add entry' : null}
+          </Button>
+        </InlineField>
+      </InlineFieldRow>
+    </>
+  );
+};
+
+interface EntryEditorRowProps {
+  value: DisplayEntry;
+  allFrames: DataFrame[];
+  primaryFieldOptions: Array<ComboboxOption<string>>;
+  fieldComboboxOptions: Array<ComboboxOption<string>>;
+  hiddenValues: string[];
+  onChange: (entry: DisplayEntry) => void;
+  onDelete: () => void;
+  dragHandleProps?: React.HTMLAttributes<HTMLElement> | null;
+}
+
+const EntryEditorRow: React.FC<EntryEditorRowProps> = ({
+  value,
+  allFrames,
+  primaryFieldOptions,
+  fieldComboboxOptions,
+  hiddenValues,
+  onChange,
+  onDelete,
+  dragHandleProps,
+}) => {
+  const styles = useStyles2(getStyles);
+  const [isOpen, setIsOpen] = useState(value.type === 'join' ? !value.sourceFrame : false);
+
+  const comboboxValue = value.type === 'field' ? value.field || null : JOIN_OPTION_VALUE;
+
+  const handleComboboxChange = (selected: string | null) => {
+    if (selected === JOIN_OPTION_VALUE) {
+      onChange({
+        id: value.id,
+        type: 'join',
+        sourceFrame: '',
+        sourceField: '',
+        keys: [],
+        overridesBorderColor: value.overridesBorderColor,
+      } satisfies JoinDisplayEntry);
+      setIsOpen(true);
+    } else {
+      onChange({
+        id: value.id,
+        type: 'field',
+        field: selected ?? '',
+        overridesBorderColor: value.overridesBorderColor,
+      } satisfies FieldDisplayEntry);
+    }
+  };
+
+  return (
+    <div>
+      <InlineFieldRow style={{ flexWrap: 'nowrap' }} className={styles.entryRow}>
+        <InlineField {...dragHandleProps}>
+          <Icon name="draggabledots" className={styles.dragHandle} />
+        </InlineField>
+        <InlineField>
+          <Button
+            variant="secondary"
+            fill="text"
+            icon={isOpen ? 'angle-down' : 'angle-right'}
+            onClick={() => setIsOpen(!isOpen)}
+            aria-label={isOpen ? 'Collapse' : 'Expand'}
+            title={isOpen ? 'Collapse' : 'Expand'}
+          />
+        </InlineField>
+        <InlineField grow={true} shrink={true}>
+          <FieldCombobox
+            options={fieldComboboxOptions}
+            hiddenValues={hiddenValues}
+            value={comboboxValue}
+            onChange={handleComboboxChange}
+            isClearable={true}
+            placeholder="Select a field or join"
+            autoFocus={true}
+          />
+        </InlineField>
+        <InlineField>
+          <Button
+            variant="secondary"
+            icon="trash-alt"
+            aria-label="Delete entry"
+            title="Delete entry"
+            onClick={onDelete}
+          />
+        </InlineField>
+      </InlineFieldRow>
+      {isOpen && (
+        <div className={styles.entryBody}>
+          {value.type === 'field' ? (
+            <FieldEntrySettings value={value} onChange={onChange} />
+          ) : (
+            <JoinEntrySettings
+              value={value}
+              allFrames={allFrames}
+              primaryFieldOptions={primaryFieldOptions}
+              onChange={onChange}
+            />
+          )}
+        </div>
+      )}
+    </div>
+  );
+};
+
+interface FieldEntrySettingsProps {
+  value: FieldDisplayEntry;
+  onChange: (entry: DisplayEntry) => void;
+}
+
+const FieldEntrySettings: React.FC<FieldEntrySettingsProps> = ({ value, onChange }) => {
+  return (
+    <Field
+      label="Overrides border color"
+      description="Allow thresholds of this field to override border color"
+      horizontal={true}
+    >
+      <Switch
+        value={value.overridesBorderColor}
+        onChange={(v) => onChange({ ...value, overridesBorderColor: v.currentTarget.checked })}
+      />
+    </Field>
+  );
+};
+
+interface JoinEntrySettingsProps {
+  value: JoinDisplayEntry;
+  allFrames: DataFrame[];
+  primaryFieldOptions: Array<ComboboxOption<string>>;
+  onChange: (entry: DisplayEntry) => void;
+}
+
+const JoinEntrySettings: React.FC<JoinEntrySettingsProps> = ({
+  value,
+  allFrames,
+  primaryFieldOptions,
+  onChange,
+}) => {
+  const frameOptions = useMemo<Array<ComboboxOption<string>>>(
+    () =>
+      allFrames.map((frame) => {
+        const name = getFrameDisplayName(frame);
+        return {
+          label: name,
+          value: frame.refId ?? name,
+          description: frame.refId,
+        };
+      }),
+    [allFrames]
+  );
+
+  const sourceFrame = useMemo(
+    () => allFrames.find((f) => f.refId === value.sourceFrame),
+    [allFrames, value.sourceFrame]
+  );
+
+  const sourceFieldOptions = useMemo<Array<ComboboxOption<string>>>(
+    () =>
+      sourceFrame
+        ? sourceFrame.fields.map((f) => ({ label: f.name, value: f.name, description: f.type }))
+        : [],
+    [sourceFrame]
+  );
+
+  const handleChange = (updates: Partial<JoinDisplayEntry>) => {
+    onChange({ ...value, ...updates });
+  };
+
+  return (
+    <>
+      <Field label="Source Frame">
+        <Combobox
+          options={frameOptions}
+          value={value.sourceFrame || null}
+          onChange={(option) => handleChange({ sourceFrame: option?.value ?? '' })}
+          isClearable={true}
+          placeholder="Select a frame"
+        />
+      </Field>
+      <Field label="Display Field" description="Field from the joined frame to display">
+        <FieldCombobox
+          options={sourceFieldOptions}
+          value={value.sourceField || null}
+          onChange={(v) => handleChange({ sourceField: v ?? '' })}
+          isClearable={true}
+          placeholder="Select a field"
+        />
+      </Field>
+      <Field label="Keys" description="How to match rows between frames">
+        <>
+          {value.keys.map((pair, i) => (
+            <JoinKeyPairRow
+              key={i}
+              value={pair}
+              primaryFieldOptions={primaryFieldOptions}
+              foreignFieldOptions={sourceFieldOptions}
+              onChange={(updated) =>
+                handleChange({ keys: value.keys.map((k, j) => (j === i ? updated : k)) })
+              }
+              onDelete={() => handleChange({ keys: value.keys.filter((_, j) => j !== i) })}
+            />
+          ))}
+          <Button
+            variant="secondary"
+            size="sm"
+            icon="plus"
+            onClick={() =>
+              handleChange({
+                keys: [...value.keys, { primaryKey: '', foreignField: '', primaryKeyTemplate: '' }],
+              })
+            }
+          >
+            Add key
+          </Button>
+        </>
+      </Field>
+      <Field
+        label="Overrides border color"
+        description="Allow thresholds of the joined value to override border color"
+        horizontal={true}
+      >
+        <Switch
+          value={value.overridesBorderColor}
+          onChange={(v) => handleChange({ overridesBorderColor: v.currentTarget.checked })}
+        />
+      </Field>
+    </>
+  );
+};
+
+interface JoinKeyPairRowProps {
+  value: JoinKeyPair;
+  primaryFieldOptions: Array<ComboboxOption<string>>;
+  foreignFieldOptions: Array<ComboboxOption<string>>;
+  onChange: (pair: JoinKeyPair) => void;
+  onDelete: () => void;
+}
+
+const JoinKeyPairRow: React.FC<JoinKeyPairRowProps> = ({
+  value,
+  primaryFieldOptions,
+  foreignFieldOptions,
+  onChange,
+  onDelete,
+}) => {
+  const styles = useStyles2(getStyles);
+
+  return (
+    <>
+      <InlineFieldRow style={{ flexWrap: 'nowrap' }} className={styles.keyPairRow}>
+        <InlineField title="Foreign field" grow={true} shrink={true}>
+          <FieldCombobox
+            options={foreignFieldOptions}
+            value={value.foreignField || null}
+            onChange={(v) => onChange({ ...value, foreignField: v ?? '' })}
+            isClearable={true}
+            placeholder="Foreign field"
+          />
+        </InlineField>
+        <InlineField>
+          <span className={styles.arrow}>=</span>
+        </InlineField>
+        <InlineField title="Value" grow={true} shrink={true}>
+          <FieldCombobox
+            options={[{ value: '__template__', label: 'Use template' }, ...primaryFieldOptions]}
+            value={value.primaryKey || null}
+            onChange={(v) => onChange({ ...value, primaryKey: v ?? '' })}
+            isClearable={true}
+            placeholder="Value"
+          />
+        </InlineField>
+        <InlineField>
+          <Button
+            variant="secondary"
+            icon="trash-alt"
+            aria-label="Delete key pair"
+            title="Delete key pair"
+            onClick={onDelete}
+          />
+        </InlineField>
+      </InlineFieldRow>
+      {value.primaryKey === '__template__' ? (
+        <InlineFieldRow style={{ flexWrap: 'nowrap' }} className={styles.keyPairRow}>
+          <InlineField grow={true}>
+            <TemplatePatternInput
+              value={value.primaryKeyTemplate}
+              onChange={(v) => onChange({ ...value, primaryKeyTemplate: v })}
+              placeholder="e.g. ${__data.fields.id}"
+            />
+          </InlineField>
+        </InlineFieldRow>
+      ) : null}
+    </>
+  );
+};
+
+export const DisplayEntriesEditorWrapper = ({
+  value,
+  onChange,
+  context,
+}: StandardEditorProps<DisplayEntry[], unknown, HostViewerOptions>) => {
+  const allFrames = context.data ?? [];
+
+  const primaryRefId = context.options?.dataFrame;
+  const primaryFrame = primaryRefId
+    ? allFrames.find((f) => f.refId === primaryRefId)
+    : allFrames[0];
+
+  const primaryFieldOptions = useMemo<Array<ComboboxOption<string>>>(
+    () =>
+      primaryFrame
+        ? primaryFrame.fields.map((f) => ({ label: f.name, value: f.name, description: f.type }))
+        : [],
+    [primaryFrame]
+  );
+
+  return (
+    <SuggestionsFromEditorContext context={context}>
+      <DisplayEntriesEditor
+        value={value ?? []}
+        onChange={onChange}
+        allFrames={allFrames}
+        primaryFieldOptions={primaryFieldOptions}
+      />
+    </SuggestionsFromEditorContext>
+  );
+};

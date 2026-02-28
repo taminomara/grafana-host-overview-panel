@@ -1,0 +1,4494 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": {
+          "type": "grafana",
+          "uid": "-- Grafana --"
+        },
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "id": 1,
+  "links": [],
+  "panels": [
+    {
+      "datasource": {
+        "type": "grafana-testdata-datasource",
+        "uid": "trlxrdZVk"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "displayMode": "auto"
+          },
+          "fieldMinMax": true,
+          "mappings": [],
+          "noValue": "unknown",
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "text",
+                "value": 0
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 24,
+        "x": 0,
+        "y": 8
+      },
+      "id": 11,
+      "options": {
+        "cellSize": 20,
+        "cellTextField": "",
+        "cellTextPattern": "",
+        "dataFrame": "",
+        "gridColumns": 5,
+        "gridType": "flow",
+        "groups": [],
+        "idField": "name",
+        "idSortMode": "disabled",
+        "idSortPattern": "",
+        "knownIds": "",
+        "resourceDisplayMode": "cell",
+        "richEntries": [],
+        "statusField": "status",
+        "tooltipEntries": [],
+        "tooltipTitleField": "",
+        "tooltipTitlePattern": ""
+      },
+      "pluginVersion": "1.0.0",
+      "targets": [
+        {
+          "csvContent": "name,status\r\n",
+          "datasource": {
+            "type": "grafana-testdata-datasource",
+            "uid": "trlxrdZVk"
+          },
+          "refId": "A",
+          "scenarioId": "csv_content"
+        }
+      ],
+      "title": "Empty frame",
+      "type": "taminomara-hostoverview-panel"
+    },
+    {
+      "datasource": {
+        "type": "grafana-testdata-datasource",
+        "uid": "trlxrdZVk"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "displayMode": "auto"
+          },
+          "fieldMinMax": true,
+          "mappings": [],
+          "noValue": "unknown",
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "text",
+                "value": 0
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 24,
+        "x": 0,
+        "y": 16
+      },
+      "id": 12,
+      "options": {
+        "cellSize": 20,
+        "cellTextField": "",
+        "cellTextPattern": "",
+        "dataFrame": "",
+        "gridColumns": 5,
+        "gridType": "flow",
+        "groups": [],
+        "idField": "name",
+        "idSortMode": "disabled",
+        "idSortPattern": "",
+        "knownIds": "",
+        "resourceDisplayMode": "cell",
+        "richEntries": [],
+        "statusField": "status",
+        "tooltipEntries": [],
+        "tooltipTitleField": "",
+        "tooltipTitlePattern": ""
+      },
+      "pluginVersion": "1.0.0",
+      "targets": [
+        {
+          "datasource": {
+            "type": "grafana-testdata-datasource",
+            "uid": "trlxrdZVk"
+          },
+          "rawFrameContent": "[{\"schema\":{\"fields\":[{\"name\":\"name\",\"type\":\"string\"},{\"name\":\"status\",\"type\":\"number\"}]},\"data\":{\"values\":[[\"node-a\"],[1]]}},{\"schema\":{\"fields\":[{\"name\":\"name\",\"type\":\"string\"},{\"name\":\"status\",\"type\":\"number\"}]},\"data\":{\"values\":[[\"node-b\"],[0]]}}]",
+          "refId": "A",
+          "scenarioId": "raw_frame"
+        }
+      ],
+      "title": "Duplicate frame IDs",
+      "type": "taminomara-hostoverview-panel"
+    },
+    {
+      "datasource": {
+        "type": "grafana-testdata-datasource",
+        "uid": "trlxrdZVk"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "displayMode": "auto"
+          },
+          "fieldMinMax": true,
+          "mappings": [],
+          "noValue": "unknown",
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "red",
+                "value": 0
+              },
+              {
+                "color": "green",
+                "value": 1
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 24,
+        "x": 0,
+        "y": 24
+      },
+      "id": 13,
+      "options": {
+        "cellSize": 20,
+        "cellTextField": "name",
+        "cellTextPattern": "",
+        "dataFrame": "",
+        "gridColumns": 5,
+        "gridType": "flow",
+        "groups": [],
+        "idField": "name",
+        "idSortMode": "disabled",
+        "idSortPattern": "",
+        "knownIds": "",
+        "resourceDisplayMode": "cell-with-text",
+        "richEntries": [],
+        "statusField": "nonexistent",
+        "tooltipEntries": [],
+        "tooltipTitleField": "",
+        "tooltipTitlePattern": ""
+      },
+      "pluginVersion": "1.0.0",
+      "targets": [
+        {
+          "csvContent": "name,status,role,cpu\r\nnode-a,1,web,45\r\nnode-b,0,web,82\r\nnode-c,1,db,23\r\nnode-d,1,db,67\r\nnode-e,0,api,91",
+          "datasource": {
+            "type": "grafana-testdata-datasource",
+            "uid": "trlxrdZVk"
+          },
+          "refId": "A",
+          "scenarioId": "csv_content"
+        }
+      ],
+      "title": "Missing status field",
+      "type": "taminomara-hostoverview-panel"
+    },
+    {
+      "datasource": {
+        "type": "grafana-testdata-datasource",
+        "uid": "trlxrdZVk"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "displayMode": "auto"
+          },
+          "fieldMinMax": true,
+          "mappings": [],
+          "noValue": "unknown",
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "red",
+                "value": 0
+              },
+              {
+                "color": "green",
+                "value": 1
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 24,
+        "x": 0,
+        "y": 32
+      },
+      "id": 14,
+      "options": {
+        "cellSize": 20,
+        "cellTextField": "name",
+        "cellTextPattern": "",
+        "dataFrame": "",
+        "gridColumns": 5,
+        "gridType": "flow",
+        "groups": [
+          {
+            "disabled": false,
+            "drawBorder": true,
+            "entries": [],
+            "gridColumns": 5,
+            "gridType": "flow",
+            "groupKey": "nonexistent",
+            "id": "e2e-14-g-0",
+            "knownIds": "",
+            "showKeyName": false,
+            "showTitle": true,
+            "sortMode": "disabled",
+            "transparentBackground": false
+          }
+        ],
+        "idField": "name",
+        "idSortMode": "disabled",
+        "idSortPattern": "",
+        "knownIds": "",
+        "resourceDisplayMode": "cell-with-text",
+        "richEntries": [],
+        "statusField": "status",
+        "tooltipEntries": [],
+        "tooltipTitleField": "",
+        "tooltipTitlePattern": ""
+      },
+      "pluginVersion": "1.0.0",
+      "targets": [
+        {
+          "csvContent": "name,status,role,cpu\r\nnode-a,1,web,45\r\nnode-b,0,web,82\r\nnode-c,1,db,23\r\nnode-d,1,db,67\r\nnode-e,0,api,91",
+          "datasource": {
+            "type": "grafana-testdata-datasource",
+            "uid": "trlxrdZVk"
+          },
+          "refId": "A",
+          "scenarioId": "csv_content"
+        }
+      ],
+      "title": "Missing group field",
+      "type": "taminomara-hostoverview-panel"
+    },
+    {
+      "datasource": {
+        "type": "grafana-testdata-datasource",
+        "uid": "trlxrdZVk"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "displayMode": "auto"
+          },
+          "fieldMinMax": true,
+          "mappings": [
+            {
+              "type": "special",
+              "options": {
+                "match": "null+nan",
+                "result": {
+                  "text": "Unknown",
+                  "color": "#888888",
+                  "index": 0
+                }
+              }
+            }
+          ],
+          "noValue": "N/A",
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "#ff0000",
+                "value": 0
+              },
+              {
+                "color": "#00ff00",
+                "value": 1
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 24,
+        "x": 0,
+        "y": 40
+      },
+      "id": 15,
+      "options": {
+        "cellSize": 20,
+        "cellTextField": "name",
+        "cellTextPattern": "",
+        "dataFrame": "",
+        "gridColumns": 5,
+        "gridType": "flow",
+        "groups": [],
+        "idField": "name",
+        "idSortMode": "disabled",
+        "idSortPattern": "",
+        "knownIds": "",
+        "resourceDisplayMode": "cell-with-text",
+        "richEntries": [],
+        "statusField": "status",
+        "tooltipEntries": [
+          {
+            "field": "cpu",
+            "id": "e2e-15-f-0",
+            "overridesBorderColor": false,
+            "type": "field"
+          }
+        ],
+        "tooltipTitleField": "",
+        "tooltipTitlePattern": ""
+      },
+      "pluginVersion": "1.0.0",
+      "targets": [
+        {
+          "csvContent": "name,status,role,cpu\r\nnode-a,1,web,45\r\nnode-b,,web,\r\nnode-c,1,,23\r\nnode-d,1,db,67\r\nnode-e,0,api,",
+          "datasource": {
+            "type": "grafana-testdata-datasource",
+            "uid": "trlxrdZVk"
+          },
+          "refId": "A",
+          "scenarioId": "csv_content"
+        }
+      ],
+      "title": "Null/empty values",
+      "type": "taminomara-hostoverview-panel"
+    },
+    {
+      "datasource": {
+        "type": "grafana-testdata-datasource",
+        "uid": "trlxrdZVk"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "displayMode": "auto"
+          },
+          "fieldMinMax": true,
+          "mappings": [],
+          "noValue": "unknown",
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "red",
+                "value": 0
+              },
+              {
+                "color": "green",
+                "value": 1
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 24,
+        "x": 0,
+        "y": 48
+      },
+      "id": 16,
+      "options": {
+        "cellSize": 20,
+        "cellTextField": "name",
+        "cellTextPattern": "",
+        "dataFrame": "",
+        "gridColumns": 5,
+        "gridType": "flow",
+        "groups": [],
+        "idField": "name",
+        "idSortMode": "disabled",
+        "idSortPattern": "",
+        "knownIds": "",
+        "resourceDisplayMode": "cell-with-text",
+        "richEntries": [],
+        "statusField": "status",
+        "tooltipEntries": [],
+        "tooltipTitleField": "",
+        "tooltipTitlePattern": ""
+      },
+      "pluginVersion": "1.0.0",
+      "targets": [
+        {
+          "csvContent": "name,status,role,cpu\r\nnode-a,1,web,45",
+          "datasource": {
+            "type": "grafana-testdata-datasource",
+            "uid": "trlxrdZVk"
+          },
+          "refId": "A",
+          "scenarioId": "csv_content"
+        }
+      ],
+      "title": "Single row",
+      "type": "taminomara-hostoverview-panel"
+    },
+    {
+      "datasource": {
+        "type": "grafana-testdata-datasource",
+        "uid": "trlxrdZVk"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "displayMode": "auto"
+          },
+          "fieldMinMax": true,
+          "mappings": [],
+          "noValue": "unknown",
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "red",
+                "value": 0
+              },
+              {
+                "color": "green",
+                "value": 1
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 24,
+        "x": 0,
+        "y": 56
+      },
+      "id": 17,
+      "options": {
+        "cellSize": 20,
+        "cellTextField": "",
+        "cellTextPattern": "",
+        "dataFrame": "NonexistentFrame",
+        "gridColumns": 5,
+        "gridType": "flow",
+        "groups": [],
+        "idField": "name",
+        "idSortMode": "disabled",
+        "idSortPattern": "",
+        "knownIds": "",
+        "resourceDisplayMode": "cell",
+        "richEntries": [],
+        "statusField": "status",
+        "tooltipEntries": [],
+        "tooltipTitleField": "",
+        "tooltipTitlePattern": ""
+      },
+      "pluginVersion": "1.0.0",
+      "targets": [
+        {
+          "csvContent": "name,status,role,cpu\r\nnode-a,1,web,45\r\nnode-b,0,web,82\r\nnode-c,1,db,23\r\nnode-d,1,db,67\r\nnode-e,0,api,91",
+          "datasource": {
+            "type": "grafana-testdata-datasource",
+            "uid": "trlxrdZVk"
+          },
+          "refId": "A",
+          "scenarioId": "csv_content"
+        }
+      ],
+      "title": "Wrong data frame",
+      "type": "taminomara-hostoverview-panel"
+    },
+    {
+      "datasource": {
+        "type": "grafana-testdata-datasource",
+        "uid": "trlxrdZVk"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "displayMode": "auto"
+          },
+          "fieldMinMax": true,
+          "mappings": [],
+          "noValue": "unknown",
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "#ff0000",
+                "value": 0
+              },
+              {
+                "color": "#00ff00",
+                "value": 1
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 24,
+        "x": 0,
+        "y": 64
+      },
+      "id": 20,
+      "options": {
+        "cellSize": 20,
+        "cellTextField": "",
+        "cellTextPattern": "",
+        "dataFrame": "",
+        "gridColumns": 5,
+        "gridType": "flow",
+        "groups": [],
+        "idField": "name",
+        "idSortMode": "disabled",
+        "idSortPattern": "",
+        "knownIds": "",
+        "resourceDisplayMode": "cell",
+        "richEntries": [],
+        "statusField": "status",
+        "tooltipEntries": [],
+        "tooltipTitleField": "",
+        "tooltipTitlePattern": ""
+      },
+      "pluginVersion": "1.0.0",
+      "targets": [
+        {
+          "csvContent": "name,status,role,cpu\r\nnode-a,1,web,45\r\nnode-b,0,web,82\r\nnode-c,1,db,23\r\nnode-d,1,db,67\r\nnode-e,0,api,91",
+          "datasource": {
+            "type": "grafana-testdata-datasource",
+            "uid": "trlxrdZVk"
+          },
+          "refId": "A",
+          "scenarioId": "csv_content"
+        }
+      ],
+      "title": "Cell mode",
+      "type": "taminomara-hostoverview-panel"
+    },
+    {
+      "datasource": {
+        "type": "grafana-testdata-datasource",
+        "uid": "trlxrdZVk"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "displayMode": "auto"
+          },
+          "fieldMinMax": true,
+          "mappings": [],
+          "noValue": "unknown",
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "#ff0000",
+                "value": 0
+              },
+              {
+                "color": "#00ff00",
+                "value": 1
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 24,
+        "x": 0,
+        "y": 72
+      },
+      "id": 21,
+      "options": {
+        "cellSize": 20,
+        "cellTextField": "name",
+        "cellTextPattern": "",
+        "dataFrame": "",
+        "gridColumns": 5,
+        "gridType": "flow",
+        "groups": [],
+        "idField": "name",
+        "idSortMode": "disabled",
+        "idSortPattern": "",
+        "knownIds": "",
+        "resourceDisplayMode": "cell-with-text",
+        "richEntries": [],
+        "statusField": "status",
+        "tooltipEntries": [],
+        "tooltipTitleField": "",
+        "tooltipTitlePattern": ""
+      },
+      "pluginVersion": "1.0.0",
+      "targets": [
+        {
+          "csvContent": "name,status,role,cpu\r\nnode-a,1,web,45\r\nnode-b,0,web,82\r\nnode-c,1,db,23\r\nnode-d,1,db,67\r\nnode-e,0,api,91",
+          "datasource": {
+            "type": "grafana-testdata-datasource",
+            "uid": "trlxrdZVk"
+          },
+          "refId": "A",
+          "scenarioId": "csv_content"
+        }
+      ],
+      "title": "Cell with text",
+      "type": "taminomara-hostoverview-panel"
+    },
+    {
+      "datasource": {
+        "type": "grafana-testdata-datasource",
+        "uid": "trlxrdZVk"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "displayMode": "auto"
+          },
+          "fieldMinMax": true,
+          "mappings": [],
+          "noValue": "unknown",
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "#ff0000",
+                "value": 0
+              },
+              {
+                "color": "#00ff00",
+                "value": 1
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "cpu"
+            },
+            "properties": [
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "#00aa00",
+                      "value": 0
+                    },
+                    {
+                      "color": "#aaaa00",
+                      "value": 50
+                    },
+                    {
+                      "color": "#aa0000",
+                      "value": 80
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 24,
+        "x": 0,
+        "y": 80
+      },
+      "id": 22,
+      "options": {
+        "cellSize": 20,
+        "cellTextField": "",
+        "cellTextPattern": "",
+        "dataFrame": "",
+        "gridColumns": 5,
+        "gridType": "flow",
+        "groups": [],
+        "idField": "name",
+        "idSortMode": "disabled",
+        "idSortPattern": "",
+        "knownIds": "",
+        "resourceDisplayMode": "rich",
+        "richEntries": [
+          {
+            "field": "role",
+            "id": "e2e-22-f-0",
+            "overridesBorderColor": false,
+            "type": "field"
+          },
+          {
+            "field": "cpu",
+            "id": "e2e-22-f-1",
+            "overridesBorderColor": false,
+            "type": "field"
+          }
+        ],
+        "statusField": "status",
+        "tooltipEntries": [],
+        "tooltipTitleField": "",
+        "tooltipTitlePattern": ""
+      },
+      "pluginVersion": "1.0.0",
+      "targets": [
+        {
+          "csvContent": "name,status,role,cpu\r\nnode-a,1,web,45\r\nnode-b,0,web,82\r\nnode-c,1,db,23\r\nnode-d,1,db,67\r\nnode-e,0,api,91",
+          "datasource": {
+            "type": "grafana-testdata-datasource",
+            "uid": "trlxrdZVk"
+          },
+          "refId": "A",
+          "scenarioId": "csv_content"
+        }
+      ],
+      "title": "Rich table",
+      "type": "taminomara-hostoverview-panel"
+    },
+    {
+      "datasource": {
+        "type": "grafana-testdata-datasource",
+        "uid": "trlxrdZVk"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "displayMode": "auto"
+          },
+          "fieldMinMax": true,
+          "mappings": [],
+          "noValue": "unknown",
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "red",
+                "value": 0
+              },
+              {
+                "color": "green",
+                "value": 1
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "cpu"
+            },
+            "properties": [
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "green",
+                      "value": 0
+                    },
+                    {
+                      "color": "yellow",
+                      "value": 50
+                    },
+                    {
+                      "color": "red",
+                      "value": 80
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 24,
+        "x": 0,
+        "y": 88
+      },
+      "id": 23,
+      "options": {
+        "cellSize": 20,
+        "cellTextField": "",
+        "cellTextPattern": "",
+        "dataFrame": "",
+        "gridColumns": 5,
+        "gridType": "flow",
+        "groups": [],
+        "idField": "name",
+        "idSortMode": "disabled",
+        "idSortPattern": "",
+        "knownIds": "",
+        "resourceDisplayMode": "rich",
+        "richEntries": [
+          {
+            "field": "role",
+            "id": "e2e-23-f-0",
+            "overridesBorderColor": false,
+            "type": "field"
+          }
+        ],
+        "statusField": "status",
+        "tooltipEntries": [
+          {
+            "field": "cpu",
+            "id": "e2e-23-f-1",
+            "overridesBorderColor": false,
+            "type": "field"
+          }
+        ],
+        "tooltipTitleField": "",
+        "tooltipTitlePattern": ""
+      },
+      "pluginVersion": "1.0.0",
+      "targets": [
+        {
+          "csvContent": "name,status,role,cpu\r\nnode-a,1,web,45\r\nnode-b,0,web,82\r\nnode-c,1,db,23\r\nnode-d,1,db,67\r\nnode-e,0,api,91",
+          "datasource": {
+            "type": "grafana-testdata-datasource",
+            "uid": "trlxrdZVk"
+          },
+          "refId": "A",
+          "scenarioId": "csv_content"
+        }
+      ],
+      "title": "Rich table expandable tooltip",
+      "type": "taminomara-hostoverview-panel"
+    },
+    {
+      "datasource": {
+        "type": "grafana-testdata-datasource",
+        "uid": "trlxrdZVk"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "displayMode": "auto"
+          },
+          "fieldMinMax": true,
+          "mappings": [],
+          "noValue": "unknown",
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "red",
+                "value": 0
+              },
+              {
+                "color": "green",
+                "value": 1
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 24,
+        "x": 0,
+        "y": 96
+      },
+      "id": 30,
+      "options": {
+        "cellSize": 20,
+        "cellTextField": "name",
+        "cellTextPattern": "",
+        "dataFrame": "",
+        "gridColumns": 5,
+        "gridType": "flow",
+        "groups": [],
+        "idField": "name",
+        "idSortMode": "disabled",
+        "idSortPattern": "",
+        "knownIds": "",
+        "resourceDisplayMode": "cell-with-text",
+        "richEntries": [],
+        "statusField": "status",
+        "tooltipEntries": [],
+        "tooltipTitleField": "",
+        "tooltipTitlePattern": ""
+      },
+      "pluginVersion": "1.0.0",
+      "targets": [
+        {
+          "csvContent": "name,region,role,status\r\nsrv-1,us-east,web,1\r\nsrv-2,us-east,db,0\r\nsrv-3,eu-west,web,1\r\nsrv-4,eu-west,db,1\r\nsrv-5,us-east,api,1\r\nsrv-6,eu-west,api,0",
+          "datasource": {
+            "type": "grafana-testdata-datasource",
+            "uid": "trlxrdZVk"
+          },
+          "refId": "A",
+          "scenarioId": "csv_content"
+        }
+      ],
+      "title": "No groups",
+      "type": "taminomara-hostoverview-panel"
+    },
+    {
+      "datasource": {
+        "type": "grafana-testdata-datasource",
+        "uid": "trlxrdZVk"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "displayMode": "auto"
+          },
+          "fieldMinMax": true,
+          "mappings": [],
+          "noValue": "unknown",
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "red",
+                "value": 0
+              },
+              {
+                "color": "green",
+                "value": 1
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 24,
+        "x": 0,
+        "y": 104
+      },
+      "id": 31,
+      "options": {
+        "cellSize": 20,
+        "cellTextField": "name",
+        "cellTextPattern": "",
+        "dataFrame": "",
+        "gridColumns": 5,
+        "gridType": "flow",
+        "groups": [
+          {
+            "disabled": false,
+            "drawBorder": true,
+            "entries": [],
+            "gridColumns": 5,
+            "gridType": "flow",
+            "groupKey": "region",
+            "id": "e2e-31-g-0",
+            "knownIds": "",
+            "showKeyName": false,
+            "showTitle": true,
+            "sortMode": "disabled",
+            "transparentBackground": false
+          }
+        ],
+        "idField": "name",
+        "idSortMode": "disabled",
+        "idSortPattern": "",
+        "knownIds": "",
+        "resourceDisplayMode": "cell-with-text",
+        "richEntries": [],
+        "statusField": "status",
+        "tooltipEntries": [],
+        "tooltipTitleField": "",
+        "tooltipTitlePattern": ""
+      },
+      "pluginVersion": "1.0.0",
+      "targets": [
+        {
+          "csvContent": "name,region,role,status\r\nsrv-1,us-east,web,1\r\nsrv-2,us-east,db,0\r\nsrv-3,eu-west,web,1\r\nsrv-4,eu-west,db,1\r\nsrv-5,us-east,api,1\r\nsrv-6,eu-west,api,0",
+          "datasource": {
+            "type": "grafana-testdata-datasource",
+            "uid": "trlxrdZVk"
+          },
+          "refId": "A",
+          "scenarioId": "csv_content"
+        }
+      ],
+      "title": "Single group",
+      "type": "taminomara-hostoverview-panel"
+    },
+    {
+      "datasource": {
+        "type": "grafana-testdata-datasource",
+        "uid": "trlxrdZVk"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "displayMode": "auto"
+          },
+          "fieldMinMax": true,
+          "mappings": [],
+          "noValue": "unknown",
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "red",
+                "value": 0
+              },
+              {
+                "color": "green",
+                "value": 1
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 24,
+        "x": 0,
+        "y": 112
+      },
+      "id": 32,
+      "options": {
+        "cellSize": 20,
+        "cellTextField": "name",
+        "cellTextPattern": "",
+        "dataFrame": "",
+        "gridColumns": 5,
+        "gridType": "flow",
+        "groups": [
+          {
+            "disabled": false,
+            "drawBorder": true,
+            "entries": [],
+            "gridColumns": 5,
+            "gridType": "flow",
+            "groupKey": "region",
+            "id": "e2e-32-g-0",
+            "knownIds": "",
+            "showKeyName": false,
+            "showTitle": true,
+            "sortMode": "disabled",
+            "transparentBackground": false
+          },
+          {
+            "disabled": false,
+            "drawBorder": true,
+            "entries": [],
+            "gridColumns": 5,
+            "gridType": "flow",
+            "groupKey": "role",
+            "id": "e2e-32-g-1",
+            "knownIds": "",
+            "showKeyName": false,
+            "showTitle": true,
+            "sortMode": "disabled",
+            "transparentBackground": false
+          }
+        ],
+        "idField": "name",
+        "idSortMode": "disabled",
+        "idSortPattern": "",
+        "knownIds": "",
+        "resourceDisplayMode": "cell-with-text",
+        "richEntries": [],
+        "statusField": "status",
+        "tooltipEntries": [],
+        "tooltipTitleField": "",
+        "tooltipTitlePattern": ""
+      },
+      "pluginVersion": "1.0.0",
+      "targets": [
+        {
+          "csvContent": "name,region,role,status\r\nsrv-1,us-east,web,1\r\nsrv-2,us-east,db,0\r\nsrv-3,eu-west,web,1\r\nsrv-4,eu-west,db,1\r\nsrv-5,us-east,api,1\r\nsrv-6,eu-west,api,0",
+          "datasource": {
+            "type": "grafana-testdata-datasource",
+            "uid": "trlxrdZVk"
+          },
+          "refId": "A",
+          "scenarioId": "csv_content"
+        }
+      ],
+      "title": "Multiple groups",
+      "type": "taminomara-hostoverview-panel"
+    },
+    {
+      "datasource": {
+        "type": "grafana-testdata-datasource",
+        "uid": "trlxrdZVk"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "displayMode": "auto"
+          },
+          "fieldMinMax": true,
+          "mappings": [],
+          "noValue": "unknown",
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "red",
+                "value": 0
+              },
+              {
+                "color": "green",
+                "value": 1
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 24,
+        "x": 0,
+        "y": 120
+      },
+      "id": 33,
+      "options": {
+        "cellSize": 20,
+        "cellTextField": "name",
+        "cellTextPattern": "",
+        "dataFrame": "",
+        "gridColumns": 5,
+        "gridType": "flow",
+        "groups": [
+          {
+            "disabled": true,
+            "drawBorder": true,
+            "entries": [],
+            "gridColumns": 5,
+            "gridType": "flow",
+            "groupKey": "region",
+            "id": "e2e-33-g-0",
+            "knownIds": "",
+            "showKeyName": false,
+            "showTitle": true,
+            "sortMode": "disabled",
+            "transparentBackground": false
+          },
+          {
+            "disabled": false,
+            "drawBorder": true,
+            "entries": [],
+            "gridColumns": 5,
+            "gridType": "flow",
+            "groupKey": "role",
+            "id": "e2e-33-g-1",
+            "knownIds": "",
+            "showKeyName": false,
+            "showTitle": true,
+            "sortMode": "disabled",
+            "transparentBackground": false
+          }
+        ],
+        "idField": "name",
+        "idSortMode": "disabled",
+        "idSortPattern": "",
+        "knownIds": "",
+        "resourceDisplayMode": "cell-with-text",
+        "richEntries": [],
+        "statusField": "status",
+        "tooltipEntries": [],
+        "tooltipTitleField": "",
+        "tooltipTitlePattern": ""
+      },
+      "pluginVersion": "1.0.0",
+      "targets": [
+        {
+          "csvContent": "name,region,role,status\r\nsrv-1,us-east,web,1\r\nsrv-2,us-east,db,0\r\nsrv-3,eu-west,web,1\r\nsrv-4,eu-west,db,1\r\nsrv-5,us-east,api,1\r\nsrv-6,eu-west,api,0",
+          "datasource": {
+            "type": "grafana-testdata-datasource",
+            "uid": "trlxrdZVk"
+          },
+          "refId": "A",
+          "scenarioId": "csv_content"
+        }
+      ],
+      "title": "Disabled group",
+      "type": "taminomara-hostoverview-panel"
+    },
+    {
+      "datasource": {
+        "type": "grafana-testdata-datasource",
+        "uid": "trlxrdZVk"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "displayMode": "auto"
+          },
+          "fieldMinMax": true,
+          "mappings": [],
+          "noValue": "unknown",
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "red",
+                "value": 0
+              },
+              {
+                "color": "green",
+                "value": 1
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 24,
+        "x": 0,
+        "y": 128
+      },
+      "id": 34,
+      "options": {
+        "cellSize": 20,
+        "cellTextField": "name",
+        "cellTextPattern": "",
+        "dataFrame": "",
+        "gridColumns": 5,
+        "gridType": "flow",
+        "groups": [
+          {
+            "disabled": false,
+            "drawBorder": true,
+            "entries": [],
+            "gridColumns": 5,
+            "gridType": "flow",
+            "groupKey": "nonexistent",
+            "id": "e2e-34-g-0",
+            "knownIds": "",
+            "showKeyName": false,
+            "showTitle": true,
+            "sortMode": "disabled",
+            "transparentBackground": false
+          }
+        ],
+        "idField": "name",
+        "idSortMode": "disabled",
+        "idSortPattern": "",
+        "knownIds": "",
+        "resourceDisplayMode": "cell-with-text",
+        "richEntries": [],
+        "statusField": "status",
+        "tooltipEntries": [],
+        "tooltipTitleField": "",
+        "tooltipTitlePattern": ""
+      },
+      "pluginVersion": "1.0.0",
+      "targets": [
+        {
+          "csvContent": "name,region,role,status\r\nsrv-1,us-east,web,1\r\nsrv-2,us-east,db,0\r\nsrv-3,eu-west,web,1\r\nsrv-4,eu-west,db,1\r\nsrv-5,us-east,api,1\r\nsrv-6,eu-west,api,0",
+          "datasource": {
+            "type": "grafana-testdata-datasource",
+            "uid": "trlxrdZVk"
+          },
+          "refId": "A",
+          "scenarioId": "csv_content"
+        }
+      ],
+      "title": "Group with missing field",
+      "type": "taminomara-hostoverview-panel"
+    },
+    {
+      "datasource": {
+        "type": "grafana-testdata-datasource",
+        "uid": "trlxrdZVk"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "displayMode": "auto"
+          },
+          "fieldMinMax": true,
+          "mappings": [],
+          "noValue": "unknown",
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "text",
+                "value": 0
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 24,
+        "x": 0,
+        "y": 136
+      },
+      "id": 40,
+      "options": {
+        "cellSize": 20,
+        "cellTextField": "name",
+        "cellTextPattern": "",
+        "dataFrame": "",
+        "gridColumns": 5,
+        "gridType": "flow",
+        "groups": [],
+        "idField": "name",
+        "idSortMode": "default",
+        "idSortPattern": "",
+        "knownIds": "",
+        "resourceDisplayMode": "cell-with-text",
+        "richEntries": [],
+        "statusField": "",
+        "tooltipEntries": [],
+        "tooltipTitleField": "",
+        "tooltipTitlePattern": ""
+      },
+      "pluginVersion": "1.0.0",
+      "targets": [
+        {
+          "csvContent": "name,value\r\nnode-1,10\r\nnode-10,100\r\nnode-2,20\r\nnode-3,30",
+          "datasource": {
+            "type": "grafana-testdata-datasource",
+            "uid": "trlxrdZVk"
+          },
+          "refId": "A",
+          "scenarioId": "csv_content"
+        }
+      ],
+      "title": "Default sort",
+      "type": "taminomara-hostoverview-panel"
+    },
+    {
+      "datasource": {
+        "type": "grafana-testdata-datasource",
+        "uid": "trlxrdZVk"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "displayMode": "auto"
+          },
+          "fieldMinMax": true,
+          "mappings": [],
+          "noValue": "unknown",
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "text",
+                "value": 0
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 24,
+        "x": 0,
+        "y": 144
+      },
+      "id": 41,
+      "options": {
+        "cellSize": 20,
+        "cellTextField": "name",
+        "cellTextPattern": "",
+        "dataFrame": "",
+        "gridColumns": 5,
+        "gridType": "flow",
+        "groups": [],
+        "idField": "name",
+        "idSortMode": "lexicographic",
+        "idSortPattern": "",
+        "knownIds": "",
+        "resourceDisplayMode": "cell-with-text",
+        "richEntries": [],
+        "statusField": "",
+        "tooltipEntries": [],
+        "tooltipTitleField": "",
+        "tooltipTitlePattern": ""
+      },
+      "pluginVersion": "1.0.0",
+      "targets": [
+        {
+          "csvContent": "name,value\r\nnode-1,10\r\nnode-10,100\r\nnode-2,20\r\nnode-3,30",
+          "datasource": {
+            "type": "grafana-testdata-datasource",
+            "uid": "trlxrdZVk"
+          },
+          "refId": "A",
+          "scenarioId": "csv_content"
+        }
+      ],
+      "title": "Lexicographic sort",
+      "type": "taminomara-hostoverview-panel"
+    },
+    {
+      "datasource": {
+        "type": "grafana-testdata-datasource",
+        "uid": "trlxrdZVk"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "displayMode": "auto"
+          },
+          "fieldMinMax": true,
+          "mappings": [],
+          "noValue": "unknown",
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "text",
+                "value": 0
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 24,
+        "x": 0,
+        "y": 152
+      },
+      "id": 42,
+      "options": {
+        "cellSize": 20,
+        "cellTextField": "name",
+        "cellTextPattern": "",
+        "dataFrame": "",
+        "gridColumns": 5,
+        "gridType": "flow",
+        "groups": [],
+        "idField": "name",
+        "idSortMode": "numeric",
+        "idSortPattern": "",
+        "knownIds": "",
+        "resourceDisplayMode": "cell-with-text",
+        "richEntries": [],
+        "statusField": "",
+        "tooltipEntries": [],
+        "tooltipTitleField": "",
+        "tooltipTitlePattern": ""
+      },
+      "pluginVersion": "1.0.0",
+      "targets": [
+        {
+          "csvContent": "name,status\r\n3,1\r\n1,1\r\n10,0\r\n2,1",
+          "datasource": {
+            "type": "grafana-testdata-datasource",
+            "uid": "trlxrdZVk"
+          },
+          "refId": "A",
+          "scenarioId": "csv_content"
+        }
+      ],
+      "title": "Numeric sort",
+      "type": "taminomara-hostoverview-panel"
+    },
+    {
+      "datasource": {
+        "type": "grafana-testdata-datasource",
+        "uid": "trlxrdZVk"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "displayMode": "auto"
+          },
+          "fieldMinMax": true,
+          "mappings": [],
+          "noValue": "unknown",
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "text",
+                "value": 0
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 24,
+        "x": 0,
+        "y": 160
+      },
+      "id": 43,
+      "options": {
+        "cellSize": 20,
+        "cellTextField": "name",
+        "cellTextPattern": "",
+        "dataFrame": "",
+        "gridColumns": 5,
+        "gridType": "flow",
+        "groups": [],
+        "idField": "name",
+        "idSortMode": "custom",
+        "idSortPattern": "node-(?<na1>\\d+)",
+        "knownIds": "",
+        "resourceDisplayMode": "cell-with-text",
+        "richEntries": [],
+        "statusField": "",
+        "tooltipEntries": [],
+        "tooltipTitleField": "",
+        "tooltipTitlePattern": ""
+      },
+      "pluginVersion": "1.0.0",
+      "targets": [
+        {
+          "csvContent": "name,value\r\nnode-1,10\r\nnode-10,100\r\nnode-2,20\r\nnode-3,30",
+          "datasource": {
+            "type": "grafana-testdata-datasource",
+            "uid": "trlxrdZVk"
+          },
+          "refId": "A",
+          "scenarioId": "csv_content"
+        }
+      ],
+      "title": "Custom sort",
+      "type": "taminomara-hostoverview-panel"
+    },
+    {
+      "datasource": {
+        "type": "grafana-testdata-datasource",
+        "uid": "trlxrdZVk"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "displayMode": "auto"
+          },
+          "fieldMinMax": true,
+          "mappings": [],
+          "noValue": "unknown",
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "red",
+                "value": 0
+              },
+              {
+                "color": "green",
+                "value": 1
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 24,
+        "x": 0,
+        "y": 168
+      },
+      "id": 44,
+      "options": {
+        "cellSize": 20,
+        "cellTextField": "name",
+        "cellTextPattern": "",
+        "dataFrame": "",
+        "gridColumns": 5,
+        "gridType": "flow",
+        "groups": [
+          {
+            "disabled": false,
+            "drawBorder": true,
+            "entries": [],
+            "gridColumns": 5,
+            "gridType": "flow",
+            "groupKey": "region",
+            "id": "e2e-44-g-0",
+            "knownIds": "",
+            "showKeyName": false,
+            "showTitle": true,
+            "sortMode": "lexicographic",
+            "transparentBackground": false
+          }
+        ],
+        "idField": "name",
+        "idSortMode": "disabled",
+        "idSortPattern": "",
+        "knownIds": "",
+        "resourceDisplayMode": "cell-with-text",
+        "richEntries": [],
+        "statusField": "status",
+        "tooltipEntries": [],
+        "tooltipTitleField": "",
+        "tooltipTitlePattern": ""
+      },
+      "pluginVersion": "1.0.0",
+      "targets": [
+        {
+          "csvContent": "name,region,role,status\r\nsrv-1,us-east,web,1\r\nsrv-2,us-east,db,0\r\nsrv-3,eu-west,web,1\r\nsrv-4,eu-west,db,1\r\nsrv-5,us-east,api,1\r\nsrv-6,eu-west,api,0",
+          "datasource": {
+            "type": "grafana-testdata-datasource",
+            "uid": "trlxrdZVk"
+          },
+          "refId": "A",
+          "scenarioId": "csv_content"
+        }
+      ],
+      "title": "Group sort (lexicographic)",
+      "type": "taminomara-hostoverview-panel"
+    },
+    {
+      "datasource": {
+        "type": "grafana-testdata-datasource",
+        "uid": "trlxrdZVk"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "displayMode": "auto"
+          },
+          "fieldMinMax": true,
+          "mappings": [],
+          "noValue": "unknown",
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "red",
+                "value": 0
+              },
+              {
+                "color": "green",
+                "value": 1
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 24,
+        "x": 0,
+        "y": 176
+      },
+      "id": 45,
+      "options": {
+        "cellSize": 20,
+        "cellTextField": "name",
+        "cellTextPattern": "",
+        "dataFrame": "",
+        "gridColumns": 5,
+        "gridType": "flow",
+        "groups": [
+          {
+            "disabled": false,
+            "drawBorder": true,
+            "entries": [],
+            "gridColumns": 5,
+            "gridType": "flow",
+            "groupKey": "zone",
+            "id": "e2e-45-g-0",
+            "knownIds": "",
+            "showKeyName": false,
+            "showTitle": true,
+            "sortMode": "numeric",
+            "transparentBackground": false
+          }
+        ],
+        "idField": "name",
+        "idSortMode": "disabled",
+        "idSortPattern": "",
+        "knownIds": "",
+        "resourceDisplayMode": "cell-with-text",
+        "richEntries": [],
+        "statusField": "status",
+        "tooltipEntries": [],
+        "tooltipTitleField": "",
+        "tooltipTitlePattern": ""
+      },
+      "pluginVersion": "1.0.0",
+      "targets": [
+        {
+          "csvContent": "name,zone,status\r\na,3,1\r\nb,1,1\r\nc,10,0\r\nd,2,1\r\ne,1,1\r\nf,3,0",
+          "datasource": {
+            "type": "grafana-testdata-datasource",
+            "uid": "trlxrdZVk"
+          },
+          "refId": "A",
+          "scenarioId": "csv_content"
+        }
+      ],
+      "title": "Group sort (numeric)",
+      "type": "taminomara-hostoverview-panel"
+    },
+    {
+      "datasource": {
+        "type": "grafana-testdata-datasource",
+        "uid": "trlxrdZVk"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "displayMode": "auto"
+          },
+          "fieldMinMax": true,
+          "mappings": [],
+          "noValue": "unknown",
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "red",
+                "value": 0
+              },
+              {
+                "color": "green",
+                "value": 1
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 24,
+        "x": 0,
+        "y": 176
+      },
+      "id": 50,
+      "options": {
+        "cellSize": 20,
+        "cellTextField": "name",
+        "cellTextPattern": "",
+        "dataFrame": "",
+        "gridColumns": 5,
+        "gridType": "flow",
+        "groups": [],
+        "idField": "name",
+        "idSortMode": "disabled",
+        "idSortPattern": "",
+        "knownIds": "",
+        "resourceDisplayMode": "cell-with-text",
+        "richEntries": [],
+        "statusField": "status",
+        "tooltipEntries": [],
+        "tooltipTitleField": "",
+        "tooltipTitlePattern": ""
+      },
+      "pluginVersion": "1.0.0",
+      "targets": [
+        {
+          "csvContent": "name,status,role,cpu\r\nnode-a,1,web,45\r\nnode-b,0,web,82\r\nnode-c,1,db,23\r\nnode-d,1,db,67\r\nnode-e,0,api,91",
+          "datasource": {
+            "type": "grafana-testdata-datasource",
+            "uid": "trlxrdZVk"
+          },
+          "refId": "A",
+          "scenarioId": "csv_content"
+        }
+      ],
+      "title": "Flow layout",
+      "type": "taminomara-hostoverview-panel"
+    },
+    {
+      "datasource": {
+        "type": "grafana-testdata-datasource",
+        "uid": "trlxrdZVk"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "displayMode": "auto"
+          },
+          "fieldMinMax": true,
+          "mappings": [],
+          "noValue": "unknown",
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "red",
+                "value": 0
+              },
+              {
+                "color": "green",
+                "value": 1
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 24,
+        "x": 0,
+        "y": 184
+      },
+      "id": 51,
+      "options": {
+        "cellSize": 20,
+        "cellTextField": "name",
+        "cellTextPattern": "",
+        "dataFrame": "",
+        "gridColumns": 3,
+        "gridType": "grid",
+        "groups": [],
+        "idField": "name",
+        "idSortMode": "disabled",
+        "idSortPattern": "",
+        "knownIds": "",
+        "resourceDisplayMode": "cell-with-text",
+        "richEntries": [],
+        "statusField": "status",
+        "tooltipEntries": [],
+        "tooltipTitleField": "",
+        "tooltipTitlePattern": ""
+      },
+      "pluginVersion": "1.0.0",
+      "targets": [
+        {
+          "csvContent": "name,status,role,cpu\r\nnode-a,1,web,45\r\nnode-b,0,web,82\r\nnode-c,1,db,23\r\nnode-d,1,db,67\r\nnode-e,0,api,91",
+          "datasource": {
+            "type": "grafana-testdata-datasource",
+            "uid": "trlxrdZVk"
+          },
+          "refId": "A",
+          "scenarioId": "csv_content"
+        }
+      ],
+      "title": "Grid layout",
+      "type": "taminomara-hostoverview-panel"
+    },
+    {
+      "datasource": {
+        "type": "grafana-testdata-datasource",
+        "uid": "trlxrdZVk"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "displayMode": "auto"
+          },
+          "fieldMinMax": true,
+          "mappings": [],
+          "noValue": "unknown",
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "red",
+                "value": 0
+              },
+              {
+                "color": "green",
+                "value": 1
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 24,
+        "x": 0,
+        "y": 192
+      },
+      "id": 52,
+      "options": {
+        "cellSize": 20,
+        "cellTextField": "name",
+        "cellTextPattern": "",
+        "dataFrame": "",
+        "gridColumns": 5,
+        "gridType": "horizontal",
+        "groups": [],
+        "idField": "name",
+        "idSortMode": "disabled",
+        "idSortPattern": "",
+        "knownIds": "",
+        "resourceDisplayMode": "cell-with-text",
+        "richEntries": [],
+        "statusField": "status",
+        "tooltipEntries": [],
+        "tooltipTitleField": "",
+        "tooltipTitlePattern": ""
+      },
+      "pluginVersion": "1.0.0",
+      "targets": [
+        {
+          "csvContent": "name,status,role,cpu\r\nnode-a,1,web,45\r\nnode-b,0,web,82\r\nnode-c,1,db,23\r\nnode-d,1,db,67\r\nnode-e,0,api,91",
+          "datasource": {
+            "type": "grafana-testdata-datasource",
+            "uid": "trlxrdZVk"
+          },
+          "refId": "A",
+          "scenarioId": "csv_content"
+        }
+      ],
+      "title": "Horizontal layout",
+      "type": "taminomara-hostoverview-panel"
+    },
+    {
+      "datasource": {
+        "type": "grafana-testdata-datasource",
+        "uid": "trlxrdZVk"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "displayMode": "auto"
+          },
+          "fieldMinMax": true,
+          "mappings": [],
+          "noValue": "unknown",
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "red",
+                "value": 0
+              },
+              {
+                "color": "green",
+                "value": 1
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 24,
+        "x": 0,
+        "y": 200
+      },
+      "id": 53,
+      "options": {
+        "cellSize": 20,
+        "cellTextField": "name",
+        "cellTextPattern": "",
+        "dataFrame": "",
+        "gridColumns": 5,
+        "gridType": "vertical",
+        "groups": [],
+        "idField": "name",
+        "idSortMode": "disabled",
+        "idSortPattern": "",
+        "knownIds": "",
+        "resourceDisplayMode": "cell-with-text",
+        "richEntries": [],
+        "statusField": "status",
+        "tooltipEntries": [],
+        "tooltipTitleField": "",
+        "tooltipTitlePattern": ""
+      },
+      "pluginVersion": "1.0.0",
+      "targets": [
+        {
+          "csvContent": "name,status,role,cpu\r\nnode-a,1,web,45\r\nnode-b,0,web,82\r\nnode-c,1,db,23\r\nnode-d,1,db,67\r\nnode-e,0,api,91",
+          "datasource": {
+            "type": "grafana-testdata-datasource",
+            "uid": "trlxrdZVk"
+          },
+          "refId": "A",
+          "scenarioId": "csv_content"
+        }
+      ],
+      "title": "Vertical layout",
+      "type": "taminomara-hostoverview-panel"
+    },
+    {
+      "datasource": {
+        "type": "grafana-testdata-datasource",
+        "uid": "trlxrdZVk"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "displayMode": "auto"
+          },
+          "fieldMinMax": true,
+          "mappings": [],
+          "noValue": "unknown",
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "red",
+                "value": 0
+              },
+              {
+                "color": "green",
+                "value": 1
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 24,
+        "x": 0,
+        "y": 208
+      },
+      "id": 60,
+      "options": {
+        "cellSize": 20,
+        "cellTextField": "name",
+        "cellTextPattern": "",
+        "dataFrame": "",
+        "gridColumns": 5,
+        "gridType": "flow",
+        "groups": [
+          {
+            "disabled": false,
+            "drawBorder": true,
+            "entries": [],
+            "gridColumns": 5,
+            "gridType": "flow",
+            "groupKey": "region",
+            "id": "e2e-60-g-0",
+            "knownIds": "",
+            "showKeyName": false,
+            "showTitle": false,
+            "sortMode": "disabled",
+            "transparentBackground": false
+          }
+        ],
+        "idField": "name",
+        "idSortMode": "disabled",
+        "idSortPattern": "",
+        "knownIds": "",
+        "resourceDisplayMode": "cell-with-text",
+        "richEntries": [],
+        "statusField": "status",
+        "tooltipEntries": [],
+        "tooltipTitleField": "",
+        "tooltipTitlePattern": ""
+      },
+      "pluginVersion": "1.0.0",
+      "targets": [
+        {
+          "csvContent": "name,region,role,status\r\nsrv-1,us-east,web,1\r\nsrv-2,us-east,db,0\r\nsrv-3,eu-west,web,1\r\nsrv-4,eu-west,db,1\r\nsrv-5,us-east,api,1\r\nsrv-6,eu-west,api,0",
+          "datasource": {
+            "type": "grafana-testdata-datasource",
+            "uid": "trlxrdZVk"
+          },
+          "refId": "A",
+          "scenarioId": "csv_content"
+        }
+      ],
+      "title": "Group hidden title",
+      "type": "taminomara-hostoverview-panel"
+    },
+    {
+      "datasource": {
+        "type": "grafana-testdata-datasource",
+        "uid": "trlxrdZVk"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "displayMode": "auto"
+          },
+          "fieldMinMax": true,
+          "mappings": [],
+          "noValue": "unknown",
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "red",
+                "value": 0
+              },
+              {
+                "color": "green",
+                "value": 1
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 24,
+        "x": 0,
+        "y": 216
+      },
+      "id": 61,
+      "options": {
+        "cellSize": 20,
+        "cellTextField": "name",
+        "cellTextPattern": "",
+        "dataFrame": "",
+        "gridColumns": 5,
+        "gridType": "flow",
+        "groups": [
+          {
+            "disabled": false,
+            "drawBorder": true,
+            "entries": [],
+            "gridColumns": 5,
+            "gridType": "flow",
+            "groupKey": "region",
+            "id": "e2e-61-g-0",
+            "knownIds": "",
+            "showKeyName": true,
+            "showTitle": true,
+            "sortMode": "disabled",
+            "transparentBackground": false
+          }
+        ],
+        "idField": "name",
+        "idSortMode": "disabled",
+        "idSortPattern": "",
+        "knownIds": "",
+        "resourceDisplayMode": "cell-with-text",
+        "richEntries": [],
+        "statusField": "status",
+        "tooltipEntries": [],
+        "tooltipTitleField": "",
+        "tooltipTitlePattern": ""
+      },
+      "pluginVersion": "1.0.0",
+      "targets": [
+        {
+          "csvContent": "name,region,role,status\r\nsrv-1,us-east,web,1\r\nsrv-2,us-east,db,0\r\nsrv-3,eu-west,web,1\r\nsrv-4,eu-west,db,1\r\nsrv-5,us-east,api,1\r\nsrv-6,eu-west,api,0",
+          "datasource": {
+            "type": "grafana-testdata-datasource",
+            "uid": "trlxrdZVk"
+          },
+          "refId": "A",
+          "scenarioId": "csv_content"
+        }
+      ],
+      "title": "Group field name in title",
+      "type": "taminomara-hostoverview-panel"
+    },
+    {
+      "datasource": {
+        "type": "grafana-testdata-datasource",
+        "uid": "trlxrdZVk"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "displayMode": "auto"
+          },
+          "fieldMinMax": true,
+          "mappings": [],
+          "noValue": "unknown",
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "red",
+                "value": 0
+              },
+              {
+                "color": "green",
+                "value": 1
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 24,
+        "x": 0,
+        "y": 224
+      },
+      "id": 62,
+      "options": {
+        "cellSize": 20,
+        "cellTextField": "name",
+        "cellTextPattern": "",
+        "dataFrame": "",
+        "gridColumns": 5,
+        "gridType": "flow",
+        "groups": [
+          {
+            "disabled": false,
+            "drawBorder": true,
+            "entries": [],
+            "gridColumns": 5,
+            "gridType": "flow",
+            "groupKey": "region",
+            "id": "e2e-62-g-0",
+            "knownIds": "",
+            "showKeyName": false,
+            "showTitle": true,
+            "sortMode": "disabled",
+            "titlePattern": "Region: ${__data.fields.region}",
+            "transparentBackground": false
+          }
+        ],
+        "idField": "name",
+        "idSortMode": "disabled",
+        "idSortPattern": "",
+        "knownIds": "",
+        "resourceDisplayMode": "cell-with-text",
+        "richEntries": [],
+        "statusField": "status",
+        "tooltipEntries": [],
+        "tooltipTitleField": "",
+        "tooltipTitlePattern": ""
+      },
+      "pluginVersion": "1.0.0",
+      "targets": [
+        {
+          "csvContent": "name,region,role,status\r\nsrv-1,us-east,web,1\r\nsrv-2,us-east,db,0\r\nsrv-3,eu-west,web,1\r\nsrv-4,eu-west,db,1\r\nsrv-5,us-east,api,1\r\nsrv-6,eu-west,api,0",
+          "datasource": {
+            "type": "grafana-testdata-datasource",
+            "uid": "trlxrdZVk"
+          },
+          "refId": "A",
+          "scenarioId": "csv_content"
+        }
+      ],
+      "title": "Group title pattern",
+      "type": "taminomara-hostoverview-panel"
+    },
+    {
+      "datasource": {
+        "type": "grafana-testdata-datasource",
+        "uid": "trlxrdZVk"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "displayMode": "auto"
+          },
+          "fieldMinMax": true,
+          "mappings": [],
+          "noValue": "unknown",
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "red",
+                "value": 0
+              },
+              {
+                "color": "green",
+                "value": 1
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 24,
+        "x": 0,
+        "y": 232
+      },
+      "id": 63,
+      "options": {
+        "cellSize": 20,
+        "cellTextField": "name",
+        "cellTextPattern": "",
+        "dataFrame": "",
+        "gridColumns": 5,
+        "gridType": "flow",
+        "groups": [
+          {
+            "disabled": false,
+            "drawBorder": false,
+            "entries": [],
+            "gridColumns": 5,
+            "gridType": "flow",
+            "groupKey": "region",
+            "id": "e2e-63-g-0",
+            "knownIds": "",
+            "showKeyName": false,
+            "showTitle": true,
+            "sortMode": "disabled",
+            "transparentBackground": false
+          }
+        ],
+        "idField": "name",
+        "idSortMode": "disabled",
+        "idSortPattern": "",
+        "knownIds": "",
+        "resourceDisplayMode": "cell-with-text",
+        "richEntries": [],
+        "statusField": "status",
+        "tooltipEntries": [],
+        "tooltipTitleField": "",
+        "tooltipTitlePattern": ""
+      },
+      "pluginVersion": "1.0.0",
+      "targets": [
+        {
+          "csvContent": "name,region,role,status\r\nsrv-1,us-east,web,1\r\nsrv-2,us-east,db,0\r\nsrv-3,eu-west,web,1\r\nsrv-4,eu-west,db,1\r\nsrv-5,us-east,api,1\r\nsrv-6,eu-west,api,0",
+          "datasource": {
+            "type": "grafana-testdata-datasource",
+            "uid": "trlxrdZVk"
+          },
+          "refId": "A",
+          "scenarioId": "csv_content"
+        }
+      ],
+      "title": "Group hidden border",
+      "type": "taminomara-hostoverview-panel"
+    },
+    {
+      "datasource": {
+        "type": "grafana-testdata-datasource",
+        "uid": "trlxrdZVk"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "displayMode": "auto"
+          },
+          "fieldMinMax": true,
+          "mappings": [],
+          "noValue": "unknown",
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "red",
+                "value": 0
+              },
+              {
+                "color": "green",
+                "value": 1
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 24,
+        "x": 0,
+        "y": 240
+      },
+      "id": 64,
+      "options": {
+        "cellSize": 20,
+        "cellTextField": "name",
+        "cellTextPattern": "",
+        "dataFrame": "",
+        "gridColumns": 5,
+        "gridType": "flow",
+        "groups": [
+          {
+            "borderColor": "#aa00aa",
+            "disabled": false,
+            "drawBorder": true,
+            "entries": [],
+            "gridColumns": 5,
+            "gridType": "flow",
+            "groupKey": "region",
+            "id": "e2e-64-g-0",
+            "knownIds": "",
+            "showKeyName": false,
+            "showTitle": true,
+            "sortMode": "disabled",
+            "transparentBackground": false
+          }
+        ],
+        "idField": "name",
+        "idSortMode": "disabled",
+        "idSortPattern": "",
+        "knownIds": "",
+        "resourceDisplayMode": "cell-with-text",
+        "richEntries": [],
+        "statusField": "status",
+        "tooltipEntries": [],
+        "tooltipTitleField": "",
+        "tooltipTitlePattern": ""
+      },
+      "pluginVersion": "1.0.0",
+      "targets": [
+        {
+          "csvContent": "name,region,role,status\r\nsrv-1,us-east,web,1\r\nsrv-2,us-east,db,0\r\nsrv-3,eu-west,web,1\r\nsrv-4,eu-west,db,1\r\nsrv-5,us-east,api,1\r\nsrv-6,eu-west,api,0",
+          "datasource": {
+            "type": "grafana-testdata-datasource",
+            "uid": "trlxrdZVk"
+          },
+          "refId": "A",
+          "scenarioId": "csv_content"
+        }
+      ],
+      "title": "Group custom border color",
+      "type": "taminomara-hostoverview-panel"
+    },
+    {
+      "datasource": {
+        "type": "grafana-testdata-datasource",
+        "uid": "trlxrdZVk"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "displayMode": "auto"
+          },
+          "fieldMinMax": true,
+          "mappings": [],
+          "noValue": "unknown",
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "red",
+                "value": 0
+              },
+              {
+                "color": "green",
+                "value": 1
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 24,
+        "x": 0,
+        "y": 248
+      },
+      "id": 65,
+      "options": {
+        "borderColor": "#00aaaa",
+        "cellSize": 20,
+        "cellTextField": "name",
+        "cellTextPattern": "",
+        "dataFrame": "",
+        "gridColumns": 5,
+        "gridType": "flow",
+        "groups": [
+          {
+            "disabled": false,
+            "drawBorder": true,
+            "entries": [],
+            "gridColumns": 5,
+            "gridType": "flow",
+            "groupKey": "region",
+            "id": "e2e-65-g-0",
+            "knownIds": "",
+            "showKeyName": false,
+            "showTitle": true,
+            "sortMode": "disabled",
+            "transparentBackground": true
+          }
+        ],
+        "idField": "name",
+        "idSortMode": "disabled",
+        "idSortPattern": "",
+        "knownIds": "",
+        "resourceDisplayMode": "cell-with-text",
+        "richEntries": [],
+        "statusField": "status",
+        "tooltipEntries": [],
+        "tooltipTitleField": "",
+        "tooltipTitlePattern": ""
+      },
+      "pluginVersion": "1.0.0",
+      "targets": [
+        {
+          "csvContent": "name,region,role,status\r\nsrv-1,us-east,web,1\r\nsrv-2,us-east,db,0\r\nsrv-3,eu-west,web,1\r\nsrv-4,eu-west,db,1\r\nsrv-5,us-east,api,1\r\nsrv-6,eu-west,api,0",
+          "datasource": {
+            "type": "grafana-testdata-datasource",
+            "uid": "trlxrdZVk"
+          },
+          "refId": "A",
+          "scenarioId": "csv_content"
+        }
+      ],
+      "title": "Panel-level border color + transparent bg",
+      "type": "taminomara-hostoverview-panel"
+    },
+    {
+      "datasource": {
+        "type": "grafana-testdata-datasource",
+        "uid": "trlxrdZVk"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "displayMode": "auto"
+          },
+          "fieldMinMax": true,
+          "mappings": [],
+          "noValue": "unknown",
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "red",
+                "value": 0
+              },
+              {
+                "color": "green",
+                "value": 1
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 24,
+        "x": 0,
+        "y": 248
+      },
+      "id": 70,
+      "options": {
+        "cellSize": 20,
+        "cellTextField": "",
+        "cellTextPattern": "",
+        "dataFrame": "",
+        "gridColumns": 5,
+        "gridType": "flow",
+        "groups": [],
+        "idField": "name",
+        "idSortMode": "disabled",
+        "idSortPattern": "",
+        "knownIds": "",
+        "resourceDisplayMode": "cell",
+        "richEntries": [],
+        "statusField": "status",
+        "tooltipEntries": [
+          {
+            "field": "role",
+            "id": "e2e-70-f-0",
+            "overridesBorderColor": false,
+            "type": "field"
+          },
+          {
+            "field": "cpu",
+            "id": "e2e-70-f-1",
+            "overridesBorderColor": false,
+            "type": "field"
+          }
+        ],
+        "tooltipTitleField": "",
+        "tooltipTitlePattern": ""
+      },
+      "pluginVersion": "1.0.0",
+      "targets": [
+        {
+          "csvContent": "name,status,role,cpu\r\nnode-a,1,web,45\r\nnode-b,0,web,82\r\nnode-c,1,db,23\r\nnode-d,1,db,67\r\nnode-e,0,api,91",
+          "datasource": {
+            "type": "grafana-testdata-datasource",
+            "uid": "trlxrdZVk"
+          },
+          "refId": "A",
+          "scenarioId": "csv_content"
+        }
+      ],
+      "title": "Cell tooltip with fields",
+      "type": "taminomara-hostoverview-panel"
+    },
+    {
+      "datasource": {
+        "type": "grafana-testdata-datasource",
+        "uid": "trlxrdZVk"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "displayMode": "auto"
+          },
+          "fieldMinMax": true,
+          "mappings": [],
+          "noValue": "unknown",
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "red",
+                "value": 0
+              },
+              {
+                "color": "green",
+                "value": 1
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 24,
+        "x": 0,
+        "y": 256
+      },
+      "id": 71,
+      "options": {
+        "cellSize": 20,
+        "cellTextField": "",
+        "cellTextPattern": "",
+        "dataFrame": "",
+        "gridColumns": 5,
+        "gridType": "flow",
+        "groups": [],
+        "idField": "name",
+        "idSortMode": "disabled",
+        "idSortPattern": "",
+        "knownIds": "",
+        "resourceDisplayMode": "cell",
+        "richEntries": [],
+        "statusField": "status",
+        "tooltipEntries": [
+          {
+            "field": "role",
+            "id": "e2e-71-f-0",
+            "overridesBorderColor": false,
+            "type": "field"
+          }
+        ],
+        "tooltipTitleField": "__use_pattern__",
+        "tooltipTitlePattern": "Host: ${__data.fields.name}"
+      },
+      "pluginVersion": "1.0.0",
+      "targets": [
+        {
+          "csvContent": "name,status,role,cpu\r\nnode-a,1,web,45\r\nnode-b,0,web,82\r\nnode-c,1,db,23\r\nnode-d,1,db,67\r\nnode-e,0,api,91",
+          "datasource": {
+            "type": "grafana-testdata-datasource",
+            "uid": "trlxrdZVk"
+          },
+          "refId": "A",
+          "scenarioId": "csv_content"
+        }
+      ],
+      "title": "Tooltip title override",
+      "type": "taminomara-hostoverview-panel"
+    },
+    {
+      "datasource": {
+        "type": "grafana-testdata-datasource",
+        "uid": "trlxrdZVk"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "displayMode": "auto"
+          },
+          "fieldMinMax": true,
+          "mappings": [],
+          "noValue": "unknown",
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "red",
+                "value": 0
+              },
+              {
+                "color": "green",
+                "value": 1
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "status"
+            },
+            "properties": [
+              {
+                "id": "mappings",
+                "value": [
+                  {
+                    "options": {
+                      "0": {
+                        "color": "red",
+                        "index": 0,
+                        "text": "Down"
+                      },
+                      "1": {
+                        "color": "green",
+                        "index": 1,
+                        "text": "Up"
+                      }
+                    },
+                    "type": "value"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 24,
+        "x": 0,
+        "y": 264
+      },
+      "id": 72,
+      "options": {
+        "cellSize": 20,
+        "cellTextField": "",
+        "cellTextPattern": "",
+        "dataFrame": "",
+        "gridColumns": 5,
+        "gridType": "flow",
+        "groups": [],
+        "idField": "name",
+        "idSortMode": "disabled",
+        "idSortPattern": "",
+        "knownIds": "",
+        "resourceDisplayMode": "rich",
+        "richEntries": [
+          {
+            "field": "status",
+            "id": "e2e-72-f-0",
+            "overridesBorderColor": false,
+            "type": "field"
+          }
+        ],
+        "statusField": "status",
+        "tooltipEntries": [],
+        "tooltipTitleField": "",
+        "tooltipTitlePattern": ""
+      },
+      "pluginVersion": "1.0.0",
+      "targets": [
+        {
+          "csvContent": "name,status,role,cpu\r\nnode-a,1,web,45\r\nnode-b,0,web,82\r\nnode-c,1,db,23\r\nnode-d,1,db,67\r\nnode-e,0,api,91",
+          "datasource": {
+            "type": "grafana-testdata-datasource",
+            "uid": "trlxrdZVk"
+          },
+          "refId": "A",
+          "scenarioId": "csv_content"
+        }
+      ],
+      "title": "Value mappings",
+      "type": "taminomara-hostoverview-panel"
+    },
+    {
+      "datasource": {
+        "type": "grafana-testdata-datasource",
+        "uid": "trlxrdZVk"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "displayMode": "auto"
+          },
+          "fieldMinMax": true,
+          "mappings": [],
+          "noValue": "unknown",
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "#ff0000",
+                "value": 0
+              },
+              {
+                "color": "#00ff00",
+                "value": 1
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "cpu"
+            },
+            "properties": [
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "#00aa00",
+                      "value": 0
+                    },
+                    {
+                      "color": "#aaaa00",
+                      "value": 50
+                    },
+                    {
+                      "color": "#aa0000",
+                      "value": 80
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 24,
+        "x": 0,
+        "y": 272
+      },
+      "id": 73,
+      "options": {
+        "cellSize": 20,
+        "cellTextField": "",
+        "cellTextPattern": "",
+        "dataFrame": "",
+        "gridColumns": 5,
+        "gridType": "flow",
+        "groups": [],
+        "idField": "name",
+        "idSortMode": "disabled",
+        "idSortPattern": "",
+        "knownIds": "",
+        "resourceDisplayMode": "rich",
+        "richEntries": [
+          {
+            "field": "cpu",
+            "id": "e2e-73-f-0",
+            "overridesBorderColor": false,
+            "type": "field"
+          }
+        ],
+        "statusField": "status",
+        "tooltipEntries": [],
+        "tooltipTitleField": "",
+        "tooltipTitlePattern": ""
+      },
+      "pluginVersion": "1.0.0",
+      "targets": [
+        {
+          "csvContent": "name,status,role,cpu\r\nnode-a,1,web,45\r\nnode-b,0,web,82\r\nnode-c,1,db,23\r\nnode-d,1,db,67\r\nnode-e,0,api,91",
+          "datasource": {
+            "type": "grafana-testdata-datasource",
+            "uid": "trlxrdZVk"
+          },
+          "refId": "A",
+          "scenarioId": "csv_content"
+        }
+      ],
+      "title": "Thresholds coloring",
+      "type": "taminomara-hostoverview-panel"
+    },
+    {
+      "datasource": {
+        "type": "grafana-testdata-datasource",
+        "uid": "trlxrdZVk"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "displayMode": "auto"
+          },
+          "fieldMinMax": true,
+          "mappings": [],
+          "noValue": "unknown",
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "red",
+                "value": 0
+              },
+              {
+                "color": "green",
+                "value": 1
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "cpu"
+            },
+            "properties": [
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "green",
+                      "value": 0
+                    },
+                    {
+                      "color": "yellow",
+                      "value": 50
+                    },
+                    {
+                      "color": "red",
+                      "value": 80
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 24,
+        "x": 0,
+        "y": 280
+      },
+      "id": 74,
+      "options": {
+        "cellSize": 20,
+        "cellTextField": "",
+        "cellTextPattern": "",
+        "dataFrame": "",
+        "gridColumns": 5,
+        "gridType": "flow",
+        "groups": [],
+        "idField": "name",
+        "idSortMode": "disabled",
+        "idSortPattern": "",
+        "knownIds": "",
+        "resourceDisplayMode": "rich",
+        "richEntries": [
+          {
+            "field": "role",
+            "id": "e2e-74-f-0",
+            "overridesBorderColor": false,
+            "type": "field"
+          }
+        ],
+        "statusField": "status",
+        "tooltipEntries": [
+          {
+            "field": "cpu",
+            "id": "e2e-74-f-1",
+            "overridesBorderColor": false,
+            "type": "field"
+          }
+        ],
+        "tooltipTitleField": "",
+        "tooltipTitlePattern": ""
+      },
+      "pluginVersion": "1.0.0",
+      "targets": [
+        {
+          "csvContent": "name,status,role,cpu\r\nnode-a,1,web,45\r\nnode-b,0,web,82\r\nnode-c,1,db,23\r\nnode-d,1,db,67\r\nnode-e,0,api,91",
+          "datasource": {
+            "type": "grafana-testdata-datasource",
+            "uid": "trlxrdZVk"
+          },
+          "refId": "A",
+          "scenarioId": "csv_content"
+        }
+      ],
+      "title": "Rich table expandable tooltip interaction",
+      "type": "taminomara-hostoverview-panel"
+    },
+    {
+      "datasource": {
+        "type": "grafana-testdata-datasource",
+        "uid": "trlxrdZVk"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "displayMode": "auto"
+          },
+          "fieldMinMax": true,
+          "mappings": [],
+          "noValue": "unknown",
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "red",
+                "value": 0
+              },
+              {
+                "color": "green",
+                "value": 1
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 24,
+        "x": 0,
+        "y": 288
+      },
+      "id": 80,
+      "options": {
+        "cellSize": 20,
+        "cellTextField": "",
+        "cellTextPattern": "",
+        "dataFrame": "",
+        "gridColumns": 5,
+        "gridType": "flow",
+        "groups": [],
+        "idField": "name",
+        "idSortMode": "disabled",
+        "idSortPattern": "",
+        "knownIds": "",
+        "resourceDisplayMode": "rich",
+        "richEntries": [
+          {
+            "id": "e2e-80-j-0",
+            "keys": [
+              {
+                "foreignField": "name",
+                "primaryKey": "name",
+                "primaryKeyTemplate": ""
+              }
+            ],
+            "overridesBorderColor": false,
+            "sourceField": "memory",
+            "sourceFrame": "Secondary",
+            "type": "join"
+          }
+        ],
+        "statusField": "status",
+        "tooltipEntries": [],
+        "tooltipTitleField": "",
+        "tooltipTitlePattern": ""
+      },
+      "pluginVersion": "1.0.0",
+      "targets": [
+        {
+          "csvContent": "name,status,role,cpu\r\nnode-a,1,web,45\r\nnode-b,0,web,82\r\nnode-c,1,db,23\r\nnode-d,1,db,67\r\nnode-e,0,api,91",
+          "datasource": {
+            "type": "grafana-testdata-datasource",
+            "uid": "trlxrdZVk"
+          },
+          "refId": "A",
+          "scenarioId": "csv_content"
+        },
+        {
+          "csvContent": "name,memory\r\nnode-a,8192\r\nnode-b,16384\r\nnode-c,4096",
+          "datasource": {
+            "type": "grafana-testdata-datasource",
+            "uid": "trlxrdZVk"
+          },
+          "refId": "Secondary",
+          "scenarioId": "csv_content"
+        }
+      ],
+      "title": "Basic join",
+      "type": "taminomara-hostoverview-panel"
+    },
+    {
+      "datasource": {
+        "type": "grafana-testdata-datasource",
+        "uid": "trlxrdZVk"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "displayMode": "auto"
+          },
+          "fieldMinMax": true,
+          "mappings": [],
+          "noValue": "unknown",
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "red",
+                "value": 0
+              },
+              {
+                "color": "green",
+                "value": 1
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 24,
+        "x": 0,
+        "y": 296
+      },
+      "id": 81,
+      "options": {
+        "cellSize": 20,
+        "cellTextField": "",
+        "cellTextPattern": "",
+        "dataFrame": "",
+        "gridColumns": 5,
+        "gridType": "flow",
+        "groups": [],
+        "idField": "name",
+        "idSortMode": "disabled",
+        "idSortPattern": "",
+        "knownIds": "",
+        "resourceDisplayMode": "rich",
+        "richEntries": [
+          {
+            "id": "e2e-81-j-0",
+            "keys": [
+              {
+                "foreignField": "name",
+                "primaryKey": "name",
+                "primaryKeyTemplate": ""
+              }
+            ],
+            "overridesBorderColor": false,
+            "sourceField": "memory",
+            "sourceFrame": "NoMatch",
+            "type": "join"
+          }
+        ],
+        "statusField": "status",
+        "tooltipEntries": [],
+        "tooltipTitleField": "",
+        "tooltipTitlePattern": ""
+      },
+      "pluginVersion": "1.0.0",
+      "targets": [
+        {
+          "csvContent": "name,status,role,cpu\r\nnode-a,1,web,45\r\nnode-b,0,web,82\r\nnode-c,1,db,23\r\nnode-d,1,db,67\r\nnode-e,0,api,91",
+          "datasource": {
+            "type": "grafana-testdata-datasource",
+            "uid": "trlxrdZVk"
+          },
+          "refId": "A",
+          "scenarioId": "csv_content"
+        },
+        {
+          "csvContent": "name,memory\r\nfoo-1,8192\r\nfoo-2,16384",
+          "datasource": {
+            "type": "grafana-testdata-datasource",
+            "uid": "trlxrdZVk"
+          },
+          "refId": "NoMatch",
+          "scenarioId": "csv_content"
+        }
+      ],
+      "title": "Join no matches",
+      "type": "taminomara-hostoverview-panel"
+    },
+    {
+      "datasource": {
+        "type": "grafana-testdata-datasource",
+        "uid": "trlxrdZVk"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "displayMode": "auto"
+          },
+          "fieldMinMax": true,
+          "mappings": [],
+          "noValue": "unknown",
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "red",
+                "value": 0
+              },
+              {
+                "color": "green",
+                "value": 1
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 24,
+        "x": 0,
+        "y": 304
+      },
+      "id": 82,
+      "options": {
+        "cellSize": 20,
+        "cellTextField": "",
+        "cellTextPattern": "",
+        "dataFrame": "",
+        "gridColumns": 5,
+        "gridType": "flow",
+        "groups": [],
+        "idField": "name",
+        "idSortMode": "disabled",
+        "idSortPattern": "",
+        "knownIds": "",
+        "resourceDisplayMode": "rich",
+        "richEntries": [
+          {
+            "id": "e2e-82-j-0",
+            "keys": [
+              {
+                "foreignField": "name",
+                "primaryKey": "name",
+                "primaryKeyTemplate": ""
+              }
+            ],
+            "overridesBorderColor": false,
+            "sourceField": "memory",
+            "sourceFrame": "NonexistentFrame",
+            "type": "join"
+          }
+        ],
+        "statusField": "status",
+        "tooltipEntries": [],
+        "tooltipTitleField": "",
+        "tooltipTitlePattern": ""
+      },
+      "pluginVersion": "1.0.0",
+      "targets": [
+        {
+          "csvContent": "name,status,role,cpu\r\nnode-a,1,web,45\r\nnode-b,0,web,82\r\nnode-c,1,db,23\r\nnode-d,1,db,67\r\nnode-e,0,api,91",
+          "datasource": {
+            "type": "grafana-testdata-datasource",
+            "uid": "trlxrdZVk"
+          },
+          "refId": "A",
+          "scenarioId": "csv_content"
+        }
+      ],
+      "title": "Missing join frame",
+      "type": "taminomara-hostoverview-panel"
+    },
+    {
+      "datasource": {
+        "type": "grafana-testdata-datasource",
+        "uid": "trlxrdZVk"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "displayMode": "auto"
+          },
+          "fieldMinMax": true,
+          "mappings": [],
+          "noValue": "unknown",
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "red",
+                "value": 0
+              },
+              {
+                "color": "green",
+                "value": 1
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 24,
+        "x": 0,
+        "y": 312
+      },
+      "id": 90,
+      "options": {
+        "cellSize": 20,
+        "cellTextField": "name",
+        "cellTextPattern": "",
+        "dataFrame": "",
+        "gridColumns": 5,
+        "gridType": "flow",
+        "groups": [],
+        "idField": "name",
+        "idSortMode": "disabled",
+        "idSortPattern": "",
+        "knownIds": "node-a,node-x,node-y",
+        "resourceDisplayMode": "cell-with-text",
+        "richEntries": [],
+        "statusField": "status",
+        "tooltipEntries": [],
+        "tooltipTitleField": "",
+        "tooltipTitlePattern": ""
+      },
+      "pluginVersion": "1.0.0",
+      "targets": [
+        {
+          "csvContent": "name,status,role,cpu\r\nnode-a,1,web,45\r\nnode-b,0,web,82\r\nnode-c,1,db,23\r\nnode-d,1,db,67\r\nnode-e,0,api,91",
+          "datasource": {
+            "type": "grafana-testdata-datasource",
+            "uid": "trlxrdZVk"
+          },
+          "refId": "A",
+          "scenarioId": "csv_content"
+        }
+      ],
+      "title": "Known IDs",
+      "type": "taminomara-hostoverview-panel"
+    },
+    {
+      "datasource": {
+        "type": "grafana-testdata-datasource",
+        "uid": "trlxrdZVk"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "displayMode": "auto"
+          },
+          "fieldMinMax": true,
+          "mappings": [],
+          "noValue": "unknown",
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "red",
+                "value": 0
+              },
+              {
+                "color": "green",
+                "value": 1
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 24,
+        "x": 0,
+        "y": 320
+      },
+      "id": 91,
+      "options": {
+        "cellSize": 20,
+        "cellTextField": "name",
+        "cellTextPattern": "",
+        "dataFrame": "",
+        "gridColumns": 5,
+        "gridType": "flow",
+        "groups": [
+          {
+            "disabled": false,
+            "drawBorder": true,
+            "entries": [],
+            "gridColumns": 5,
+            "gridType": "flow",
+            "groupKey": "region",
+            "id": "e2e-91-g-0",
+            "knownIds": "us-east,eu-west,ap-south",
+            "showKeyName": false,
+            "showTitle": true,
+            "sortMode": "disabled",
+            "transparentBackground": false
+          },
+          {
+            "disabled": false,
+            "drawBorder": true,
+            "entries": [],
+            "gridColumns": 5,
+            "gridType": "flow",
+            "groupKey": "role",
+            "id": "e2e-91-g-1",
+            "knownIds": "web,db,api",
+            "showKeyName": false,
+            "showTitle": true,
+            "sortMode": "disabled",
+            "transparentBackground": false
+          }
+        ],
+        "idField": "name",
+        "idSortMode": "disabled",
+        "idSortPattern": "",
+        "knownIds": "node-a,node-b,node-x",
+        "resourceDisplayMode": "cell-with-text",
+        "richEntries": [],
+        "statusField": "status",
+        "tooltipEntries": [],
+        "tooltipTitleField": "",
+        "tooltipTitlePattern": ""
+      },
+      "pluginVersion": "1.0.0",
+      "targets": [
+        {
+          "csvContent": "name,region,role,status\r\nnode-a,us-east,web,1\r\nnode-b,eu-west,db,0",
+          "datasource": {
+            "type": "grafana-testdata-datasource",
+            "uid": "trlxrdZVk"
+          },
+          "refId": "A",
+          "scenarioId": "csv_content"
+        }
+      ],
+      "title": "Known IDs in groups (full matrix)",
+      "type": "taminomara-hostoverview-panel"
+    },
+    {
+      "datasource": {
+        "type": "grafana-testdata-datasource",
+        "uid": "trlxrdZVk"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "displayMode": "auto"
+          },
+          "fieldMinMax": true,
+          "mappings": [],
+          "noValue": "unknown",
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "red",
+                "value": 0
+              },
+              {
+                "color": "green",
+                "value": 1
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 24,
+        "x": 0,
+        "y": 320
+      },
+      "id": 100,
+      "options": {
+        "cellSize": 10,
+        "cellTextField": "",
+        "cellTextPattern": "",
+        "dataFrame": "",
+        "gridColumns": 5,
+        "gridType": "flow",
+        "groups": [],
+        "idField": "name",
+        "idSortMode": "disabled",
+        "idSortPattern": "",
+        "knownIds": "",
+        "resourceDisplayMode": "cell",
+        "richEntries": [],
+        "statusField": "status",
+        "tooltipEntries": [],
+        "tooltipTitleField": "",
+        "tooltipTitlePattern": ""
+      },
+      "pluginVersion": "1.0.0",
+      "targets": [
+        {
+          "csvContent": "name,status,role,cpu\r\nnode-a,1,web,45\r\nnode-b,0,web,82\r\nnode-c,1,db,23\r\nnode-d,1,db,67\r\nnode-e,0,api,91",
+          "datasource": {
+            "type": "grafana-testdata-datasource",
+            "uid": "trlxrdZVk"
+          },
+          "refId": "A",
+          "scenarioId": "csv_content"
+        }
+      ],
+      "title": "Small cells",
+      "type": "taminomara-hostoverview-panel"
+    },
+    {
+      "datasource": {
+        "type": "grafana-testdata-datasource",
+        "uid": "trlxrdZVk"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "displayMode": "auto"
+          },
+          "fieldMinMax": true,
+          "mappings": [],
+          "noValue": "unknown",
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "red",
+                "value": 0
+              },
+              {
+                "color": "green",
+                "value": 1
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 24,
+        "x": 0,
+        "y": 328
+      },
+      "id": 101,
+      "options": {
+        "cellSize": 40,
+        "cellTextField": "",
+        "cellTextPattern": "",
+        "dataFrame": "",
+        "gridColumns": 5,
+        "gridType": "flow",
+        "groups": [],
+        "idField": "name",
+        "idSortMode": "disabled",
+        "idSortPattern": "",
+        "knownIds": "",
+        "resourceDisplayMode": "cell",
+        "richEntries": [],
+        "statusField": "status",
+        "tooltipEntries": [],
+        "tooltipTitleField": "",
+        "tooltipTitlePattern": ""
+      },
+      "pluginVersion": "1.0.0",
+      "targets": [
+        {
+          "csvContent": "name,status,role,cpu\r\nnode-a,1,web,45\r\nnode-b,0,web,82\r\nnode-c,1,db,23\r\nnode-d,1,db,67\r\nnode-e,0,api,91",
+          "datasource": {
+            "type": "grafana-testdata-datasource",
+            "uid": "trlxrdZVk"
+          },
+          "refId": "A",
+          "scenarioId": "csv_content"
+        }
+      ],
+      "title": "Large cells",
+      "type": "taminomara-hostoverview-panel"
+    },
+    {
+      "datasource": {
+        "type": "grafana-testdata-datasource",
+        "uid": "trlxrdZVk"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "displayMode": "auto"
+          },
+          "fieldMinMax": true,
+          "mappings": [],
+          "noValue": "unknown",
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "#ff0000",
+                "value": 0
+              },
+              {
+                "color": "#00ff00",
+                "value": 1
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "cpu"
+            },
+            "properties": [
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "#00aa00",
+                      "value": 0
+                    },
+                    {
+                      "color": "#aaaa00",
+                      "value": 50
+                    },
+                    {
+                      "color": "#aa0000",
+                      "value": 80
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 24,
+        "x": 0,
+        "y": 336
+      },
+      "id": 110,
+      "options": {
+        "cellSize": 20,
+        "cellTextField": "",
+        "cellTextPattern": "",
+        "dataFrame": "",
+        "gridColumns": 5,
+        "gridType": "flow",
+        "groups": [],
+        "idField": "name",
+        "idSortMode": "disabled",
+        "idSortPattern": "",
+        "knownIds": "",
+        "resourceDisplayMode": "cell",
+        "richEntries": [],
+        "statusField": "status",
+        "tooltipEntries": [
+          {
+            "field": "cpu",
+            "id": "e2e-110-f-0",
+            "overridesBorderColor": true,
+            "type": "field"
+          }
+        ],
+        "tooltipTitleField": "",
+        "tooltipTitlePattern": ""
+      },
+      "pluginVersion": "1.0.0",
+      "targets": [
+        {
+          "csvContent": "name,status,role,cpu\r\nnode-a,1,web,45\r\nnode-b,0,web,82\r\nnode-c,1,db,23\r\nnode-d,1,db,67\r\nnode-e,0,api,91",
+          "datasource": {
+            "type": "grafana-testdata-datasource",
+            "uid": "trlxrdZVk"
+          },
+          "refId": "A",
+          "scenarioId": "csv_content"
+        }
+      ],
+      "title": "Criticality border override (cell)",
+      "type": "taminomara-hostoverview-panel"
+    },
+    {
+      "datasource": {
+        "type": "grafana-testdata-datasource",
+        "uid": "trlxrdZVk"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "displayMode": "auto"
+          },
+          "fieldMinMax": true,
+          "mappings": [],
+          "noValue": "unknown",
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "#ff0000",
+                "value": 0
+              },
+              {
+                "color": "#00ff00",
+                "value": 1
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "cpu"
+            },
+            "properties": [
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "#00aa00",
+                      "value": 0
+                    },
+                    {
+                      "color": "#aaaa00",
+                      "value": 50
+                    },
+                    {
+                      "color": "#aa0000",
+                      "value": 80
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 24,
+        "x": 0,
+        "y": 344
+      },
+      "id": 111,
+      "options": {
+        "cellSize": 20,
+        "cellTextField": "name",
+        "cellTextPattern": "",
+        "dataFrame": "",
+        "gridColumns": 5,
+        "gridType": "flow",
+        "groups": [],
+        "idField": "name",
+        "idSortMode": "disabled",
+        "idSortPattern": "",
+        "knownIds": "",
+        "resourceDisplayMode": "rich",
+        "richEntries": [
+          {
+            "field": "cpu",
+            "id": "e2e-111-f-0",
+            "overridesBorderColor": true,
+            "type": "field"
+          }
+        ],
+        "statusField": "status",
+        "tooltipEntries": [],
+        "tooltipTitleField": "",
+        "tooltipTitlePattern": ""
+      },
+      "pluginVersion": "1.0.0",
+      "targets": [
+        {
+          "csvContent": "name,status,role,cpu\r\nnode-a,1,web,45\r\nnode-b,0,web,82\r\nnode-c,1,db,23\r\nnode-d,1,db,67\r\nnode-e,0,api,91",
+          "datasource": {
+            "type": "grafana-testdata-datasource",
+            "uid": "trlxrdZVk"
+          },
+          "refId": "A",
+          "scenarioId": "csv_content"
+        }
+      ],
+      "title": "Criticality border override (rich table)",
+      "type": "taminomara-hostoverview-panel"
+    },
+    {
+      "datasource": {
+        "type": "grafana-testdata-datasource",
+        "uid": "trlxrdZVk"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "displayMode": "auto"
+          },
+          "fieldMinMax": true,
+          "mappings": [],
+          "noValue": "unknown",
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "#ff0000",
+                "value": 0
+              },
+              {
+                "color": "#00ff00",
+                "value": 1
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "cpu"
+            },
+            "properties": [
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "#00aa00",
+                      "value": 0
+                    },
+                    {
+                      "color": "#aaaa00",
+                      "value": 50
+                    },
+                    {
+                      "color": "#aa0000",
+                      "value": 80
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 24,
+        "x": 0,
+        "y": 352
+      },
+      "id": 112,
+      "options": {
+        "cellSize": 20,
+        "cellTextField": "",
+        "cellTextPattern": "",
+        "dataFrame": "",
+        "gridColumns": 5,
+        "gridType": "flow",
+        "groups": [
+          {
+            "disabled": false,
+            "drawBorder": true,
+            "entries": [
+              {
+                "field": "cpu",
+                "id": "e2e-112-f-0",
+                "overridesBorderColor": true,
+                "type": "field"
+              }
+            ],
+            "gridColumns": 5,
+            "gridType": "flow",
+            "groupKey": "role",
+            "id": "e2e-112-g-0",
+            "knownIds": "",
+            "showKeyName": false,
+            "showTitle": true,
+            "sortMode": "disabled",
+            "transparentBackground": false
+          }
+        ],
+        "idField": "name",
+        "idSortMode": "disabled",
+        "idSortPattern": "",
+        "knownIds": "",
+        "resourceDisplayMode": "cell",
+        "richEntries": [],
+        "statusField": "status",
+        "tooltipEntries": [],
+        "tooltipTitleField": "",
+        "tooltipTitlePattern": ""
+      },
+      "pluginVersion": "1.0.0",
+      "targets": [
+        {
+          "csvContent": "name,status,role,cpu\r\nnode-b,0,web,82\r\nnode-a,1,web,45\r\nnode-d,1,db,67\r\nnode-c,1,db,23\r\nnode-e,0,api,91",
+          "datasource": {
+            "type": "grafana-testdata-datasource",
+            "uid": "trlxrdZVk"
+          },
+          "refId": "A",
+          "scenarioId": "csv_content"
+        }
+      ],
+      "title": "Criticality border override (groups)",
+      "type": "taminomara-hostoverview-panel"
+    },
+    {
+      "datasource": {
+        "type": "grafana-testdata-datasource",
+        "uid": "trlxrdZVk"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": { "mode": "thresholds" },
+          "custom": { "displayMode": "auto" },
+          "fieldMinMax": true,
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [{ "color": "#aaaaaa", "value": 0 }]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": { "id": "byName", "options": "cpu" },
+            "properties": [
+              { "id": "custom.displayMode", "value": "text" },
+              { "id": "thresholds", "value": { "mode": "absolute", "steps": [{"color":"#00aa00","value":0},{"color":"#aaaa00","value":50},{"color":"#aa0000","value":80}] } }
+            ]
+          },
+          {
+            "matcher": { "id": "byName", "options": "mem" },
+            "properties": [
+              { "id": "custom.displayMode", "value": "colored-text" },
+              { "id": "thresholds", "value": { "mode": "absolute", "steps": [{"color":"#00aa00","value":0},{"color":"#aaaa00","value":50},{"color":"#aa0000","value":80}] } }
+            ]
+          },
+          {
+            "matcher": { "id": "byName", "options": "disk" },
+            "properties": [
+              { "id": "custom.displayMode", "value": "colored-background" },
+              { "id": "thresholds", "value": { "mode": "absolute", "steps": [{"color":"#00aa00","value":0},{"color":"#aaaa00","value":50},{"color":"#aa0000","value":80}] } }
+            ]
+          },
+          {
+            "matcher": { "id": "byName", "options": "net" },
+            "properties": [
+              { "id": "custom.displayMode", "value": "gauge" },
+              { "id": "thresholds", "value": { "mode": "absolute", "steps": [{"color":"#00aa00","value":0},{"color":"#aaaa00","value":50},{"color":"#aa0000","value":80}] } },
+              { "id": "min", "value": 0 },
+              { "id": "max", "value": 100 }
+            ]
+          }
+        ]
+      },
+      "gridPos": { "h": 8, "w": 24, "x": 0, "y": 360 },
+      "id": 120,
+      "options": {
+        "cellSize": 20,
+        "cellTextField": "name",
+        "cellTextPattern": "",
+        "dataFrame": "",
+        "gridColumns": 5,
+        "gridType": "flow",
+        "groups": [],
+        "idField": "name",
+        "idSortMode": "disabled",
+        "idSortPattern": "",
+        "knownIds": "",
+        "resourceDisplayMode": "rich",
+        "richEntries": [
+          { "field": "cpu", "id": "e2e-120-f-0", "overridesBorderColor": false, "type": "field" },
+          { "field": "mem", "id": "e2e-120-f-1", "overridesBorderColor": false, "type": "field" },
+          { "field": "disk", "id": "e2e-120-f-2", "overridesBorderColor": false, "type": "field" },
+          { "field": "net", "id": "e2e-120-f-3", "overridesBorderColor": false, "type": "field" }
+        ],
+        "statusField": "status",
+        "tooltipEntries": [],
+        "tooltipTitleField": "",
+        "tooltipTitlePattern": ""
+      },
+      "pluginVersion": "1.0.0",
+      "targets": [
+        {
+          "csvContent": "name,status,cpu,mem,disk,net\r\nnode-a,1,45,70,30,55\r\nnode-b,0,82,40,85,20\r\nnode-c,1,23,90,60,75",
+          "datasource": { "type": "grafana-testdata-datasource", "uid": "trlxrdZVk" },
+          "refId": "A",
+          "scenarioId": "csv_content"
+        }
+      ],
+      "title": "Rendering types in rich table",
+      "type": "taminomara-hostoverview-panel"
+    },
+    {
+      "datasource": {
+        "type": "grafana-testdata-datasource",
+        "uid": "trlxrdZVk"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": { "mode": "thresholds" },
+          "custom": { "displayMode": "auto" },
+          "fieldMinMax": true,
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [{ "color": "#aaaaaa", "value": 0 }]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": { "id": "byName", "options": "cpu" },
+            "properties": [
+              { "id": "custom.displayMode", "value": "text" },
+              { "id": "thresholds", "value": { "mode": "absolute", "steps": [{"color":"#00aa00","value":0},{"color":"#aaaa00","value":50},{"color":"#aa0000","value":80}] } }
+            ]
+          },
+          {
+            "matcher": { "id": "byName", "options": "mem" },
+            "properties": [
+              { "id": "custom.displayMode", "value": "colored-text" },
+              { "id": "thresholds", "value": { "mode": "absolute", "steps": [{"color":"#00aa00","value":0},{"color":"#aaaa00","value":50},{"color":"#aa0000","value":80}] } }
+            ]
+          },
+          {
+            "matcher": { "id": "byName", "options": "disk" },
+            "properties": [
+              { "id": "custom.displayMode", "value": "colored-background" },
+              { "id": "thresholds", "value": { "mode": "absolute", "steps": [{"color":"#00aa00","value":0},{"color":"#aaaa00","value":50},{"color":"#aa0000","value":80}] } }
+            ]
+          },
+          {
+            "matcher": { "id": "byName", "options": "net" },
+            "properties": [
+              { "id": "custom.displayMode", "value": "gauge" },
+              { "id": "thresholds", "value": { "mode": "absolute", "steps": [{"color":"#00aa00","value":0},{"color":"#aaaa00","value":50},{"color":"#aa0000","value":80}] } },
+              { "id": "min", "value": 0 },
+              { "id": "max", "value": 100 }
+            ]
+          }
+        ]
+      },
+      "gridPos": { "h": 8, "w": 24, "x": 0, "y": 368 },
+      "id": 121,
+      "options": {
+        "cellSize": 20,
+        "cellTextField": "",
+        "cellTextPattern": "",
+        "dataFrame": "",
+        "gridColumns": 5,
+        "gridType": "flow",
+        "groups": [],
+        "idField": "name",
+        "idSortMode": "disabled",
+        "idSortPattern": "",
+        "knownIds": "",
+        "resourceDisplayMode": "cell",
+        "richEntries": [],
+        "statusField": "status",
+        "tooltipEntries": [
+          { "field": "cpu", "id": "e2e-121-f-0", "overridesBorderColor": false, "type": "field" },
+          { "field": "mem", "id": "e2e-121-f-1", "overridesBorderColor": false, "type": "field" },
+          { "field": "disk", "id": "e2e-121-f-2", "overridesBorderColor": false, "type": "field" },
+          { "field": "net", "id": "e2e-121-f-3", "overridesBorderColor": false, "type": "field" }
+        ],
+        "tooltipTitleField": "",
+        "tooltipTitlePattern": ""
+      },
+      "pluginVersion": "1.0.0",
+      "targets": [
+        {
+          "csvContent": "name,status,cpu,mem,disk,net\r\nnode-a,1,45,70,30,55\r\nnode-b,0,82,40,85,20\r\nnode-c,1,23,90,60,75",
+          "datasource": { "type": "grafana-testdata-datasource", "uid": "trlxrdZVk" },
+          "refId": "A",
+          "scenarioId": "csv_content"
+        }
+      ],
+      "title": "Rendering types in cell tooltip",
+      "type": "taminomara-hostoverview-panel"
+    },
+    {
+      "datasource": {
+        "type": "grafana-testdata-datasource",
+        "uid": "trlxrdZVk"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": { "mode": "thresholds" },
+          "custom": { "displayMode": "auto" },
+          "fieldMinMax": true,
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [{ "color": "#aaaaaa", "value": 0 }]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": { "id": "byName", "options": "cpu" },
+            "properties": [
+              { "id": "custom.displayMode", "value": "text" },
+              { "id": "thresholds", "value": { "mode": "absolute", "steps": [{"color":"#00aa00","value":0},{"color":"#aaaa00","value":50},{"color":"#aa0000","value":80}] } }
+            ]
+          },
+          {
+            "matcher": { "id": "byName", "options": "mem" },
+            "properties": [
+              { "id": "custom.displayMode", "value": "colored-text" },
+              { "id": "thresholds", "value": { "mode": "absolute", "steps": [{"color":"#00aa00","value":0},{"color":"#aaaa00","value":50},{"color":"#aa0000","value":80}] } }
+            ]
+          },
+          {
+            "matcher": { "id": "byName", "options": "disk" },
+            "properties": [
+              { "id": "custom.displayMode", "value": "colored-background" },
+              { "id": "thresholds", "value": { "mode": "absolute", "steps": [{"color":"#00aa00","value":0},{"color":"#aaaa00","value":50},{"color":"#aa0000","value":80}] } }
+            ]
+          },
+          {
+            "matcher": { "id": "byName", "options": "net" },
+            "properties": [
+              { "id": "custom.displayMode", "value": "gauge" },
+              { "id": "thresholds", "value": { "mode": "absolute", "steps": [{"color":"#00aa00","value":0},{"color":"#aaaa00","value":50},{"color":"#aa0000","value":80}] } },
+              { "id": "min", "value": 0 },
+              { "id": "max", "value": 100 }
+            ]
+          }
+        ]
+      },
+      "gridPos": { "h": 8, "w": 24, "x": 0, "y": 376 },
+      "id": 122,
+      "options": {
+        "cellSize": 20,
+        "cellTextField": "name",
+        "cellTextPattern": "",
+        "dataFrame": "",
+        "gridColumns": 5,
+        "gridType": "flow",
+        "groups": [
+          {
+            "disabled": false,
+            "drawBorder": true,
+            "entries": [
+              { "field": "cpu", "id": "e2e-122-f-0", "overridesBorderColor": false, "type": "field" },
+              { "field": "mem", "id": "e2e-122-f-1", "overridesBorderColor": false, "type": "field" },
+              { "field": "disk", "id": "e2e-122-f-2", "overridesBorderColor": false, "type": "field" },
+              { "field": "net", "id": "e2e-122-f-3", "overridesBorderColor": false, "type": "field" }
+            ],
+            "gridColumns": 5,
+            "gridType": "flow",
+            "groupKey": "status",
+            "id": "e2e-122-g-0",
+            "knownIds": "",
+            "showKeyName": false,
+            "showTitle": true,
+            "sortMode": "disabled",
+            "transparentBackground": false
+          }
+        ],
+        "idField": "name",
+        "idSortMode": "disabled",
+        "idSortPattern": "",
+        "knownIds": "",
+        "resourceDisplayMode": "cell-with-text",
+        "richEntries": [],
+        "statusField": "status",
+        "tooltipEntries": [],
+        "tooltipTitleField": "",
+        "tooltipTitlePattern": ""
+      },
+      "pluginVersion": "1.0.0",
+      "targets": [
+        {
+          "csvContent": "name,status,cpu,mem,disk,net\r\nnode-a,1,45,70,30,55\r\nnode-b,0,82,40,85,20\r\nnode-c,1,23,90,60,75",
+          "datasource": { "type": "grafana-testdata-datasource", "uid": "trlxrdZVk" },
+          "refId": "A",
+          "scenarioId": "csv_content"
+        }
+      ],
+      "title": "Rendering types in group entries",
+      "type": "taminomara-hostoverview-panel"
+    },
+    {
+      "datasource": {
+        "type": "grafana-testdata-datasource",
+        "uid": "trlxrdZVk"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": { "mode": "thresholds" },
+          "custom": { "displayMode": "auto" },
+          "fieldMinMax": true,
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [{ "color": "#aaaaaa", "value": 0 }]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": { "id": "byName", "options": "cpu" },
+            "properties": [
+              { "id": "custom.displayMode", "value": "text" },
+              { "id": "thresholds", "value": { "mode": "absolute", "steps": [{"color":"#00aa00","value":0},{"color":"#aaaa00","value":50},{"color":"#aa0000","value":80}] } }
+            ]
+          },
+          {
+            "matcher": { "id": "byName", "options": "mem" },
+            "properties": [
+              { "id": "custom.displayMode", "value": "colored-text" },
+              { "id": "thresholds", "value": { "mode": "absolute", "steps": [{"color":"#00aa00","value":0},{"color":"#aaaa00","value":50},{"color":"#aa0000","value":80}] } }
+            ]
+          },
+          {
+            "matcher": { "id": "byName", "options": "disk" },
+            "properties": [
+              { "id": "custom.displayMode", "value": "colored-background" },
+              { "id": "thresholds", "value": { "mode": "absolute", "steps": [{"color":"#00aa00","value":0},{"color":"#aaaa00","value":50},{"color":"#aa0000","value":80}] } }
+            ]
+          },
+          {
+            "matcher": { "id": "byName", "options": "net" },
+            "properties": [
+              { "id": "custom.displayMode", "value": "gauge" },
+              { "id": "thresholds", "value": { "mode": "absolute", "steps": [{"color":"#00aa00","value":0},{"color":"#aaaa00","value":50},{"color":"#aa0000","value":80}] } },
+              { "id": "min", "value": 0 },
+              { "id": "max", "value": 100 }
+            ]
+          }
+        ]
+      },
+      "gridPos": { "h": 8, "w": 24, "x": 0, "y": 384 },
+      "id": 123,
+      "options": {
+        "cellSize": 20,
+        "cellTextField": "name",
+        "cellTextPattern": "",
+        "dataFrame": "",
+        "gridColumns": 5,
+        "gridType": "flow",
+        "groups": [],
+        "idField": "name",
+        "idSortMode": "disabled",
+        "idSortPattern": "",
+        "knownIds": "",
+        "resourceDisplayMode": "rich",
+        "richEntries": [
+          { "field": "status", "id": "e2e-123-f-s", "overridesBorderColor": false, "type": "field" }
+        ],
+        "statusField": "status",
+        "tooltipEntries": [
+          { "field": "cpu", "id": "e2e-123-f-0", "overridesBorderColor": false, "type": "field" },
+          { "field": "mem", "id": "e2e-123-f-1", "overridesBorderColor": false, "type": "field" },
+          { "field": "disk", "id": "e2e-123-f-2", "overridesBorderColor": false, "type": "field" },
+          { "field": "net", "id": "e2e-123-f-3", "overridesBorderColor": false, "type": "field" }
+        ],
+        "tooltipTitleField": "",
+        "tooltipTitlePattern": ""
+      },
+      "pluginVersion": "1.0.0",
+      "targets": [
+        {
+          "csvContent": "name,status,cpu,mem,disk,net\r\nnode-a,1,45,70,30,55\r\nnode-b,0,82,40,85,20\r\nnode-c,1,23,90,60,75",
+          "datasource": { "type": "grafana-testdata-datasource", "uid": "trlxrdZVk" },
+          "refId": "A",
+          "scenarioId": "csv_content"
+        }
+      ],
+      "title": "Rendering types in table tooltip",
+      "type": "taminomara-hostoverview-panel"
+    }
+  ],
+  "preload": false,
+  "schemaVersion": 42,
+  "tags": [
+    "Test"
+  ],
+  "templating": {
+    "list": []
+  },
+  "time": {
+    "from": "now-1h",
+    "to": "now"
+  },
+  "timepicker": {},
+  "timezone": "utc",
+  "title": "E2E Tests",
+  "uid": "e2e-tests",
+  "version": 1
+}

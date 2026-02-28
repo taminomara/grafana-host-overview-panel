@@ -1,0 +1,429 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": {
+          "type": "grafana",
+          "uid": "-- Grafana --"
+        },
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "id": 5,
+  "links": [],
+  "panels": [
+    {
+      "fieldConfig": {
+        "defaults": {},
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 24,
+        "x": 0,
+        "y": 0
+      },
+      "id": 1,
+      "options": {
+        "code": {
+          "language": "plaintext",
+          "showLineNumbers": false,
+          "showMiniMap": false
+        },
+        "content": "# Service Overview\n\nProcesses grouped by **service \u2192 node \u2192 process type**. Each coloured square is one process instance (green = up, red = down). Node headers show CPU / Memory / Disk gauges from the joined `NodeMetrics` frame.\n",
+        "mode": "markdown"
+      },
+      "pluginVersion": "12.3.2",
+      "title": "Info",
+      "type": "text"
+    },
+    {
+      "datasource": {
+        "type": "grafana-testdata-datasource",
+        "uid": "trlxrdZVk"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "displayMode": "auto"
+          },
+          "fieldMinMax": true,
+          "mappings": [],
+          "noValue": "unknown",
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "text",
+                "value": 0
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "status"
+            },
+            "properties": [
+              {
+                "id": "custom.displayMode",
+                "value": "colored-text"
+              },
+              {
+                "id": "mappings",
+                "value": [
+                  {
+                    "options": {
+                      "down": {
+                        "color": "red",
+                        "index": 1
+                      },
+                      "looping": {
+                        "color": "purple",
+                        "index": 2
+                      },
+                      "up": {
+                        "color": "green",
+                        "index": 0
+                      }
+                    },
+                    "type": "value"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "cpu"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "percent"
+              },
+              {
+                "id": "min",
+                "value": 0
+              },
+              {
+                "id": "max",
+                "value": 100
+              },
+              {
+                "id": "custom.displayMode",
+                "value": "gauge"
+              },
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "semi-dark-green",
+                      "value": 0
+                    },
+                    {
+                      "color": "semi-dark-yellow",
+                      "value": 70
+                    },
+                    {
+                      "color": "semi-dark-orange",
+                      "value": 85
+                    },
+                    {
+                      "color": "semi-dark-red",
+                      "value": 95
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "memory"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "percent"
+              },
+              {
+                "id": "min",
+                "value": 0
+              },
+              {
+                "id": "max",
+                "value": 100
+              },
+              {
+                "id": "custom.displayMode",
+                "value": "gauge"
+              },
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "semi-dark-green",
+                      "value": 0
+                    },
+                    {
+                      "color": "semi-dark-orange",
+                      "value": 80
+                    },
+                    {
+                      "color": "semi-dark-red",
+                      "value": 90
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "disk"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "percent"
+              },
+              {
+                "id": "min",
+                "value": 0
+              },
+              {
+                "id": "max",
+                "value": 100
+              },
+              {
+                "id": "custom.displayMode",
+                "value": "gauge"
+              },
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "semi-dark-green",
+                      "value": 0
+                    },
+                    {
+                      "color": "semi-dark-yellow",
+                      "value": 70
+                    },
+                    {
+                      "color": "semi-dark-orange",
+                      "value": 85
+                    },
+                    {
+                      "color": "semi-dark-red",
+                      "value": 95
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "node"
+            },
+            "properties": [
+              {
+                "id": "links",
+                "value": [
+                  {
+                    "targetBlank": true,
+                    "title": "Node exporter dashboard",
+                    "url": "http://example.com?host=${__data.fields.node}"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "process"
+            },
+            "properties": [
+              {
+                "id": "links",
+                "value": [
+                  {
+                    "targetBlank": true,
+                    "title": "Docker overview dashboard",
+                    "url": "http://example.com?host=${__data.fields.node}"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 20,
+        "w": 24,
+        "x": 0,
+        "y": 4
+      },
+      "id": 2,
+      "options": {
+        "resourceDisplayMode": "cell-with-text",
+        "cellSize": 30,
+        "cellTextField": "",
+        "cellTextPattern": "",
+        "dataFrame": "Processes",
+        "gridColumns": 4,
+        "gridType": "flow",
+        "groups": [
+          {
+            "disabled": false,
+            "drawBorder": false,
+            "gridColumns": 6,
+            "gridType": "vertical",
+            "groupKey": "service",
+            "id": "5a7a7f97-2c8c-401b-8d7f-587e66133a4e",
+            "knownIds": "",
+            "showKeyName": false,
+            "showTitle": true,
+            "sortMode": "lexicographic",
+            "transparentBackground": true,
+            "entries": []
+          },
+          {
+            "borderColor": "transparent",
+            "disabled": false,
+            "drawBorder": true,
+            "gridColumns": 4,
+            "gridType": "flow",
+            "groupKey": "node",
+            "id": "1a2f13a0-5fae-430f-b55a-f99d82315811",
+            "knownIds": "",
+            "showKeyName": false,
+            "showTitle": true,
+            "sortMode": "custom",
+            "sortPattern": "\\w+?-(?<n1>\\d+)\\.example.com",
+            "transparentBackground": false,
+            "entries": [
+              {
+                "id": "048dc95c-fb21-4213-b1b0-7cc6f67c29b5",
+                "keys": [
+                  {
+                    "foreignField": "node",
+                    "primaryKey": "node",
+                    "primaryKeyTemplate": ""
+                  }
+                ],
+                "sourceField": "cpu",
+                "sourceFrame": "NodeMetrics",
+                "overridesBorderColor": true,
+                "type": "join"
+              },
+              {
+                "id": "73479366-8b4d-4278-8a17-5771a399399c",
+                "keys": [
+                  {
+                    "foreignField": "node",
+                    "primaryKey": "node",
+                    "primaryKeyTemplate": ""
+                  }
+                ],
+                "sourceField": "memory",
+                "sourceFrame": "NodeMetrics",
+                "overridesBorderColor": true,
+                "type": "join"
+              },
+              {
+                "id": "25af0293-6227-4663-b24d-e0143799039e",
+                "keys": [
+                  {
+                    "foreignField": "node",
+                    "primaryKey": "node",
+                    "primaryKeyTemplate": ""
+                  }
+                ],
+                "sourceField": "disk",
+                "sourceFrame": "NodeMetrics",
+                "overridesBorderColor": true,
+                "type": "join"
+              }
+            ]
+          }
+        ],
+        "knownIds": "",
+        "tooltipTitleField": "",
+        "tooltipTitlePattern": "",
+        "statusField": "status",
+        "idField": "process",
+        "idSortMode": "lexicographic-insensitive",
+        "idSortPattern": "",
+        "tooltipEntries": []
+      },
+      "pluginVersion": "1.0.0",
+      "targets": [
+        {
+          "csvContent": "service,node,process,status\r\napi,api-01.example.com,haproxy,up\r\napi,api-01.example.com,api,up\r\napi,api-01.example.com,alloy,up\r\napi,api-02.example.com,haproxy,up\r\napi,api-02.example.com,api,up\r\napi,api-02.example.com,alloy,up\r\napi,api-03.example.com,haproxy,up\r\napi,api-03.example.com,api,down\r\napi,api-03.example.com,alloy,up\r\napi,api-04.example.com,haproxy,up\r\napi,api-04.example.com,api,up\r\napi,api-04.example.com,alloy,up\r\nbackend,backend-01.example.com,haproxy,up\r\nbackend,backend-01.example.com,backend,up\r\nbackend,backend-01.example.com,alloy,up\r\nbackend,backend-01.example.com,worker,up\r\nbackend,backend-02.example.com,haproxy,up\r\nbackend,backend-02.example.com,backend,up\r\nbackend,backend-02.example.com,worker,up\r\nbackend,backend-02.example.com,alloy,up\r\nbackend,backend-03.example.com,haproxy,down\r\nbackend,backend-03.example.com,backend,down\r\nbackend,backend-03.example.com,alloy,up\r\nbackend,backend-03.example.com,worker,looping\r\nbackend,backend-04.example.com,haproxy,up\r\nbackend,backend-04.example.com,backend,up\r\nbackend,backend-04.example.com,alloy,up\r\nbackend,backend-04.example.com,worker,up\r\nfrontend,frontend-01.example.com,nginx,up\r\nfrontend,frontend-01.example.com,frontend,up\r\nfrontend,frontend-01.example.com,alloy,up\r\nfrontend,frontend-02.example.com,nginx,up\r\nfrontend,frontend-02.example.com,frontend,up\r\nfrontend,frontend-02.example.com,alloy,up\r\nfrontend,frontend-03.example.com,nginx,up\r\nfrontend,frontend-03.example.com,frontend,up\r\nfrontend,frontend-03.example.com,alloy,up\r\ndatabase,mongo-01.example.com,db,down\r\ndatabase,mongo-01.example.com,mongo-exporter,up\r\ndatabase,mongo-01.example.com,alloy,up\r\ndatabase,mongo-02.example.com,db,up\r\ndatabase,mongo-02.example.com,mongo-exporter,up\r\ndatabase,mongo-02.example.com,alloy,up",
+          "datasource": {
+            "type": "grafana-testdata-datasource",
+            "uid": "trlxrdZVk"
+          },
+          "refId": "Processes",
+          "scenarioId": "csv_content"
+        },
+        {
+          "csvContent": "node,cpu,memory,disk\r\napi-01.example.com,44.2,57.1,31.0\r\napi-02.example.com,51.8,63.4,35.5\r\napi-03.example.com,38.5,52.0,29.3\r\napi-04.example.com,47.1,60.2,33.8\r\nbackend-01.example.com,60.3,70.5,42.1\r\nbackend-02.example.com,58.9,68.2,40.7\r\nbackend-03.example.com,92.7,91.3,65.4\r\nbackend-04.example.com,55.4,66.8,38.2\r\nfrontend-01.example.com,35.1,48.6,25.0\r\nfrontend-02.example.com,41.7,55.3,28.9\r\nfrontend-03.example.com,39.0,51.8,27.4\r\nmongo-01.example.com,78.4,85.9,96.1\r\nmongo-02.example.com,70.2,79.6,58.3",
+          "datasource": {
+            "type": "grafana-testdata-datasource",
+            "uid": "trlxrdZVk"
+          },
+          "refId": "NodeMetrics",
+          "scenarioId": "csv_content"
+        }
+      ],
+      "title": "Node liveness",
+      "transparent": true,
+      "type": "taminomara-hostoverview-panel"
+    }
+  ],
+  "preload": false,
+  "refresh": "",
+  "schemaVersion": 42,
+  "tags": ["Demo"],
+  "templating": {
+    "list": []
+  },
+  "time": {
+    "from": "now-1h",
+    "to": "now"
+  },
+  "timepicker": {},
+  "timezone": "browser",
+  "title": "Service liveness",
+  "uid": "b23a2d8e-47f4-409f-92de-a1123aaa8563",
+  "version": 13
+}
