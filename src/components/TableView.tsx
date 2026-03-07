@@ -82,7 +82,6 @@ export const TableView: React.FC<TableViewProps> = ({ node, frame, rowIndex, opt
   const hasTooltipEntries = (options.tooltipEntries ?? []).length > 0;
 
   const updateHeight = useCallback(() => {
-    console.log(tooltipRef.current);
     if (tooltipRef.current) {
       setTooltipHeight(tooltipRef.current.offsetHeight);
     }
