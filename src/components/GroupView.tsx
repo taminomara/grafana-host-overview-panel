@@ -147,7 +147,7 @@ export const GroupView: React.FC<GroupViewProps> = ({ node, options }) => {
 
     return (
       <div className={styles.heading}>
-        <span style={{ color: displayValue?.color }}>{titleText}</span>
+        <span>{titleText}</span>
         <DataLinksButton links={links} />
       </div>
     );
