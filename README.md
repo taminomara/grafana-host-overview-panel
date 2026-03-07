@@ -55,6 +55,9 @@ Use panel plugins when you want to do things like visualize data returned by dat
    # If you wish to start a certain Grafana version. If not specified will use latest by default
    GRAFANA_VERSION=11.3.0 npm run server
 
+   # Start dev build
+   npm run dev
+
    # Starts the tests
    npm run e2e
    ```

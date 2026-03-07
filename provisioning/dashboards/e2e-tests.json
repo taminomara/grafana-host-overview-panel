@@ -4129,28 +4129,68 @@
             "matcher": { "id": "byName", "options": "cpu" },
             "properties": [
               { "id": "custom.displayMode", "value": "text" },
-              { "id": "thresholds", "value": { "mode": "absolute", "steps": [{"color":"#00aa00","value":0},{"color":"#aaaa00","value":50},{"color":"#aa0000","value":80}] } }
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    { "color": "#00aa00", "value": 0 },
+                    { "color": "#aaaa00", "value": 50 },
+                    { "color": "#aa0000", "value": 80 }
+                  ]
+                }
+              }
             ]
           },
           {
             "matcher": { "id": "byName", "options": "mem" },
             "properties": [
               { "id": "custom.displayMode", "value": "colored-text" },
-              { "id": "thresholds", "value": { "mode": "absolute", "steps": [{"color":"#00aa00","value":0},{"color":"#aaaa00","value":50},{"color":"#aa0000","value":80}] } }
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    { "color": "#00aa00", "value": 0 },
+                    { "color": "#aaaa00", "value": 50 },
+                    { "color": "#aa0000", "value": 80 }
+                  ]
+                }
+              }
             ]
           },
           {
             "matcher": { "id": "byName", "options": "disk" },
             "properties": [
               { "id": "custom.displayMode", "value": "colored-background" },
-              { "id": "thresholds", "value": { "mode": "absolute", "steps": [{"color":"#00aa00","value":0},{"color":"#aaaa00","value":50},{"color":"#aa0000","value":80}] } }
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    { "color": "#00aa00", "value": 0 },
+                    { "color": "#aaaa00", "value": 50 },
+                    { "color": "#aa0000", "value": 80 }
+                  ]
+                }
+              }
             ]
           },
           {
             "matcher": { "id": "byName", "options": "net" },
             "properties": [
               { "id": "custom.displayMode", "value": "gauge" },
-              { "id": "thresholds", "value": { "mode": "absolute", "steps": [{"color":"#00aa00","value":0},{"color":"#aaaa00","value":50},{"color":"#aa0000","value":80}] } },
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    { "color": "#00aa00", "value": 0 },
+                    { "color": "#aaaa00", "value": 50 },
+                    { "color": "#aa0000", "value": 80 }
+                  ]
+                }
+              },
               { "id": "min", "value": 0 },
               { "id": "max", "value": 100 }
             ]
@@ -4216,28 +4256,68 @@
             "matcher": { "id": "byName", "options": "cpu" },
             "properties": [
               { "id": "custom.displayMode", "value": "text" },
-              { "id": "thresholds", "value": { "mode": "absolute", "steps": [{"color":"#00aa00","value":0},{"color":"#aaaa00","value":50},{"color":"#aa0000","value":80}] } }
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    { "color": "#00aa00", "value": 0 },
+                    { "color": "#aaaa00", "value": 50 },
+                    { "color": "#aa0000", "value": 80 }
+                  ]
+                }
+              }
             ]
           },
           {
             "matcher": { "id": "byName", "options": "mem" },
             "properties": [
               { "id": "custom.displayMode", "value": "colored-text" },
-              { "id": "thresholds", "value": { "mode": "absolute", "steps": [{"color":"#00aa00","value":0},{"color":"#aaaa00","value":50},{"color":"#aa0000","value":80}] } }
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    { "color": "#00aa00", "value": 0 },
+                    { "color": "#aaaa00", "value": 50 },
+                    { "color": "#aa0000", "value": 80 }
+                  ]
+                }
+              }
             ]
           },
           {
             "matcher": { "id": "byName", "options": "disk" },
             "properties": [
               { "id": "custom.displayMode", "value": "colored-background" },
-              { "id": "thresholds", "value": { "mode": "absolute", "steps": [{"color":"#00aa00","value":0},{"color":"#aaaa00","value":50},{"color":"#aa0000","value":80}] } }
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    { "color": "#00aa00", "value": 0 },
+                    { "color": "#aaaa00", "value": 50 },
+                    { "color": "#aa0000", "value": 80 }
+                  ]
+                }
+              }
             ]
           },
           {
             "matcher": { "id": "byName", "options": "net" },
             "properties": [
               { "id": "custom.displayMode", "value": "gauge" },
-              { "id": "thresholds", "value": { "mode": "absolute", "steps": [{"color":"#00aa00","value":0},{"color":"#aaaa00","value":50},{"color":"#aa0000","value":80}] } },
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    { "color": "#00aa00", "value": 0 },
+                    { "color": "#aaaa00", "value": 50 },
+                    { "color": "#aa0000", "value": 80 }
+                  ]
+                }
+              },
               { "id": "min", "value": 0 },
               { "id": "max", "value": 100 }
             ]
@@ -4303,28 +4383,68 @@
             "matcher": { "id": "byName", "options": "cpu" },
             "properties": [
               { "id": "custom.displayMode", "value": "text" },
-              { "id": "thresholds", "value": { "mode": "absolute", "steps": [{"color":"#00aa00","value":0},{"color":"#aaaa00","value":50},{"color":"#aa0000","value":80}] } }
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    { "color": "#00aa00", "value": 0 },
+                    { "color": "#aaaa00", "value": 50 },
+                    { "color": "#aa0000", "value": 80 }
+                  ]
+                }
+              }
             ]
           },
           {
             "matcher": { "id": "byName", "options": "mem" },
             "properties": [
               { "id": "custom.displayMode", "value": "colored-text" },
-              { "id": "thresholds", "value": { "mode": "absolute", "steps": [{"color":"#00aa00","value":0},{"color":"#aaaa00","value":50},{"color":"#aa0000","value":80}] } }
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    { "color": "#00aa00", "value": 0 },
+                    { "color": "#aaaa00", "value": 50 },
+                    { "color": "#aa0000", "value": 80 }
+                  ]
+                }
+              }
             ]
           },
           {
             "matcher": { "id": "byName", "options": "disk" },
             "properties": [
               { "id": "custom.displayMode", "value": "colored-background" },
-              { "id": "thresholds", "value": { "mode": "absolute", "steps": [{"color":"#00aa00","value":0},{"color":"#aaaa00","value":50},{"color":"#aa0000","value":80}] } }
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    { "color": "#00aa00", "value": 0 },
+                    { "color": "#aaaa00", "value": 50 },
+                    { "color": "#aa0000", "value": 80 }
+                  ]
+                }
+              }
             ]
           },
           {
             "matcher": { "id": "byName", "options": "net" },
             "properties": [
               { "id": "custom.displayMode", "value": "gauge" },
-              { "id": "thresholds", "value": { "mode": "absolute", "steps": [{"color":"#00aa00","value":0},{"color":"#aaaa00","value":50},{"color":"#aa0000","value":80}] } },
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    { "color": "#00aa00", "value": 0 },
+                    { "color": "#aaaa00", "value": 50 },
+                    { "color": "#aa0000", "value": 80 }
+                  ]
+                }
+              },
               { "id": "min", "value": 0 },
               { "id": "max", "value": 100 }
             ]
@@ -4345,10 +4465,30 @@
             "disabled": false,
             "drawBorder": true,
             "entries": [
-              { "field": "cpu", "id": "e2e-122-f-0", "overridesBorderColor": false, "type": "field" },
-              { "field": "mem", "id": "e2e-122-f-1", "overridesBorderColor": false, "type": "field" },
-              { "field": "disk", "id": "e2e-122-f-2", "overridesBorderColor": false, "type": "field" },
-              { "field": "net", "id": "e2e-122-f-3", "overridesBorderColor": false, "type": "field" }
+              {
+                "field": "cpu",
+                "id": "e2e-122-f-0",
+                "overridesBorderColor": false,
+                "type": "field"
+              },
+              {
+                "field": "mem",
+                "id": "e2e-122-f-1",
+                "overridesBorderColor": false,
+                "type": "field"
+              },
+              {
+                "field": "disk",
+                "id": "e2e-122-f-2",
+                "overridesBorderColor": false,
+                "type": "field"
+              },
+              {
+                "field": "net",
+                "id": "e2e-122-f-3",
+                "overridesBorderColor": false,
+                "type": "field"
+              }
             ],
             "gridColumns": 5,
             "gridType": "flow",
@@ -4405,28 +4545,68 @@
             "matcher": { "id": "byName", "options": "cpu" },
             "properties": [
               { "id": "custom.displayMode", "value": "text" },
-              { "id": "thresholds", "value": { "mode": "absolute", "steps": [{"color":"#00aa00","value":0},{"color":"#aaaa00","value":50},{"color":"#aa0000","value":80}] } }
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    { "color": "#00aa00", "value": 0 },
+                    { "color": "#aaaa00", "value": 50 },
+                    { "color": "#aa0000", "value": 80 }
+                  ]
+                }
+              }
             ]
           },
           {
             "matcher": { "id": "byName", "options": "mem" },
             "properties": [
               { "id": "custom.displayMode", "value": "colored-text" },
-              { "id": "thresholds", "value": { "mode": "absolute", "steps": [{"color":"#00aa00","value":0},{"color":"#aaaa00","value":50},{"color":"#aa0000","value":80}] } }
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    { "color": "#00aa00", "value": 0 },
+                    { "color": "#aaaa00", "value": 50 },
+                    { "color": "#aa0000", "value": 80 }
+                  ]
+                }
+              }
             ]
           },
           {
             "matcher": { "id": "byName", "options": "disk" },
             "properties": [
               { "id": "custom.displayMode", "value": "colored-background" },
-              { "id": "thresholds", "value": { "mode": "absolute", "steps": [{"color":"#00aa00","value":0},{"color":"#aaaa00","value":50},{"color":"#aa0000","value":80}] } }
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    { "color": "#00aa00", "value": 0 },
+                    { "color": "#aaaa00", "value": 50 },
+                    { "color": "#aa0000", "value": 80 }
+                  ]
+                }
+              }
             ]
           },
           {
             "matcher": { "id": "byName", "options": "net" },
             "properties": [
               { "id": "custom.displayMode", "value": "gauge" },
-              { "id": "thresholds", "value": { "mode": "absolute", "steps": [{"color":"#00aa00","value":0},{"color":"#aaaa00","value":50},{"color":"#aa0000","value":80}] } },
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    { "color": "#00aa00", "value": 0 },
+                    { "color": "#aaaa00", "value": 50 },
+                    { "color": "#aa0000", "value": 80 }
+                  ]
+                }
+              },
               { "id": "min", "value": 0 },
               { "id": "max", "value": 100 }
             ]
@@ -4476,9 +4656,7 @@
   ],
   "preload": false,
   "schemaVersion": 42,
-  "tags": [
-    "Test"
-  ],
+  "tags": ["Test"],
   "templating": {
     "list": []
   },

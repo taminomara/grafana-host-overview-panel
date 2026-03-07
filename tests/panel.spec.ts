@@ -5,14 +5,20 @@ const E2E_DASHBOARD = 'e2e-tests.json';
 // ── Data Anomalies ──
 
 test.describe('data anomalies', () => {
-  test('empty frame renders without crash', async ({ gotoPanelEditPage, readProvisionedDashboard }) => {
+  test('empty frame renders without crash', async ({
+    gotoPanelEditPage,
+    readProvisionedDashboard,
+  }) => {
     const dashboard = await readProvisionedDashboard({ fileName: E2E_DASHBOARD });
     const panelEditPage = await gotoPanelEditPage({ dashboard, id: '11' });
     await expect(panelEditPage.panel.locator).not.toContainText('No data');
     await expect(panelEditPage.panel.locator).not.toContainText('Cannot visualize data');
   });
 
-  test('duplicate frame IDs shows error', async ({ gotoPanelEditPage, readProvisionedDashboard }) => {
+  test('duplicate frame IDs shows error', async ({
+    gotoPanelEditPage,
+    readProvisionedDashboard,
+  }) => {
     const dashboard = await readProvisionedDashboard({ fileName: E2E_DASHBOARD });
     const panelEditPage = await gotoPanelEditPage({ dashboard, id: '12' });
     await expect(panelEditPage.panel.locator).toContainText('Duplicate data frame IDs');
@@ -66,8 +72,8 @@ test.describe('data anomalies', () => {
       };
     });
     expect(colorCounts.green).toBe(3); // node-a, node-c, node-d
-    expect(colorCounts.red).toBe(1);   // node-e
-    expect(colorCounts.gray).toBe(1);  // node-b (null status → mapping color)
+    expect(colorCounts.red).toBe(1); // node-e
+    expect(colorCounts.gray).toBe(1); // node-b (null status → mapping color)
 
     // Open tooltip for node-b (null status and cpu) and verify mapped values
     const nodeBCell = panel.locator('[data-testid="resource-cell"]').filter({ hasText: 'node-b' });
@@ -204,9 +210,9 @@ test.describe('display modes', () => {
         red: colors.filter((c) => c.includes('rgb(170, 0, 0)')).length,
       };
     });
-    expect(cpuColorCounts.green).toBe(2);  // cpu 45, 23
+    expect(cpuColorCounts.green).toBe(2); // cpu 45, 23
     expect(cpuColorCounts.yellow).toBe(1); // cpu 67
-    expect(cpuColorCounts.red).toBe(2);    // cpu 82, 91
+    expect(cpuColorCounts.red).toBe(2); // cpu 82, 91
   });
 
   test('rich table with expandable tooltip has show more button', async ({
@@ -328,18 +334,15 @@ test.describe('sorting', () => {
     expect(matches).toEqual(['node-1', 'node-10', 'node-2', 'node-3']);
   });
 
-  test('numeric sort orders by number', async ({
-    gotoPanelEditPage,
-    readProvisionedDashboard,
-  }) => {
+  test('numeric sort orders by number', async ({ gotoPanelEditPage, readProvisionedDashboard }) => {
     const dashboard = await readProvisionedDashboard({ fileName: E2E_DASHBOARD });
     const panelEditPage = await gotoPanelEditPage({ dashboard, id: '42' });
     const panel = panelEditPage.panel.locator;
     // Data: 3, 1, 10, 2 → numeric sort → 1, 2, 3, 10
     await expect(panel).toContainText('10');
-    const cellTexts = await panel.locator('[data-testid="resource-cell"]').evaluateAll(
-      (els) => els.map((el) => el.textContent?.trim())
-    );
+    const cellTexts = await panel
+      .locator('[data-testid="resource-cell"]')
+      .evaluateAll((els) => els.map((el) => el.textContent?.trim()));
     expect(cellTexts).toEqual(['1', '2', '3', '10']);
   });
 
@@ -406,10 +409,7 @@ test.describe('sorting', () => {
 // ── Layout ──
 
 test.describe('layout', () => {
-  test('flow layout renders resources', async ({
-    gotoPanelEditPage,
-    readProvisionedDashboard,
-  }) => {
+  test('flow layout renders resources', async ({ gotoPanelEditPage, readProvisionedDashboard }) => {
     const dashboard = await readProvisionedDashboard({ fileName: E2E_DASHBOARD });
     const panelEditPage = await gotoPanelEditPage({ dashboard, id: '50' });
     for (const name of ['node-a', 'node-b', 'node-c', 'node-d', 'node-e']) {
@@ -417,10 +417,7 @@ test.describe('layout', () => {
     }
   });
 
-  test('grid layout renders resources', async ({
-    gotoPanelEditPage,
-    readProvisionedDashboard,
-  }) => {
+  test('grid layout renders resources', async ({ gotoPanelEditPage, readProvisionedDashboard }) => {
     const dashboard = await readProvisionedDashboard({ fileName: E2E_DASHBOARD });
     const panelEditPage = await gotoPanelEditPage({ dashboard, id: '51' });
     for (const name of ['node-a', 'node-b', 'node-c', 'node-d', 'node-e']) {
@@ -518,9 +515,7 @@ test.describe('group settings', () => {
     // Group borderColor: #aa00aa → rgb(170, 0, 170)
     const groups = panel.locator('div[style*="border-color"]');
     await expect(groups).toHaveCount(2);
-    const colors = await groups.evaluateAll((els) =>
-      els.map((el) => el.style.borderColor)
-    );
+    const colors = await groups.evaluateAll((els) => els.map((el) => el.style.borderColor));
     expect(colors.every((c) => c.includes('rgb(170, 0, 170)'))).toBe(true);
   });
 
@@ -535,9 +530,7 @@ test.describe('group settings', () => {
     // Panel borderColor: #00aaaa → rgb(0, 170, 170), group has no own borderColor
     const groups = panel.locator('div[style*="border-color"]');
     await expect(groups).toHaveCount(2);
-    const colors = await groups.evaluateAll((els) =>
-      els.map((el) => el.style.borderColor)
-    );
+    const colors = await groups.evaluateAll((els) => els.map((el) => el.style.borderColor));
     expect(colors.every((c) => c.includes('rgb(0, 170, 170)'))).toBe(true);
   });
 
@@ -577,7 +570,9 @@ test.describe('tooltips and fields', () => {
     await expect(tooltip).toContainText('role');
     await expect(tooltip).toContainText('cpu');
     // Should show actual field values from the first row
-    await expect(tooltip.getByText('web').or(tooltip.getByText('db')).or(tooltip.getByText('api')).first()).toBeVisible();
+    await expect(
+      tooltip.getByText('web').or(tooltip.getByText('db')).or(tooltip.getByText('api')).first()
+    ).toBeVisible();
   });
 
   test('tooltip title override renders pattern', async ({
@@ -650,9 +645,9 @@ test.describe('tooltips and fields', () => {
         red: colors.filter((c) => c.includes('rgb(170, 0, 0)')).length,
       };
     });
-    expect(cpuColorCounts.green).toBe(2);  // cpu 45, 23
+    expect(cpuColorCounts.green).toBe(2); // cpu 45, 23
     expect(cpuColorCounts.yellow).toBe(1); // cpu 67
-    expect(cpuColorCounts.red).toBe(2);    // cpu 82, 91
+    expect(cpuColorCounts.red).toBe(2); // cpu 82, 91
   });
 
   test('rich table expandable tooltip expands and collapses', async ({
@@ -855,7 +850,7 @@ test.describe('criticality', () => {
     const withCpuYellow = gradients.filter((g) => g.includes('rgb(170, 170, 0)')).length;
     const withCpuRed = gradients.filter((g) => g.includes('rgb(170, 0, 0)')).length;
     expect(withCpuYellow).toBe(1); // cpu 67
-    expect(withCpuRed).toBe(2);    // cpu 82, 91
+    expect(withCpuRed).toBe(2); // cpu 82, 91
     // node-d has status=1→rgb(0,255,0) and cpu=67→rgb(170,170,0): two distinct colors
     const splitCell = gradients.find(
       (g) => g.includes('rgb(0, 255, 0)') && g.includes('rgb(170, 170, 0)')
@@ -887,15 +882,13 @@ test.describe('criticality', () => {
     // node-e(s=0,cpu=91): #aa0000, score 2/3 → override rgb(170, 0, 0)
     const cards = panel.locator('div[style*="border-color"]');
     await expect(cards).toHaveCount(5);
-    const borderColors = await cards.evaluateAll((els) =>
-      els.map((el) => el.style.borderColor)
-    );
+    const borderColors = await cards.evaluateAll((els) => els.map((el) => el.style.borderColor));
     const green = borderColors.filter((c) => c.includes('rgb(0, 255, 0)')).length;
     const yellow = borderColors.filter((c) => c.includes('rgb(170, 170, 0)')).length;
     const red = borderColors.filter((c) => c.includes('rgb(170, 0, 0)')).length;
-    expect(green).toBe(2);  // node-a, node-c
+    expect(green).toBe(2); // node-a, node-c
     expect(yellow).toBe(1); // node-d
-    expect(red).toBe(2);    // node-b, node-e
+    expect(red).toBe(2); // node-b, node-e
   });
 
   test('group criticality override colors group borders', async ({
@@ -915,13 +908,11 @@ test.describe('criticality', () => {
     // api → first row cpu=91 → #aa0000 (score 2/3) → rgb(170, 0, 0)
     const groups = panel.locator('div[style*="border-color"]');
     await expect(groups).toHaveCount(3);
-    const borderColors = await groups.evaluateAll((els) =>
-      els.map((el) => el.style.borderColor)
-    );
+    const borderColors = await groups.evaluateAll((els) => els.map((el) => el.style.borderColor));
     const yellow = borderColors.filter((c) => c.includes('rgb(170, 170, 0)')).length;
     const red = borderColors.filter((c) => c.includes('rgb(170, 0, 0)')).length;
     expect(yellow).toBe(1); // db
-    expect(red).toBe(2);    // web, api
+    expect(red).toBe(2); // web, api
   });
 });
 

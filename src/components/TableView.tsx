@@ -2,7 +2,15 @@ import { css, cx } from '@emotion/css';
 import { GrafanaTheme2 } from '@grafana/data';
 import { Icon, useStyles2, useTheme2 } from '@grafana/ui';
 import { GroupNode } from 'library/groupFrames';
-import React, { useCallback, useEffect, useId, useLayoutEffect, useMemo, useRef, useState } from 'react';
+import React, {
+  useCallback,
+  useEffect,
+  useId,
+  useLayoutEffect,
+  useMemo,
+  useRef,
+  useState,
+} from 'react';
 import { HostViewerOptions } from 'types';
 import { useOverrideColor } from '../library/criticality';
 import { IndexedFrame } from '../library/dataFrame';
@@ -17,7 +25,7 @@ const getStyles = (theme: GrafanaTheme2) => ({
     // boxShadow: theme.shadows.z2,
   }),
   card: css({
-    position: "relative",
+    position: 'relative',
     zIndex: 1,
     padding: theme.spacing(0.5),
     borderWidth: 1,
@@ -152,7 +160,10 @@ export const TableView: React.FC<TableViewProps> = ({ node, frame, rowIndex, opt
   );
 
   return (
-    <div ref={wrapperRef} className={cx(styles.cardWrapper, expanded && styles.cardWrapperExpanded)}>
+    <div
+      ref={wrapperRef}
+      className={cx(styles.cardWrapper, expanded && styles.cardWrapperExpanded)}
+    >
       <div className={cx(styles.card, expanded && styles.cardExpanded)} style={{ borderColor }}>
         <ResourceDetails
           node={node}
