@@ -104,6 +104,10 @@
               {
                 "id": "custom.displayMode",
                 "value": "colored-background"
+              },
+              {
+                "id": "displayName",
+                "value": "Role"
               }
             ]
           },
@@ -144,6 +148,10 @@
               {
                 "id": "custom.displayMode",
                 "value": "gauge"
+              },
+              {
+                "id": "displayName",
+                "value": "Connections"
               }
             ]
           },
@@ -172,6 +180,10 @@
                     }
                   ]
                 }
+              },
+              {
+                "id": "displayName",
+                "value": "Replication lag"
               }
             ]
           },
@@ -208,6 +220,54 @@
               {
                 "id": "custom.displayMode",
                 "value": "sparkline"
+              },
+              {
+                "id": "displayName",
+                "value": "Query rate"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "cache_hit_ratio"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "percent"
+              },
+              {
+                "id": "min",
+                "value": 0
+              },
+              {
+                "id": "max",
+                "value": 100
+              },
+              {
+                "id": "custom.displayMode",
+                "value": "gauge"
+              },
+              {
+                "id": "displayName",
+                "value": "Cache hits"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "wal_size_mb"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "decmbytes"
+              },
+              {
+                "id": "displayName",
+                "value": "WAL size"
               }
             ]
           }
@@ -239,21 +299,47 @@
             "id": "1cdb89b9-1dd2-49fd-b708-e1b762a8cefe",
             "overridesBorderColor": false,
             "type": "field"
+          },
+          {
+            "field": "connections",
+            "id": "9a28907c-1fc9-4c34-b5b3-d2bbbf7d5e81",
+            "overridesBorderColor": true,
+            "type": "field"
           }
         ],
         "statusField": "",
         "tooltipEntries": [
           {
-            "field": "connections",
-            "id": "910a5555-40e8-4bfa-9110-805ce9d1ffba",
-            "overridesBorderColor": false,
+            "field": "replication_lag_s",
+            "id": "faf9a5eb-e2e5-4986-b982-5584855679f8",
+            "overridesBorderColor": true,
             "type": "field"
           },
           {
-            "field": "replication_lag_s",
-            "id": "faf9a5eb-e2e5-4986-b982-5584855679f8",
-            "overridesBorderColor": false,
+            "field": "cache_hit_ratio",
+            "id": "2bbb0ea0-4bc5-49fb-b3c7-3400e155910b",
+            "overridesBorderColor": true,
             "type": "field"
+          },
+          {
+            "field": "wal_size_mb",
+            "id": "93346417-013f-4cf1-bc20-a475b2e60dec",
+            "overridesBorderColor": true,
+            "type": "field"
+          },
+          {
+            "id": "ccb39bce-ea56-48f4-a50f-2522c08f2d55",
+            "keys": [
+              {
+                "foreignField": "instance",
+                "primaryKey": "instance",
+                "primaryKeyTemplate": ""
+              }
+            ],
+            "overridesBorderColor": true,
+            "sourceField": "qps",
+            "sourceFrame": "History",
+            "type": "join"
           }
         ],
         "tooltipTitleField": "",
@@ -288,7 +374,9 @@
   "preload": false,
   "refresh": "",
   "schemaVersion": 42,
-  "tags": ["Demo"],
+  "tags": [
+    "Demo"
+  ],
   "templating": {
     "list": []
   },
