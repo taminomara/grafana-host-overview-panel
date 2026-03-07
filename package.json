@@ -70,8 +70,9 @@
     "@grafana/data": "^12.3.2",
     "@grafana/i18n": "^12.3.2",
     "@grafana/runtime": "^12.3.2",
-    "@grafana/ui": "^12.3.2",
     "@grafana/schema": "^12.3.2",
+    "@grafana/ui": "^12.3.2",
+    "@hello-pangea/dnd": "^18.0.1",
     "react": "^18.3.0",
     "react-dom": "^18.3.0"
   },
