@@ -94,10 +94,24 @@ export function resolveDisplayMode(field: Field): FieldDisplayMode {
   if (mode !== FieldDisplayMode.Auto) {
     return mode;
   }
-  if (field.type === FieldType.frame) {
+  if (
+    field.type === FieldType.frame &&
+    !field.values.every((value) => ((value as DataFrame).length ?? 1) <= 1)
+  ) {
     return FieldDisplayMode.Sparkline;
+  } else if (
+    [FieldType.frame, FieldType.number].includes(field.type) &&
+    field.config.min !== undefined &&
+    field.config.min !== null &&
+    field.config.max !== undefined &&
+    field.config.max !== null
+  ) {
+    return FieldDisplayMode.Gauge;
+  } else if (field.type === FieldType.enum) {
+    return FieldDisplayMode.ColoredBackground;
+  } else {
+    return FieldDisplayMode.ColoredText;
   }
-  return FieldDisplayMode.ColoredText;
 }
 
 function toSparkline(

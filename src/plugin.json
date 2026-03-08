@@ -31,22 +31,22 @@
     "screenshots": [
       {
         "name": "Overview of nodes and containers",
-        "path": "screenshots/service.png"
+        "path": "img/screenshots/service.png"
       },
       {
         "name": "Overview of a large data center",
-        "path": "screenshots/dc.png"
+        "path": "img/screenshots/dc.png"
       },
       {
         "name": "Overview of database instances",
-        "path": "screenshots/db.png"
+        "path": "img/screenshots/db.png"
       }
     ],
     "version": "%VERSION%",
     "updated": "%TODAY%"
   },
   "dependencies": {
-    "grafanaDependency": ">=12.0.0",
+    "grafanaDependency": ">=12.0.10",
     "plugins": []
   }
 }

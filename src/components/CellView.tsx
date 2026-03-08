@@ -1,5 +1,5 @@
 import { css, cx } from '@emotion/css';
-import { GrafanaTheme2 } from '@grafana/data';
+import { DataFrameWithValue, GrafanaTheme2 } from '@grafana/data';
 import { Toggletip, useStyles2, useTheme2 } from '@grafana/ui';
 import { GroupNode } from 'library/groupFrames';
 import React, { useRef, useState } from 'react';
@@ -66,9 +66,14 @@ export const CellView: React.FC<CellViewProps> = ({ node, frame, rowIndex, optio
 
   const idField = frame.fieldByName.get(options.idField);
   const statusField = frame.fieldByName.get(options.statusField);
+  const statusValue = statusField
+    ? statusField?.type === 'frame'
+      ? (statusField.values[rowIndex] as DataFrameWithValue).value
+      : statusField.values[rowIndex]
+    : undefined;
   const displayValue =
     statusField && statusField.display
-      ? statusField.display(statusField.values[rowIndex])
+      ? statusField.display(statusValue)
       : undefined;
 
   const cellColor = displayValue?.color ?? theme.colors.background.elevated;

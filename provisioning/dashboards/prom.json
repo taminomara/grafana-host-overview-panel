@@ -162,7 +162,7 @@
           {
             "matcher": {
               "id": "byName",
-              "options": "up"
+              "options": "Trend #UP"
             },
             "properties": [
               {
@@ -214,7 +214,7 @@
         "cellSize": 30,
         "cellTextField": "",
         "cellTextPattern": "",
-        "dataFrame": "merge-UP-UP",
+        "dataFrame": "UP",
         "gridColumns": 5,
         "gridType": "flow",
         "groups": [
@@ -267,12 +267,12 @@
         "knownIds": "",
         "resourceDisplayMode": "cell-with-text",
         "richEntries": [],
-        "statusField": "up",
+        "statusField": "Trend #UP",
         "tooltipEntries": [],
         "tooltipTitleField": "",
         "tooltipTitlePattern": ""
       },
-      "pluginVersion": "1.0.0",
+      "pluginVersion": "12.3.2",
       "targets": [
         {
           "datasource": {
@@ -317,31 +317,21 @@
       "title": "Scraping jobs",
       "transformations": [
         {
-          "filter": {
-            "id": "byRefId",
-            "options": "/^(?:UP)$/"
-          },
-          "id": "prepareTimeSeries",
-          "options": {
-            "format": "long"
-          }
-        },
-        {
-          "filter": {
-            "id": "byRefId",
-            "options": "/^(?:A|UP)$/"
-          },
-          "id": "merge",
-          "options": {}
-        },
-        {
-          "filter": {
-            "id": "byRefId",
-            "options": "/^(?:CPU|MEM)$/"
-          },
           "id": "timeSeriesTable",
           "options": {
             "B": {
+              "timeField": "Time"
+            },
+            "CPU": {
+              "stat": "last",
+              "timeField": "Time"
+            },
+            "MEM": {
+              "stat": "last",
+              "timeField": "Time"
+            },
+            "UP": {
+              "stat": "last",
               "timeField": "Time"
             }
           }
@@ -363,7 +353,9 @@
   "preload": false,
   "refresh": "5s",
   "schemaVersion": 42,
-  "tags": ["Demo"],
+  "tags": [
+    "Demo"
+  ],
   "templating": {
     "list": []
   },
