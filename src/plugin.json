@@ -4,17 +4,44 @@
   "name": "Host Overview",
   "id": "taminomara-hostoverview-panel",
   "info": {
-    "keywords": ["panel"],
-    "description": "",
+    "keywords": ["panel", "overview", "cluster", "compact"],
+    "description": "A compact panel for visualizing the status of fleets of resources — servers, database instances, containers, and anything similar.",
     "author": {
-      "name": "Taminomara"
+      "name": "Tamika Nomara",
+      "email": "taminomara@gmail.com"
     },
     "logos": {
       "small": "img/logo.svg",
       "large": "img/logo.svg"
     },
-    "links": [],
-    "screenshots": [],
+    "links": [
+      {
+        "name": "Source",
+        "url": "https://github.com/taminomara/grafana-host-overview-panel/"
+      },
+      {
+        "name": "Issues",
+        "url": "https://github.com/taminomara/grafana-host-overview-panel/issues"
+      },
+      {
+        "name": "Changelog",
+        "url": "https://github.com/taminomara/grafana-host-overview-panel/blob/main/CHANGELOG.md"
+      }
+    ],
+    "screenshots": [
+      {
+        "name": "Overview of nodes and containers",
+        "path": "screenshots/service.png"
+      },
+      {
+        "name": "Overview of a large data center",
+        "path": "screenshots/dc.png"
+      },
+      {
+        "name": "Overview of database instances",
+        "path": "screenshots/db.png"
+      }
+    ],
     "version": "%VERSION%",
     "updated": "%TODAY%"
   },
