@@ -356,7 +356,13 @@ describe('getCriticalityScore', () => {
   });
 
   it('recognizes green color variants', () => {
-    for (const greenColor of ['green', 'semi-dark-green', 'dark-green', 'light-green', 'super-light-green']) {
+    for (const greenColor of [
+      'green',
+      'semi-dark-green',
+      'dark-green',
+      'light-green',
+      'super-light-green',
+    ]) {
       const steps = [
         { value: 0, color: 'red' },
         { value: 50, color: greenColor },
@@ -486,7 +492,15 @@ describe('getMostCriticalColor', () => {
       { id: '2', type: 'field', field: 'mem', overridesBorderColor: true },
     ];
 
-    const result = getMostCriticalColor(entries, frame, 0, new Map(), replaceVariables, [], resolver);
+    const result = getMostCriticalColor(
+      entries,
+      frame,
+      0,
+      new Map(),
+      replaceVariables,
+      [],
+      resolver
+    );
     expect(result).toBe('yellow');
   });
 

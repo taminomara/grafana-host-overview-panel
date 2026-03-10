@@ -374,9 +374,7 @@
   "preload": false,
   "refresh": "",
   "schemaVersion": 42,
-  "tags": [
-    "Demo"
-  ],
+  "tags": ["Demo"],
   "templating": {
     "list": []
   },

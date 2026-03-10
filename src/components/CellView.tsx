@@ -72,9 +72,7 @@ export const CellView: React.FC<CellViewProps> = ({ node, frame, rowIndex, optio
       : statusField.values[rowIndex]
     : undefined;
   const displayValue =
-    statusField && statusField.display
-      ? statusField.display(statusValue)
-      : undefined;
+    statusField && statusField.display ? statusField.display(statusValue) : undefined;
 
   const cellColor = displayValue?.color ?? theme.colors.background.elevated;
   const overrideColor =

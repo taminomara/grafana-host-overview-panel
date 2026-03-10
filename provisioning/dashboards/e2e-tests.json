@@ -4220,9 +4220,7 @@
             "field": "cpu",
             "id": "e2e-113-f-cpu",
             "overridesBorderColor": true,
-            "severityOverrides": [
-              { "color": "#aaaa00", "severity": 2 }
-            ],
+            "severityOverrides": [{ "color": "#aaaa00", "severity": 2 }],
             "type": "field"
           },
           {

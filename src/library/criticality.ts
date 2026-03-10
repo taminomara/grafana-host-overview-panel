@@ -15,7 +15,13 @@ import { DisplayEntry, SeverityOverride } from '../types';
 import { IndexedFrame } from './dataFrame';
 import { JoinIndex, resolveJoinSections } from './joinFrames';
 
-const GREEN_COLORS = new Set(['green', 'semi-dark-green', 'dark-green', 'light-green', 'super-light-green']);
+const GREEN_COLORS = new Set([
+  'green',
+  'semi-dark-green',
+  'dark-green',
+  'light-green',
+  'super-light-green',
+]);
 
 export type ResolveColor = (color: string) => string;
 
@@ -125,7 +131,12 @@ export function getMostCriticalColor(
       if (!field) {
         continue;
       }
-      const [score, color] = getCriticalityScore(field, field.values[rowIndex], severityMap, resolveColor);
+      const [score, color] = getCriticalityScore(
+        field,
+        field.values[rowIndex],
+        severityMap,
+        resolveColor
+      );
       if (score > bestScore && color) {
         bestScore = score;
         bestColor = color;

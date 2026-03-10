@@ -5,7 +5,10 @@ export interface IndexedFrame extends DataFrame {
   fieldByName: ReadonlyMap<string, Field>;
 }
 
-export function findFrame(frames: DataFrame[], dataFrameId: string | undefined): DataFrame | undefined {
+export function findFrame(
+  frames: DataFrame[],
+  dataFrameId: string | undefined
+): DataFrame | undefined {
   if (!dataFrameId) {
     return frames[0];
   }

@@ -71,7 +71,7 @@ export const SeverityOverridesEditor: React.FC<SeverityOverridesEditorProps> = (
     if (autoOpenIndex !== null && showPickerRef.current) {
       showPickerRef.current();
       showPickerRef.current = null;
-      setAutoOpenIndex(null);
+      setAutoOpenIndex(null); // eslint-disable-line react-hooks/set-state-in-effect
     }
   }, [autoOpenIndex]);
 

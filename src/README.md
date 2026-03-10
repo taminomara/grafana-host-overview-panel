@@ -98,11 +98,11 @@ Let's add CPU and Memory metrics to hosts from the previous dashboard.
 
     ![Screenshot of CPU and Memory queries](https://raw.githubusercontent.com/taminomara/grafana-host-overview-panel/refs/heads/main/src/img/screenshots/advanced-1.png)
 
-3.  In visualization settings, select data frame with metric "up" as primary (in **Host Overview** > **Data frame**).
+2.  In visualization settings, select data frame with metric "up" as primary (in **Host Overview** > **Data frame**).
 
     ![Screenshot of data frame settings](https://raw.githubusercontent.com/taminomara/grafana-host-overview-panel/refs/heads/main/src/img/screenshots/advanced-2.png)
 
-4.  Go to settings of group "host" and add joins for CPU and Memory. Join by field "host".
+3.  Go to settings of group "host" and add joins for CPU and Memory. Join by field "host".
 
     ![Screenshot of group settings](https://raw.githubusercontent.com/taminomara/grafana-host-overview-panel/refs/heads/main/src/img/screenshots/advanced-3.png)
 
@@ -110,7 +110,7 @@ Let's add CPU and Memory metrics to hosts from the previous dashboard.
 
     ![Screenshot of join settings](https://raw.githubusercontent.com/taminomara/grafana-host-overview-panel/refs/heads/main/src/img/screenshots/advanced-5.png)
 
-6.  Add a **field override** for CPU and Memory. Override "Unit", "Min", "Max", "Display name",
+4.  Add a **field override** for CPU and Memory. Override "Unit", "Min", "Max", "Display name",
     and optionally "Thresholds". If you want to display metric as a gauge, add override
     for "Display mode" as well.
 
