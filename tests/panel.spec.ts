@@ -842,11 +842,10 @@ test.describe('criticality', () => {
     const gradients = await cells.evaluateAll((els) =>
       els.map((el) => getComputedStyle(el).backgroundImage)
     );
-    // Criticality scoring: base threshold (index 0) gets score 0, so only
-    // non-base thresholds produce an override color.
-    // cpu=45,23 → base (#00aa00), score 0 → no override
-    // cpu=67 → #aaaa00 (index 1), score 1/3 → override rgb(170, 170, 0)
-    // cpu=82,91 → #aa0000 (index 2), score 2/3 → override rgb(170, 0, 0)
+    // Distance-based scoring: no named green → l=0, maxDist=2
+    // cpu=45,23 → #00aa00 (i=0), score 0 → no override
+    // cpu=67 → #aaaa00 (i=1), score 0.5 → override rgb(170, 170, 0)
+    // cpu=82,91 → #aa0000 (i=2), score 1 → override rgb(170, 0, 0)
     const withCpuYellow = gradients.filter((g) => g.includes('rgb(170, 170, 0)')).length;
     const withCpuRed = gradients.filter((g) => g.includes('rgb(170, 0, 0)')).length;
     expect(withCpuYellow).toBe(1); // cpu 67
@@ -872,14 +871,13 @@ test.describe('criticality', () => {
     const panel = panelEditPage.panel.locator;
     await expect(panel).toContainText('node-a');
 
-    // Status: #ff0000@0, #00ff00@1 — CPU override: #00aa00@0, #aaaa00@50, #aa0000@80
-    // richEntries has cpu with overridesBorderColor: true
-    // Card borderColor = override ?? status color
-    // node-a(s=1,cpu=45): base → no override → status green rgb(0, 255, 0)
-    // node-b(s=0,cpu=82): #aa0000, score 2/3 → override rgb(170, 0, 0)
-    // node-c(s=1,cpu=23): base → no override → status green rgb(0, 255, 0)
-    // node-d(s=1,cpu=67): #aaaa00, score 1/3 → override rgb(170, 170, 0)
-    // node-e(s=0,cpu=91): #aa0000, score 2/3 → override rgb(170, 0, 0)
+    // CPU override: #00aa00@0, #aaaa00@50, #aa0000@80
+    // Distance-based scoring: no named green → l=0, maxDist=2
+    // node-a(s=1,cpu=45): score 0 → no override → status rgb(0, 255, 0)
+    // node-b(s=0,cpu=82): score 1 → override rgb(170, 0, 0)
+    // node-c(s=1,cpu=23): score 0 → no override → status rgb(0, 255, 0)
+    // node-d(s=1,cpu=67): score 0.5 → override rgb(170, 170, 0)
+    // node-e(s=0,cpu=91): score 1 → override rgb(170, 0, 0)
     const cards = panel.locator('div[style*="border-color"]');
     await expect(cards).toHaveCount(5);
     const borderColors = await cards.evaluateAll((els) => els.map((el) => el.style.borderColor));
@@ -901,11 +899,10 @@ test.describe('criticality', () => {
     await expect(panel).toContainText('web');
 
     // Groups by role: web, db, api. Group entries has cpu with overridesBorderColor.
-    // getMostCriticalColor uses row 0 of each group's frame.
-    // Data order: node-b(web,cpu=82), node-a(web,45), node-d(db,67), node-c(db,23), node-e(api,91)
-    // web → first row cpu=82 → #aa0000 (score 2/3) → rgb(170, 0, 0)
-    // db  → first row cpu=67 → #aaaa00 (score 1/3) → rgb(170, 170, 0)
-    // api → first row cpu=91 → #aa0000 (score 2/3) → rgb(170, 0, 0)
+    // Distance-based scoring: no named green → l=0, maxDist=2
+    // web → first row cpu=82 → score 1 → rgb(170, 0, 0)
+    // db  → first row cpu=67 → score 0.5 → rgb(170, 170, 0)
+    // api → first row cpu=91 → score 1 → rgb(170, 0, 0)
     const groups = panel.locator('div[style*="border-color"]');
     await expect(groups).toHaveCount(3);
     const borderColors = await groups.evaluateAll((els) => els.map((el) => el.style.borderColor));
@@ -913,6 +910,45 @@ test.describe('criticality', () => {
     const red = borderColors.filter((c) => c.includes('rgb(170, 0, 0)')).length;
     expect(yellow).toBe(1); // db
     expect(red).toBe(2); // web, api
+  });
+
+  test('custom severity override makes yellow more critical than red', async ({
+    gotoPanelEditPage,
+    readProvisionedDashboard,
+  }) => {
+    const dashboard = await readProvisionedDashboard({ fileName: E2E_DASHBOARD });
+    const panelEditPage = await gotoPanelEditPage({ dashboard, id: '113' });
+    const panel = panelEditPage.panel.locator;
+    await expect(panel).not.toContainText('No data');
+
+    // Two fields with overridesBorderColor:
+    //   cpu: #00aa00@0, #aaaa00@50, #aa0000@80 — severityOverrides: [{#aaaa00, severity: 2}]
+    //   mem: #0000aa@0, #aa0000@80
+    // Data: node-a(cpu=45,mem=30), node-b(cpu=67,mem=90), node-c(cpu=23,mem=50),
+    //       node-d(cpu=82,mem=30), node-e(cpu=91,mem=90)
+    //
+    // Without custom severity, node-b would get mem red (score 1) > cpu yellow (score 0.5).
+    // With severity override {#aaaa00: 2}, cpu yellow has severity 2 > mem red (score 1),
+    // so node-b gets yellow override instead of red.
+    //
+    // node-a: cpu score 0, mem score 0 → no override
+    // node-b: cpu yellow sev 2, mem red sev 1 → yellow wins → rgb(170, 170, 0)
+    // node-c: cpu score 0, mem score 0 → no override
+    // node-d: cpu red sev 1, mem score 0 → red → rgb(170, 0, 0)
+    // node-e: cpu red sev 1, mem red sev 1 → red → rgb(170, 0, 0)
+    const cells = panel.locator('div[style*="linear-gradient"]');
+    await expect(cells).toHaveCount(5);
+    const gradients = await cells.evaluateAll((els) =>
+      els.map((el) => getComputedStyle(el).backgroundImage)
+    );
+    const withYellow = gradients.filter((g) => g.includes('rgb(170, 170, 0)')).length;
+    const withRed = gradients.filter((g) => g.includes('rgb(170, 0, 0)')).length;
+    const withNoOverride = gradients.filter(
+      (g) => !g.includes('rgb(170, 170, 0)') && !g.includes('rgb(170, 0, 0)')
+    ).length;
+    expect(withYellow).toBe(1); // node-b: custom severity makes yellow win over red
+    expect(withRed).toBe(2); // node-d, node-e
+    expect(withNoOverride).toBe(2); // node-a, node-c
   });
 });
 

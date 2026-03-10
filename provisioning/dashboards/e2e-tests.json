@@ -4115,6 +4115,148 @@
       },
       "fieldConfig": {
         "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "displayMode": "auto"
+          },
+          "fieldMinMax": true,
+          "mappings": [],
+          "noValue": "unknown",
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "#ff0000",
+                "value": 0
+              },
+              {
+                "color": "#00ff00",
+                "value": 1
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "cpu"
+            },
+            "properties": [
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "#00aa00",
+                      "value": 0
+                    },
+                    {
+                      "color": "#aaaa00",
+                      "value": 50
+                    },
+                    {
+                      "color": "#aa0000",
+                      "value": 80
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "mem"
+            },
+            "properties": [
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "#0000aa",
+                      "value": 0
+                    },
+                    {
+                      "color": "#aa0000",
+                      "value": 80
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 24,
+        "x": 0,
+        "y": 360
+      },
+      "id": 113,
+      "options": {
+        "cellSize": 20,
+        "cellTextField": "",
+        "cellTextPattern": "",
+        "dataFrame": "",
+        "gridColumns": 5,
+        "gridType": "flow",
+        "groups": [],
+        "idField": "name",
+        "idSortMode": "disabled",
+        "idSortPattern": "",
+        "knownIds": "",
+        "resourceDisplayMode": "cell",
+        "richEntries": [],
+        "statusField": "status",
+        "tooltipEntries": [
+          {
+            "field": "cpu",
+            "id": "e2e-113-f-cpu",
+            "overridesBorderColor": true,
+            "severityOverrides": [
+              { "color": "#aaaa00", "severity": 2 }
+            ],
+            "type": "field"
+          },
+          {
+            "field": "mem",
+            "id": "e2e-113-f-mem",
+            "overridesBorderColor": true,
+            "type": "field"
+          }
+        ],
+        "tooltipTitleField": "",
+        "tooltipTitlePattern": ""
+      },
+      "pluginVersion": "1.0.0",
+      "targets": [
+        {
+          "csvContent": "name,status,cpu,mem\r\nnode-a,1,45,30\r\nnode-b,0,67,90\r\nnode-c,1,23,50\r\nnode-d,1,82,30\r\nnode-e,0,91,90",
+          "datasource": {
+            "type": "grafana-testdata-datasource",
+            "uid": "trlxrdZVk"
+          },
+          "refId": "A",
+          "scenarioId": "csv_content"
+        }
+      ],
+      "title": "Custom severity override (cell)",
+      "type": "taminomara-hostoverview-panel"
+    },
+    {
+      "datasource": {
+        "type": "grafana-testdata-datasource",
+        "uid": "trlxrdZVk"
+      },
+      "fieldConfig": {
+        "defaults": {
           "color": { "mode": "thresholds" },
           "custom": { "displayMode": "auto" },
           "fieldMinMax": true,

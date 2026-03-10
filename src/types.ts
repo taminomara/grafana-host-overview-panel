@@ -4,11 +4,17 @@ export interface JoinKeyPair {
   foreignField: string;
 }
 
+export interface SeverityOverride {
+  color: string;
+  severity: number;
+}
+
 export interface FieldDisplayEntry {
   id: string;
   type: 'field';
   field: string;
   overridesBorderColor: boolean;
+  severityOverrides?: SeverityOverride[];
 }
 
 export interface JoinDisplayEntry {
@@ -18,6 +24,7 @@ export interface JoinDisplayEntry {
   sourceField: string;
   keys: JoinKeyPair[];
   overridesBorderColor: boolean;
+  severityOverrides?: SeverityOverride[];
 }
 
 export type DisplayEntry = FieldDisplayEntry | JoinDisplayEntry;

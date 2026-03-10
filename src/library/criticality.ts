@@ -5,16 +5,61 @@ import {
   FieldType,
   getActiveThreshold,
   InterpolateFunction,
+  Threshold,
   ThresholdsMode,
 } from '@grafana/data';
 import { useTheme2 } from '@grafana/ui';
 import { useMemo } from 'react';
 import { useHostViewerPanelContext } from '../components/PanelContext';
-import { DisplayEntry } from '../types';
+import { DisplayEntry, SeverityOverride } from '../types';
 import { IndexedFrame } from './dataFrame';
 import { JoinIndex, resolveJoinSections } from './joinFrames';
 
-export function getCriticalityScore(field: Field, rawValue: unknown): [number, string | undefined] {
+const GREEN_COLORS = new Set(['green', 'semi-dark-green', 'dark-green', 'light-green', 'super-light-green']);
+
+export type ResolveColor = (color: string) => string;
+
+export function buildSeverityMap(
+  overrides: SeverityOverride[] | undefined,
+  resolveColor: ResolveColor
+): Map<string, number> | undefined {
+  if (!overrides || overrides.length === 0) {
+    return undefined;
+  }
+  const map = new Map<string, number>();
+  for (const ov of overrides) {
+    map.set(resolveColor(ov.color), ov.severity);
+  }
+  return map;
+}
+
+function findSeverityZeroIndex(
+  steps: Threshold[],
+  severityMap: Map<string, number> | undefined,
+  resolveColor: ResolveColor
+): number {
+  if (severityMap) {
+    for (let i = 0; i < steps.length; i++) {
+      const sev = severityMap.get(resolveColor(steps[i].color));
+      if (sev !== undefined && sev === 0) {
+        return i;
+      }
+    }
+  }
+  for (let i = 0; i < steps.length; i++) {
+    if (GREEN_COLORS.has(steps[i].color)) {
+      return i;
+    }
+  }
+  return 0;
+}
+
+export function getCriticalityScore(
+  field: Field,
+  rawValue: unknown,
+  severityMap?: Map<string, number>,
+  resolveColor: ResolveColor = (c) => c
+): [number, string | undefined] {
   if (!field.display) {
     return [0, undefined];
   }
@@ -39,7 +84,22 @@ export function getCriticalityScore(field: Field, rawValue: unknown): [number, s
     value *= 100;
   }
   const threshold = getActiveThreshold(value, steps);
-  const score = (steps.indexOf(threshold) ?? 0) / steps.length;
+  const i = steps.indexOf(threshold);
+
+  if (severityMap) {
+    const sev = severityMap.get(resolveColor(threshold.color));
+    if (sev !== undefined) {
+      return [sev, threshold.color];
+    }
+  }
+
+  if (steps.length <= 1) {
+    return [0, threshold.color];
+  }
+
+  const l = findSeverityZeroIndex(steps, severityMap, resolveColor);
+  const maxDist = Math.max(l, steps.length - 1 - l);
+  const score = maxDist === 0 ? 0 : Math.abs(l - i) / maxDist;
   return [score, threshold.color];
 }
 
@@ -49,7 +109,8 @@ export function getMostCriticalColor(
   rowIndex: number,
   joinIndices: Map<string, JoinIndex>,
   replaceVariables: InterpolateFunction,
-  allData: DataFrame[]
+  allData: DataFrame[],
+  resolveColor: ResolveColor = (c) => c
 ): string | undefined {
   let bestScore = 0;
   let bestColor: string | undefined;
@@ -58,12 +119,13 @@ export function getMostCriticalColor(
     if (!entry.overridesBorderColor) {
       continue;
     }
+    const severityMap = buildSeverityMap(entry.severityOverrides, resolveColor);
     if (entry.type === 'field') {
       const field = frame.fieldByName.get(entry.field);
       if (!field) {
         continue;
       }
-      const [score, color] = getCriticalityScore(field, field.values[rowIndex]);
+      const [score, color] = getCriticalityScore(field, field.values[rowIndex], severityMap, resolveColor);
       if (score > bestScore && color) {
         bestScore = score;
         bestColor = color;
@@ -81,7 +143,9 @@ export function getMostCriticalColor(
         for (const joinedRow of section.matchedRows) {
           const [score, color] = getCriticalityScore(
             section.sourceField,
-            section.sourceField.values[joinedRow]
+            section.sourceField.values[joinedRow],
+            severityMap,
+            resolveColor
           );
           if (score > bestScore && color) {
             bestScore = score;
@@ -113,7 +177,8 @@ export function useOverrideColor(
       rowIndex,
       context.joinIndices,
       context.replaceVariables,
-      context.data
+      context.data,
+      theme.visualization.getColorByName
     );
     return color ? theme.visualization.getColorByName(color) : undefined;
   }, [entries, frame, rowIndex, context, theme]);

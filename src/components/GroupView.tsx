@@ -202,7 +202,8 @@ export const GroupView: React.FC<GroupViewProps> = ({ node, options }) => {
       0,
       context.joinIndices,
       context.replaceVariables,
-      context.data
+      context.data,
+      theme.visualization.getColorByName
     );
     if (overrideColor) {
       border = { ...border, color: overrideColor };

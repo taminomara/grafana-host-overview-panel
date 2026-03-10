@@ -22,6 +22,7 @@ import {
 } from '../../types';
 import { findFrame } from '../../library/dataFrame';
 import { FieldCombobox } from './FieldCombobox';
+import { SeverityOverridesEditor } from './SeverityOverridesEditor';
 import { SuggestionsFromEditorContext, TemplatePatternInput } from './TemplatePatternEditor';
 
 const JOIN_OPTION_VALUE = '__join__';
@@ -261,16 +262,26 @@ interface FieldEntrySettingsProps {
 
 const FieldEntrySettings: React.FC<FieldEntrySettingsProps> = ({ value, onChange }) => {
   return (
-    <Field
-      label="Overrides border color"
-      description="Allow thresholds of this field to override border color"
-      horizontal={true}
-    >
-      <Switch
-        value={value.overridesBorderColor}
-        onChange={(v) => onChange({ ...value, overridesBorderColor: v.currentTarget.checked })}
-      />
-    </Field>
+    <>
+      <Field
+        label="Overrides border color"
+        description="Allow thresholds of this field to override border color"
+        horizontal={true}
+      >
+        <Switch
+          value={value.overridesBorderColor}
+          onChange={(v) => onChange({ ...value, overridesBorderColor: v.currentTarget.checked })}
+        />
+      </Field>
+      {value.overridesBorderColor && (
+        <Field label="Severity overrides" description="Custom severity scores for threshold colors">
+          <SeverityOverridesEditor
+            value={value.severityOverrides ?? []}
+            onChange={(severityOverrides) => onChange({ ...value, severityOverrides })}
+          />
+        </Field>
+      )}
+    </>
   );
 };
 
@@ -375,6 +386,14 @@ const JoinEntrySettings: React.FC<JoinEntrySettingsProps> = ({
           onChange={(v) => handleChange({ overridesBorderColor: v.currentTarget.checked })}
         />
       </Field>
+      {value.overridesBorderColor && (
+        <Field label="Severity overrides" description="Custom severity scores for threshold colors">
+          <SeverityOverridesEditor
+            value={value.severityOverrides ?? []}
+            onChange={(severityOverrides) => handleChange({ severityOverrides })}
+          />
+        </Field>
+      )}
     </>
   );
 };
