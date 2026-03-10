@@ -1,8 +1,18 @@
-import { DataFrame, Field, getLinksSupplier } from '@grafana/data';
+import { DataFrame, Field, getFrameDisplayName, getLinksSupplier } from '@grafana/data';
 import { HostViewerPanelContext } from 'components/PanelContext';
 
 export interface IndexedFrame extends DataFrame {
   fieldByName: ReadonlyMap<string, Field>;
+}
+
+export function findFrame(frames: DataFrame[], dataFrameId: string | undefined): DataFrame | undefined {
+  if (!dataFrameId) {
+    return frames[0];
+  }
+  return (
+    frames.find((f) => f.refId === dataFrameId) ??
+    frames.find((f) => getFrameDisplayName(f) === dataFrameId)
+  );
 }
 
 export function indexFrame(frame: DataFrame): IndexedFrame {

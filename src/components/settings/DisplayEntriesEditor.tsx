@@ -20,6 +20,7 @@ import {
   JoinDisplayEntry,
   JoinKeyPair,
 } from '../../types';
+import { findFrame } from '../../library/dataFrame';
 import { FieldCombobox } from './FieldCombobox';
 import { SuggestionsFromEditorContext, TemplatePatternInput } from './TemplatePatternEditor';
 
@@ -450,11 +451,7 @@ export const DisplayEntriesEditorWrapper = ({
   context,
 }: StandardEditorProps<DisplayEntry[], unknown, HostViewerOptions>) => {
   const allFrames = context.data ?? [];
-
-  const primaryRefId = context.options?.dataFrame;
-  const primaryFrame = primaryRefId
-    ? allFrames.find((f) => f.refId === primaryRefId)
-    : allFrames[0];
+  const primaryFrame = findFrame(allFrames, context.options?.dataFrame);
 
   const primaryFieldOptions = useMemo<Array<ComboboxOption<string>>>(
     () =>

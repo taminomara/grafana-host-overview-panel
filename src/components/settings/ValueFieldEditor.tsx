@@ -1,6 +1,7 @@
 import React, { useMemo } from 'react';
 import { StandardEditorProps } from '@grafana/data';
 import { HostViewerOptions } from 'types';
+import { findFrame } from '../../library/dataFrame';
 import { FieldCombobox } from './FieldCombobox';
 
 export const ValueFieldEditor = ({
@@ -12,7 +13,7 @@ export const ValueFieldEditor = ({
   const additionalOptions = item.settings?.additionalOptions;
 
   const fieldOptions = useMemo(() => {
-    const frame = context.data?.[0];
+    const frame = findFrame(context.data ?? [], context.options?.dataFrame);
     if (!frame) {
       return [];
     }
@@ -24,7 +25,7 @@ export const ValueFieldEditor = ({
         description: field.type,
       })),
     ];
-  }, [context.data, additionalOptions]);
+  }, [context.data, context.options?.dataFrame, additionalOptions]);
 
   const hiddenValues = useMemo(
     () => (context.options?.groups ?? []).map((g) => g.groupKey),

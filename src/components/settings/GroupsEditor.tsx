@@ -11,7 +11,8 @@ import {
 } from '@grafana/ui';
 import { DragDropContext, Draggable, Droppable, DropResult } from '@hello-pangea/dnd';
 import React, { useMemo, useState } from 'react';
-import { GridType, Group, SortMode } from 'types';
+import { GridType, Group, HostViewerOptions, SortMode } from 'types';
+import { findFrame } from '../../library/dataFrame';
 import { FieldCombobox } from './FieldCombobox';
 import { GroupSettings } from './GroupSettings';
 import { SuggestionsFromEditorContext } from './TemplatePatternEditor';
@@ -29,25 +30,32 @@ const getStyles = (theme: GrafanaTheme2) => ({
   }),
 });
 
-export const GroupsEditor = ({ value, onChange, context }: StandardEditorProps<Group[]>) => {
+export const GroupsEditor = ({
+  value,
+  onChange,
+  context,
+}: StandardEditorProps<Group[], any, HostViewerOptions>) => {
+  const primaryFrame = useMemo(
+    () => findFrame(context.data ?? [], context.options?.dataFrame),
+    [context.data, context.options?.dataFrame]
+  );
+
   const fieldOptions = useMemo(() => {
-    const frame = context.data?.[0];
-    if (!frame) {
+    if (!primaryFrame) {
       return [];
     }
-    return frame.fields.map((field) => ({
+    return primaryFrame.fields.map((field) => ({
       label: field.name,
       value: field.name,
       description: field.type,
     }));
-  }, [context.data]);
+  }, [primaryFrame]);
 
   const nonGroupableFields = useMemo(() => {
-    const frame = context.data?.[0];
-    if (!frame) {
+    if (!primaryFrame) {
       return [];
     }
-    return frame.fields
+    return primaryFrame.fields
       .filter(
         (field) =>
           ![FieldType.string, FieldType.boolean, FieldType.enum, FieldType.number].includes(
@@ -55,7 +63,7 @@ export const GroupsEditor = ({ value, onChange, context }: StandardEditorProps<G
           )
       )
       .map((field) => field.name);
-  }, [context.data]);
+  }, [primaryFrame]);
 
   const onDragEnd = (result: DropResult) => {
     if (!result.destination) {

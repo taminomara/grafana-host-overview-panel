@@ -4,7 +4,7 @@ import { PanelDataErrorView } from '@grafana/runtime';
 import { Alert, useStyles2 } from '@grafana/ui';
 import React, { useEffect, useMemo } from 'react';
 import { HostViewerOptions, JoinDisplayEntry } from 'types';
-import { indexFrame } from '../library/dataFrame';
+import { findFrame, indexFrame } from '../library/dataFrame';
 import { groupFrame } from '../library/groupFrames';
 import { buildJoinIndices } from '../library/joinFrames';
 import { GroupView } from './GroupView';
@@ -45,10 +45,7 @@ export const HostViewerPanel: React.FC<Props> = ({
     return [...seen.entries()].filter(([, count]) => count > 1).map(([id]) => id);
   }, [data.series]);
 
-  const rawFrame = options.dataFrame
-    ? (data.series.find((f) => f.refId === options.dataFrame) ??
-      data.series.find((f) => getFrameDisplayName(f) === options.dataFrame))
-    : data.series[0];
+  const rawFrame = findFrame(data.series, options.dataFrame);
   const frame = useMemo(() => (rawFrame ? indexFrame(rawFrame) : null), [rawFrame]);
 
   const allJoins = useMemo(() => {

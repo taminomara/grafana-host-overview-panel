@@ -162,7 +162,7 @@
           {
             "matcher": {
               "id": "byName",
-              "options": "Trend #UP"
+              "options": "Value"
             },
             "properties": [
               {
@@ -267,12 +267,12 @@
         "knownIds": "",
         "resourceDisplayMode": "cell-with-text",
         "richEntries": [],
-        "statusField": "Trend #UP",
+        "statusField": "Value",
         "tooltipEntries": [],
         "tooltipTitleField": "",
         "tooltipTitlePattern": ""
       },
-      "pluginVersion": "12.3.2",
+      "pluginVersion": "1.0.0",
       "targets": [
         {
           "datasource": {
@@ -282,6 +282,7 @@
           "editorMode": "builder",
           "exemplar": false,
           "expr": "up",
+          "format": "table",
           "instant": true,
           "legendFormat": "__auto",
           "range": false,
@@ -317,6 +318,10 @@
       "title": "Scraping jobs",
       "transformations": [
         {
+          "filter": {
+            "id": "byRefId",
+            "options": "/^(?:CPU|MEM)$/"
+          },
           "id": "timeSeriesTable",
           "options": {
             "B": {
@@ -367,5 +372,5 @@
   "timezone": "browser",
   "title": "Using data from Prometheus",
   "uid": "g2ms7r",
-  "version": 1
+  "version": 4
 }
