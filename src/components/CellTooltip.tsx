@@ -26,7 +26,7 @@ interface CellTooltipProps {
   frame: IndexedFrame;
   rowIndex: number;
   options: HostViewerOptions;
-  children: JSX.Element;
+  children: React.JSX.Element;
 }
 
 export const CellTooltip: React.FC<CellTooltipProps> = ({
@@ -103,12 +103,7 @@ export const CellTooltip: React.FC<CellTooltipProps> = ({
       <Tooltip
         content={() => (
           <div ref={tooltipRef}>
-            <CellTooltipContent
-              node={node}
-              frame={frame}
-              rowIndex={rowIndex}
-              options={options}
-            />
+            <CellTooltipContent node={node} frame={frame} rowIndex={rowIndex} options={options} />
           </div>
         )}
         show={tooltipOpened || hovering}
