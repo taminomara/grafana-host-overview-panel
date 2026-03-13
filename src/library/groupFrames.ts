@@ -5,8 +5,8 @@ import {
   GridType,
   Group,
   HostViewerOptions,
-  SortMode,
   isGroupDisabled,
+  SortMode,
 } from '../types';
 import { createFrame, IndexedFrame } from './dataFrame';
 
@@ -222,17 +222,12 @@ function bucketByField(
       knownValuesSet.delete(String(field.values[rowIndex]));
       const fields = frame.fields.map((f) => ({
         ...f,
-        getLinks: undefined, // Links are bound later,
         values: [] as unknown[],
       }));
-      const fieldByName = new Map<string, Field>();
-      for (const f of fields) {
-        fieldByName.set(f.name, f);
-      }
       bucket = {
         key,
         sortValue,
-        frame: { ...frame, fields, fieldByName, length: 0 },
+        frame: createFrame({ ...frame, fields, length: 0 }, context),
       };
       bucketMap.set(key, bucket);
     }
