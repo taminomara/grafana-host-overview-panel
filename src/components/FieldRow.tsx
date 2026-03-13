@@ -64,6 +64,7 @@ export const getRowStyles = (theme: GrafanaTheme2) => ({
     height: VALUE_HEIGHT,
     width: VALUE_WIDTH,
     textAlign: 'center',
+    margin: theme.spacing(0, 0.5),
   }),
   gaugeContainer: css({
     display: 'inline-block',
@@ -73,6 +74,7 @@ export const getRowStyles = (theme: GrafanaTheme2) => ({
     backgroundColor: theme.colors.background.elevated,
     verticalAlign: 'text-top',
     overflow: 'hidden',
+    margin: theme.spacing(0, 0.5),
   }),
   sparklineContainer: css({
     display: 'inline-block',
@@ -82,6 +84,7 @@ export const getRowStyles = (theme: GrafanaTheme2) => ({
     backgroundColor: theme.colors.background.elevated,
     verticalAlign: 'text-top',
     overflow: 'hidden',
+    margin: theme.spacing(0, 0.5),
   }),
 });
 

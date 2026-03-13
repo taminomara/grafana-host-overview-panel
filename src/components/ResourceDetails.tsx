@@ -1,15 +1,14 @@
 import { css, cx } from '@emotion/css';
 import { GrafanaTheme2, LinkModel } from '@grafana/data';
 import { useStyles2 } from '@grafana/ui';
-import { DataLinksButton } from './DataLinksButton';
-import { GroupNode } from 'library/groupFrames';
 import React from 'react';
 import { DisplayEntry, HostViewerOptions } from 'types';
 import { IndexedFrame } from '../library/dataFrame';
-import { resolveJoinSections } from '../library/joinFrames';
 import { interpolateWithDataContext } from '../library/interpolate';
+import { resolveJoinSections } from '../library/joinFrames';
+import { DataLinksButton } from './DataLinksButton';
+import { FieldRow, formatFieldValue } from './FieldRow';
 import { useHostViewerPanelContext } from './PanelContext';
-import { formatFieldValue, FieldRow } from './FieldRow';
 
 export interface ResourceDetailsConfig {
   titleField: string | false;
@@ -47,27 +46,27 @@ const getStyles = (theme: GrafanaTheme2) => ({
 });
 
 interface ResourceDetailsProps {
-  node: GroupNode;
   frame: IndexedFrame;
   rowIndex: number;
   options: HostViewerOptions;
   config: ResourceDetailsConfig;
   className?: string;
+  showStatus: Boolean;
 }
 
 export const ResourceDetails: React.FC<ResourceDetailsProps> = ({
-  node,
   frame,
   rowIndex,
   options,
   config,
   className,
+  showStatus,
 }) => {
   const styles = useStyles2(getStyles);
   const context = useHostViewerPanelContext();
 
   const idField = frame.fieldByName.get(options.idField);
-  const statusField = frame.fieldByName.get(options.statusField);
+  const statusField = showStatus ? frame.fieldByName.get(options.statusField) : undefined;
 
   let title: string | undefined = undefined;
   let titleField;

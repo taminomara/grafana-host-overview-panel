@@ -1,5 +1,5 @@
 import { Field, FieldType } from '@grafana/data';
-import { HostViewerPanelDataContext } from 'components/PanelContext';
+import { HostViewerPanelContext } from 'components/PanelContext';
 import {
   DisplayEntry,
   GridType,
@@ -203,7 +203,7 @@ function bucketByField(
   field: Field,
   sortMode: SortMode,
   sortPattern: string | undefined,
-  context: HostViewerPanelDataContext,
+  context: HostViewerPanelContext,
   knownIds: string
 ): Bucket[] {
   const bucketMap = new Map<string, Bucket>();
@@ -284,7 +284,7 @@ function sortFrame(
   sortFieldName: string,
   sortMode: SortMode,
   sortPattern: string | undefined,
-  context: HostViewerPanelDataContext
+  context: HostViewerPanelContext
 ): IndexedFrame {
   if (sortMode === SortMode.Disabled) {
     return frame;
@@ -326,7 +326,7 @@ function sortFrame(
 export function groupFrame(
   frame: IndexedFrame,
   options: HostViewerOptions,
-  context: HostViewerPanelDataContext
+  context: HostViewerPanelContext
 ): GroupNode {
   const activeGroups = options.groups.filter((g) => !isGroupDisabled(g));
   const gridType = activeGroups.length > 0 ? activeGroups[0].gridType : options.gridType;
@@ -357,7 +357,7 @@ export function groupFrame(
 function applySortFrame(
   frame: IndexedFrame,
   options: HostViewerOptions,
-  context: HostViewerPanelDataContext
+  context: HostViewerPanelContext
 ): IndexedFrame {
   if (!options.idField || !options.idSortMode) {
     return frame;
@@ -369,7 +369,7 @@ function groupFrameRecursive(
   frame: IndexedFrame,
   groups: Group[],
   options: HostViewerOptions,
-  context: HostViewerPanelDataContext,
+  context: HostViewerPanelContext,
   groupValues: Record<string, unknown>
 ): [IndexedFrame, GroupNode[]] {
   if (groups.length === 0) {
@@ -455,7 +455,7 @@ function addKnownNodeValues(
   frame: IndexedFrame,
   options: HostViewerOptions,
   groupValues: Record<string, unknown>,
-  context: HostViewerPanelDataContext
+  context: HostViewerPanelContext
 ) {
   const field = frame.fields.find((field) => field.name === options.idField);
 

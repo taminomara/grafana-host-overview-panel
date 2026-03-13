@@ -60,6 +60,7 @@ const getStyles = (theme: GrafanaTheme2) => ({
   tooltip: css({
     padding: theme.spacing(0.5),
     paddingTop: 0,
+    marginTop: theme.spacing(-0.5),
     backgroundColor: theme.colors.background.primary,
     '--row-hover-bg': theme.colors.background.primary,
     fontSize: theme.typography.bodySmall.fontSize,
@@ -98,7 +99,7 @@ export const TableView: React.FC<TableViewProps> = ({ node, frame, rowIndex, opt
     [entries, splitIndex]
   );
   const moreEntries = useMemo(
-    () => (splitIndex >= 0 ? entries.slice(splitIndex) : []),
+    () => (splitIndex >= 0 ? entries.slice(splitIndex + 1) : []),
     [entries, splitIndex]
   );
   const hasMoreEntries = moreEntries.length > 0;
@@ -176,11 +177,11 @@ export const TableView: React.FC<TableViewProps> = ({ node, frame, rowIndex, opt
     >
       <div className={cx(styles.card, expanded && styles.cardExpanded)} style={{ borderColor }}>
         <ResourceDetails
-          node={node}
           frame={frame}
           rowIndex={rowIndex}
           options={options}
           config={config}
+          showStatus={true}
         />
         {hasMoreEntries && (
           <button
@@ -208,11 +209,11 @@ export const TableView: React.FC<TableViewProps> = ({ node, frame, rowIndex, opt
           style={{ borderColor, marginBottom: -tooltipHeight }}
         >
           <ResourceDetails
-            node={node}
             frame={frame}
             rowIndex={rowIndex}
             options={options}
             config={moreConfig}
+            showStatus={false}
           />
         </div>
       )}

@@ -9,6 +9,7 @@ import { groupFrame } from '../library/groupFrames';
 import { buildJoinIndices } from '../library/joinFrames';
 import { GroupView } from './GroupView';
 import { HostViewerPanelContextProvider } from './PanelContext';
+import { TooltipContextProvider } from './TooltipContext';
 
 interface Props extends PanelProps<HostViewerOptions> {}
 
@@ -74,19 +75,18 @@ export const HostViewerPanel: React.FC<Props> = ({
     }
   }, [joinIndices]);
 
-  const tooltipPinnedRef = useRef(false);
-
-  const dataContext = useMemo(
+  const panelContext = useMemo(
     () => ({ data: data.series, replaceVariables, joinIndices, timeRange }),
     [replaceVariables, data.series, joinIndices, timeRange]
   );
 
-  const rootNode = useMemo(
-    () => (frame ? groupFrame(frame, options, dataContext) : null),
-    [frame, options, dataContext]
-  );
+  const tooltipPinnedRef = useRef(false);
+  const tooltipContext = useMemo(() => ({ pinnedRef: tooltipPinnedRef }), []);
 
-  const panelContext = useMemo(() => ({ ...dataContext, tooltipPinnedRef }), [dataContext]);
+  const rootNode = useMemo(
+    () => (frame ? groupFrame(frame, options, panelContext) : null),
+    [frame, options, panelContext]
+  );
 
   if (duplicateFrameIds.length > 0) {
     return (
@@ -116,15 +116,17 @@ export const HostViewerPanel: React.FC<Props> = ({
 
   return (
     <HostViewerPanelContextProvider value={panelContext}>
-      <div
-        className={cx(
-          styles.wrapper,
-          transparent && styles.wrapperTransparent,
-          css({ width: width, height: height })
-        )}
-      >
-        <GroupView node={rootNode} options={options} />
-      </div>
+      <TooltipContextProvider value={tooltipContext}>
+        <div
+          className={cx(
+            styles.wrapper,
+            transparent && styles.wrapperTransparent,
+            css({ width: width, height: height })
+          )}
+        >
+          <GroupView node={rootNode} options={options} />
+        </div>
+      </TooltipContextProvider>
     </HostViewerPanelContextProvider>
   );
 };

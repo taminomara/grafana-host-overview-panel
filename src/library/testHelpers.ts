@@ -65,7 +65,6 @@ export function makePanelContext(
       to: dateTime('2026-02-28T12:00:00Z'),
       raw: { from: 'now-6h', to: 'now' },
     },
-    tooltipPinnedRef: { current: false },
     ...overrides,
   };
 }

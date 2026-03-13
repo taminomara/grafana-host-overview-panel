@@ -1,5 +1,5 @@
 import { DataFrame, Field, getFrameDisplayName, getLinksSupplier } from '@grafana/data';
-import { HostViewerPanelDataContext } from 'components/PanelContext';
+import { HostViewerPanelContext } from 'components/PanelContext';
 
 export interface IndexedFrame extends DataFrame {
   fieldByName: ReadonlyMap<string, Field>;
@@ -26,7 +26,7 @@ export function indexFrame(frame: DataFrame): IndexedFrame {
   return { ...frame, fieldByName };
 }
 
-export function createFrame(frame: DataFrame, context: HostViewerPanelDataContext): IndexedFrame {
+export function createFrame(frame: DataFrame, context: HostViewerPanelContext): IndexedFrame {
   const indexedFrame = indexFrame(frame);
   for (const field of indexedFrame.fields) {
     field.getLinks = getLinksSupplier(

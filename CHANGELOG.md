@@ -8,6 +8,7 @@
 - Fixed incorrect suggestions when selecting fields for grouping and joining.
 - Fixed disappearing data links.
 - Fixed resource tooltip being clipped by panel bounds.
+- Fixed a bug when status field would show up twice in rich table rendering mode.
 
 ## 1.0.0
 
