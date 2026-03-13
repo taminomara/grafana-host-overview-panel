@@ -1,18 +1,16 @@
 import { css, cx } from '@emotion/css';
 import { DataFrameWithValue, GrafanaTheme2 } from '@grafana/data';
-import { Toggletip, useStyles2, useTheme2 } from '@grafana/ui';
+import { Tooltip, useStyles2, useTheme2 } from '@grafana/ui';
 import { GroupNode } from 'library/groupFrames';
-import React, { useRef, useState } from 'react';
-import { ResourceDisplayMode, HostViewerOptions } from 'types';
+import React, { useEffect, useRef, useState } from 'react';
+import { HostViewerOptions, ResourceDisplayMode } from 'types';
 import { getCellSizeTier } from '../library/cellSize';
 import { useOverrideColor } from '../library/criticality';
 import { IndexedFrame } from '../library/dataFrame';
 import { interpolateWithDataContext } from '../library/interpolate';
-import { ResourceTooltip } from './ResourceTooltip';
-import { useHostViewerPanelContext } from './PanelContext';
 import { formatFieldValue } from './FieldRow';
-
-let _TooltipsOpened = 0;
+import { useHostViewerPanelContext } from './PanelContext';
+import { ResourceTooltip } from './ResourceTooltip';
 
 function getStyles(theme: GrafanaTheme2, cellSize: number) {
   const tier = getCellSizeTier(cellSize);
@@ -59,10 +57,11 @@ interface CellViewProps {
 export const CellView: React.FC<CellViewProps> = ({ node, frame, rowIndex, options }) => {
   const theme = useTheme2();
   const styles = useStyles2(getStyles, options.cellSize ?? 20);
-  const context = useHostViewerPanelContext();
+  const { tooltipPinnedRef, ...context } = useHostViewerPanelContext();
   const [tooltipOpened, setTooltipVisible] = useState(false);
   const [hovering, setHovering] = useState(false);
   const nodeRef = useRef<HTMLDivElement>(null);
+  const tooltipRef = useRef<HTMLDivElement>(null);
 
   const idField = frame.fieldByName.get(options.idField);
   const statusField = frame.fieldByName.get(options.statusField);
@@ -77,6 +76,32 @@ export const CellView: React.FC<CellViewProps> = ({ node, frame, rowIndex, optio
   const cellColor = displayValue?.color ?? theme.colors.background.elevated;
   const overrideColor =
     useOverrideColor(options.displayEntries ?? [], frame, rowIndex) ?? cellColor;
+
+  useEffect(() => {
+    if (!tooltipOpened) {
+      return;
+    }
+
+    const handleClick = (e: MouseEvent) => {
+      const target = e.target as HTMLElement;
+
+      if (nodeRef.current?.contains(target)) {
+        return;
+      }
+      if (tooltipRef.current?.contains(target)) {
+        return;
+      }
+      if (target.closest?.('[role="menu"]')) {
+        return;
+      }
+      tooltipPinnedRef.current = false;
+      setTooltipVisible(false);
+      setHovering(false);
+    };
+
+    document.addEventListener('mousedown', handleClick);
+    return () => document.removeEventListener('mousedown', handleClick);
+  }, [tooltipOpened, tooltipPinnedRef]);
 
   let cellText = undefined;
   if (options.resourceDisplayMode === ResourceDisplayMode.CellWithText) {
@@ -100,24 +125,27 @@ export const CellView: React.FC<CellViewProps> = ({ node, frame, rowIndex, optio
   return (
     <div
       onMouseEnter={() => {
-        if (_TooltipsOpened === 0) {
+        if (!tooltipPinnedRef.current) {
           setHovering(true);
         }
       }}
       onMouseLeave={() => {
         setHovering(false);
       }}
-      onClickCapture={(e) => {
-        if (e.target !== nodeRef.current) {
+      onClick={(e) => {
+        const target = e.target as HTMLElement;
+        if (target.closest?.('[role="menu"]')) {
           return;
         }
-
+        if (tooltipRef.current?.contains(target)) {
+          return;
+        }
         if (tooltipOpened) {
-          _TooltipsOpened -= 1;
+          tooltipPinnedRef.current = false;
           setTooltipVisible(false);
           setHovering(false);
         } else {
-          _TooltipsOpened += 1;
+          tooltipPinnedRef.current = true;
           setTooltipVisible(true);
         }
         e.stopPropagation();
@@ -126,51 +154,34 @@ export const CellView: React.FC<CellViewProps> = ({ node, frame, rowIndex, optio
       data-testid="resource-cell"
       ref={nodeRef}
     >
-      <div
-        style={{
-          pointerEvents: tooltipOpened ? undefined : 'none',
-          cursor: tooltipOpened ? 'auto' : undefined,
-        }}
-      >
-        <Toggletip
-          content={() => (
+      <Tooltip
+        content={() => (
+          <div ref={tooltipRef}>
             <ResourceTooltip node={node} frame={frame} rowIndex={rowIndex} options={options} />
-          )}
-          show={tooltipOpened || hovering}
-          onOpen={() => {
-            if (!tooltipOpened) {
-              _TooltipsOpened += 1;
-            }
-            setTooltipVisible(true);
-          }}
-          onClose={() => {
-            if (tooltipOpened) {
-              _TooltipsOpened -= 1;
-            }
-            setTooltipVisible(false);
-          }}
-          closeButton={false}
-          fitContent={true}
-        >
-          <div
-            className={cx(styles.cell)}
-            style={{
-              background: `linear-gradient(to bottom right, ${cellColor} 0%, ${cellColor} 50%, ${overrideColor} 50%, ${overrideColor} 100%)`,
-            }}
-          >
-            {cellText ? (
-              <div
-                className={styles.cellText}
-                style={{
-                  color: theme.colors.getContrastText(cellColor),
-                }}
-              >
-                {cellText}
-              </div>
-            ) : null}
           </div>
-        </Toggletip>
-      </div>
+        )}
+        show={tooltipOpened || hovering}
+        // interactive={true}
+        placement="bottom"
+      >
+        <div
+          className={cx(styles.cell)}
+          style={{
+            background: `linear-gradient(to bottom right, ${cellColor} 0%, ${cellColor} 50%, ${overrideColor} 50%, ${overrideColor} 100%)`,
+          }}
+        >
+          {cellText ? (
+            <div
+              className={styles.cellText}
+              style={{
+                color: theme.colors.getContrastText(cellColor),
+              }}
+            >
+              {cellText}
+            </div>
+          ) : null}
+        </div>
+      </Tooltip>
     </div>
   );
 };

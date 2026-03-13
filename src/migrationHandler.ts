@@ -2,7 +2,7 @@ import { PanelModel } from '@grafana/data';
 import { DisplayEntry, HeadingDisplayEntry, HostViewerOptions } from './types';
 
 export function migrationHandler(panel: PanelModel<Partial<HostViewerOptions>>) {
-  console.log("!!!");
+  console.log('!!!');
   const options = { ...panel.options };
   const old = panel.options as Record<string, unknown>;
 

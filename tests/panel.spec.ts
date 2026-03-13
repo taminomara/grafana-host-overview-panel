@@ -78,7 +78,7 @@ test.describe('data anomalies', () => {
     // Open tooltip for node-b (null status and cpu) and verify mapped values
     const nodeBCell = panel.locator('[data-testid="resource-cell"]').filter({ hasText: 'node-b' });
     await nodeBCell.click();
-    const tooltip = page.locator('[data-testid="toggletip-content"]');
+    const tooltip = page.locator('[data-testid="resource-tooltip"]');
     // status is always rendered; cpu is from displayEntries
     await expect(tooltip).toContainText('status');
     await expect(tooltip).toContainText('cpu');
@@ -138,9 +138,9 @@ test.describe('display modes', () => {
     expect(colorCounts.green).toBe(3);
     expect(colorCounts.red).toBe(2);
 
-    // Click a cell wrapper to open its toggletip
+    // Click a cell to open its tooltip
     await panel.locator('[data-testid="resource-cell"]').first().click();
-    const tooltip = page.locator('[data-testid="toggletip-content"]');
+    const tooltip = page.locator('[data-testid="resource-tooltip"]');
     await expect(tooltip).toContainText('status');
   });
 
@@ -563,10 +563,9 @@ test.describe('tooltips and fields', () => {
     const dashboard = await readProvisionedDashboard({ fileName: E2E_DASHBOARD });
     const panelEditPage = await gotoPanelEditPage({ dashboard, id: '70' });
     await expect(panelEditPage.panel.locator).not.toContainText('No data');
-    // Click a cell wrapper to open its toggletip
+    // Click a cell to open its tooltip
     await panelEditPage.panel.locator.locator('[data-testid="resource-cell"]').first().click();
-    // Tooltip content is rendered via Portal with data-testid="toggletip-content"
-    const tooltip = page.locator('[data-testid="toggletip-content"]');
+    const tooltip = page.locator('[data-testid="resource-tooltip"]');
     await expect(tooltip).toContainText('role');
     await expect(tooltip).toContainText('cpu');
     // Should show actual field values from the first row
@@ -583,9 +582,9 @@ test.describe('tooltips and fields', () => {
     const dashboard = await readProvisionedDashboard({ fileName: E2E_DASHBOARD });
     const panelEditPage = await gotoPanelEditPage({ dashboard, id: '71' });
     await expect(panelEditPage.panel.locator).not.toContainText('No data');
-    // Click a cell wrapper to open its toggletip
+    // Click a cell to open its tooltip
     await panelEditPage.panel.locator.locator('[data-testid="resource-cell"]').first().click();
-    const tooltip = page.locator('[data-testid="toggletip-content"]');
+    const tooltip = page.locator('[data-testid="resource-tooltip"]');
     // Title should be "Host: <name>" from the pattern "Host: ${__data.fields.name}"
     await expect(tooltip.getByText(/Host:/).first()).toBeVisible();
     // Tooltip entry (role) should also be visible
@@ -856,9 +855,9 @@ test.describe('criticality', () => {
     );
     expect(splitCell).toBeDefined();
 
-    // Click a cell wrapper to open its toggletip
+    // Click a cell to open its tooltip
     await panel.locator('[data-testid="resource-cell"]').first().click();
-    const tooltip = page.locator('[data-testid="toggletip-content"]');
+    const tooltip = page.locator('[data-testid="resource-tooltip"]');
     await expect(tooltip).toContainText('cpu');
   });
 
@@ -1031,7 +1030,7 @@ test.describe('rendering types', () => {
     await expect(panel).not.toContainText('No data');
     // Open tooltip by clicking a cell
     await panel.locator('[data-testid="resource-cell"]').first().click();
-    const tooltip = page.locator('[data-testid="toggletip-content"]');
+    const tooltip = page.locator('[data-testid="resource-tooltip"]');
     await expect(tooltip).toContainText('cpu');
     await checkRenderingTypes(tooltip);
   });

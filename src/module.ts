@@ -316,5 +316,5 @@ export const plugin = new PanelPlugin<HostViewerOptions, HostViewerFieldConfig>(
         defaultValue: '',
         showIf: (options) => options.tooltipTitleField === '__use_pattern__',
         category: ['Resource tooltip'],
-      })
+      });
   });

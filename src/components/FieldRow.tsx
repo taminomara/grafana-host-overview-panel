@@ -35,6 +35,7 @@ export const getRowStyles = (theme: GrafanaTheme2) => ({
     display: 'flex',
     flexWrap: 'nowrap',
     gap: theme.spacing(0.5),
+    zIndex: 2,
   }),
   labelContentWrapper: css({
     display: 'inline-block',
@@ -48,7 +49,7 @@ export const getRowStyles = (theme: GrafanaTheme2) => ({
   labelContent: css({
     whiteSpace: 'nowrap',
     '&:hover': {
-      backgroundColor: theme.colors.background.primary,
+      backgroundColor: 'var(--row-hover-bg, transparent)',
     },
   }),
   value: css({

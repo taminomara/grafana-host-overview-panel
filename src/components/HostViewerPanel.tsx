@@ -2,7 +2,7 @@ import { css, cx } from '@emotion/css';
 import { getFrameDisplayName, GrafanaTheme2, PanelProps } from '@grafana/data';
 import { PanelDataErrorView } from '@grafana/runtime';
 import { Alert, useStyles2 } from '@grafana/ui';
-import React, { useEffect, useMemo } from 'react';
+import React, { useEffect, useMemo, useRef } from 'react';
 import { HostViewerOptions, JoinDisplayEntry } from 'types';
 import { findFrame, indexFrame } from '../library/dataFrame';
 import { groupFrame } from '../library/groupFrames';
@@ -17,6 +17,10 @@ const getStyles = (theme: GrafanaTheme2) => {
     wrapper: css({
       position: 'relative',
       overflow: 'auto',
+      '--row-hover-bg': theme.colors.background.primary,
+    }),
+    wrapperTransparent: css({
+      '--row-hover-bg': theme.colors.background.canvas,
     }),
     error: css({
       margin: theme.spacing(1),
@@ -33,6 +37,7 @@ export const HostViewerPanel: React.FC<Props> = ({
   id,
   replaceVariables,
   timeRange,
+  transparent,
 }) => {
   const styles = useStyles2(getStyles);
 
@@ -69,15 +74,19 @@ export const HostViewerPanel: React.FC<Props> = ({
     }
   }, [joinIndices]);
 
-  const panelContext = useMemo(
+  const tooltipPinnedRef = useRef(false);
+
+  const dataContext = useMemo(
     () => ({ data: data.series, replaceVariables, joinIndices, timeRange }),
     [replaceVariables, data.series, joinIndices, timeRange]
   );
 
   const rootNode = useMemo(
-    () => (frame ? groupFrame(frame, options, panelContext) : null),
-    [frame, options, panelContext]
+    () => (frame ? groupFrame(frame, options, dataContext) : null),
+    [frame, options, dataContext]
   );
+
+  const panelContext = useMemo(() => ({ ...dataContext, tooltipPinnedRef }), [dataContext]);
 
   if (duplicateFrameIds.length > 0) {
     return (
@@ -107,7 +116,13 @@ export const HostViewerPanel: React.FC<Props> = ({
 
   return (
     <HostViewerPanelContextProvider value={panelContext}>
-      <div className={cx(styles.wrapper, css({ width: width, height: height }))}>
+      <div
+        className={cx(
+          styles.wrapper,
+          transparent && styles.wrapperTransparent,
+          css({ width: width, height: height })
+        )}
+      >
         <GroupView node={rootNode} options={options} />
       </div>
     </HostViewerPanelContextProvider>

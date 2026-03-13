@@ -22,7 +22,7 @@ const getStyles = (theme: GrafanaTheme2) => ({
   }),
   cardWrapperExpanded: css({
     zIndex: 2,
-    // boxShadow: theme.shadows.z2,
+    boxShadow: theme.shadows.z2,
   }),
   card: css({
     position: 'relative',
@@ -31,7 +31,9 @@ const getStyles = (theme: GrafanaTheme2) => ({
     borderWidth: 1,
     borderStyle: 'solid',
     borderRadius: theme.shape.radius.default,
+    fontSize: theme.typography.bodySmall.fontSize,
     backgroundColor: theme.colors.background.primary,
+    '--row-hover-bg': theme.colors.background.primary,
   }),
   showMoreButton: css({
     gridColumn: '1 / -1',
@@ -59,6 +61,8 @@ const getStyles = (theme: GrafanaTheme2) => ({
     padding: theme.spacing(0.5),
     paddingTop: 0,
     backgroundColor: theme.colors.background.primary,
+    '--row-hover-bg': theme.colors.background.primary,
+    fontSize: theme.typography.bodySmall.fontSize,
     borderStyle: 'solid',
     borderWidth: 1,
     borderTopWidth: 0,
@@ -87,10 +91,16 @@ export const TableView: React.FC<TableViewProps> = ({ node, frame, rowIndex, opt
   const [tooltipHeight, setTooltipHeight] = useState(0);
   const tooltipId = useId();
 
-  const entries = options.displayEntries ?? [];
+  const entries = options.displayEntries;
   const splitIndex = entries.findIndex((e) => e.type === 'heading');
-  const mainEntries = splitIndex >= 0 ? entries.slice(0, splitIndex) : entries;
-  const moreEntries = splitIndex >= 0 ? entries.slice(splitIndex) : [];
+  const mainEntries = useMemo(
+    () => (splitIndex >= 0 ? entries.slice(0, splitIndex) : entries),
+    [entries, splitIndex]
+  );
+  const moreEntries = useMemo(
+    () => (splitIndex >= 0 ? entries.slice(splitIndex) : []),
+    [entries, splitIndex]
+  );
   const hasMoreEntries = moreEntries.length > 0;
 
   const updateHeight = useCallback(() => {

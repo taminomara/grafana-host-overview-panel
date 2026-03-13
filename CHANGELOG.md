@@ -7,6 +7,7 @@
 - Added option to add tooltip sections. Merged tooltip content and resource content into a single section.
 - Fixed incorrect suggestions when selecting fields for grouping and joining.
 - Fixed disappearing data links.
+- Fixed resource tooltip being clipped by panel bounds.
 
 ## 1.0.0
 

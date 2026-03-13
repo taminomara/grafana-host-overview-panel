@@ -38,10 +38,13 @@ const getStyles = (theme: GrafanaTheme2) => ({
     borderWidth: 1,
     borderStyle: 'solid',
     borderRadius: theme.shape.radius.default,
-    backgroundColor: theme.colors.background.primary,
   }),
   containerWithTransparentBackground: css({
     backgroundColor: 'transparent',
+  }),
+  containerWithNonTransparentBackground: css({
+    backgroundColor: theme.colors.background.primary,
+    '--row-hover-bg': theme.colors.background.primary,
   }),
   heading: css({
     lineHeight: 1,
@@ -227,7 +230,9 @@ export const GroupView: React.FC<GroupViewProps> = ({ node, options }) => {
       className={cx(
         styles.container,
         border ? styles.containerWithBorder : null,
-        node.transparentBackground ? styles.containerWithTransparentBackground : null
+        node.transparentBackground
+          ? styles.containerWithTransparentBackground
+          : styles.containerWithNonTransparentBackground
       )}
       style={border ? { borderColor: theme.visualization.getColorByName(border.color) } : undefined}
     >

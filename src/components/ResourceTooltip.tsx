@@ -8,8 +8,8 @@ import { IndexedFrame } from '../library/dataFrame';
 import { ResourceDetails, ResourceDetailsConfig } from './ResourceDetails';
 
 const getStyles = (theme: GrafanaTheme2) => ({
-  tooltipAdjust: css({
-    margin: theme.spacing(-2, -1),
+  tooltipWrapper: css({
+    '--row-hover-bg': theme.components.tooltip.background,
   }),
 });
 
@@ -38,13 +38,14 @@ export const ResourceTooltip: React.FC<ResourceTooltipProps> = ({
   );
 
   return (
-    <ResourceDetails
-      node={node}
-      frame={frame}
-      rowIndex={rowIndex}
-      options={options}
-      config={config}
-      className={styles.tooltipAdjust}
-    />
+    <div data-testid="resource-tooltip" className={styles.tooltipWrapper}>
+      <ResourceDetails
+        node={node}
+        frame={frame}
+        rowIndex={rowIndex}
+        options={options}
+        config={config}
+      />
+    </div>
   );
 };
