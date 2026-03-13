@@ -34,14 +34,13 @@ export function makeGroup(overrides: Partial<Group> & { groupKey: string }): Gro
 
 export function makeOptions(overrides?: Partial<HostViewerOptions>): HostViewerOptions {
   return {
-    tooltipEntries: [],
+    displayEntries: [],
     groups: [],
     statusField: 'value',
     cellSize: 20,
     resourceDisplayMode: ResourceDisplayMode.Cell,
     tooltipTitleField: '',
     tooltipTitlePattern: '',
-    richEntries: [],
     gridType: GridType.Flow,
     gridColumns: 4,
     knownIds: '',

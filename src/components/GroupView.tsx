@@ -76,6 +76,18 @@ const getStyles = (theme: GrafanaTheme2) => ({
     marginBottom: theme.spacing(0.5),
     fontSize: theme.typography.bodySmall.fontSize,
   }),
+  headingText: css({
+    gridColumn: '1 / -1',
+    fontWeight: theme.typography.fontWeightBold,
+    color: theme.colors.text.secondary,
+    marginTop: theme.spacing(0.5),
+  }),
+  headingRule: css({
+    gridColumn: '1 / -1',
+    border: 'none',
+    borderTop: `1px solid ${theme.colors.border.weak}`,
+    margin: theme.spacing(0.5, 0),
+  }),
 });
 
 interface GroupViewProps {
@@ -223,6 +235,15 @@ export const GroupView: React.FC<GroupViewProps> = ({ node, options }) => {
       {node.entries.length > 0 && frameForEntries ? (
         <div className={styles.joinedData}>
           {node.entries.map((entry) => {
+            if (entry.type === 'heading') {
+              return entry.title ? (
+                <span key={entry.id} className={styles.headingText}>
+                  {entry.title}
+                </span>
+              ) : (
+                <hr key={entry.id} className={styles.headingRule} />
+              );
+            }
             if (entry.type === 'field') {
               const field = frameForEntries.fieldByName.get(entry.field);
               if (!field) {

@@ -122,6 +122,9 @@ export function getMostCriticalColor(
   let bestColor: string | undefined;
 
   for (const entry of entries) {
+    if (entry.type === 'heading') {
+      continue;
+    }
     if (!entry.overridesBorderColor) {
       continue;
     }
@@ -178,7 +181,7 @@ export function useOverrideColor(
   const context = useHostViewerPanelContext();
   const theme = useTheme2();
   return useMemo(() => {
-    const colorEntries = entries.filter((e) => e.overridesBorderColor);
+    const colorEntries = entries.filter((e) => e.type !== 'heading' && e.overridesBorderColor);
     if (colorEntries.length === 0) {
       return undefined;
     }

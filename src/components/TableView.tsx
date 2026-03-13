@@ -87,7 +87,11 @@ export const TableView: React.FC<TableViewProps> = ({ node, frame, rowIndex, opt
   const [tooltipHeight, setTooltipHeight] = useState(0);
   const tooltipId = useId();
 
-  const hasTooltipEntries = (options.tooltipEntries ?? []).length > 0;
+  const entries = options.displayEntries ?? [];
+  const splitIndex = entries.findIndex((e) => e.type === 'heading');
+  const mainEntries = splitIndex >= 0 ? entries.slice(0, splitIndex) : entries;
+  const moreEntries = splitIndex >= 0 ? entries.slice(splitIndex) : [];
+  const hasMoreEntries = moreEntries.length > 0;
 
   const updateHeight = useCallback(() => {
     if (tooltipRef.current) {
@@ -129,11 +133,7 @@ export const TableView: React.FC<TableViewProps> = ({ node, frame, rowIndex, opt
       ? statusField.display(statusField.values[rowIndex])
       : undefined;
 
-  const allEntries = useMemo(
-    () => [...(options.tooltipEntries ?? []), ...(options.richEntries ?? [])],
-    [options.tooltipEntries, options.richEntries]
-  );
-  const overrideColor = useOverrideColor(allEntries, frame, rowIndex);
+  const overrideColor = useOverrideColor(entries, frame, rowIndex);
 
   const borderColor =
     overrideColor ??
@@ -145,18 +145,18 @@ export const TableView: React.FC<TableViewProps> = ({ node, frame, rowIndex, opt
     (): ResourceDetailsConfig => ({
       titleField: options.cellTextField,
       titlePattern: options.cellTextPattern,
-      entries: options.richEntries ?? [],
+      entries: mainEntries,
     }),
-    [options.cellTextField, options.cellTextPattern, options.richEntries]
+    [options.cellTextField, options.cellTextPattern, mainEntries]
   );
 
-  const tooltipConfig = useMemo(
+  const moreConfig = useMemo(
     (): ResourceDetailsConfig => ({
       titleField: false,
       titlePattern: '',
-      entries: options.tooltipEntries ?? [],
+      entries: moreEntries,
     }),
-    [options.tooltipEntries]
+    [moreEntries]
   );
 
   return (
@@ -172,7 +172,7 @@ export const TableView: React.FC<TableViewProps> = ({ node, frame, rowIndex, opt
           options={options}
           config={config}
         />
-        {hasTooltipEntries && (
+        {hasMoreEntries && (
           <button
             className={styles.showMoreButton}
             onClick={() => setExpanded((v) => !v)}
@@ -188,7 +188,7 @@ export const TableView: React.FC<TableViewProps> = ({ node, frame, rowIndex, opt
           </button>
         )}
       </div>
-      {hasTooltipEntries && (
+      {hasMoreEntries && (
         <div
           id={tooltipId}
           ref={tooltipRef}
@@ -202,7 +202,7 @@ export const TableView: React.FC<TableViewProps> = ({ node, frame, rowIndex, opt
             frame={frame}
             rowIndex={rowIndex}
             options={options}
-            config={tooltipConfig}
+            config={moreConfig}
           />
         </div>
       )}

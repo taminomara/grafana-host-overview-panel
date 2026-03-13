@@ -27,11 +27,17 @@ export interface JoinDisplayEntry {
   severityOverrides?: SeverityOverride[];
 }
 
-export type DisplayEntry = FieldDisplayEntry | JoinDisplayEntry;
+export interface HeadingDisplayEntry {
+  id: string;
+  type: 'heading';
+  title: string;
+}
+
+export type DisplayEntry = FieldDisplayEntry | JoinDisplayEntry | HeadingDisplayEntry;
 
 export interface HostViewerOptions {
   dataFrame?: string;
-  tooltipEntries: DisplayEntry[];
+  displayEntries: DisplayEntry[];
   groups: Group[];
   statusField: string;
   cellSize: number;
@@ -44,7 +50,6 @@ export interface HostViewerOptions {
   cellTextPattern: string;
   tooltipTitleField: string;
   tooltipTitlePattern: string;
-  richEntries: DisplayEntry[];
   gridType: GridType;
   gridColumns: number;
   borderColor?: string;

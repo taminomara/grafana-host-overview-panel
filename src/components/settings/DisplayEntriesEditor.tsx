@@ -8,6 +8,7 @@ import {
   Icon,
   InlineField,
   InlineFieldRow,
+  Input,
   Switch,
   useStyles2,
 } from '@grafana/ui';
@@ -16,6 +17,7 @@ import React, { useMemo, useState } from 'react';
 import {
   DisplayEntry,
   FieldDisplayEntry,
+  HeadingDisplayEntry,
   HostViewerOptions,
   JoinDisplayEntry,
   JoinKeyPair,
@@ -26,6 +28,7 @@ import { SeverityOverridesEditor } from './SeverityOverridesEditor';
 import { SuggestionsFromEditorContext, TemplatePatternInput } from './TemplatePatternEditor';
 
 const JOIN_OPTION_VALUE = '__join__';
+const SECTION_OPTION_VALUE = '__section__';
 
 const getStyles = (theme: GrafanaTheme2) => ({
   dragHandle: css({
@@ -76,6 +79,11 @@ export const DisplayEntriesEditor: React.FC<DisplayEntriesEditorProps> = ({
         value: JOIN_OPTION_VALUE,
         label: 'Join from another frame',
         description: 'Join data from a secondary data frame',
+      },
+      {
+        value: SECTION_OPTION_VALUE,
+        label: 'Section heading',
+        description: 'Visual separator between entry groups',
       },
     ];
   }, [primaryFieldOptions]);
@@ -177,17 +185,29 @@ const EntryEditorRow: React.FC<EntryEditorRowProps> = ({
   const styles = useStyles2(getStyles);
   const [isOpen, setIsOpen] = useState(value.type === 'join' ? !value.sourceFrame : false);
 
-  const comboboxValue = value.type === 'field' ? value.field || null : JOIN_OPTION_VALUE;
+  const comboboxValue =
+    value.type === 'heading'
+      ? SECTION_OPTION_VALUE
+      : value.type === 'field'
+        ? value.field || null
+        : JOIN_OPTION_VALUE;
 
   const handleComboboxChange = (selected: string | null) => {
-    if (selected === JOIN_OPTION_VALUE) {
+    if (selected === SECTION_OPTION_VALUE) {
+      onChange({
+        id: value.id,
+        type: 'heading',
+        title: '',
+      } satisfies HeadingDisplayEntry);
+      setIsOpen(false);
+    } else if (selected === JOIN_OPTION_VALUE) {
       onChange({
         id: value.id,
         type: 'join',
         sourceFrame: '',
         sourceField: '',
         keys: [],
-        overridesBorderColor: value.overridesBorderColor,
+        overridesBorderColor: value.type !== 'heading' ? value.overridesBorderColor : false,
       } satisfies JoinDisplayEntry);
       setIsOpen(true);
     } else {
@@ -195,7 +215,7 @@ const EntryEditorRow: React.FC<EntryEditorRowProps> = ({
         id: value.id,
         type: 'field',
         field: selected ?? '',
-        overridesBorderColor: value.overridesBorderColor,
+        overridesBorderColor: value.type !== 'heading' ? value.overridesBorderColor : false,
       } satisfies FieldDisplayEntry);
     }
   };
@@ -239,7 +259,17 @@ const EntryEditorRow: React.FC<EntryEditorRowProps> = ({
       </InlineFieldRow>
       {isOpen && (
         <div className={styles.entryBody}>
-          {value.type === 'field' ? (
+          {value.type === 'heading' ? (
+            <Field label="Heading text" description="Leave empty to render a horizontal ruler">
+              <Input
+                value={value.title}
+                onChange={(e) =>
+                  onChange({ ...value, title: e.currentTarget.value } satisfies HeadingDisplayEntry)
+                }
+                placeholder="Section title"
+              />
+            </Field>
+          ) : value.type === 'field' ? (
             <FieldEntrySettings value={value} onChange={onChange} />
           ) : (
             <JoinEntrySettings

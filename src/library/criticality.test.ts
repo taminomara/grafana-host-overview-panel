@@ -3,7 +3,7 @@ import { buildSeverityMap, getCriticalityScore, getMostCriticalColor } from './c
 import { indexFrame } from './dataFrame';
 import { buildJoinIndices, JoinIndex } from './joinFrames';
 import { makeField, makeFrame } from './testHelpers';
-import { DisplayEntry, FieldDisplayEntry, JoinDisplayEntry } from '../types';
+import { DisplayEntry, FieldDisplayEntry, HeadingDisplayEntry, JoinDisplayEntry } from '../types';
 
 function makeThresholdField(
   name: string,
@@ -536,6 +536,39 @@ describe('getMostCriticalColor', () => {
       [secondaryFrame]
     );
     expect(result).toBe('red');
+  });
+
+  it('skips heading entries without error', () => {
+    const steps = [
+      { value: 0, color: 'green' },
+      { value: 80, color: 'red' },
+    ];
+    const field = makeThresholdField('cpu', [90], steps);
+    const frame = indexFrame(makeFrame([field]));
+    const heading: HeadingDisplayEntry = { id: 'h1', type: 'heading', title: 'Section' };
+    const fieldEntry: FieldDisplayEntry = {
+      id: '1',
+      type: 'field',
+      field: 'cpu',
+      overridesBorderColor: true,
+    };
+
+    const result = getMostCriticalColor(
+      [heading, fieldEntry],
+      frame,
+      0,
+      new Map(),
+      replaceVariables,
+      []
+    );
+    expect(result).toBe('red');
+  });
+
+  it('returns undefined when only heading entries are present', () => {
+    const frame = indexFrame(makeFrame([makeField('x', FieldType.number, [42])]));
+    const heading: HeadingDisplayEntry = { id: 'h1', type: 'heading', title: '' };
+    const result = getMostCriticalColor([heading], frame, 0, new Map(), replaceVariables, []);
+    expect(result).toBeUndefined();
   });
 
   it('picks highest score when mixing field and join entries', () => {

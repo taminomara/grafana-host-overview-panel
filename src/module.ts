@@ -8,6 +8,7 @@ import { SortModeEditor, SortPatternEditor } from './components/settings/SortEdi
 import { TemplatePatternEditor } from './components/settings/TemplatePatternEditor';
 import { ValueFieldEditor } from './components/settings/ValueFieldEditor';
 import { HostViewerPanel } from './components/HostViewerPanel';
+import { migrationHandler } from './migrationHandler';
 import {
   ResourceDisplayMode,
   FieldDisplayMode,
@@ -18,6 +19,7 @@ import {
 } from './types';
 
 export const plugin = new PanelPlugin<HostViewerOptions, HostViewerFieldConfig>(HostViewerPanel)
+  .setMigrationHandler(migrationHandler)
   .useFieldConfig({
     standardOptions: {
       [FieldConfigProperty.Unit]: { hideFromDefaults: true },
@@ -278,14 +280,13 @@ export const plugin = new PanelPlugin<HostViewerOptions, HostViewerFieldConfig>(
           options.cellTextField === '__use_pattern__',
       })
       .addCustomEditor({
-        id: 'richEntries',
-        path: 'richEntries',
+        id: 'displayEntries',
+        path: 'displayEntries',
         name: 'Fields and joins',
-        description: 'Fields and joined data to display in each resource row',
+        description: 'Fields and joined data to display in each resource',
         editor: DisplayEntriesEditorWrapper,
         defaultValue: [],
         category: ['Resource content'],
-        showIf: (options) => options.resourceDisplayMode === ResourceDisplayMode.Rich,
       })
       .addCustomEditor({
         id: 'tooltipTitleField',
@@ -316,13 +317,4 @@ export const plugin = new PanelPlugin<HostViewerOptions, HostViewerFieldConfig>(
         showIf: (options) => options.tooltipTitleField === '__use_pattern__',
         category: ['Resource tooltip'],
       })
-      .addCustomEditor({
-        id: 'tooltipEntries',
-        path: 'tooltipEntries',
-        name: 'Fields and joins',
-        description: 'Fields and joined data to display in tooltips',
-        editor: DisplayEntriesEditorWrapper,
-        defaultValue: [],
-        category: ['Resource tooltip'],
-      });
   });

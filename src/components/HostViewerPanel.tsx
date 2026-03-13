@@ -49,14 +49,14 @@ export const HostViewerPanel: React.FC<Props> = ({
   const frame = useMemo(() => (rawFrame ? indexFrame(rawFrame) : null), [rawFrame]);
 
   const allJoins = useMemo(() => {
-    const entries = [...(options.tooltipEntries ?? []), ...(options.richEntries ?? [])];
+    const entries = [...(options.displayEntries ?? [])];
     for (const group of options.groups ?? []) {
       if (group.entries) {
         entries.push(...group.entries);
       }
     }
     return entries.filter((e): e is JoinDisplayEntry => e.type === 'join');
-  }, [options.tooltipEntries, options.richEntries, options.groups]);
+  }, [options.displayEntries, options.groups]);
 
   const joinIndices = useMemo(() => {
     const indices = buildJoinIndices(data.series, allJoins);

@@ -32,9 +32,9 @@ export const ResourceTooltip: React.FC<ResourceTooltipProps> = ({
     (): ResourceDetailsConfig => ({
       titleField: options.tooltipTitleField,
       titlePattern: options.tooltipTitlePattern,
-      entries: options.tooltipEntries ?? [],
+      entries: options.displayEntries ?? [],
     }),
-    [options.tooltipTitleField, options.tooltipTitlePattern, options.tooltipEntries]
+    [options.tooltipTitleField, options.tooltipTitlePattern, options.displayEntries]
   );
 
   return (

@@ -76,7 +76,7 @@ export const CellView: React.FC<CellViewProps> = ({ node, frame, rowIndex, optio
 
   const cellColor = displayValue?.color ?? theme.colors.background.elevated;
   const overrideColor =
-    useOverrideColor(options.tooltipEntries ?? [], frame, rowIndex) ?? cellColor;
+    useOverrideColor(options.displayEntries ?? [], frame, rowIndex) ?? cellColor;
 
   let cellText = undefined;
   if (options.resourceDisplayMode === ResourceDisplayMode.CellWithText) {

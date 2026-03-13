@@ -32,6 +32,18 @@ const getStyles = (theme: GrafanaTheme2) => ({
     gap: theme.spacing(0.5),
     marginBottom: theme.spacing(0.25),
   }),
+  headingText: css({
+    gridColumn: '1 / -1',
+    fontWeight: theme.typography.fontWeightBold,
+    color: theme.colors.text.secondary,
+    marginTop: theme.spacing(0.5),
+  }),
+  headingRule: css({
+    gridColumn: '1 / -1',
+    border: 'none',
+    borderTop: `1px solid ${theme.colors.border.weak}`,
+    margin: theme.spacing(0.5, 0),
+  }),
 });
 
 interface ResourceDetailsProps {
@@ -119,6 +131,15 @@ export const ResourceDetails: React.FC<ResourceDetailsProps> = ({
       ) : null}
       {statusField ? <FieldRow field={statusField} frame={frame} rowIndex={rowIndex} /> : null}
       {config.entries.map((entry) => {
+        if (entry.type === 'heading') {
+          return entry.title ? (
+            <span key={entry.id} className={styles.headingText}>
+              {entry.title}
+            </span>
+          ) : (
+            <hr key={entry.id} className={styles.headingRule} />
+          );
+        }
         if (entry.type === 'field') {
           const field = frame.fieldByName.get(entry.field);
           if (!field) {

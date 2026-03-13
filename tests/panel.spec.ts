@@ -79,7 +79,7 @@ test.describe('data anomalies', () => {
     const nodeBCell = panel.locator('[data-testid="resource-cell"]').filter({ hasText: 'node-b' });
     await nodeBCell.click();
     const tooltip = page.locator('[data-testid="toggletip-content"]');
-    // status is always rendered; cpu is from tooltipEntries
+    // status is always rendered; cpu is from displayEntries
     await expect(tooltip).toContainText('status');
     await expect(tooltip).toContainText('cpu');
     // Null values should display mapped text "Unknown" in gray (#888888)
