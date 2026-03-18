@@ -30,6 +30,7 @@ interface JoinEditorProps<T extends Join = Join> {
   onChange: (join: T) => void;
   allFrames: DataFrame[];
   primaryFieldOptions: Array<ComboboxOption<string>>;
+  hiddenKeyFields?: string[];
   children?: React.ReactNode;
 }
 
@@ -38,6 +39,7 @@ export function JoinEditor<T extends Join = Join>({
   onChange,
   allFrames,
   primaryFieldOptions,
+  hiddenKeyFields,
   children,
 }: JoinEditorProps<T>) {
   const frameOptions = useMemo<Array<ComboboxOption<string>>>(
@@ -98,6 +100,11 @@ export function JoinEditor<T extends Join = Join>({
               value={pair}
               primaryFieldOptions={primaryFieldOptions}
               foreignFieldOptions={foreignFieldOptions}
+              hiddenKeyFields={hiddenKeyFields}
+              hiddenForeignFields={value.keys
+                .filter((_, j) => j !== i)
+                .map((k) => k.foreignField)
+                .filter(Boolean)}
               onChange={(updated) =>
                 handleChange({ keys: value.keys.map((k, j) => (j === i ? updated : k)) })
               }
@@ -130,6 +137,8 @@ export interface JoinKeyPairRowProps {
   value: JoinKeyPair;
   primaryFieldOptions: Array<ComboboxOption<string>>;
   foreignFieldOptions: Array<ComboboxOption<string>>;
+  hiddenKeyFields?: string[];
+  hiddenForeignFields?: string[];
   onChange: (pair: JoinKeyPair) => void;
   onDelete: () => void;
 }
@@ -138,6 +147,8 @@ export const JoinKeyPairRow: React.FC<JoinKeyPairRowProps> = ({
   value,
   primaryFieldOptions,
   foreignFieldOptions,
+  hiddenKeyFields,
+  hiddenForeignFields,
   onChange,
   onDelete,
 }) => {
@@ -149,6 +160,7 @@ export const JoinKeyPairRow: React.FC<JoinKeyPairRowProps> = ({
         <InlineField title="Foreign field" grow={true} shrink={true}>
           <FieldCombobox
             options={foreignFieldOptions}
+            hiddenValues={hiddenForeignFields}
             value={value.foreignField || null}
             onChange={(v) => onChange({ ...value, foreignField: v ?? '' })}
             isClearable={true}
@@ -161,6 +173,7 @@ export const JoinKeyPairRow: React.FC<JoinKeyPairRowProps> = ({
         <InlineField title="Value" grow={true} shrink={true}>
           <FieldCombobox
             options={[{ value: '__template__', label: 'Use template' }, ...primaryFieldOptions]}
+            hiddenValues={hiddenKeyFields}
             value={value.primaryKey || null}
             onChange={(v) => onChange({ ...value, primaryKey: v ?? '' })}
             isClearable={true}
@@ -197,6 +210,7 @@ interface KnownIdsJoinEditorProps {
   onChange: (join: Join | undefined) => void;
   allFrames: DataFrame[];
   primaryFieldOptions: Array<ComboboxOption<string>>;
+  hiddenKeyFields?: string[];
 }
 
 export const KnownIdsJoinEditor: React.FC<KnownIdsJoinEditorProps> = ({
@@ -204,6 +218,7 @@ export const KnownIdsJoinEditor: React.FC<KnownIdsJoinEditorProps> = ({
   onChange,
   allFrames,
   primaryFieldOptions,
+  hiddenKeyFields,
 }) => {
   const defaultValue = useMemo<Join>(
     () => ({ id: crypto.randomUUID(), foreignFrame: '', foreignField: '', keys: [] }),
@@ -222,6 +237,7 @@ export const KnownIdsJoinEditor: React.FC<KnownIdsJoinEditorProps> = ({
       }}
       allFrames={allFrames}
       primaryFieldOptions={primaryFieldOptions}
+      hiddenKeyFields={hiddenKeyFields}
     />
   );
 };
@@ -242,12 +258,22 @@ export const KnownIdsJoinEditorWrapper = ({
     [primaryFrame]
   );
 
+  const hiddenKeyFields = useMemo(() => {
+    const activeGroupKeys = new Set(
+      (context.options?.groups ?? [])
+        .filter((g) => !g.disabled && g.groupKey)
+        .map((g) => g.groupKey)
+    );
+    return primaryFieldOptions.filter((o) => !activeGroupKeys.has(o.value)).map((o) => o.value);
+  }, [primaryFieldOptions, context.options?.groups]);
+
   return (
     <KnownIdsJoinEditor
       value={value}
       onChange={onChange}
       allFrames={allFrames}
       primaryFieldOptions={primaryFieldOptions}
+      hiddenKeyFields={hiddenKeyFields}
     />
   );
 };

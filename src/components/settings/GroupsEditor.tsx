@@ -88,10 +88,11 @@ export const GroupsEditor = ({
                       <GroupEditor
                         value={group}
                         fieldOptions={fieldOptions}
-                        hiddenFields={[
-                          ...nonGroupableFields,
-                          ...value.slice(0, i).map((g) => g.groupKey),
-                        ]}
+                        nonGroupableFields={nonGroupableFields}
+                        parentGroupKeys={value
+                          .slice(0, i)
+                          .map((g) => g.groupKey)
+                          .filter((k) => k)}
                         allFrames={context.data ?? []}
                         onChange={(updatedGroup) =>
                           onChange(value.map((group, j) => (i === j ? updatedGroup : group)))
@@ -144,7 +145,8 @@ export const GroupsEditor = ({
 
 export const GroupEditor = ({
   value,
-  hiddenFields,
+  nonGroupableFields,
+  parentGroupKeys,
   fieldOptions,
   allFrames,
   onChange,
@@ -152,7 +154,8 @@ export const GroupEditor = ({
   dragHandleProps,
 }: {
   value: Group;
-  hiddenFields: string[];
+  nonGroupableFields: string[];
+  parentGroupKeys: string[];
   fieldOptions: Array<ComboboxOption<string>>;
   allFrames: DataFrame[];
   onChange: (group: Group) => void;
@@ -161,6 +164,11 @@ export const GroupEditor = ({
 }) => {
   const styles = useStyles2(getStyles);
   const [lostFocusOnce, setLostFocusOnce] = useState(false);
+
+  const hiddenGroupKeyFields = useMemo(
+    () => [...nonGroupableFields, ...parentGroupKeys],
+    [nonGroupableFields, parentGroupKeys]
+  );
 
   // This is a state of the button, so don't use `isGroupDisabled` here.
   const disabled = value.disabled;
@@ -180,7 +188,7 @@ export const GroupEditor = ({
       >
         <FieldCombobox
           options={fieldOptions}
-          hiddenValues={hiddenFields}
+          hiddenValues={hiddenGroupKeyFields}
           value={value.groupKey}
           onChange={(key) => onChange({ ...value, groupKey: key.trim() })}
           autoFocus={true}
@@ -201,7 +209,8 @@ export const GroupEditor = ({
           content={
             <GroupSettings
               value={value}
-              hiddenFields={hiddenFields}
+              nonGroupableFields={nonGroupableFields}
+              parentGroupKeys={parentGroupKeys}
               fieldOptions={fieldOptions}
               allFrames={allFrames}
               onChange={onChange}

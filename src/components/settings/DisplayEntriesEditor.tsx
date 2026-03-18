@@ -56,6 +56,7 @@ interface DisplayEntriesEditorProps {
   onChange: (entries: DisplayEntry[]) => void;
   allFrames: DataFrame[];
   primaryFieldOptions: Array<ComboboxOption<string>>;
+  hiddenKeyFields?: string[];
 }
 
 export const DisplayEntriesEditor: React.FC<DisplayEntriesEditorProps> = ({
@@ -63,6 +64,7 @@ export const DisplayEntriesEditor: React.FC<DisplayEntriesEditorProps> = ({
   onChange,
   allFrames,
   primaryFieldOptions,
+  hiddenKeyFields,
 }) => {
   const fieldComboboxOptions = useMemo((): Array<ComboboxOption<string>> => {
     return [
@@ -111,6 +113,7 @@ export const DisplayEntriesEditor: React.FC<DisplayEntriesEditorProps> = ({
                         primaryFieldOptions={primaryFieldOptions}
                         fieldComboboxOptions={fieldComboboxOptions}
                         hiddenValues={hiddenValues}
+                        hiddenKeyFields={hiddenKeyFields}
                         onChange={(updated) =>
                           onChange(value.map((e, k) => (k === i ? updated : e)))
                         }
@@ -159,6 +162,7 @@ interface EntryEditorRowProps {
   primaryFieldOptions: Array<ComboboxOption<string>>;
   fieldComboboxOptions: Array<ComboboxOption<string>>;
   hiddenValues: string[];
+  hiddenKeyFields?: string[];
   onChange: (entry: DisplayEntry) => void;
   onDelete: () => void;
   dragHandleProps?: React.HTMLAttributes<HTMLElement> | null;
@@ -170,6 +174,7 @@ const EntryEditorRow: React.FC<EntryEditorRowProps> = ({
   primaryFieldOptions,
   fieldComboboxOptions,
   hiddenValues,
+  hiddenKeyFields,
   onChange,
   onDelete,
   dragHandleProps,
@@ -269,6 +274,7 @@ const EntryEditorRow: React.FC<EntryEditorRowProps> = ({
               onChange={onChange}
               allFrames={allFrames}
               primaryFieldOptions={primaryFieldOptions}
+              hiddenKeyFields={hiddenKeyFields}
             >
               <Field
                 label="Overrides border color"

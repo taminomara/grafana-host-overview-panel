@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { css } from '@emotion/css';
 import { DataFrame, GrafanaTheme2 } from '@grafana/data';
 import { ComboboxOption, Field, Input, Switch, useStyles2 } from '@grafana/ui';
@@ -13,7 +13,8 @@ import { TemplatePatternInput } from './TemplatePatternEditor';
 
 interface GroupSettingsProps {
   value: Group;
-  hiddenFields: string[];
+  nonGroupableFields: string[];
+  parentGroupKeys: string[];
   fieldOptions: Array<ComboboxOption<string>>;
   allFrames: DataFrame[];
   onChange: (group: Group) => void;
@@ -41,12 +42,26 @@ const getStyles = (theme: GrafanaTheme2) => ({
 
 export const GroupSettings: React.FC<GroupSettingsProps> = ({
   value,
-  hiddenFields,
+  nonGroupableFields,
+  parentGroupKeys,
   fieldOptions,
   allFrames,
   onChange,
 }) => {
   const styles = useStyles2(getStyles);
+
+  const hiddenGroupKeyFields = useMemo(
+    () => [...nonGroupableFields, ...parentGroupKeys],
+    [nonGroupableFields, parentGroupKeys]
+  );
+
+  const hiddenKeyFields = useMemo(() => {
+    const parentSet = new Set(parentGroupKeys);
+    if (value.groupKey) {
+      parentSet.add(value.groupKey);
+    }
+    return fieldOptions.filter((o) => !parentSet.has(o.value)).map((o) => o.value);
+  }, [fieldOptions, parentGroupKeys, value.groupKey]);
 
   return (
     <div className={styles.popup}>
@@ -54,7 +69,7 @@ export const GroupSettings: React.FC<GroupSettingsProps> = ({
       <Field label="Group Key">
         <FieldCombobox
           options={fieldOptions}
-          hiddenValues={hiddenFields}
+          hiddenValues={hiddenGroupKeyFields}
           value={value.groupKey}
           onChange={(key) => onChange({ ...value, groupKey: key.trim() })}
         />
@@ -183,6 +198,7 @@ export const GroupSettings: React.FC<GroupSettingsProps> = ({
         onChange={(knownIdsJoin) => onChange({ ...value, knownIdsJoin })}
         allFrames={allFrames}
         primaryFieldOptions={fieldOptions}
+        hiddenKeyFields={hiddenKeyFields}
       />
       <Field label="Fields and joins" description="Additional data to display for this group">
         <DisplayEntriesEditor
@@ -190,6 +206,7 @@ export const GroupSettings: React.FC<GroupSettingsProps> = ({
           onChange={(entries) => onChange({ ...value, entries })}
           allFrames={allFrames}
           primaryFieldOptions={fieldOptions}
+          hiddenKeyFields={hiddenKeyFields}
         />
       </Field>
       <div className={styles.hint}>
