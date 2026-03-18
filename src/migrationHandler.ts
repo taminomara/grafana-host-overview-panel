@@ -1,5 +1,5 @@
 import { PanelModel } from '@grafana/data';
-import { DisplayEntry, HeadingDisplayEntry, HostViewerOptions } from './types';
+import { DisplayEntry, Group, HeadingDisplayEntry, HostViewerOptions } from './types';
 
 function renameJoinFields(obj: Record<string, unknown>) {
   if ('sourceFrame' in obj && !('foreignFrame' in obj)) {
@@ -9,6 +9,17 @@ function renameJoinFields(obj: Record<string, unknown>) {
   if ('sourceField' in obj && !('foreignField' in obj)) {
     obj.foreignField = obj.sourceField;
     delete obj.sourceField;
+  }
+}
+
+function addKnownIdsJoin(group: Group) {
+  if (!('knownIdsJoin' in group)) {
+    (group as Group).knownIdsJoin = {
+      id: crypto.randomUUID(),
+      foreignFrame: '',
+      foreignField: '',
+      keys: [],
+    }
   }
 }
 
@@ -50,6 +61,7 @@ export function migrationHandler(panel: PanelModel<Partial<HostViewerOptions>>) 
   }
 
   for (const group of options.groups ?? []) {
+    addKnownIdsJoin(group);
     for (const entry of group.entries ?? []) {
       if (entry.type === 'join') {
         renameJoinFields(entry as unknown as Record<string, unknown>);

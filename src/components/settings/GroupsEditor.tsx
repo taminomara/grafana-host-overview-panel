@@ -130,6 +130,12 @@ export const GroupsEditor = ({
                   transparentBackground: false,
                   gridColumns: 5,
                   knownIds: '',
+                  knownIdsJoin: {
+                    id: crypto.randomUUID(),
+                    foreignFrame: '',
+                    foreignField: '',
+                    keys: [],
+                  },
                   entries: [],
                 },
               ])

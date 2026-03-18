@@ -206,8 +206,8 @@ export const JoinKeyPairRow: React.FC<JoinKeyPairRowProps> = ({
 };
 
 interface KnownIdsJoinEditorProps {
-  value: Join | undefined;
-  onChange: (join: Join | undefined) => void;
+  value: Join;
+  onChange: (join: Join) => void;
   allFrames: DataFrame[];
   primaryFieldOptions: Array<ComboboxOption<string>>;
   hiddenKeyFields?: string[];
@@ -220,21 +220,10 @@ export const KnownIdsJoinEditor: React.FC<KnownIdsJoinEditorProps> = ({
   primaryFieldOptions,
   hiddenKeyFields,
 }) => {
-  const defaultValue = useMemo<Join>(
-    () => ({ id: crypto.randomUUID(), foreignFrame: '', foreignField: '', keys: [] }),
-    []
-  );
-
   return (
     <JoinEditor
-      value={value ?? defaultValue}
-      onChange={(updated) => {
-        if (!updated.foreignFrame) {
-          onChange(undefined);
-        } else {
-          onChange(updated);
-        }
-      }}
+      value={value}
+      onChange={onChange}
       allFrames={allFrames}
       primaryFieldOptions={primaryFieldOptions}
       hiddenKeyFields={hiddenKeyFields}
@@ -246,7 +235,7 @@ export const KnownIdsJoinEditorWrapper = ({
   value,
   onChange,
   context,
-}: StandardEditorProps<Join | undefined, unknown, HostViewerOptions>) => {
+}: StandardEditorProps<Join, unknown, HostViewerOptions>) => {
   const allFrames = context.data ?? [];
   const primaryFrame = findFrame(allFrames, context.options?.dataFrame);
 

@@ -17,6 +17,7 @@ import {
   HostViewerFieldConfig,
   HostViewerOptions,
   SortMode,
+  Join,
 } from './types';
 
 export const plugin = new PanelPlugin<HostViewerOptions, HostViewerFieldConfig>(HostViewerPanel)
@@ -170,7 +171,12 @@ export const plugin = new PanelPlugin<HostViewerOptions, HostViewerFieldConfig>(
         name: 'Known IDs from join',
         description: 'Read known IDs from a field in another data frame',
         editor: KnownIdsJoinEditorWrapper,
-        defaultValue: undefined,
+        defaultValue: {
+          id: "__known_ids_join__",
+          foreignFrame: "",
+          foreignField: "",
+          keys: [],
+        } satisfies Join,
         category: ['Resource'],
         showIf: (options) => options.idField !== '',
       })

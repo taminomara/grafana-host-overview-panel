@@ -48,7 +48,7 @@ export interface HostViewerOptions {
   idSortMode: SortMode;
   idSortPattern: string;
   knownIds: string;
-  knownIdsJoin?: Join;
+  knownIdsJoin: Join;
   resourceDisplayMode: ResourceDisplayMode;
   cellTextField: string;
   cellTextPattern: string;
@@ -72,7 +72,7 @@ export interface Group {
   gridColumns: number;
   drawBorder: boolean;
   knownIds: string;
-  knownIdsJoin?: Join;
+  knownIdsJoin: Join;
   transparentBackground: boolean;
   borderColor?: string;
   entries: DisplayEntry[];

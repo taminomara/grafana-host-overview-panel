@@ -27,6 +27,12 @@ export function makeGroup(overrides: Partial<Group> & { groupKey: string }): Gro
     drawBorder: false,
     transparentBackground: true,
     knownIds: '',
+    knownIdsJoin: {
+      id: `group-${nextId}-known-ids`,
+      foreignFrame: '',
+      foreignField: '',
+      keys: [],
+    },
     entries: [],
     ...overrides,
   };
@@ -44,6 +50,12 @@ export function makeOptions(overrides?: Partial<HostViewerOptions>): HostViewerO
     gridType: GridType.Flow,
     gridColumns: 4,
     knownIds: '',
+    knownIdsJoin: {
+      id: `known-ids`,
+      foreignFrame: '',
+      foreignField: '',
+      keys: [],
+    },
     idField: '',
     idSortMode: SortMode.Default,
     idSortPattern: '',
