@@ -17,12 +17,15 @@ export interface FieldDisplayEntry {
   severityOverrides?: SeverityOverride[];
 }
 
-export interface JoinDisplayEntry {
+export interface Join {
   id: string;
-  type: 'join';
   sourceFrame: string;
   sourceField: string;
   keys: JoinKeyPair[];
+}
+
+export interface JoinDisplayEntry extends Join {
+  type: 'join';
   overridesBorderColor: boolean;
   severityOverrides?: SeverityOverride[];
 }
@@ -45,6 +48,7 @@ export interface HostViewerOptions {
   idSortMode: SortMode;
   idSortPattern: string;
   knownIds: string;
+  knownIdsJoin?: Join;
   resourceDisplayMode: ResourceDisplayMode;
   cellTextField: string;
   cellTextPattern: string;
@@ -68,6 +72,7 @@ export interface Group {
   gridColumns: number;
   drawBorder: boolean;
   knownIds: string;
+  knownIdsJoin?: Join;
   transparentBackground: boolean;
   borderColor?: string;
   entries: DisplayEntry[];

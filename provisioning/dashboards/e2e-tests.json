@@ -18,7 +18,7 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 1,
+  "id": 3,
   "links": [],
   "panels": [
     {
@@ -53,7 +53,7 @@
         "h": 8,
         "w": 24,
         "x": 0,
-        "y": 8
+        "y": 0
       },
       "id": 11,
       "options": {
@@ -61,6 +61,7 @@
         "cellTextField": "",
         "cellTextPattern": "",
         "dataFrame": "",
+        "displayEntries": [],
         "gridColumns": 5,
         "gridType": "flow",
         "groups": [],
@@ -69,13 +70,11 @@
         "idSortPattern": "",
         "knownIds": "",
         "resourceDisplayMode": "cell",
-        "richEntries": [],
         "statusField": "status",
-        "tooltipEntries": [],
         "tooltipTitleField": "",
         "tooltipTitlePattern": ""
       },
-      "pluginVersion": "1.0.0",
+      "pluginVersion": "1.1.0",
       "targets": [
         {
           "csvContent": "name,status\r\n",
@@ -122,7 +121,7 @@
         "h": 8,
         "w": 24,
         "x": 0,
-        "y": 16
+        "y": 8
       },
       "id": 12,
       "options": {
@@ -130,6 +129,7 @@
         "cellTextField": "",
         "cellTextPattern": "",
         "dataFrame": "",
+        "displayEntries": [],
         "gridColumns": 5,
         "gridType": "flow",
         "groups": [],
@@ -138,13 +138,11 @@
         "idSortPattern": "",
         "knownIds": "",
         "resourceDisplayMode": "cell",
-        "richEntries": [],
         "statusField": "status",
-        "tooltipEntries": [],
         "tooltipTitleField": "",
         "tooltipTitlePattern": ""
       },
-      "pluginVersion": "1.0.0",
+      "pluginVersion": "1.1.0",
       "targets": [
         {
           "datasource": {
@@ -195,7 +193,7 @@
         "h": 8,
         "w": 24,
         "x": 0,
-        "y": 24
+        "y": 16
       },
       "id": 13,
       "options": {
@@ -203,6 +201,7 @@
         "cellTextField": "name",
         "cellTextPattern": "",
         "dataFrame": "",
+        "displayEntries": [],
         "gridColumns": 5,
         "gridType": "flow",
         "groups": [],
@@ -211,13 +210,11 @@
         "idSortPattern": "",
         "knownIds": "",
         "resourceDisplayMode": "cell-with-text",
-        "richEntries": [],
         "statusField": "nonexistent",
-        "tooltipEntries": [],
         "tooltipTitleField": "",
         "tooltipTitlePattern": ""
       },
-      "pluginVersion": "1.0.0",
+      "pluginVersion": "1.1.0",
       "targets": [
         {
           "csvContent": "name,status,role,cpu\r\nnode-a,1,web,45\r\nnode-b,0,web,82\r\nnode-c,1,db,23\r\nnode-d,1,db,67\r\nnode-e,0,api,91",
@@ -268,7 +265,7 @@
         "h": 8,
         "w": 24,
         "x": 0,
-        "y": 32
+        "y": 24
       },
       "id": 14,
       "options": {
@@ -276,6 +273,7 @@
         "cellTextField": "name",
         "cellTextPattern": "",
         "dataFrame": "",
+        "displayEntries": [],
         "gridColumns": 5,
         "gridType": "flow",
         "groups": [
@@ -299,13 +297,11 @@
         "idSortPattern": "",
         "knownIds": "",
         "resourceDisplayMode": "cell-with-text",
-        "richEntries": [],
         "statusField": "status",
-        "tooltipEntries": [],
         "tooltipTitleField": "",
         "tooltipTitlePattern": ""
       },
-      "pluginVersion": "1.0.0",
+      "pluginVersion": "1.1.0",
       "targets": [
         {
           "csvContent": "name,status,role,cpu\r\nnode-a,1,web,45\r\nnode-b,0,web,82\r\nnode-c,1,db,23\r\nnode-d,1,db,67\r\nnode-e,0,api,91",
@@ -336,15 +332,15 @@
           "fieldMinMax": true,
           "mappings": [
             {
-              "type": "special",
               "options": {
                 "match": "null+nan",
                 "result": {
-                  "text": "Unknown",
                   "color": "#888888",
-                  "index": 0
+                  "index": 0,
+                  "text": "Unknown"
                 }
-              }
+              },
+              "type": "special"
             }
           ],
           "noValue": "N/A",
@@ -368,7 +364,7 @@
         "h": 8,
         "w": 24,
         "x": 0,
-        "y": 40
+        "y": 32
       },
       "id": 15,
       "options": {
@@ -376,6 +372,14 @@
         "cellTextField": "name",
         "cellTextPattern": "",
         "dataFrame": "",
+        "displayEntries": [
+          {
+            "field": "cpu",
+            "id": "e2e-15-f-0",
+            "overridesBorderColor": false,
+            "type": "field"
+          }
+        ],
         "gridColumns": 5,
         "gridType": "flow",
         "groups": [],
@@ -384,20 +388,11 @@
         "idSortPattern": "",
         "knownIds": "",
         "resourceDisplayMode": "cell-with-text",
-        "richEntries": [],
         "statusField": "status",
-        "tooltipEntries": [
-          {
-            "field": "cpu",
-            "id": "e2e-15-f-0",
-            "overridesBorderColor": false,
-            "type": "field"
-          }
-        ],
         "tooltipTitleField": "",
         "tooltipTitlePattern": ""
       },
-      "pluginVersion": "1.0.0",
+      "pluginVersion": "1.1.0",
       "targets": [
         {
           "csvContent": "name,status,role,cpu\r\nnode-a,1,web,45\r\nnode-b,,web,\r\nnode-c,1,,23\r\nnode-d,1,db,67\r\nnode-e,0,api,",
@@ -448,7 +443,7 @@
         "h": 8,
         "w": 24,
         "x": 0,
-        "y": 48
+        "y": 40
       },
       "id": 16,
       "options": {
@@ -456,6 +451,7 @@
         "cellTextField": "name",
         "cellTextPattern": "",
         "dataFrame": "",
+        "displayEntries": [],
         "gridColumns": 5,
         "gridType": "flow",
         "groups": [],
@@ -464,13 +460,11 @@
         "idSortPattern": "",
         "knownIds": "",
         "resourceDisplayMode": "cell-with-text",
-        "richEntries": [],
         "statusField": "status",
-        "tooltipEntries": [],
         "tooltipTitleField": "",
         "tooltipTitlePattern": ""
       },
-      "pluginVersion": "1.0.0",
+      "pluginVersion": "1.1.0",
       "targets": [
         {
           "csvContent": "name,status,role,cpu\r\nnode-a,1,web,45",
@@ -521,7 +515,7 @@
         "h": 8,
         "w": 24,
         "x": 0,
-        "y": 56
+        "y": 48
       },
       "id": 17,
       "options": {
@@ -529,6 +523,7 @@
         "cellTextField": "",
         "cellTextPattern": "",
         "dataFrame": "NonexistentFrame",
+        "displayEntries": [],
         "gridColumns": 5,
         "gridType": "flow",
         "groups": [],
@@ -537,13 +532,11 @@
         "idSortPattern": "",
         "knownIds": "",
         "resourceDisplayMode": "cell",
-        "richEntries": [],
         "statusField": "status",
-        "tooltipEntries": [],
         "tooltipTitleField": "",
         "tooltipTitlePattern": ""
       },
-      "pluginVersion": "1.0.0",
+      "pluginVersion": "1.1.0",
       "targets": [
         {
           "csvContent": "name,status,role,cpu\r\nnode-a,1,web,45\r\nnode-b,0,web,82\r\nnode-c,1,db,23\r\nnode-d,1,db,67\r\nnode-e,0,api,91",
@@ -594,7 +587,7 @@
         "h": 8,
         "w": 24,
         "x": 0,
-        "y": 64
+        "y": 56
       },
       "id": 20,
       "options": {
@@ -602,6 +595,7 @@
         "cellTextField": "",
         "cellTextPattern": "",
         "dataFrame": "",
+        "displayEntries": [],
         "gridColumns": 5,
         "gridType": "flow",
         "groups": [],
@@ -610,13 +604,11 @@
         "idSortPattern": "",
         "knownIds": "",
         "resourceDisplayMode": "cell",
-        "richEntries": [],
         "statusField": "status",
-        "tooltipEntries": [],
         "tooltipTitleField": "",
         "tooltipTitlePattern": ""
       },
-      "pluginVersion": "1.0.0",
+      "pluginVersion": "1.1.0",
       "targets": [
         {
           "csvContent": "name,status,role,cpu\r\nnode-a,1,web,45\r\nnode-b,0,web,82\r\nnode-c,1,db,23\r\nnode-d,1,db,67\r\nnode-e,0,api,91",
@@ -667,7 +659,7 @@
         "h": 8,
         "w": 24,
         "x": 0,
-        "y": 72
+        "y": 64
       },
       "id": 21,
       "options": {
@@ -675,6 +667,7 @@
         "cellTextField": "name",
         "cellTextPattern": "",
         "dataFrame": "",
+        "displayEntries": [],
         "gridColumns": 5,
         "gridType": "flow",
         "groups": [],
@@ -683,13 +676,11 @@
         "idSortPattern": "",
         "knownIds": "",
         "resourceDisplayMode": "cell-with-text",
-        "richEntries": [],
         "statusField": "status",
-        "tooltipEntries": [],
         "tooltipTitleField": "",
         "tooltipTitlePattern": ""
       },
-      "pluginVersion": "1.0.0",
+      "pluginVersion": "1.1.0",
       "targets": [
         {
           "csvContent": "name,status,role,cpu\r\nnode-a,1,web,45\r\nnode-b,0,web,82\r\nnode-c,1,db,23\r\nnode-d,1,db,67\r\nnode-e,0,api,91",
@@ -769,7 +760,7 @@
         "h": 8,
         "w": 24,
         "x": 0,
-        "y": 80
+        "y": 72
       },
       "id": 22,
       "options": {
@@ -777,15 +768,7 @@
         "cellTextField": "",
         "cellTextPattern": "",
         "dataFrame": "",
-        "gridColumns": 5,
-        "gridType": "flow",
-        "groups": [],
-        "idField": "name",
-        "idSortMode": "disabled",
-        "idSortPattern": "",
-        "knownIds": "",
-        "resourceDisplayMode": "rich",
-        "richEntries": [
+        "displayEntries": [
           {
             "field": "role",
             "id": "e2e-22-f-0",
@@ -799,12 +782,19 @@
             "type": "field"
           }
         ],
+        "gridColumns": 5,
+        "gridType": "flow",
+        "groups": [],
+        "idField": "name",
+        "idSortMode": "disabled",
+        "idSortPattern": "",
+        "knownIds": "",
+        "resourceDisplayMode": "rich",
         "statusField": "status",
-        "tooltipEntries": [],
         "tooltipTitleField": "",
         "tooltipTitlePattern": ""
       },
-      "pluginVersion": "1.0.0",
+      "pluginVersion": "1.1.0",
       "targets": [
         {
           "csvContent": "name,status,role,cpu\r\nnode-a,1,web,45\r\nnode-b,0,web,82\r\nnode-c,1,db,23\r\nnode-d,1,db,67\r\nnode-e,0,api,91",
@@ -884,7 +874,7 @@
         "h": 8,
         "w": 24,
         "x": 0,
-        "y": 88
+        "y": 80
       },
       "id": 23,
       "options": {
@@ -892,6 +882,25 @@
         "cellTextField": "",
         "cellTextPattern": "",
         "dataFrame": "",
+        "displayEntries": [
+          {
+            "field": "role",
+            "id": "e2e-23-f-0",
+            "overridesBorderColor": false,
+            "type": "field"
+          },
+          {
+            "id": "03a63342-b667-4236-bbbb-27ec7f4b98bd",
+            "title": "",
+            "type": "heading"
+          },
+          {
+            "field": "cpu",
+            "id": "e2e-23-f-1",
+            "overridesBorderColor": false,
+            "type": "field"
+          }
+        ],
         "gridColumns": 5,
         "gridType": "flow",
         "groups": [],
@@ -900,27 +909,11 @@
         "idSortPattern": "",
         "knownIds": "",
         "resourceDisplayMode": "rich",
-        "richEntries": [
-          {
-            "field": "role",
-            "id": "e2e-23-f-0",
-            "overridesBorderColor": false,
-            "type": "field"
-          }
-        ],
         "statusField": "status",
-        "tooltipEntries": [
-          {
-            "field": "cpu",
-            "id": "e2e-23-f-1",
-            "overridesBorderColor": false,
-            "type": "field"
-          }
-        ],
         "tooltipTitleField": "",
         "tooltipTitlePattern": ""
       },
-      "pluginVersion": "1.0.0",
+      "pluginVersion": "1.1.0",
       "targets": [
         {
           "csvContent": "name,status,role,cpu\r\nnode-a,1,web,45\r\nnode-b,0,web,82\r\nnode-c,1,db,23\r\nnode-d,1,db,67\r\nnode-e,0,api,91",
@@ -971,7 +964,7 @@
         "h": 8,
         "w": 24,
         "x": 0,
-        "y": 96
+        "y": 88
       },
       "id": 30,
       "options": {
@@ -979,6 +972,7 @@
         "cellTextField": "name",
         "cellTextPattern": "",
         "dataFrame": "",
+        "displayEntries": [],
         "gridColumns": 5,
         "gridType": "flow",
         "groups": [],
@@ -987,13 +981,11 @@
         "idSortPattern": "",
         "knownIds": "",
         "resourceDisplayMode": "cell-with-text",
-        "richEntries": [],
         "statusField": "status",
-        "tooltipEntries": [],
         "tooltipTitleField": "",
         "tooltipTitlePattern": ""
       },
-      "pluginVersion": "1.0.0",
+      "pluginVersion": "1.1.0",
       "targets": [
         {
           "csvContent": "name,region,role,status\r\nsrv-1,us-east,web,1\r\nsrv-2,us-east,db,0\r\nsrv-3,eu-west,web,1\r\nsrv-4,eu-west,db,1\r\nsrv-5,us-east,api,1\r\nsrv-6,eu-west,api,0",
@@ -1044,7 +1036,7 @@
         "h": 8,
         "w": 24,
         "x": 0,
-        "y": 104
+        "y": 96
       },
       "id": 31,
       "options": {
@@ -1052,6 +1044,7 @@
         "cellTextField": "name",
         "cellTextPattern": "",
         "dataFrame": "",
+        "displayEntries": [],
         "gridColumns": 5,
         "gridType": "flow",
         "groups": [
@@ -1075,13 +1068,11 @@
         "idSortPattern": "",
         "knownIds": "",
         "resourceDisplayMode": "cell-with-text",
-        "richEntries": [],
         "statusField": "status",
-        "tooltipEntries": [],
         "tooltipTitleField": "",
         "tooltipTitlePattern": ""
       },
-      "pluginVersion": "1.0.0",
+      "pluginVersion": "1.1.0",
       "targets": [
         {
           "csvContent": "name,region,role,status\r\nsrv-1,us-east,web,1\r\nsrv-2,us-east,db,0\r\nsrv-3,eu-west,web,1\r\nsrv-4,eu-west,db,1\r\nsrv-5,us-east,api,1\r\nsrv-6,eu-west,api,0",
@@ -1132,7 +1123,7 @@
         "h": 8,
         "w": 24,
         "x": 0,
-        "y": 112
+        "y": 104
       },
       "id": 32,
       "options": {
@@ -1140,6 +1131,7 @@
         "cellTextField": "name",
         "cellTextPattern": "",
         "dataFrame": "",
+        "displayEntries": [],
         "gridColumns": 5,
         "gridType": "flow",
         "groups": [
@@ -1177,13 +1169,11 @@
         "idSortPattern": "",
         "knownIds": "",
         "resourceDisplayMode": "cell-with-text",
-        "richEntries": [],
         "statusField": "status",
-        "tooltipEntries": [],
         "tooltipTitleField": "",
         "tooltipTitlePattern": ""
       },
-      "pluginVersion": "1.0.0",
+      "pluginVersion": "1.1.0",
       "targets": [
         {
           "csvContent": "name,region,role,status\r\nsrv-1,us-east,web,1\r\nsrv-2,us-east,db,0\r\nsrv-3,eu-west,web,1\r\nsrv-4,eu-west,db,1\r\nsrv-5,us-east,api,1\r\nsrv-6,eu-west,api,0",
@@ -1234,7 +1224,7 @@
         "h": 8,
         "w": 24,
         "x": 0,
-        "y": 120
+        "y": 112
       },
       "id": 33,
       "options": {
@@ -1242,6 +1232,7 @@
         "cellTextField": "name",
         "cellTextPattern": "",
         "dataFrame": "",
+        "displayEntries": [],
         "gridColumns": 5,
         "gridType": "flow",
         "groups": [
@@ -1279,13 +1270,11 @@
         "idSortPattern": "",
         "knownIds": "",
         "resourceDisplayMode": "cell-with-text",
-        "richEntries": [],
         "statusField": "status",
-        "tooltipEntries": [],
         "tooltipTitleField": "",
         "tooltipTitlePattern": ""
       },
-      "pluginVersion": "1.0.0",
+      "pluginVersion": "1.1.0",
       "targets": [
         {
           "csvContent": "name,region,role,status\r\nsrv-1,us-east,web,1\r\nsrv-2,us-east,db,0\r\nsrv-3,eu-west,web,1\r\nsrv-4,eu-west,db,1\r\nsrv-5,us-east,api,1\r\nsrv-6,eu-west,api,0",
@@ -1336,7 +1325,7 @@
         "h": 8,
         "w": 24,
         "x": 0,
-        "y": 128
+        "y": 120
       },
       "id": 34,
       "options": {
@@ -1344,6 +1333,7 @@
         "cellTextField": "name",
         "cellTextPattern": "",
         "dataFrame": "",
+        "displayEntries": [],
         "gridColumns": 5,
         "gridType": "flow",
         "groups": [
@@ -1367,13 +1357,11 @@
         "idSortPattern": "",
         "knownIds": "",
         "resourceDisplayMode": "cell-with-text",
-        "richEntries": [],
         "statusField": "status",
-        "tooltipEntries": [],
         "tooltipTitleField": "",
         "tooltipTitlePattern": ""
       },
-      "pluginVersion": "1.0.0",
+      "pluginVersion": "1.1.0",
       "targets": [
         {
           "csvContent": "name,region,role,status\r\nsrv-1,us-east,web,1\r\nsrv-2,us-east,db,0\r\nsrv-3,eu-west,web,1\r\nsrv-4,eu-west,db,1\r\nsrv-5,us-east,api,1\r\nsrv-6,eu-west,api,0",
@@ -1420,7 +1408,7 @@
         "h": 8,
         "w": 24,
         "x": 0,
-        "y": 136
+        "y": 128
       },
       "id": 40,
       "options": {
@@ -1428,6 +1416,7 @@
         "cellTextField": "name",
         "cellTextPattern": "",
         "dataFrame": "",
+        "displayEntries": [],
         "gridColumns": 5,
         "gridType": "flow",
         "groups": [],
@@ -1436,13 +1425,11 @@
         "idSortPattern": "",
         "knownIds": "",
         "resourceDisplayMode": "cell-with-text",
-        "richEntries": [],
         "statusField": "",
-        "tooltipEntries": [],
         "tooltipTitleField": "",
         "tooltipTitlePattern": ""
       },
-      "pluginVersion": "1.0.0",
+      "pluginVersion": "1.1.0",
       "targets": [
         {
           "csvContent": "name,value\r\nnode-1,10\r\nnode-10,100\r\nnode-2,20\r\nnode-3,30",
@@ -1489,7 +1476,7 @@
         "h": 8,
         "w": 24,
         "x": 0,
-        "y": 144
+        "y": 136
       },
       "id": 41,
       "options": {
@@ -1497,6 +1484,7 @@
         "cellTextField": "name",
         "cellTextPattern": "",
         "dataFrame": "",
+        "displayEntries": [],
         "gridColumns": 5,
         "gridType": "flow",
         "groups": [],
@@ -1505,13 +1493,11 @@
         "idSortPattern": "",
         "knownIds": "",
         "resourceDisplayMode": "cell-with-text",
-        "richEntries": [],
         "statusField": "",
-        "tooltipEntries": [],
         "tooltipTitleField": "",
         "tooltipTitlePattern": ""
       },
-      "pluginVersion": "1.0.0",
+      "pluginVersion": "1.1.0",
       "targets": [
         {
           "csvContent": "name,value\r\nnode-1,10\r\nnode-10,100\r\nnode-2,20\r\nnode-3,30",
@@ -1558,7 +1544,7 @@
         "h": 8,
         "w": 24,
         "x": 0,
-        "y": 152
+        "y": 144
       },
       "id": 42,
       "options": {
@@ -1566,6 +1552,7 @@
         "cellTextField": "name",
         "cellTextPattern": "",
         "dataFrame": "",
+        "displayEntries": [],
         "gridColumns": 5,
         "gridType": "flow",
         "groups": [],
@@ -1574,13 +1561,11 @@
         "idSortPattern": "",
         "knownIds": "",
         "resourceDisplayMode": "cell-with-text",
-        "richEntries": [],
         "statusField": "",
-        "tooltipEntries": [],
         "tooltipTitleField": "",
         "tooltipTitlePattern": ""
       },
-      "pluginVersion": "1.0.0",
+      "pluginVersion": "1.1.0",
       "targets": [
         {
           "csvContent": "name,status\r\n3,1\r\n1,1\r\n10,0\r\n2,1",
@@ -1627,7 +1612,7 @@
         "h": 8,
         "w": 24,
         "x": 0,
-        "y": 160
+        "y": 152
       },
       "id": 43,
       "options": {
@@ -1635,6 +1620,7 @@
         "cellTextField": "name",
         "cellTextPattern": "",
         "dataFrame": "",
+        "displayEntries": [],
         "gridColumns": 5,
         "gridType": "flow",
         "groups": [],
@@ -1643,13 +1629,11 @@
         "idSortPattern": "node-(?<na1>\\d+)",
         "knownIds": "",
         "resourceDisplayMode": "cell-with-text",
-        "richEntries": [],
         "statusField": "",
-        "tooltipEntries": [],
         "tooltipTitleField": "",
         "tooltipTitlePattern": ""
       },
-      "pluginVersion": "1.0.0",
+      "pluginVersion": "1.1.0",
       "targets": [
         {
           "csvContent": "name,value\r\nnode-1,10\r\nnode-10,100\r\nnode-2,20\r\nnode-3,30",
@@ -1700,7 +1684,7 @@
         "h": 8,
         "w": 24,
         "x": 0,
-        "y": 168
+        "y": 160
       },
       "id": 44,
       "options": {
@@ -1708,6 +1692,7 @@
         "cellTextField": "name",
         "cellTextPattern": "",
         "dataFrame": "",
+        "displayEntries": [],
         "gridColumns": 5,
         "gridType": "flow",
         "groups": [
@@ -1731,13 +1716,11 @@
         "idSortPattern": "",
         "knownIds": "",
         "resourceDisplayMode": "cell-with-text",
-        "richEntries": [],
         "statusField": "status",
-        "tooltipEntries": [],
         "tooltipTitleField": "",
         "tooltipTitlePattern": ""
       },
-      "pluginVersion": "1.0.0",
+      "pluginVersion": "1.1.0",
       "targets": [
         {
           "csvContent": "name,region,role,status\r\nsrv-1,us-east,web,1\r\nsrv-2,us-east,db,0\r\nsrv-3,eu-west,web,1\r\nsrv-4,eu-west,db,1\r\nsrv-5,us-east,api,1\r\nsrv-6,eu-west,api,0",
@@ -1788,7 +1771,7 @@
         "h": 8,
         "w": 24,
         "x": 0,
-        "y": 176
+        "y": 168
       },
       "id": 45,
       "options": {
@@ -1796,6 +1779,7 @@
         "cellTextField": "name",
         "cellTextPattern": "",
         "dataFrame": "",
+        "displayEntries": [],
         "gridColumns": 5,
         "gridType": "flow",
         "groups": [
@@ -1819,13 +1803,11 @@
         "idSortPattern": "",
         "knownIds": "",
         "resourceDisplayMode": "cell-with-text",
-        "richEntries": [],
         "statusField": "status",
-        "tooltipEntries": [],
         "tooltipTitleField": "",
         "tooltipTitlePattern": ""
       },
-      "pluginVersion": "1.0.0",
+      "pluginVersion": "1.1.0",
       "targets": [
         {
           "csvContent": "name,zone,status\r\na,3,1\r\nb,1,1\r\nc,10,0\r\nd,2,1\r\ne,1,1\r\nf,3,0",
@@ -1884,6 +1866,7 @@
         "cellTextField": "name",
         "cellTextPattern": "",
         "dataFrame": "",
+        "displayEntries": [],
         "gridColumns": 5,
         "gridType": "flow",
         "groups": [],
@@ -1892,13 +1875,11 @@
         "idSortPattern": "",
         "knownIds": "",
         "resourceDisplayMode": "cell-with-text",
-        "richEntries": [],
         "statusField": "status",
-        "tooltipEntries": [],
         "tooltipTitleField": "",
         "tooltipTitlePattern": ""
       },
-      "pluginVersion": "1.0.0",
+      "pluginVersion": "1.1.0",
       "targets": [
         {
           "csvContent": "name,status,role,cpu\r\nnode-a,1,web,45\r\nnode-b,0,web,82\r\nnode-c,1,db,23\r\nnode-d,1,db,67\r\nnode-e,0,api,91",
@@ -1957,6 +1938,7 @@
         "cellTextField": "name",
         "cellTextPattern": "",
         "dataFrame": "",
+        "displayEntries": [],
         "gridColumns": 3,
         "gridType": "grid",
         "groups": [],
@@ -1965,13 +1947,11 @@
         "idSortPattern": "",
         "knownIds": "",
         "resourceDisplayMode": "cell-with-text",
-        "richEntries": [],
         "statusField": "status",
-        "tooltipEntries": [],
         "tooltipTitleField": "",
         "tooltipTitlePattern": ""
       },
-      "pluginVersion": "1.0.0",
+      "pluginVersion": "1.1.0",
       "targets": [
         {
           "csvContent": "name,status,role,cpu\r\nnode-a,1,web,45\r\nnode-b,0,web,82\r\nnode-c,1,db,23\r\nnode-d,1,db,67\r\nnode-e,0,api,91",
@@ -2030,6 +2010,7 @@
         "cellTextField": "name",
         "cellTextPattern": "",
         "dataFrame": "",
+        "displayEntries": [],
         "gridColumns": 5,
         "gridType": "horizontal",
         "groups": [],
@@ -2038,13 +2019,11 @@
         "idSortPattern": "",
         "knownIds": "",
         "resourceDisplayMode": "cell-with-text",
-        "richEntries": [],
         "statusField": "status",
-        "tooltipEntries": [],
         "tooltipTitleField": "",
         "tooltipTitlePattern": ""
       },
-      "pluginVersion": "1.0.0",
+      "pluginVersion": "1.1.0",
       "targets": [
         {
           "csvContent": "name,status,role,cpu\r\nnode-a,1,web,45\r\nnode-b,0,web,82\r\nnode-c,1,db,23\r\nnode-d,1,db,67\r\nnode-e,0,api,91",
@@ -2103,6 +2082,7 @@
         "cellTextField": "name",
         "cellTextPattern": "",
         "dataFrame": "",
+        "displayEntries": [],
         "gridColumns": 5,
         "gridType": "vertical",
         "groups": [],
@@ -2111,13 +2091,11 @@
         "idSortPattern": "",
         "knownIds": "",
         "resourceDisplayMode": "cell-with-text",
-        "richEntries": [],
         "statusField": "status",
-        "tooltipEntries": [],
         "tooltipTitleField": "",
         "tooltipTitlePattern": ""
       },
-      "pluginVersion": "1.0.0",
+      "pluginVersion": "1.1.0",
       "targets": [
         {
           "csvContent": "name,status,role,cpu\r\nnode-a,1,web,45\r\nnode-b,0,web,82\r\nnode-c,1,db,23\r\nnode-d,1,db,67\r\nnode-e,0,api,91",
@@ -2176,6 +2154,7 @@
         "cellTextField": "name",
         "cellTextPattern": "",
         "dataFrame": "",
+        "displayEntries": [],
         "gridColumns": 5,
         "gridType": "flow",
         "groups": [
@@ -2199,13 +2178,11 @@
         "idSortPattern": "",
         "knownIds": "",
         "resourceDisplayMode": "cell-with-text",
-        "richEntries": [],
         "statusField": "status",
-        "tooltipEntries": [],
         "tooltipTitleField": "",
         "tooltipTitlePattern": ""
       },
-      "pluginVersion": "1.0.0",
+      "pluginVersion": "1.1.0",
       "targets": [
         {
           "csvContent": "name,region,role,status\r\nsrv-1,us-east,web,1\r\nsrv-2,us-east,db,0\r\nsrv-3,eu-west,web,1\r\nsrv-4,eu-west,db,1\r\nsrv-5,us-east,api,1\r\nsrv-6,eu-west,api,0",
@@ -2264,6 +2241,7 @@
         "cellTextField": "name",
         "cellTextPattern": "",
         "dataFrame": "",
+        "displayEntries": [],
         "gridColumns": 5,
         "gridType": "flow",
         "groups": [
@@ -2287,13 +2265,11 @@
         "idSortPattern": "",
         "knownIds": "",
         "resourceDisplayMode": "cell-with-text",
-        "richEntries": [],
         "statusField": "status",
-        "tooltipEntries": [],
         "tooltipTitleField": "",
         "tooltipTitlePattern": ""
       },
-      "pluginVersion": "1.0.0",
+      "pluginVersion": "1.1.0",
       "targets": [
         {
           "csvContent": "name,region,role,status\r\nsrv-1,us-east,web,1\r\nsrv-2,us-east,db,0\r\nsrv-3,eu-west,web,1\r\nsrv-4,eu-west,db,1\r\nsrv-5,us-east,api,1\r\nsrv-6,eu-west,api,0",
@@ -2352,6 +2328,7 @@
         "cellTextField": "name",
         "cellTextPattern": "",
         "dataFrame": "",
+        "displayEntries": [],
         "gridColumns": 5,
         "gridType": "flow",
         "groups": [
@@ -2376,13 +2353,11 @@
         "idSortPattern": "",
         "knownIds": "",
         "resourceDisplayMode": "cell-with-text",
-        "richEntries": [],
         "statusField": "status",
-        "tooltipEntries": [],
         "tooltipTitleField": "",
         "tooltipTitlePattern": ""
       },
-      "pluginVersion": "1.0.0",
+      "pluginVersion": "1.1.0",
       "targets": [
         {
           "csvContent": "name,region,role,status\r\nsrv-1,us-east,web,1\r\nsrv-2,us-east,db,0\r\nsrv-3,eu-west,web,1\r\nsrv-4,eu-west,db,1\r\nsrv-5,us-east,api,1\r\nsrv-6,eu-west,api,0",
@@ -2441,6 +2416,7 @@
         "cellTextField": "name",
         "cellTextPattern": "",
         "dataFrame": "",
+        "displayEntries": [],
         "gridColumns": 5,
         "gridType": "flow",
         "groups": [
@@ -2464,13 +2440,11 @@
         "idSortPattern": "",
         "knownIds": "",
         "resourceDisplayMode": "cell-with-text",
-        "richEntries": [],
         "statusField": "status",
-        "tooltipEntries": [],
         "tooltipTitleField": "",
         "tooltipTitlePattern": ""
       },
-      "pluginVersion": "1.0.0",
+      "pluginVersion": "1.1.0",
       "targets": [
         {
           "csvContent": "name,region,role,status\r\nsrv-1,us-east,web,1\r\nsrv-2,us-east,db,0\r\nsrv-3,eu-west,web,1\r\nsrv-4,eu-west,db,1\r\nsrv-5,us-east,api,1\r\nsrv-6,eu-west,api,0",
@@ -2529,6 +2503,7 @@
         "cellTextField": "name",
         "cellTextPattern": "",
         "dataFrame": "",
+        "displayEntries": [],
         "gridColumns": 5,
         "gridType": "flow",
         "groups": [
@@ -2553,13 +2528,11 @@
         "idSortPattern": "",
         "knownIds": "",
         "resourceDisplayMode": "cell-with-text",
-        "richEntries": [],
         "statusField": "status",
-        "tooltipEntries": [],
         "tooltipTitleField": "",
         "tooltipTitlePattern": ""
       },
-      "pluginVersion": "1.0.0",
+      "pluginVersion": "1.1.0",
       "targets": [
         {
           "csvContent": "name,region,role,status\r\nsrv-1,us-east,web,1\r\nsrv-2,us-east,db,0\r\nsrv-3,eu-west,web,1\r\nsrv-4,eu-west,db,1\r\nsrv-5,us-east,api,1\r\nsrv-6,eu-west,api,0",
@@ -2619,6 +2592,7 @@
         "cellTextField": "name",
         "cellTextPattern": "",
         "dataFrame": "",
+        "displayEntries": [],
         "gridColumns": 5,
         "gridType": "flow",
         "groups": [
@@ -2642,13 +2616,11 @@
         "idSortPattern": "",
         "knownIds": "",
         "resourceDisplayMode": "cell-with-text",
-        "richEntries": [],
         "statusField": "status",
-        "tooltipEntries": [],
         "tooltipTitleField": "",
         "tooltipTitlePattern": ""
       },
-      "pluginVersion": "1.0.0",
+      "pluginVersion": "1.1.0",
       "targets": [
         {
           "csvContent": "name,region,role,status\r\nsrv-1,us-east,web,1\r\nsrv-2,us-east,db,0\r\nsrv-3,eu-west,web,1\r\nsrv-4,eu-west,db,1\r\nsrv-5,us-east,api,1\r\nsrv-6,eu-west,api,0",
@@ -2699,7 +2671,7 @@
         "h": 8,
         "w": 24,
         "x": 0,
-        "y": 248
+        "y": 256
       },
       "id": 70,
       "options": {
@@ -2707,17 +2679,7 @@
         "cellTextField": "",
         "cellTextPattern": "",
         "dataFrame": "",
-        "gridColumns": 5,
-        "gridType": "flow",
-        "groups": [],
-        "idField": "name",
-        "idSortMode": "disabled",
-        "idSortPattern": "",
-        "knownIds": "",
-        "resourceDisplayMode": "cell",
-        "richEntries": [],
-        "statusField": "status",
-        "tooltipEntries": [
+        "displayEntries": [
           {
             "field": "role",
             "id": "e2e-70-f-0",
@@ -2731,10 +2693,19 @@
             "type": "field"
           }
         ],
+        "gridColumns": 5,
+        "gridType": "flow",
+        "groups": [],
+        "idField": "name",
+        "idSortMode": "disabled",
+        "idSortPattern": "",
+        "knownIds": "",
+        "resourceDisplayMode": "cell",
+        "statusField": "status",
         "tooltipTitleField": "",
         "tooltipTitlePattern": ""
       },
-      "pluginVersion": "1.0.0",
+      "pluginVersion": "1.1.0",
       "targets": [
         {
           "csvContent": "name,status,role,cpu\r\nnode-a,1,web,45\r\nnode-b,0,web,82\r\nnode-c,1,db,23\r\nnode-d,1,db,67\r\nnode-e,0,api,91",
@@ -2785,7 +2756,7 @@
         "h": 8,
         "w": 24,
         "x": 0,
-        "y": 256
+        "y": 264
       },
       "id": 71,
       "options": {
@@ -2793,6 +2764,14 @@
         "cellTextField": "",
         "cellTextPattern": "",
         "dataFrame": "",
+        "displayEntries": [
+          {
+            "field": "role",
+            "id": "e2e-71-f-0",
+            "overridesBorderColor": false,
+            "type": "field"
+          }
+        ],
         "gridColumns": 5,
         "gridType": "flow",
         "groups": [],
@@ -2801,20 +2780,11 @@
         "idSortPattern": "",
         "knownIds": "",
         "resourceDisplayMode": "cell",
-        "richEntries": [],
         "statusField": "status",
-        "tooltipEntries": [
-          {
-            "field": "role",
-            "id": "e2e-71-f-0",
-            "overridesBorderColor": false,
-            "type": "field"
-          }
-        ],
         "tooltipTitleField": "__use_pattern__",
         "tooltipTitlePattern": "Host: ${__data.fields.name}"
       },
-      "pluginVersion": "1.0.0",
+      "pluginVersion": "1.1.0",
       "targets": [
         {
           "csvContent": "name,status,role,cpu\r\nnode-a,1,web,45\r\nnode-b,0,web,82\r\nnode-c,1,db,23\r\nnode-d,1,db,67\r\nnode-e,0,api,91",
@@ -2894,7 +2864,7 @@
         "h": 8,
         "w": 24,
         "x": 0,
-        "y": 264
+        "y": 272
       },
       "id": 72,
       "options": {
@@ -2902,6 +2872,14 @@
         "cellTextField": "",
         "cellTextPattern": "",
         "dataFrame": "",
+        "displayEntries": [
+          {
+            "field": "status",
+            "id": "e2e-72-f-0",
+            "overridesBorderColor": false,
+            "type": "field"
+          }
+        ],
         "gridColumns": 5,
         "gridType": "flow",
         "groups": [],
@@ -2910,20 +2888,11 @@
         "idSortPattern": "",
         "knownIds": "",
         "resourceDisplayMode": "rich",
-        "richEntries": [
-          {
-            "field": "status",
-            "id": "e2e-72-f-0",
-            "overridesBorderColor": false,
-            "type": "field"
-          }
-        ],
         "statusField": "status",
-        "tooltipEntries": [],
         "tooltipTitleField": "",
         "tooltipTitlePattern": ""
       },
-      "pluginVersion": "1.0.0",
+      "pluginVersion": "1.1.0",
       "targets": [
         {
           "csvContent": "name,status,role,cpu\r\nnode-a,1,web,45\r\nnode-b,0,web,82\r\nnode-c,1,db,23\r\nnode-d,1,db,67\r\nnode-e,0,api,91",
@@ -3003,7 +2972,7 @@
         "h": 8,
         "w": 24,
         "x": 0,
-        "y": 272
+        "y": 280
       },
       "id": 73,
       "options": {
@@ -3011,6 +2980,14 @@
         "cellTextField": "",
         "cellTextPattern": "",
         "dataFrame": "",
+        "displayEntries": [
+          {
+            "field": "cpu",
+            "id": "e2e-73-f-0",
+            "overridesBorderColor": false,
+            "type": "field"
+          }
+        ],
         "gridColumns": 5,
         "gridType": "flow",
         "groups": [],
@@ -3019,20 +2996,11 @@
         "idSortPattern": "",
         "knownIds": "",
         "resourceDisplayMode": "rich",
-        "richEntries": [
-          {
-            "field": "cpu",
-            "id": "e2e-73-f-0",
-            "overridesBorderColor": false,
-            "type": "field"
-          }
-        ],
         "statusField": "status",
-        "tooltipEntries": [],
         "tooltipTitleField": "",
         "tooltipTitlePattern": ""
       },
-      "pluginVersion": "1.0.0",
+      "pluginVersion": "1.1.0",
       "targets": [
         {
           "csvContent": "name,status,role,cpu\r\nnode-a,1,web,45\r\nnode-b,0,web,82\r\nnode-c,1,db,23\r\nnode-d,1,db,67\r\nnode-e,0,api,91",
@@ -3112,7 +3080,7 @@
         "h": 8,
         "w": 24,
         "x": 0,
-        "y": 280
+        "y": 288
       },
       "id": 74,
       "options": {
@@ -3120,6 +3088,25 @@
         "cellTextField": "",
         "cellTextPattern": "",
         "dataFrame": "",
+        "displayEntries": [
+          {
+            "field": "role",
+            "id": "e2e-74-f-0",
+            "overridesBorderColor": false,
+            "type": "field"
+          },
+          {
+            "id": "23c00f6d-af30-40a6-958b-d990a47d9845",
+            "title": "",
+            "type": "heading"
+          },
+          {
+            "field": "cpu",
+            "id": "e2e-74-f-1",
+            "overridesBorderColor": false,
+            "type": "field"
+          }
+        ],
         "gridColumns": 5,
         "gridType": "flow",
         "groups": [],
@@ -3128,27 +3115,11 @@
         "idSortPattern": "",
         "knownIds": "",
         "resourceDisplayMode": "rich",
-        "richEntries": [
-          {
-            "field": "role",
-            "id": "e2e-74-f-0",
-            "overridesBorderColor": false,
-            "type": "field"
-          }
-        ],
         "statusField": "status",
-        "tooltipEntries": [
-          {
-            "field": "cpu",
-            "id": "e2e-74-f-1",
-            "overridesBorderColor": false,
-            "type": "field"
-          }
-        ],
         "tooltipTitleField": "",
         "tooltipTitlePattern": ""
       },
-      "pluginVersion": "1.0.0",
+      "pluginVersion": "1.1.0",
       "targets": [
         {
           "csvContent": "name,status,role,cpu\r\nnode-a,1,web,45\r\nnode-b,0,web,82\r\nnode-c,1,db,23\r\nnode-d,1,db,67\r\nnode-e,0,api,91",
@@ -3199,7 +3170,7 @@
         "h": 8,
         "w": 24,
         "x": 0,
-        "y": 288
+        "y": 296
       },
       "id": 80,
       "options": {
@@ -3207,15 +3178,7 @@
         "cellTextField": "",
         "cellTextPattern": "",
         "dataFrame": "",
-        "gridColumns": 5,
-        "gridType": "flow",
-        "groups": [],
-        "idField": "name",
-        "idSortMode": "disabled",
-        "idSortPattern": "",
-        "knownIds": "",
-        "resourceDisplayMode": "rich",
-        "richEntries": [
+        "displayEntries": [
           {
             "id": "e2e-80-j-0",
             "keys": [
@@ -3231,12 +3194,19 @@
             "type": "join"
           }
         ],
+        "gridColumns": 5,
+        "gridType": "flow",
+        "groups": [],
+        "idField": "name",
+        "idSortMode": "disabled",
+        "idSortPattern": "",
+        "knownIds": "",
+        "resourceDisplayMode": "rich",
         "statusField": "status",
-        "tooltipEntries": [],
         "tooltipTitleField": "",
         "tooltipTitlePattern": ""
       },
-      "pluginVersion": "1.0.0",
+      "pluginVersion": "1.1.0",
       "targets": [
         {
           "csvContent": "name,status,role,cpu\r\nnode-a,1,web,45\r\nnode-b,0,web,82\r\nnode-c,1,db,23\r\nnode-d,1,db,67\r\nnode-e,0,api,91",
@@ -3296,7 +3266,7 @@
         "h": 8,
         "w": 24,
         "x": 0,
-        "y": 296
+        "y": 304
       },
       "id": 81,
       "options": {
@@ -3304,15 +3274,7 @@
         "cellTextField": "",
         "cellTextPattern": "",
         "dataFrame": "",
-        "gridColumns": 5,
-        "gridType": "flow",
-        "groups": [],
-        "idField": "name",
-        "idSortMode": "disabled",
-        "idSortPattern": "",
-        "knownIds": "",
-        "resourceDisplayMode": "rich",
-        "richEntries": [
+        "displayEntries": [
           {
             "id": "e2e-81-j-0",
             "keys": [
@@ -3328,12 +3290,19 @@
             "type": "join"
           }
         ],
+        "gridColumns": 5,
+        "gridType": "flow",
+        "groups": [],
+        "idField": "name",
+        "idSortMode": "disabled",
+        "idSortPattern": "",
+        "knownIds": "",
+        "resourceDisplayMode": "rich",
         "statusField": "status",
-        "tooltipEntries": [],
         "tooltipTitleField": "",
         "tooltipTitlePattern": ""
       },
-      "pluginVersion": "1.0.0",
+      "pluginVersion": "1.1.0",
       "targets": [
         {
           "csvContent": "name,status,role,cpu\r\nnode-a,1,web,45\r\nnode-b,0,web,82\r\nnode-c,1,db,23\r\nnode-d,1,db,67\r\nnode-e,0,api,91",
@@ -3393,7 +3362,7 @@
         "h": 8,
         "w": 24,
         "x": 0,
-        "y": 304
+        "y": 312
       },
       "id": 82,
       "options": {
@@ -3401,15 +3370,7 @@
         "cellTextField": "",
         "cellTextPattern": "",
         "dataFrame": "",
-        "gridColumns": 5,
-        "gridType": "flow",
-        "groups": [],
-        "idField": "name",
-        "idSortMode": "disabled",
-        "idSortPattern": "",
-        "knownIds": "",
-        "resourceDisplayMode": "rich",
-        "richEntries": [
+        "displayEntries": [
           {
             "id": "e2e-82-j-0",
             "keys": [
@@ -3425,12 +3386,19 @@
             "type": "join"
           }
         ],
+        "gridColumns": 5,
+        "gridType": "flow",
+        "groups": [],
+        "idField": "name",
+        "idSortMode": "disabled",
+        "idSortPattern": "",
+        "knownIds": "",
+        "resourceDisplayMode": "rich",
         "statusField": "status",
-        "tooltipEntries": [],
         "tooltipTitleField": "",
         "tooltipTitlePattern": ""
       },
-      "pluginVersion": "1.0.0",
+      "pluginVersion": "1.1.0",
       "targets": [
         {
           "csvContent": "name,status,role,cpu\r\nnode-a,1,web,45\r\nnode-b,0,web,82\r\nnode-c,1,db,23\r\nnode-d,1,db,67\r\nnode-e,0,api,91",
@@ -3481,7 +3449,7 @@
         "h": 8,
         "w": 24,
         "x": 0,
-        "y": 312
+        "y": 320
       },
       "id": 90,
       "options": {
@@ -3489,6 +3457,7 @@
         "cellTextField": "name",
         "cellTextPattern": "",
         "dataFrame": "",
+        "displayEntries": [],
         "gridColumns": 5,
         "gridType": "flow",
         "groups": [],
@@ -3497,13 +3466,11 @@
         "idSortPattern": "",
         "knownIds": "node-a,node-x,node-y",
         "resourceDisplayMode": "cell-with-text",
-        "richEntries": [],
         "statusField": "status",
-        "tooltipEntries": [],
         "tooltipTitleField": "",
         "tooltipTitlePattern": ""
       },
-      "pluginVersion": "1.0.0",
+      "pluginVersion": "1.1.0",
       "targets": [
         {
           "csvContent": "name,status,role,cpu\r\nnode-a,1,web,45\r\nnode-b,0,web,82\r\nnode-c,1,db,23\r\nnode-d,1,db,67\r\nnode-e,0,api,91",
@@ -3554,7 +3521,7 @@
         "h": 8,
         "w": 24,
         "x": 0,
-        "y": 320
+        "y": 328
       },
       "id": 91,
       "options": {
@@ -3562,6 +3529,7 @@
         "cellTextField": "name",
         "cellTextPattern": "",
         "dataFrame": "",
+        "displayEntries": [],
         "gridColumns": 5,
         "gridType": "flow",
         "groups": [
@@ -3599,13 +3567,11 @@
         "idSortPattern": "",
         "knownIds": "node-a,node-b,node-x",
         "resourceDisplayMode": "cell-with-text",
-        "richEntries": [],
         "statusField": "status",
-        "tooltipEntries": [],
         "tooltipTitleField": "",
         "tooltipTitlePattern": ""
       },
-      "pluginVersion": "1.0.0",
+      "pluginVersion": "1.1.0",
       "targets": [
         {
           "csvContent": "name,region,role,status\r\nnode-a,us-east,web,1\r\nnode-b,eu-west,db,0",
@@ -3656,14 +3622,15 @@
         "h": 8,
         "w": 24,
         "x": 0,
-        "y": 320
+        "y": 336
       },
-      "id": 100,
+      "id": 92,
       "options": {
-        "cellSize": 10,
-        "cellTextField": "",
+        "cellSize": 20,
+        "cellTextField": "name",
         "cellTextPattern": "",
-        "dataFrame": "",
+        "dataFrame": "A",
+        "displayEntries": [],
         "gridColumns": 5,
         "gridType": "flow",
         "groups": [],
@@ -3671,26 +3638,39 @@
         "idSortMode": "disabled",
         "idSortPattern": "",
         "knownIds": "",
-        "resourceDisplayMode": "cell",
-        "richEntries": [],
+        "knownIdsJoin": {
+          "id": "e2e-92-kij",
+          "keys": [],
+          "sourceField": "hostname",
+          "sourceFrame": "B"
+        },
+        "resourceDisplayMode": "cell-with-text",
         "statusField": "status",
-        "tooltipEntries": [],
         "tooltipTitleField": "",
         "tooltipTitlePattern": ""
       },
-      "pluginVersion": "1.0.0",
+      "pluginVersion": "1.1.0",
       "targets": [
         {
-          "csvContent": "name,status,role,cpu\r\nnode-a,1,web,45\r\nnode-b,0,web,82\r\nnode-c,1,db,23\r\nnode-d,1,db,67\r\nnode-e,0,api,91",
+          "csvContent": "name,status\r\nnode-a,1\r\nnode-b,0",
           "datasource": {
             "type": "grafana-testdata-datasource",
             "uid": "trlxrdZVk"
           },
           "refId": "A",
           "scenarioId": "csv_content"
+        },
+        {
+          "csvContent": "hostname\r\nnode-a\r\nnode-b\r\nnode-c\r\nnode-x",
+          "datasource": {
+            "type": "grafana-testdata-datasource",
+            "uid": "trlxrdZVk"
+          },
+          "refId": "B",
+          "scenarioId": "csv_content"
         }
       ],
-      "title": "Small cells",
+      "title": "Known IDs from cross-join",
       "type": "taminomara-hostoverview-panel"
     },
     {
@@ -3729,41 +3709,82 @@
         "h": 8,
         "w": 24,
         "x": 0,
-        "y": 328
+        "y": 344
       },
-      "id": 101,
+      "id": 93,
       "options": {
-        "cellSize": 40,
-        "cellTextField": "",
+        "cellSize": 20,
+        "cellTextField": "name",
         "cellTextPattern": "",
-        "dataFrame": "",
+        "dataFrame": "A",
+        "displayEntries": [],
         "gridColumns": 5,
         "gridType": "flow",
-        "groups": [],
+        "groups": [
+          {
+            "disabled": false,
+            "drawBorder": true,
+            "entries": [],
+            "gridColumns": 5,
+            "gridType": "flow",
+            "groupKey": "dc",
+            "id": "e2e-93-g-0",
+            "knownIds": "",
+            "knownIdsJoin": {
+              "id": "6bc4cb60-6201-47d0-beb6-cc2602c528e1",
+              "keys": [],
+              "sourceField": "region",
+              "sourceFrame": "B"
+            },
+            "showKeyName": false,
+            "showTitle": true,
+            "sortMode": "disabled",
+            "transparentBackground": false
+          }
+        ],
         "idField": "name",
         "idSortMode": "disabled",
         "idSortPattern": "",
         "knownIds": "",
-        "resourceDisplayMode": "cell",
-        "richEntries": [],
+        "knownIdsJoin": {
+          "id": "e2e-93-kij",
+          "keys": [
+            {
+              "foreignField": "region",
+              "primaryKey": "dc",
+              "primaryKeyTemplate": ""
+            }
+          ],
+          "sourceField": "hostname",
+          "sourceFrame": "B"
+        },
+        "resourceDisplayMode": "cell-with-text",
         "statusField": "status",
-        "tooltipEntries": [],
         "tooltipTitleField": "",
         "tooltipTitlePattern": ""
       },
-      "pluginVersion": "1.0.0",
+      "pluginVersion": "1.1.0",
       "targets": [
         {
-          "csvContent": "name,status,role,cpu\r\nnode-a,1,web,45\r\nnode-b,0,web,82\r\nnode-c,1,db,23\r\nnode-d,1,db,67\r\nnode-e,0,api,91",
+          "csvContent": "name,dc,status\r\nnode-a,us,1\r\nnode-b,eu,0",
           "datasource": {
             "type": "grafana-testdata-datasource",
             "uid": "trlxrdZVk"
           },
           "refId": "A",
           "scenarioId": "csv_content"
+        },
+        {
+          "csvContent": "region,hostname\r\nus,node-a\r\nus,node-c\r\neu,node-b\r\neu,node-d\r\nap,node-x",
+          "datasource": {
+            "type": "grafana-testdata-datasource",
+            "uid": "trlxrdZVk"
+          },
+          "refId": "B",
+          "scenarioId": "csv_content"
         }
       ],
-      "title": "Large cells",
+      "title": "Known IDs from keyed join in groups",
       "type": "taminomara-hostoverview-panel"
     },
     {
@@ -3831,7 +3852,7 @@
         "h": 8,
         "w": 24,
         "x": 0,
-        "y": 336
+        "y": 352
       },
       "id": 110,
       "options": {
@@ -3839,6 +3860,14 @@
         "cellTextField": "",
         "cellTextPattern": "",
         "dataFrame": "",
+        "displayEntries": [
+          {
+            "field": "cpu",
+            "id": "e2e-110-f-0",
+            "overridesBorderColor": true,
+            "type": "field"
+          }
+        ],
         "gridColumns": 5,
         "gridType": "flow",
         "groups": [],
@@ -3847,20 +3876,11 @@
         "idSortPattern": "",
         "knownIds": "",
         "resourceDisplayMode": "cell",
-        "richEntries": [],
         "statusField": "status",
-        "tooltipEntries": [
-          {
-            "field": "cpu",
-            "id": "e2e-110-f-0",
-            "overridesBorderColor": true,
-            "type": "field"
-          }
-        ],
         "tooltipTitleField": "",
         "tooltipTitlePattern": ""
       },
-      "pluginVersion": "1.0.0",
+      "pluginVersion": "1.1.0",
       "targets": [
         {
           "csvContent": "name,status,role,cpu\r\nnode-a,1,web,45\r\nnode-b,0,web,82\r\nnode-c,1,db,23\r\nnode-d,1,db,67\r\nnode-e,0,api,91",
@@ -3895,6 +3915,150 @@
             "mode": "absolute",
             "steps": [
               {
+                "color": "red",
+                "value": 0
+              },
+              {
+                "color": "green",
+                "value": 1
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 24,
+        "x": 0,
+        "y": 360
+      },
+      "id": 101,
+      "options": {
+        "cellSize": 40,
+        "cellTextField": "",
+        "cellTextPattern": "",
+        "dataFrame": "",
+        "displayEntries": [],
+        "gridColumns": 5,
+        "gridType": "flow",
+        "groups": [],
+        "idField": "name",
+        "idSortMode": "disabled",
+        "idSortPattern": "",
+        "knownIds": "",
+        "resourceDisplayMode": "cell",
+        "statusField": "status",
+        "tooltipTitleField": "",
+        "tooltipTitlePattern": ""
+      },
+      "pluginVersion": "1.1.0",
+      "targets": [
+        {
+          "csvContent": "name,status,role,cpu\r\nnode-a,1,web,45\r\nnode-b,0,web,82\r\nnode-c,1,db,23\r\nnode-d,1,db,67\r\nnode-e,0,api,91",
+          "datasource": {
+            "type": "grafana-testdata-datasource",
+            "uid": "trlxrdZVk"
+          },
+          "refId": "A",
+          "scenarioId": "csv_content"
+        }
+      ],
+      "title": "Large cells",
+      "type": "taminomara-hostoverview-panel"
+    },
+    {
+      "datasource": {
+        "type": "grafana-testdata-datasource",
+        "uid": "trlxrdZVk"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "displayMode": "auto"
+          },
+          "fieldMinMax": true,
+          "mappings": [],
+          "noValue": "unknown",
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "red",
+                "value": 0
+              },
+              {
+                "color": "green",
+                "value": 1
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 24,
+        "x": 0,
+        "y": 368
+      },
+      "id": 100,
+      "options": {
+        "cellSize": 10,
+        "cellTextField": "",
+        "cellTextPattern": "",
+        "dataFrame": "",
+        "displayEntries": [],
+        "gridColumns": 5,
+        "gridType": "flow",
+        "groups": [],
+        "idField": "name",
+        "idSortMode": "disabled",
+        "idSortPattern": "",
+        "knownIds": "",
+        "resourceDisplayMode": "cell",
+        "statusField": "status",
+        "tooltipTitleField": "",
+        "tooltipTitlePattern": ""
+      },
+      "pluginVersion": "1.1.0",
+      "targets": [
+        {
+          "csvContent": "name,status,role,cpu\r\nnode-a,1,web,45\r\nnode-b,0,web,82\r\nnode-c,1,db,23\r\nnode-d,1,db,67\r\nnode-e,0,api,91",
+          "datasource": {
+            "type": "grafana-testdata-datasource",
+            "uid": "trlxrdZVk"
+          },
+          "refId": "A",
+          "scenarioId": "csv_content"
+        }
+      ],
+      "title": "Small cells",
+      "type": "taminomara-hostoverview-panel"
+    },
+    {
+      "datasource": {
+        "type": "grafana-testdata-datasource",
+        "uid": "trlxrdZVk"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "displayMode": "auto"
+          },
+          "fieldMinMax": true,
+          "mappings": [],
+          "noValue": "unknown",
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
                 "color": "#ff0000",
                 "value": 0
               },
@@ -3940,7 +4104,7 @@
         "h": 8,
         "w": 24,
         "x": 0,
-        "y": 344
+        "y": 376
       },
       "id": 111,
       "options": {
@@ -3948,6 +4112,14 @@
         "cellTextField": "name",
         "cellTextPattern": "",
         "dataFrame": "",
+        "displayEntries": [
+          {
+            "field": "cpu",
+            "id": "e2e-111-f-0",
+            "overridesBorderColor": true,
+            "type": "field"
+          }
+        ],
         "gridColumns": 5,
         "gridType": "flow",
         "groups": [],
@@ -3956,20 +4128,11 @@
         "idSortPattern": "",
         "knownIds": "",
         "resourceDisplayMode": "rich",
-        "richEntries": [
-          {
-            "field": "cpu",
-            "id": "e2e-111-f-0",
-            "overridesBorderColor": true,
-            "type": "field"
-          }
-        ],
         "statusField": "status",
-        "tooltipEntries": [],
         "tooltipTitleField": "",
         "tooltipTitlePattern": ""
       },
-      "pluginVersion": "1.0.0",
+      "pluginVersion": "1.1.0",
       "targets": [
         {
           "csvContent": "name,status,role,cpu\r\nnode-a,1,web,45\r\nnode-b,0,web,82\r\nnode-c,1,db,23\r\nnode-d,1,db,67\r\nnode-e,0,api,91",
@@ -4049,7 +4212,7 @@
         "h": 8,
         "w": 24,
         "x": 0,
-        "y": 352
+        "y": 384
       },
       "id": 112,
       "options": {
@@ -4057,6 +4220,7 @@
         "cellTextField": "",
         "cellTextPattern": "",
         "dataFrame": "",
+        "displayEntries": [],
         "gridColumns": 5,
         "gridType": "flow",
         "groups": [
@@ -4087,13 +4251,11 @@
         "idSortPattern": "",
         "knownIds": "",
         "resourceDisplayMode": "cell",
-        "richEntries": [],
         "statusField": "status",
-        "tooltipEntries": [],
         "tooltipTitleField": "",
         "tooltipTitlePattern": ""
       },
-      "pluginVersion": "1.0.0",
+      "pluginVersion": "1.1.0",
       "targets": [
         {
           "csvContent": "name,status,role,cpu\r\nnode-b,0,web,82\r\nnode-a,1,web,45\r\nnode-d,1,db,67\r\nnode-c,1,db,23\r\nnode-e,0,api,91",
@@ -4197,7 +4359,7 @@
         "h": 8,
         "w": 24,
         "x": 0,
-        "y": 360
+        "y": 392
       },
       "id": 113,
       "options": {
@@ -4205,22 +4367,17 @@
         "cellTextField": "",
         "cellTextPattern": "",
         "dataFrame": "",
-        "gridColumns": 5,
-        "gridType": "flow",
-        "groups": [],
-        "idField": "name",
-        "idSortMode": "disabled",
-        "idSortPattern": "",
-        "knownIds": "",
-        "resourceDisplayMode": "cell",
-        "richEntries": [],
-        "statusField": "status",
-        "tooltipEntries": [
+        "displayEntries": [
           {
             "field": "cpu",
             "id": "e2e-113-f-cpu",
             "overridesBorderColor": true,
-            "severityOverrides": [{ "color": "#aaaa00", "severity": 2 }],
+            "severityOverrides": [
+              {
+                "color": "#aaaa00",
+                "severity": 2
+              }
+            ],
             "type": "field"
           },
           {
@@ -4230,10 +4387,19 @@
             "type": "field"
           }
         ],
+        "gridColumns": 5,
+        "gridType": "flow",
+        "groups": [],
+        "idField": "name",
+        "idSortMode": "disabled",
+        "idSortPattern": "",
+        "knownIds": "",
+        "resourceDisplayMode": "cell",
+        "statusField": "status",
         "tooltipTitleField": "",
         "tooltipTitlePattern": ""
       },
-      "pluginVersion": "1.0.0",
+      "pluginVersion": "1.1.0",
       "targets": [
         {
           "csvContent": "name,status,cpu,mem\r\nnode-a,1,45,30\r\nnode-b,0,67,90\r\nnode-c,1,23,50\r\nnode-d,1,82,30\r\nnode-e,0,91,90",
@@ -4255,95 +4421,202 @@
       },
       "fieldConfig": {
         "defaults": {
-          "color": { "mode": "thresholds" },
-          "custom": { "displayMode": "auto" },
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "displayMode": "auto"
+          },
           "fieldMinMax": true,
           "mappings": [],
+          "noValue": "unknown",
           "thresholds": {
             "mode": "absolute",
-            "steps": [{ "color": "#aaaaaa", "value": 0 }]
+            "steps": [
+              {
+                "color": "#aaaaaa",
+                "value": 0
+              }
+            ]
           }
         },
         "overrides": [
           {
-            "matcher": { "id": "byName", "options": "cpu" },
+            "matcher": {
+              "id": "byName",
+              "options": "cpu"
+            },
             "properties": [
-              { "id": "custom.displayMode", "value": "text" },
+              {
+                "id": "custom.displayMode",
+                "value": "text"
+              },
               {
                 "id": "thresholds",
                 "value": {
                   "mode": "absolute",
                   "steps": [
-                    { "color": "#00aa00", "value": 0 },
-                    { "color": "#aaaa00", "value": 50 },
-                    { "color": "#aa0000", "value": 80 }
+                    {
+                      "color": "#00aa00",
+                      "value": 0
+                    },
+                    {
+                      "color": "#aaaa00",
+                      "value": 50
+                    },
+                    {
+                      "color": "#aa0000",
+                      "value": 80
+                    }
                   ]
                 }
               }
             ]
           },
           {
-            "matcher": { "id": "byName", "options": "mem" },
+            "matcher": {
+              "id": "byName",
+              "options": "mem"
+            },
             "properties": [
-              { "id": "custom.displayMode", "value": "colored-text" },
+              {
+                "id": "custom.displayMode",
+                "value": "colored-text"
+              },
               {
                 "id": "thresholds",
                 "value": {
                   "mode": "absolute",
                   "steps": [
-                    { "color": "#00aa00", "value": 0 },
-                    { "color": "#aaaa00", "value": 50 },
-                    { "color": "#aa0000", "value": 80 }
+                    {
+                      "color": "#00aa00",
+                      "value": 0
+                    },
+                    {
+                      "color": "#aaaa00",
+                      "value": 50
+                    },
+                    {
+                      "color": "#aa0000",
+                      "value": 80
+                    }
                   ]
                 }
               }
             ]
           },
           {
-            "matcher": { "id": "byName", "options": "disk" },
+            "matcher": {
+              "id": "byName",
+              "options": "disk"
+            },
             "properties": [
-              { "id": "custom.displayMode", "value": "colored-background" },
+              {
+                "id": "custom.displayMode",
+                "value": "colored-background"
+              },
               {
                 "id": "thresholds",
                 "value": {
                   "mode": "absolute",
                   "steps": [
-                    { "color": "#00aa00", "value": 0 },
-                    { "color": "#aaaa00", "value": 50 },
-                    { "color": "#aa0000", "value": 80 }
+                    {
+                      "color": "#00aa00",
+                      "value": 0
+                    },
+                    {
+                      "color": "#aaaa00",
+                      "value": 50
+                    },
+                    {
+                      "color": "#aa0000",
+                      "value": 80
+                    }
                   ]
                 }
               }
             ]
           },
           {
-            "matcher": { "id": "byName", "options": "net" },
+            "matcher": {
+              "id": "byName",
+              "options": "net"
+            },
             "properties": [
-              { "id": "custom.displayMode", "value": "gauge" },
+              {
+                "id": "custom.displayMode",
+                "value": "gauge"
+              },
               {
                 "id": "thresholds",
                 "value": {
                   "mode": "absolute",
                   "steps": [
-                    { "color": "#00aa00", "value": 0 },
-                    { "color": "#aaaa00", "value": 50 },
-                    { "color": "#aa0000", "value": 80 }
+                    {
+                      "color": "#00aa00",
+                      "value": 0
+                    },
+                    {
+                      "color": "#aaaa00",
+                      "value": 50
+                    },
+                    {
+                      "color": "#aa0000",
+                      "value": 80
+                    }
                   ]
                 }
               },
-              { "id": "min", "value": 0 },
-              { "id": "max", "value": 100 }
+              {
+                "id": "min",
+                "value": 0
+              },
+              {
+                "id": "max",
+                "value": 100
+              }
             ]
           }
         ]
       },
-      "gridPos": { "h": 8, "w": 24, "x": 0, "y": 360 },
+      "gridPos": {
+        "h": 8,
+        "w": 24,
+        "x": 0,
+        "y": 400
+      },
       "id": 120,
       "options": {
         "cellSize": 20,
         "cellTextField": "name",
         "cellTextPattern": "",
         "dataFrame": "",
+        "displayEntries": [
+          {
+            "field": "cpu",
+            "id": "e2e-120-f-0",
+            "overridesBorderColor": false,
+            "type": "field"
+          },
+          {
+            "field": "mem",
+            "id": "e2e-120-f-1",
+            "overridesBorderColor": false,
+            "type": "field"
+          },
+          {
+            "field": "disk",
+            "id": "e2e-120-f-2",
+            "overridesBorderColor": false,
+            "type": "field"
+          },
+          {
+            "field": "net",
+            "id": "e2e-120-f-3",
+            "overridesBorderColor": false,
+            "type": "field"
+          }
+        ],
         "gridColumns": 5,
         "gridType": "flow",
         "groups": [],
@@ -4352,22 +4625,18 @@
         "idSortPattern": "",
         "knownIds": "",
         "resourceDisplayMode": "rich",
-        "richEntries": [
-          { "field": "cpu", "id": "e2e-120-f-0", "overridesBorderColor": false, "type": "field" },
-          { "field": "mem", "id": "e2e-120-f-1", "overridesBorderColor": false, "type": "field" },
-          { "field": "disk", "id": "e2e-120-f-2", "overridesBorderColor": false, "type": "field" },
-          { "field": "net", "id": "e2e-120-f-3", "overridesBorderColor": false, "type": "field" }
-        ],
         "statusField": "status",
-        "tooltipEntries": [],
         "tooltipTitleField": "",
         "tooltipTitlePattern": ""
       },
-      "pluginVersion": "1.0.0",
+      "pluginVersion": "1.1.0",
       "targets": [
         {
           "csvContent": "name,status,cpu,mem,disk,net\r\nnode-a,1,45,70,30,55\r\nnode-b,0,82,40,85,20\r\nnode-c,1,23,90,60,75",
-          "datasource": { "type": "grafana-testdata-datasource", "uid": "trlxrdZVk" },
+          "datasource": {
+            "type": "grafana-testdata-datasource",
+            "uid": "trlxrdZVk"
+          },
           "refId": "A",
           "scenarioId": "csv_content"
         }
@@ -4382,95 +4651,202 @@
       },
       "fieldConfig": {
         "defaults": {
-          "color": { "mode": "thresholds" },
-          "custom": { "displayMode": "auto" },
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "displayMode": "auto"
+          },
           "fieldMinMax": true,
           "mappings": [],
+          "noValue": "unknown",
           "thresholds": {
             "mode": "absolute",
-            "steps": [{ "color": "#aaaaaa", "value": 0 }]
+            "steps": [
+              {
+                "color": "#aaaaaa",
+                "value": 0
+              }
+            ]
           }
         },
         "overrides": [
           {
-            "matcher": { "id": "byName", "options": "cpu" },
+            "matcher": {
+              "id": "byName",
+              "options": "cpu"
+            },
             "properties": [
-              { "id": "custom.displayMode", "value": "text" },
+              {
+                "id": "custom.displayMode",
+                "value": "text"
+              },
               {
                 "id": "thresholds",
                 "value": {
                   "mode": "absolute",
                   "steps": [
-                    { "color": "#00aa00", "value": 0 },
-                    { "color": "#aaaa00", "value": 50 },
-                    { "color": "#aa0000", "value": 80 }
+                    {
+                      "color": "#00aa00",
+                      "value": 0
+                    },
+                    {
+                      "color": "#aaaa00",
+                      "value": 50
+                    },
+                    {
+                      "color": "#aa0000",
+                      "value": 80
+                    }
                   ]
                 }
               }
             ]
           },
           {
-            "matcher": { "id": "byName", "options": "mem" },
+            "matcher": {
+              "id": "byName",
+              "options": "mem"
+            },
             "properties": [
-              { "id": "custom.displayMode", "value": "colored-text" },
+              {
+                "id": "custom.displayMode",
+                "value": "colored-text"
+              },
               {
                 "id": "thresholds",
                 "value": {
                   "mode": "absolute",
                   "steps": [
-                    { "color": "#00aa00", "value": 0 },
-                    { "color": "#aaaa00", "value": 50 },
-                    { "color": "#aa0000", "value": 80 }
+                    {
+                      "color": "#00aa00",
+                      "value": 0
+                    },
+                    {
+                      "color": "#aaaa00",
+                      "value": 50
+                    },
+                    {
+                      "color": "#aa0000",
+                      "value": 80
+                    }
                   ]
                 }
               }
             ]
           },
           {
-            "matcher": { "id": "byName", "options": "disk" },
+            "matcher": {
+              "id": "byName",
+              "options": "disk"
+            },
             "properties": [
-              { "id": "custom.displayMode", "value": "colored-background" },
+              {
+                "id": "custom.displayMode",
+                "value": "colored-background"
+              },
               {
                 "id": "thresholds",
                 "value": {
                   "mode": "absolute",
                   "steps": [
-                    { "color": "#00aa00", "value": 0 },
-                    { "color": "#aaaa00", "value": 50 },
-                    { "color": "#aa0000", "value": 80 }
+                    {
+                      "color": "#00aa00",
+                      "value": 0
+                    },
+                    {
+                      "color": "#aaaa00",
+                      "value": 50
+                    },
+                    {
+                      "color": "#aa0000",
+                      "value": 80
+                    }
                   ]
                 }
               }
             ]
           },
           {
-            "matcher": { "id": "byName", "options": "net" },
+            "matcher": {
+              "id": "byName",
+              "options": "net"
+            },
             "properties": [
-              { "id": "custom.displayMode", "value": "gauge" },
+              {
+                "id": "custom.displayMode",
+                "value": "gauge"
+              },
               {
                 "id": "thresholds",
                 "value": {
                   "mode": "absolute",
                   "steps": [
-                    { "color": "#00aa00", "value": 0 },
-                    { "color": "#aaaa00", "value": 50 },
-                    { "color": "#aa0000", "value": 80 }
+                    {
+                      "color": "#00aa00",
+                      "value": 0
+                    },
+                    {
+                      "color": "#aaaa00",
+                      "value": 50
+                    },
+                    {
+                      "color": "#aa0000",
+                      "value": 80
+                    }
                   ]
                 }
               },
-              { "id": "min", "value": 0 },
-              { "id": "max", "value": 100 }
+              {
+                "id": "min",
+                "value": 0
+              },
+              {
+                "id": "max",
+                "value": 100
+              }
             ]
           }
         ]
       },
-      "gridPos": { "h": 8, "w": 24, "x": 0, "y": 368 },
+      "gridPos": {
+        "h": 8,
+        "w": 24,
+        "x": 0,
+        "y": 408
+      },
       "id": 121,
       "options": {
         "cellSize": 20,
         "cellTextField": "",
         "cellTextPattern": "",
         "dataFrame": "",
+        "displayEntries": [
+          {
+            "field": "cpu",
+            "id": "e2e-121-f-0",
+            "overridesBorderColor": false,
+            "type": "field"
+          },
+          {
+            "field": "mem",
+            "id": "e2e-121-f-1",
+            "overridesBorderColor": false,
+            "type": "field"
+          },
+          {
+            "field": "disk",
+            "id": "e2e-121-f-2",
+            "overridesBorderColor": false,
+            "type": "field"
+          },
+          {
+            "field": "net",
+            "id": "e2e-121-f-3",
+            "overridesBorderColor": false,
+            "type": "field"
+          }
+        ],
         "gridColumns": 5,
         "gridType": "flow",
         "groups": [],
@@ -4479,22 +4855,18 @@
         "idSortPattern": "",
         "knownIds": "",
         "resourceDisplayMode": "cell",
-        "richEntries": [],
         "statusField": "status",
-        "tooltipEntries": [
-          { "field": "cpu", "id": "e2e-121-f-0", "overridesBorderColor": false, "type": "field" },
-          { "field": "mem", "id": "e2e-121-f-1", "overridesBorderColor": false, "type": "field" },
-          { "field": "disk", "id": "e2e-121-f-2", "overridesBorderColor": false, "type": "field" },
-          { "field": "net", "id": "e2e-121-f-3", "overridesBorderColor": false, "type": "field" }
-        ],
         "tooltipTitleField": "",
         "tooltipTitlePattern": ""
       },
-      "pluginVersion": "1.0.0",
+      "pluginVersion": "1.1.0",
       "targets": [
         {
           "csvContent": "name,status,cpu,mem,disk,net\r\nnode-a,1,45,70,30,55\r\nnode-b,0,82,40,85,20\r\nnode-c,1,23,90,60,75",
-          "datasource": { "type": "grafana-testdata-datasource", "uid": "trlxrdZVk" },
+          "datasource": {
+            "type": "grafana-testdata-datasource",
+            "uid": "trlxrdZVk"
+          },
           "refId": "A",
           "scenarioId": "csv_content"
         }
@@ -4509,95 +4881,177 @@
       },
       "fieldConfig": {
         "defaults": {
-          "color": { "mode": "thresholds" },
-          "custom": { "displayMode": "auto" },
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "displayMode": "auto"
+          },
           "fieldMinMax": true,
           "mappings": [],
+          "noValue": "unknown",
           "thresholds": {
             "mode": "absolute",
-            "steps": [{ "color": "#aaaaaa", "value": 0 }]
+            "steps": [
+              {
+                "color": "#aaaaaa",
+                "value": 0
+              }
+            ]
           }
         },
         "overrides": [
           {
-            "matcher": { "id": "byName", "options": "cpu" },
+            "matcher": {
+              "id": "byName",
+              "options": "cpu"
+            },
             "properties": [
-              { "id": "custom.displayMode", "value": "text" },
+              {
+                "id": "custom.displayMode",
+                "value": "text"
+              },
               {
                 "id": "thresholds",
                 "value": {
                   "mode": "absolute",
                   "steps": [
-                    { "color": "#00aa00", "value": 0 },
-                    { "color": "#aaaa00", "value": 50 },
-                    { "color": "#aa0000", "value": 80 }
+                    {
+                      "color": "#00aa00",
+                      "value": 0
+                    },
+                    {
+                      "color": "#aaaa00",
+                      "value": 50
+                    },
+                    {
+                      "color": "#aa0000",
+                      "value": 80
+                    }
                   ]
                 }
               }
             ]
           },
           {
-            "matcher": { "id": "byName", "options": "mem" },
+            "matcher": {
+              "id": "byName",
+              "options": "mem"
+            },
             "properties": [
-              { "id": "custom.displayMode", "value": "colored-text" },
+              {
+                "id": "custom.displayMode",
+                "value": "colored-text"
+              },
               {
                 "id": "thresholds",
                 "value": {
                   "mode": "absolute",
                   "steps": [
-                    { "color": "#00aa00", "value": 0 },
-                    { "color": "#aaaa00", "value": 50 },
-                    { "color": "#aa0000", "value": 80 }
+                    {
+                      "color": "#00aa00",
+                      "value": 0
+                    },
+                    {
+                      "color": "#aaaa00",
+                      "value": 50
+                    },
+                    {
+                      "color": "#aa0000",
+                      "value": 80
+                    }
                   ]
                 }
               }
             ]
           },
           {
-            "matcher": { "id": "byName", "options": "disk" },
+            "matcher": {
+              "id": "byName",
+              "options": "disk"
+            },
             "properties": [
-              { "id": "custom.displayMode", "value": "colored-background" },
+              {
+                "id": "custom.displayMode",
+                "value": "colored-background"
+              },
               {
                 "id": "thresholds",
                 "value": {
                   "mode": "absolute",
                   "steps": [
-                    { "color": "#00aa00", "value": 0 },
-                    { "color": "#aaaa00", "value": 50 },
-                    { "color": "#aa0000", "value": 80 }
+                    {
+                      "color": "#00aa00",
+                      "value": 0
+                    },
+                    {
+                      "color": "#aaaa00",
+                      "value": 50
+                    },
+                    {
+                      "color": "#aa0000",
+                      "value": 80
+                    }
                   ]
                 }
               }
             ]
           },
           {
-            "matcher": { "id": "byName", "options": "net" },
+            "matcher": {
+              "id": "byName",
+              "options": "net"
+            },
             "properties": [
-              { "id": "custom.displayMode", "value": "gauge" },
+              {
+                "id": "custom.displayMode",
+                "value": "gauge"
+              },
               {
                 "id": "thresholds",
                 "value": {
                   "mode": "absolute",
                   "steps": [
-                    { "color": "#00aa00", "value": 0 },
-                    { "color": "#aaaa00", "value": 50 },
-                    { "color": "#aa0000", "value": 80 }
+                    {
+                      "color": "#00aa00",
+                      "value": 0
+                    },
+                    {
+                      "color": "#aaaa00",
+                      "value": 50
+                    },
+                    {
+                      "color": "#aa0000",
+                      "value": 80
+                    }
                   ]
                 }
               },
-              { "id": "min", "value": 0 },
-              { "id": "max", "value": 100 }
+              {
+                "id": "min",
+                "value": 0
+              },
+              {
+                "id": "max",
+                "value": 100
+              }
             ]
           }
         ]
       },
-      "gridPos": { "h": 8, "w": 24, "x": 0, "y": 376 },
+      "gridPos": {
+        "h": 8,
+        "w": 24,
+        "x": 0,
+        "y": 416
+      },
       "id": 122,
       "options": {
         "cellSize": 20,
         "cellTextField": "name",
         "cellTextPattern": "",
         "dataFrame": "",
+        "displayEntries": [],
         "gridColumns": 5,
         "gridType": "flow",
         "groups": [
@@ -4646,17 +5100,18 @@
         "idSortPattern": "",
         "knownIds": "",
         "resourceDisplayMode": "cell-with-text",
-        "richEntries": [],
         "statusField": "status",
-        "tooltipEntries": [],
         "tooltipTitleField": "",
         "tooltipTitlePattern": ""
       },
-      "pluginVersion": "1.0.0",
+      "pluginVersion": "1.1.0",
       "targets": [
         {
           "csvContent": "name,status,cpu,mem,disk,net\r\nnode-a,1,45,70,30,55\r\nnode-b,0,82,40,85,20\r\nnode-c,1,23,90,60,75",
-          "datasource": { "type": "grafana-testdata-datasource", "uid": "trlxrdZVk" },
+          "datasource": {
+            "type": "grafana-testdata-datasource",
+            "uid": "trlxrdZVk"
+          },
           "refId": "A",
           "scenarioId": "csv_content"
         }
@@ -4671,95 +5126,213 @@
       },
       "fieldConfig": {
         "defaults": {
-          "color": { "mode": "thresholds" },
-          "custom": { "displayMode": "auto" },
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "displayMode": "auto"
+          },
           "fieldMinMax": true,
           "mappings": [],
+          "noValue": "unknown",
           "thresholds": {
             "mode": "absolute",
-            "steps": [{ "color": "#aaaaaa", "value": 0 }]
+            "steps": [
+              {
+                "color": "#aaaaaa",
+                "value": 0
+              }
+            ]
           }
         },
         "overrides": [
           {
-            "matcher": { "id": "byName", "options": "cpu" },
+            "matcher": {
+              "id": "byName",
+              "options": "cpu"
+            },
             "properties": [
-              { "id": "custom.displayMode", "value": "text" },
+              {
+                "id": "custom.displayMode",
+                "value": "text"
+              },
               {
                 "id": "thresholds",
                 "value": {
                   "mode": "absolute",
                   "steps": [
-                    { "color": "#00aa00", "value": 0 },
-                    { "color": "#aaaa00", "value": 50 },
-                    { "color": "#aa0000", "value": 80 }
+                    {
+                      "color": "#00aa00",
+                      "value": 0
+                    },
+                    {
+                      "color": "#aaaa00",
+                      "value": 50
+                    },
+                    {
+                      "color": "#aa0000",
+                      "value": 80
+                    }
                   ]
                 }
               }
             ]
           },
           {
-            "matcher": { "id": "byName", "options": "mem" },
+            "matcher": {
+              "id": "byName",
+              "options": "mem"
+            },
             "properties": [
-              { "id": "custom.displayMode", "value": "colored-text" },
+              {
+                "id": "custom.displayMode",
+                "value": "colored-text"
+              },
               {
                 "id": "thresholds",
                 "value": {
                   "mode": "absolute",
                   "steps": [
-                    { "color": "#00aa00", "value": 0 },
-                    { "color": "#aaaa00", "value": 50 },
-                    { "color": "#aa0000", "value": 80 }
+                    {
+                      "color": "#00aa00",
+                      "value": 0
+                    },
+                    {
+                      "color": "#aaaa00",
+                      "value": 50
+                    },
+                    {
+                      "color": "#aa0000",
+                      "value": 80
+                    }
                   ]
                 }
               }
             ]
           },
           {
-            "matcher": { "id": "byName", "options": "disk" },
+            "matcher": {
+              "id": "byName",
+              "options": "disk"
+            },
             "properties": [
-              { "id": "custom.displayMode", "value": "colored-background" },
+              {
+                "id": "custom.displayMode",
+                "value": "colored-background"
+              },
               {
                 "id": "thresholds",
                 "value": {
                   "mode": "absolute",
                   "steps": [
-                    { "color": "#00aa00", "value": 0 },
-                    { "color": "#aaaa00", "value": 50 },
-                    { "color": "#aa0000", "value": 80 }
+                    {
+                      "color": "#00aa00",
+                      "value": 0
+                    },
+                    {
+                      "color": "#aaaa00",
+                      "value": 50
+                    },
+                    {
+                      "color": "#aa0000",
+                      "value": 80
+                    }
                   ]
                 }
               }
             ]
           },
           {
-            "matcher": { "id": "byName", "options": "net" },
+            "matcher": {
+              "id": "byName",
+              "options": "net"
+            },
             "properties": [
-              { "id": "custom.displayMode", "value": "gauge" },
+              {
+                "id": "custom.displayMode",
+                "value": "gauge"
+              },
               {
                 "id": "thresholds",
                 "value": {
                   "mode": "absolute",
                   "steps": [
-                    { "color": "#00aa00", "value": 0 },
-                    { "color": "#aaaa00", "value": 50 },
-                    { "color": "#aa0000", "value": 80 }
+                    {
+                      "color": "#00aa00",
+                      "value": 0
+                    },
+                    {
+                      "color": "#aaaa00",
+                      "value": 50
+                    },
+                    {
+                      "color": "#aa0000",
+                      "value": 80
+                    }
                   ]
                 }
               },
-              { "id": "min", "value": 0 },
-              { "id": "max", "value": 100 }
+              {
+                "id": "min",
+                "value": 0
+              },
+              {
+                "id": "max",
+                "value": 100
+              }
             ]
           }
         ]
       },
-      "gridPos": { "h": 8, "w": 24, "x": 0, "y": 384 },
+      "gridPos": {
+        "h": 8,
+        "w": 24,
+        "x": 0,
+        "y": 424
+      },
       "id": 123,
       "options": {
         "cellSize": 20,
         "cellTextField": "name",
         "cellTextPattern": "",
         "dataFrame": "",
+        "displayEntries": [
+          {
+            "field": "status",
+            "id": "e2e-123-f-s",
+            "overridesBorderColor": false,
+            "type": "field"
+          },
+          {
+            "id": "431b4eaa-f9ab-42fb-992c-270f5e2014d3",
+            "title": "",
+            "type": "heading"
+          },
+          {
+            "field": "cpu",
+            "id": "e2e-123-f-0",
+            "overridesBorderColor": false,
+            "type": "field"
+          },
+          {
+            "field": "mem",
+            "id": "e2e-123-f-1",
+            "overridesBorderColor": false,
+            "type": "field"
+          },
+          {
+            "field": "disk",
+            "id": "e2e-123-f-2",
+            "overridesBorderColor": false,
+            "type": "field"
+          },
+          {
+            "field": "net",
+            "id": "e2e-123-f-3",
+            "overridesBorderColor": false,
+            "type": "field"
+          }
+        ],
         "gridColumns": 5,
         "gridType": "flow",
         "groups": [],
@@ -4768,24 +5341,18 @@
         "idSortPattern": "",
         "knownIds": "",
         "resourceDisplayMode": "rich",
-        "richEntries": [
-          { "field": "status", "id": "e2e-123-f-s", "overridesBorderColor": false, "type": "field" }
-        ],
         "statusField": "status",
-        "tooltipEntries": [
-          { "field": "cpu", "id": "e2e-123-f-0", "overridesBorderColor": false, "type": "field" },
-          { "field": "mem", "id": "e2e-123-f-1", "overridesBorderColor": false, "type": "field" },
-          { "field": "disk", "id": "e2e-123-f-2", "overridesBorderColor": false, "type": "field" },
-          { "field": "net", "id": "e2e-123-f-3", "overridesBorderColor": false, "type": "field" }
-        ],
         "tooltipTitleField": "",
         "tooltipTitlePattern": ""
       },
-      "pluginVersion": "1.0.0",
+      "pluginVersion": "1.1.0",
       "targets": [
         {
           "csvContent": "name,status,cpu,mem,disk,net\r\nnode-a,1,45,70,30,55\r\nnode-b,0,82,40,85,20\r\nnode-c,1,23,90,60,75",
-          "datasource": { "type": "grafana-testdata-datasource", "uid": "trlxrdZVk" },
+          "datasource": {
+            "type": "grafana-testdata-datasource",
+            "uid": "trlxrdZVk"
+          },
           "refId": "A",
           "scenarioId": "csv_content"
         }
@@ -4796,7 +5363,9 @@
   ],
   "preload": false,
   "schemaVersion": 42,
-  "tags": ["Test"],
+  "tags": [
+    "Test"
+  ],
   "templating": {
     "list": []
   },
@@ -4808,5 +5377,5 @@
   "timezone": "utc",
   "title": "E2E Tests",
   "uid": "e2e-tests",
-  "version": 1
+  "version": 2
 }

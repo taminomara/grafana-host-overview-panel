@@ -5,6 +5,7 @@ import { ComboboxOption, Field, Input, Switch, useStyles2 } from '@grafana/ui';
 import { GridType, Group, SortMode } from 'types';
 import { ClearableColorPicker } from './ClearableColorPicker';
 import { DisplayEntriesEditor } from './DisplayEntriesEditor';
+import { KnownIdsJoinEditor } from './JoinEditor';
 import { FieldCombobox } from './FieldCombobox';
 import { GridTypePicker } from './GridTypePicker';
 import { SortModeCombobox, SortPatternInput } from './SortEditor';
@@ -177,6 +178,12 @@ export const GroupSettings: React.FC<GroupSettingsProps> = ({
           placeholder="id1, id2, ..."
         />
       </Field>
+      <KnownIdsJoinEditor
+        value={value.knownIdsJoin}
+        onChange={(knownIdsJoin) => onChange({ ...value, knownIdsJoin })}
+        allFrames={allFrames}
+        primaryFieldOptions={fieldOptions}
+      />
       <Field label="Fields and joins" description="Additional data to display for this group">
         <DisplayEntriesEditor
           value={value.entries ?? []}

@@ -4,6 +4,7 @@ import { DataFrameEditor } from './components/settings/DataFrameEditor';
 import { GRID_TYPE_OPTIONS } from './components/settings/GridTypePicker';
 import { GroupsEditor } from './components/settings/GroupsEditor';
 import { DisplayEntriesEditorWrapper } from './components/settings/DisplayEntriesEditor';
+import { KnownIdsJoinEditorWrapper } from './components/settings/JoinEditor';
 import { SortModeEditor, SortPatternEditor } from './components/settings/SortEditor';
 import { TemplatePatternEditor } from './components/settings/TemplatePatternEditor';
 import { ValueFieldEditor } from './components/settings/ValueFieldEditor';
@@ -161,6 +162,16 @@ export const plugin = new PanelPlugin<HostViewerOptions, HostViewerFieldConfig>(
         settings: {
           placeholder: 'value1, value2, ...',
         },
+        showIf: (options) => options.idField !== '',
+      })
+      .addCustomEditor({
+        id: 'knownIdsJoin',
+        path: 'knownIdsJoin',
+        name: 'Known IDs from join',
+        description: 'Read known IDs from a field in another data frame',
+        editor: KnownIdsJoinEditorWrapper,
+        defaultValue: undefined,
+        category: ['Resource'],
         showIf: (options) => options.idField !== '',
       })
       .addCustomEditor({

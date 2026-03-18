@@ -5,10 +5,12 @@ import {
   GridType,
   Group,
   HostViewerOptions,
+  Join,
   isGroupDisabled,
   SortMode,
 } from '../types';
 import { createFrame, IndexedFrame } from './dataFrame';
+import { KEY_SEPARATOR } from './joinFrames';
 
 export interface GroupNode {
   groupKey: string;
@@ -198,21 +200,62 @@ function compareCustomSortables(
   }
 }
 
+export function parseKnownIds(knownIds: string): Set<string> {
+  return new Set(
+    (knownIds || '')
+      .split(',')
+      .map((value) => value.trim())
+      .filter((value) => value.length > 0)
+  );
+}
+
+export function resolveKnownIdsFromJoin(
+  join: Join | undefined,
+  context: HostViewerPanelContext,
+  groupValues: Record<string, unknown>
+): Set<string> {
+  const result = new Set<string>();
+  if (!join?.sourceField) {
+    return result;
+  }
+
+  const index = context.joinIndices.get(join.id);
+  if (!index) {
+    return result;
+  }
+
+  const sourceField = index.frame.fieldByName.get(join.sourceField);
+  if (!sourceField) {
+    return result;
+  }
+
+  const parts: string[] = [];
+  for (const pair of join.keys) {
+    parts.push(String(groupValues[pair.primaryKey] ?? ''));
+  }
+  const compositeKey = parts.join(KEY_SEPARATOR);
+
+  const matchedRows = index.getKeyMap().get(compositeKey);
+  if (!matchedRows) {
+    return result;
+  }
+
+  for (const rowIndex of matchedRows) {
+    result.add(String(sourceField.values[rowIndex]));
+  }
+  return result;
+}
+
 function bucketByField(
   frame: IndexedFrame,
   field: Field,
   sortMode: SortMode,
   sortPattern: string | undefined,
   context: HostViewerPanelContext,
-  knownIds: string
+  knownValuesSet: Set<string>
 ): Bucket[] {
   const bucketMap = new Map<string, Bucket>();
-  const knownValuesSet = new Set(
-    (knownIds || '')
-      .split(',')
-      .map((value) => value.trim())
-      .filter((value) => value.length > 0)
-  );
+  knownValuesSet = new Set(knownValuesSet);
   const fieldCount = frame.fields.length;
 
   for (let rowIndex = 0; rowIndex < frame.length; rowIndex++) {
@@ -413,13 +456,18 @@ function groupFrameRecursive(
     ];
   }
 
+  const knownIdsSet = parseKnownIds(group.knownIds);
+  for (const id of resolveKnownIdsFromJoin(group.knownIdsJoin, context, groupValues)) {
+    knownIdsSet.add(id);
+  }
+
   const buckets = bucketByField(
     frame,
     field,
     group.sortMode ?? SortMode.Default,
     group.sortPattern,
     context,
-    group.knownIds
+    knownIdsSet
   );
   return [
     frame,
@@ -463,12 +511,10 @@ function addKnownNodeValues(
     return frame;
   }
 
-  const knownValuesSet = new Set(
-    options.knownIds
-      .split(',')
-      .map((value) => value.trim())
-      .filter((value) => value.length > 0)
-  );
+  const knownValuesSet = parseKnownIds(options.knownIds);
+  for (const id of resolveKnownIdsFromJoin(options.knownIdsJoin, context, groupValues)) {
+    knownValuesSet.add(id);
+  }
 
   for (const value of field.values) {
     knownValuesSet.delete(String(value));

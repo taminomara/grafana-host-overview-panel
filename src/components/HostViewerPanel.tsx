@@ -3,7 +3,7 @@ import { getFrameDisplayName, GrafanaTheme2, PanelProps } from '@grafana/data';
 import { PanelDataErrorView } from '@grafana/runtime';
 import { Alert, useStyles2 } from '@grafana/ui';
 import React, { useEffect, useMemo, useRef } from 'react';
-import { HostViewerOptions, JoinDisplayEntry } from 'types';
+import { HostViewerOptions, Join } from 'types';
 import { findFrame, indexFrame } from '../library/dataFrame';
 import { groupFrame } from '../library/groupFrames';
 import { buildJoinIndices } from '../library/joinFrames';
@@ -55,14 +55,27 @@ export const HostViewerPanel: React.FC<Props> = ({
   const frame = useMemo(() => (rawFrame ? indexFrame(rawFrame) : null), [rawFrame]);
 
   const allJoins = useMemo(() => {
-    const entries = [...(options.displayEntries ?? [])];
-    for (const group of options.groups ?? []) {
-      if (group.entries) {
-        entries.push(...group.entries);
+    const joins: Join[] = [];
+    for (const entry of options.displayEntries ?? []) {
+      if (entry.type === 'join') {
+        joins.push(entry);
       }
     }
-    return entries.filter((e): e is JoinDisplayEntry => e.type === 'join');
-  }, [options.displayEntries, options.groups]);
+    for (const group of options.groups ?? []) {
+      for (const entry of group.entries ?? []) {
+        if (entry.type === 'join') {
+          joins.push(entry);
+        }
+      }
+      if (group.knownIdsJoin) {
+        joins.push(group.knownIdsJoin);
+      }
+    }
+    if (options.knownIdsJoin) {
+      joins.push(options.knownIdsJoin);
+    }
+    return joins;
+  }, [options.displayEntries, options.groups, options.knownIdsJoin]);
 
   const joinIndices = useMemo(() => {
     const indices = buildJoinIndices(data.series, allJoins);

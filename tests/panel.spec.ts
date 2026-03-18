@@ -776,6 +776,44 @@ test.describe('known IDs', () => {
     const cells = panel.locator('[data-testid="resource-cell"]');
     await expect(cells).toHaveCount(27);
   });
+
+  test('known IDs from cross-join appear even without data', async ({
+    gotoPanelEditPage,
+    readProvisionedDashboard,
+  }) => {
+    const dashboard = await readProvisionedDashboard({ fileName: E2E_DASHBOARD });
+    const panelEditPage = await gotoPanelEditPage({ dashboard, id: '92' });
+    const panel = panelEditPage.panel.locator;
+    // Data: node-a, node-b
+    // knownIdsJoin from frame B: node-a, node-b, node-c, node-x
+    await expect(panel).toContainText('node-a');
+    await expect(panel).toContainText('node-b');
+    await expect(panel).toContainText('node-c');
+    await expect(panel).toContainText('node-x');
+    const cells = panel.locator('[data-testid="resource-cell"]');
+    await expect(cells).toHaveCount(4);
+  });
+
+  test('known IDs from keyed join in groups', async ({
+    gotoPanelEditPage,
+    readProvisionedDashboard,
+  }) => {
+    const dashboard = await readProvisionedDashboard({ fileName: E2E_DASHBOARD });
+    const panelEditPage = await gotoPanelEditPage({ dashboard, id: '93' });
+    const panel = panelEditPage.panel.locator;
+    // Data: node-a(us), node-b(eu)
+    // Groups: dc with knownIds us,eu,ap
+    // knownIdsJoin from frame B keyed by dc=region: us→[node-a,node-c], eu→[node-b,node-d], ap→[node-x]
+    await expect(panel).toContainText('us');
+    await expect(panel).toContainText('eu');
+    await expect(panel).toContainText('ap');
+    // node-c appears via join for us group
+    await expect(panel).toContainText('node-c');
+    // node-d appears via join for eu group
+    await expect(panel).toContainText('node-d');
+    // node-x appears via join for ap group
+    await expect(panel).toContainText('node-x');
+  });
 });
 
 // ── Cell Size ──

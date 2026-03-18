@@ -1,18 +1,18 @@
 import { DataFrame, Field, InterpolateFunction } from '@grafana/data';
 import { IndexedFrame, indexFrame } from './dataFrame';
-import { JoinDisplayEntry } from '../types';
+import { Join } from '../types';
 
-const KEY_SEPARATOR = '\0';
+export const KEY_SEPARATOR = '\0';
 
 export interface JoinIndex {
-  config: JoinDisplayEntry;
+  config: Join;
   frame: IndexedFrame;
   getKeyMap: () => Map<string, number[]>;
 }
 
 function createLazyKeyMap(
   frame: IndexedFrame,
-  config: JoinDisplayEntry
+  config: Join
 ): () => Map<string, number[]> {
   let cached: Map<string, number[]> | null = null;
   return () => {
@@ -42,11 +42,11 @@ function createLazyKeyMap(
   };
 }
 
-export function buildJoinIndices(allFrames: DataFrame[], joins: JoinDisplayEntry[]): JoinIndex[] {
+export function buildJoinIndices(allFrames: DataFrame[], joins: Join[]): JoinIndex[] {
   const result: JoinIndex[] = [];
 
   for (const join of joins) {
-    if (join.keys.length === 0 || !join.sourceFrame) {
+    if (!join.sourceFrame) {
       continue;
     }
     const secondaryFrame = allFrames.find((f) => f.refId === join.sourceFrame);
@@ -70,7 +70,7 @@ export function buildJoinIndices(allFrames: DataFrame[], joins: JoinDisplayEntry
 }
 
 export interface ResolvedJoinSection {
-  joinConfig: JoinDisplayEntry;
+  joinConfig: Join;
   index: JoinIndex;
   /** Row indices in index.frame that matched. Empty array means no match. */
   matchedRows: number[];
@@ -78,13 +78,13 @@ export interface ResolvedJoinSection {
 }
 
 /**
- * Resolves a list of JoinDisplayEntry against a primary frame row, returning one
+ * Resolves a list of Join configs against a primary frame row, returning one
  * ResolvedJoinSection per join that has a valid sourceField. Sections where no
  * rows matched are included with matchedRows = []; callers can filter them out
  * if they don't want to show placeholders.
  */
 export function resolveJoinSections(
-  joins: JoinDisplayEntry[],
+  joins: Join[],
   frame: IndexedFrame,
   rowIndex: number,
   joinIndices: Map<string, JoinIndex>,

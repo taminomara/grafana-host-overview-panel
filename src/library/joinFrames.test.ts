@@ -2,18 +2,16 @@ import { FieldType } from '@grafana/data';
 import { indexFrame } from './dataFrame';
 import { buildJoinIndices, JoinIndex, lookupJoinedRows, resolveJoinSections } from './joinFrames';
 import { makeField, makeFrame } from './testHelpers';
-import { JoinDisplayEntry } from '../types';
+import { Join } from '../types';
 
 let nextJoinId = 0;
 
 function makeJoin(
-  overrides: Partial<JoinDisplayEntry> & Pick<JoinDisplayEntry, 'sourceFrame' | 'keys'>
-): JoinDisplayEntry {
+  overrides: Partial<Join> & Pick<Join, 'sourceFrame' | 'keys'>
+): Join {
   return {
     id: `join-${nextJoinId++}`,
-    type: 'join',
     sourceField: '',
-    overridesBorderColor: false,
     ...overrides,
   };
 }
@@ -34,10 +32,16 @@ describe('buildJoinIndices', () => {
     expect(buildJoinIndices([], [join])).toEqual([]);
   });
 
-  it('skips joins with no keys', () => {
-    const frames = [makeFrame([makeField('a', FieldType.string, ['x'])], 'B')];
+  it('builds index for cross-join (no keys)', () => {
+    const frames = [makeFrame([makeField('a', FieldType.string, ['x', 'y', 'z'])], 'B')];
     const join = makeJoin({ sourceFrame: 'B', keys: [] });
-    expect(buildJoinIndices(frames, [join])).toEqual([]);
+    const indices = buildJoinIndices(frames, [join]);
+
+    expect(indices).toHaveLength(1);
+    expect(indices[0].config).toBe(join);
+    const map = indices[0].getKeyMap();
+    expect(map.size).toBe(1);
+    expect(map.get('')).toEqual([0, 1, 2]);
   });
 
   it('skips joins referencing missing sourceFrame', () => {
@@ -296,7 +300,7 @@ describe('resolveJoinSections', () => {
 
   function buildIndicesMap(
     frames: Array<ReturnType<typeof makeFrame>>,
-    joins: JoinDisplayEntry[]
+    joins: Join[]
   ): Map<string, JoinIndex> {
     const indices = buildJoinIndices(frames, joins);
     return new Map(indices.map((idx) => [idx.config.id, idx]));

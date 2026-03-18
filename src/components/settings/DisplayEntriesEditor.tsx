@@ -1,8 +1,7 @@
 import { css } from '@emotion/css';
-import { DataFrame, getFrameDisplayName, GrafanaTheme2, StandardEditorProps } from '@grafana/data';
+import { DataFrame, GrafanaTheme2, StandardEditorProps } from '@grafana/data';
 import {
   Button,
-  Combobox,
   ComboboxOption,
   Field,
   Icon,
@@ -20,12 +19,12 @@ import {
   HeadingDisplayEntry,
   HostViewerOptions,
   JoinDisplayEntry,
-  JoinKeyPair,
 } from '../../types';
 import { findFrame } from '../../library/dataFrame';
 import { FieldCombobox } from './FieldCombobox';
+import { JoinEditor } from './JoinEditor';
 import { SeverityOverridesEditor } from './SeverityOverridesEditor';
-import { SuggestionsFromEditorContext, TemplatePatternInput } from './TemplatePatternEditor';
+import { SuggestionsFromEditorContext } from './TemplatePatternEditor';
 
 const JOIN_OPTION_VALUE = '__join__';
 const SECTION_OPTION_VALUE = '__section__';
@@ -49,13 +48,6 @@ const getStyles = (theme: GrafanaTheme2) => ({
     borderLeftWidth: 1,
     borderLeftStyle: 'solid',
     borderLeftColor: theme.colors.border.weak,
-  }),
-  keyPairRow: css({
-    alignItems: 'center',
-  }),
-  arrow: css({
-    color: theme.colors.text.secondary,
-    userSelect: 'none',
   }),
 });
 
@@ -272,12 +264,36 @@ const EntryEditorRow: React.FC<EntryEditorRowProps> = ({
           ) : value.type === 'field' ? (
             <FieldEntrySettings value={value} onChange={onChange} />
           ) : (
-            <JoinEntrySettings
+            <JoinEditor<JoinDisplayEntry>
               value={value}
+              onChange={onChange}
               allFrames={allFrames}
               primaryFieldOptions={primaryFieldOptions}
-              onChange={onChange}
-            />
+            >
+              <Field
+                label="Overrides border color"
+                description="Allow thresholds of the joined value to override border color"
+                horizontal={true}
+              >
+                <Switch
+                  value={value.overridesBorderColor}
+                  onChange={(v) =>
+                    onChange({ ...value, overridesBorderColor: v.currentTarget.checked })
+                  }
+                />
+              </Field>
+              {value.overridesBorderColor && (
+                <Field
+                  label="Severity overrides"
+                  description="Custom severity scores for threshold colors"
+                >
+                  <SeverityOverridesEditor
+                    value={value.severityOverrides ?? []}
+                    onChange={(severityOverrides) => onChange({ ...value, severityOverrides })}
+                  />
+                </Field>
+              )}
+            </JoinEditor>
           )}
         </div>
       )}
@@ -311,185 +327,6 @@ const FieldEntrySettings: React.FC<FieldEntrySettingsProps> = ({ value, onChange
           />
         </Field>
       )}
-    </>
-  );
-};
-
-interface JoinEntrySettingsProps {
-  value: JoinDisplayEntry;
-  allFrames: DataFrame[];
-  primaryFieldOptions: Array<ComboboxOption<string>>;
-  onChange: (entry: DisplayEntry) => void;
-}
-
-const JoinEntrySettings: React.FC<JoinEntrySettingsProps> = ({
-  value,
-  allFrames,
-  primaryFieldOptions,
-  onChange,
-}) => {
-  const frameOptions = useMemo<Array<ComboboxOption<string>>>(
-    () =>
-      allFrames.map((frame) => {
-        const name = getFrameDisplayName(frame);
-        return {
-          label: name,
-          value: frame.refId ?? name,
-          description: frame.refId,
-        };
-      }),
-    [allFrames]
-  );
-
-  const sourceFrame = useMemo(
-    () => allFrames.find((f) => f.refId === value.sourceFrame),
-    [allFrames, value.sourceFrame]
-  );
-
-  const sourceFieldOptions = useMemo<Array<ComboboxOption<string>>>(
-    () =>
-      sourceFrame
-        ? sourceFrame.fields.map((f) => ({ label: f.name, value: f.name, description: f.type }))
-        : [],
-    [sourceFrame]
-  );
-
-  const handleChange = (updates: Partial<JoinDisplayEntry>) => {
-    onChange({ ...value, ...updates });
-  };
-
-  return (
-    <>
-      <Field label="Source Frame">
-        <Combobox
-          options={frameOptions}
-          value={value.sourceFrame || null}
-          onChange={(option) => handleChange({ sourceFrame: option?.value ?? '' })}
-          isClearable={true}
-          placeholder="Select a frame"
-        />
-      </Field>
-      <Field label="Display Field" description="Field from the joined frame to display">
-        <FieldCombobox
-          options={sourceFieldOptions}
-          value={value.sourceField || null}
-          onChange={(v) => handleChange({ sourceField: v ?? '' })}
-          isClearable={true}
-          placeholder="Select a field"
-        />
-      </Field>
-      <Field label="Keys" description="How to match rows between frames">
-        <>
-          {value.keys.map((pair, i) => (
-            <JoinKeyPairRow
-              key={i}
-              value={pair}
-              primaryFieldOptions={primaryFieldOptions}
-              foreignFieldOptions={sourceFieldOptions}
-              onChange={(updated) =>
-                handleChange({ keys: value.keys.map((k, j) => (j === i ? updated : k)) })
-              }
-              onDelete={() => handleChange({ keys: value.keys.filter((_, j) => j !== i) })}
-            />
-          ))}
-          <Button
-            variant="secondary"
-            size="sm"
-            icon="plus"
-            onClick={() =>
-              handleChange({
-                keys: [...value.keys, { primaryKey: '', foreignField: '', primaryKeyTemplate: '' }],
-              })
-            }
-          >
-            Add key
-          </Button>
-        </>
-      </Field>
-      <Field
-        label="Overrides border color"
-        description="Allow thresholds of the joined value to override border color"
-        horizontal={true}
-      >
-        <Switch
-          value={value.overridesBorderColor}
-          onChange={(v) => handleChange({ overridesBorderColor: v.currentTarget.checked })}
-        />
-      </Field>
-      {value.overridesBorderColor && (
-        <Field label="Severity overrides" description="Custom severity scores for threshold colors">
-          <SeverityOverridesEditor
-            value={value.severityOverrides ?? []}
-            onChange={(severityOverrides) => handleChange({ severityOverrides })}
-          />
-        </Field>
-      )}
-    </>
-  );
-};
-
-interface JoinKeyPairRowProps {
-  value: JoinKeyPair;
-  primaryFieldOptions: Array<ComboboxOption<string>>;
-  foreignFieldOptions: Array<ComboboxOption<string>>;
-  onChange: (pair: JoinKeyPair) => void;
-  onDelete: () => void;
-}
-
-const JoinKeyPairRow: React.FC<JoinKeyPairRowProps> = ({
-  value,
-  primaryFieldOptions,
-  foreignFieldOptions,
-  onChange,
-  onDelete,
-}) => {
-  const styles = useStyles2(getStyles);
-
-  return (
-    <>
-      <InlineFieldRow style={{ flexWrap: 'nowrap' }} className={styles.keyPairRow}>
-        <InlineField title="Foreign field" grow={true} shrink={true}>
-          <FieldCombobox
-            options={foreignFieldOptions}
-            value={value.foreignField || null}
-            onChange={(v) => onChange({ ...value, foreignField: v ?? '' })}
-            isClearable={true}
-            placeholder="Foreign field"
-          />
-        </InlineField>
-        <InlineField>
-          <span className={styles.arrow}>=</span>
-        </InlineField>
-        <InlineField title="Value" grow={true} shrink={true}>
-          <FieldCombobox
-            options={[{ value: '__template__', label: 'Use template' }, ...primaryFieldOptions]}
-            value={value.primaryKey || null}
-            onChange={(v) => onChange({ ...value, primaryKey: v ?? '' })}
-            isClearable={true}
-            placeholder="Value"
-          />
-        </InlineField>
-        <InlineField>
-          <Button
-            variant="secondary"
-            icon="trash-alt"
-            aria-label="Delete key pair"
-            title="Delete key pair"
-            onClick={onDelete}
-          />
-        </InlineField>
-      </InlineFieldRow>
-      {value.primaryKey === '__template__' ? (
-        <InlineFieldRow style={{ flexWrap: 'nowrap' }} className={styles.keyPairRow}>
-          <InlineField grow={true}>
-            <TemplatePatternInput
-              value={value.primaryKeyTemplate}
-              onChange={(v) => onChange({ ...value, primaryKeyTemplate: v })}
-              placeholder="e.g. ${__data.fields.id}"
-            />
-          </InlineField>
-        </InlineFieldRow>
-      ) : null}
     </>
   );
 };

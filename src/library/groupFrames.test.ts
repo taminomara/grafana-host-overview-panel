@@ -1,8 +1,9 @@
 import { FieldType } from '@grafana/data';
 import { indexFrame } from './dataFrame';
-import { parseCustomSortPattern, groupFrame, GroupNode } from './groupFrames';
+import { parseCustomSortPattern, groupFrame, GroupNode, resolveKnownIdsFromJoin } from './groupFrames';
+import { buildJoinIndices } from './joinFrames';
 import { makeField, makeFrame, makeGroup, makeOptions, makePanelContext } from './testHelpers';
-import { GridType, SortMode } from '../types';
+import { GridType, Join, SortMode } from '../types';
 
 jest.mock('@grafana/data', () => ({
   ...jest.requireActual('@grafana/data'),
@@ -513,5 +514,311 @@ describe('groupFrame', () => {
 
       expect(root.children).toHaveLength(0);
     });
+  });
+
+  // -- known IDs from join ----------------------------------------------------
+
+  describe('known IDs from join', () => {
+    function makeJoinIndices(foreignFrame: ReturnType<typeof makeFrame>, join: Join) {
+      const displayEntry = { ...join, type: 'join' as const, overridesBorderColor: false };
+      const indices = buildJoinIndices([foreignFrame], [displayEntry]);
+      return new Map(indices.map((idx) => [idx.config.id, idx]));
+    }
+
+    it('cross-join known IDs at group level', () => {
+      const frame = indexFrame(
+        makeFrame([
+          makeField('dc', FieldType.string, ['us', 'eu']),
+          makeField('host', FieldType.string, ['h1', 'h2']),
+        ])
+      );
+      const foreignFrame = makeFrame(
+        [makeField('region', FieldType.string, ['us', 'eu', 'ap'])],
+        'Inventory'
+      );
+      const join: Join = {
+        id: 'ki-1',
+        sourceFrame: 'Inventory',
+        sourceField: 'region',
+        keys: [],
+      };
+      const joinIndices = makeJoinIndices(foreignFrame, join);
+      const ctxWithJoin = makePanelContext({ joinIndices, data: [foreignFrame] });
+
+      const opts = makeOptions({
+        groups: [makeGroup({ groupKey: 'dc', knownIdsJoin: join })],
+      });
+      const root = groupFrame(frame, opts, ctxWithJoin);
+
+      expect(root.children).toHaveLength(3);
+      const keys = root.children.map((c) => c.groupValues['dc']);
+      expect(keys).toContain('us');
+      expect(keys).toContain('eu');
+      expect(keys).toContain('ap');
+    });
+
+    it('keyed join known IDs at nested group level', () => {
+      const frame = indexFrame(
+        makeFrame([
+          makeField('dc', FieldType.string, ['us', 'us']),
+          makeField('rack', FieldType.string, ['r1', 'r2']),
+          makeField('host', FieldType.string, ['h1', 'h2']),
+        ])
+      );
+      const foreignFrame = makeFrame(
+        [
+          makeField('region', FieldType.string, ['us', 'us', 'us', 'eu', 'eu']),
+          makeField('rack_id', FieldType.string, ['r1', 'r2', 'r3', 'r4', 'r5']),
+        ],
+        'Racks'
+      );
+      const join: Join = {
+        id: 'ki-2',
+        sourceFrame: 'Racks',
+        sourceField: 'rack_id',
+        keys: [{ primaryKey: 'dc', foreignField: 'region', primaryKeyTemplate: '' }],
+      };
+      const joinIndices = makeJoinIndices(foreignFrame, join);
+      const ctxWithJoin = makePanelContext({ joinIndices, data: [foreignFrame] });
+
+      const opts = makeOptions({
+        groups: [
+          makeGroup({ groupKey: 'dc' }),
+          makeGroup({ groupKey: 'rack', knownIdsJoin: join }),
+        ],
+      });
+      const root = groupFrame(frame, opts, ctxWithJoin);
+
+      const usNode = root.children.find((c) => c.groupValues['dc'] === 'us')!;
+      const usRackKeys = usNode.children.map((c) => c.groupValues['rack']);
+      expect(usRackKeys).toContain('r1');
+      expect(usRackKeys).toContain('r2');
+      expect(usRackKeys).toContain('r3');
+      expect(usRackKeys).toHaveLength(3);
+
+      // eu has no data rows, so it won't appear unless dc also has knownIds
+    });
+
+    it('panel-level known IDs from cross-join', () => {
+      const frame = indexFrame(
+        makeFrame([
+          makeField('host', FieldType.string, ['h1', 'h2']),
+          makeField('value', FieldType.number, [10, 20]),
+        ])
+      );
+      const foreignFrame = makeFrame(
+        [makeField('hostname', FieldType.string, ['h1', 'h2', 'h3', 'h4'])],
+        'Hosts'
+      );
+      const join: Join = {
+        id: 'ki-3',
+        sourceFrame: 'Hosts',
+        sourceField: 'hostname',
+        keys: [],
+      };
+      const joinIndices = makeJoinIndices(foreignFrame, join);
+      const ctxWithJoin = makePanelContext({ joinIndices, data: [foreignFrame] });
+
+      const opts = makeOptions({
+        idField: 'host',
+        knownIdsJoin: join,
+      });
+      const root = groupFrame(frame, opts, ctxWithJoin);
+
+      const hostValues = [...root.frame.fieldByName.get('host')!.values];
+      expect(hostValues).toContain('h1');
+      expect(hostValues).toContain('h2');
+      expect(hostValues).toContain('h3');
+      expect(hostValues).toContain('h4');
+      expect(hostValues).toHaveLength(4);
+    });
+
+    it('merges static and join known IDs', () => {
+      const frame = indexFrame(
+        makeFrame([
+          makeField('host', FieldType.string, ['h1']),
+          makeField('value', FieldType.number, [10]),
+        ])
+      );
+      const foreignFrame = makeFrame(
+        [makeField('hostname', FieldType.string, ['h1', 'h2'])],
+        'Hosts'
+      );
+      const join: Join = {
+        id: 'ki-4',
+        sourceFrame: 'Hosts',
+        sourceField: 'hostname',
+        keys: [],
+      };
+      const joinIndices = makeJoinIndices(foreignFrame, join);
+      const ctxWithJoin = makePanelContext({ joinIndices, data: [foreignFrame] });
+
+      const opts = makeOptions({
+        idField: 'host',
+        knownIds: 'h3, h4',
+        knownIdsJoin: join,
+      });
+      const root = groupFrame(frame, opts, ctxWithJoin);
+
+      const hostValues = [...root.frame.fieldByName.get('host')!.values];
+      expect(hostValues).toContain('h1');
+      expect(hostValues).toContain('h2');
+      expect(hostValues).toContain('h3');
+      expect(hostValues).toContain('h4');
+      expect(hostValues).toHaveLength(4);
+    });
+
+    it('gracefully handles missing source frame', () => {
+      const frame = indexFrame(
+        makeFrame([
+          makeField('host', FieldType.string, ['h1']),
+          makeField('value', FieldType.number, [10]),
+        ])
+      );
+      const join: Join = {
+        id: 'ki-5',
+        sourceFrame: 'NonExistent',
+        sourceField: 'hostname',
+        keys: [],
+      };
+      const opts = makeOptions({
+        idField: 'host',
+        knownIdsJoin: join,
+      });
+      const root = groupFrame(frame, opts, ctx);
+
+      const hostValues = [...root.frame.fieldByName.get('host')!.values];
+      expect(hostValues).toEqual(['h1']);
+    });
+
+    it('gracefully handles missing source field', () => {
+      const frame = indexFrame(
+        makeFrame([
+          makeField('host', FieldType.string, ['h1']),
+          makeField('value', FieldType.number, [10]),
+        ])
+      );
+      const foreignFrame = makeFrame(
+        [makeField('other', FieldType.string, ['x', 'y'])],
+        'Hosts'
+      );
+      const join: Join = {
+        id: 'ki-6',
+        sourceFrame: 'Hosts',
+        sourceField: 'nonexistent',
+        keys: [],
+      };
+      const joinIndices = makeJoinIndices(foreignFrame, join);
+      const ctxWithJoin = makePanelContext({ joinIndices, data: [foreignFrame] });
+
+      const opts = makeOptions({
+        idField: 'host',
+        knownIdsJoin: join,
+      });
+      const root = groupFrame(frame, opts, ctxWithJoin);
+
+      const hostValues = [...root.frame.fieldByName.get('host')!.values];
+      expect(hostValues).toEqual(['h1']);
+    });
+
+    it('handles empty foreign frame', () => {
+      const frame = indexFrame(
+        makeFrame([
+          makeField('host', FieldType.string, ['h1']),
+          makeField('value', FieldType.number, [10]),
+        ])
+      );
+      const foreignFrame = makeFrame(
+        [makeField('hostname', FieldType.string, [])],
+        'Hosts'
+      );
+      const join: Join = {
+        id: 'ki-7',
+        sourceFrame: 'Hosts',
+        sourceField: 'hostname',
+        keys: [],
+      };
+      const joinIndices = makeJoinIndices(foreignFrame, join);
+      const ctxWithJoin = makePanelContext({ joinIndices, data: [foreignFrame] });
+
+      const opts = makeOptions({
+        idField: 'host',
+        knownIdsJoin: join,
+      });
+      const root = groupFrame(frame, opts, ctxWithJoin);
+
+      const hostValues = [...root.frame.fieldByName.get('host')!.values];
+      expect(hostValues).toEqual(['h1']);
+    });
+  });
+});
+
+// -- resolveKnownIdsFromJoin --------------------------------------------------
+
+describe('resolveKnownIdsFromJoin', () => {
+  function makeJoinIndices(foreignFrame: ReturnType<typeof makeFrame>, join: Join) {
+    const displayEntry = { ...join, type: 'join' as const, overridesBorderColor: false };
+    const indices = buildJoinIndices([foreignFrame], [displayEntry]);
+    return new Map(indices.map((idx) => [idx.config.id, idx]));
+  }
+
+  it('returns empty set for undefined join', () => {
+    const ctx = makePanelContext();
+    expect(resolveKnownIdsFromJoin(undefined, ctx, {})).toEqual(new Set());
+  });
+
+  it('returns empty set when sourceField is empty', () => {
+    const ctx = makePanelContext();
+    const join: Join = { id: 'x', sourceFrame: 'A', sourceField: '', keys: [] };
+    expect(resolveKnownIdsFromJoin(join, ctx, {})).toEqual(new Set());
+  });
+
+  it('returns empty set when join index not found', () => {
+    const ctx = makePanelContext();
+    const join: Join = { id: 'missing', sourceFrame: 'A', sourceField: 'f', keys: [] };
+    expect(resolveKnownIdsFromJoin(join, ctx, {})).toEqual(new Set());
+  });
+
+  it('returns all values for cross-join (no keys)', () => {
+    const foreignFrame = makeFrame(
+      [makeField('host', FieldType.string, ['a', 'b', 'c'])],
+      'Inv'
+    );
+    const join: Join = { id: 'j1', sourceFrame: 'Inv', sourceField: 'host', keys: [] };
+    const ctx = makePanelContext({ joinIndices: makeJoinIndices(foreignFrame, join) });
+
+    expect(resolveKnownIdsFromJoin(join, ctx, {})).toEqual(new Set(['a', 'b', 'c']));
+  });
+
+  it('filters by keyed join using groupValues', () => {
+    const foreignFrame = makeFrame(
+      [
+        makeField('dc', FieldType.string, ['us', 'us', 'eu']),
+        makeField('rack', FieldType.string, ['r1', 'r2', 'r3']),
+      ],
+      'Inv'
+    );
+    const join: Join = {
+      id: 'j2',
+      sourceFrame: 'Inv',
+      sourceField: 'rack',
+      keys: [{ primaryKey: 'dc', foreignField: 'dc', primaryKeyTemplate: '' }],
+    };
+    const ctx = makePanelContext({ joinIndices: makeJoinIndices(foreignFrame, join) });
+
+    expect(resolveKnownIdsFromJoin(join, ctx, { dc: 'us' })).toEqual(new Set(['r1', 'r2']));
+    expect(resolveKnownIdsFromJoin(join, ctx, { dc: 'eu' })).toEqual(new Set(['r3']));
+    expect(resolveKnownIdsFromJoin(join, ctx, { dc: 'ap' })).toEqual(new Set());
+  });
+
+  it('deduplicates values', () => {
+    const foreignFrame = makeFrame(
+      [makeField('host', FieldType.string, ['a', 'a', 'b'])],
+      'Inv'
+    );
+    const join: Join = { id: 'j3', sourceFrame: 'Inv', sourceField: 'host', keys: [] };
+    const ctx = makePanelContext({ joinIndices: makeJoinIndices(foreignFrame, join) });
+
+    expect(resolveKnownIdsFromJoin(join, ctx, {})).toEqual(new Set(['a', 'b']));
   });
 });
