@@ -53,17 +53,17 @@ export function JoinEditor<T extends Join = Join>({
     [allFrames]
   );
 
-  const sourceFrame = useMemo(
-    () => allFrames.find((f) => f.refId === value.sourceFrame),
-    [allFrames, value.sourceFrame]
+  const foreignFrame = useMemo(
+    () => allFrames.find((f) => f.refId === value.foreignFrame),
+    [allFrames, value.foreignFrame]
   );
 
-  const sourceFieldOptions = useMemo<Array<ComboboxOption<string>>>(
+  const foreignFieldOptions = useMemo<Array<ComboboxOption<string>>>(
     () =>
-      sourceFrame
-        ? sourceFrame.fields.map((f) => ({ label: f.name, value: f.name, description: f.type }))
+      foreignFrame
+        ? foreignFrame.fields.map((f) => ({ label: f.name, value: f.name, description: f.type }))
         : [],
-    [sourceFrame]
+    [foreignFrame]
   );
 
   const handleChange = (updates: Partial<Join>) => {
@@ -72,20 +72,20 @@ export function JoinEditor<T extends Join = Join>({
 
   return (
     <>
-      <Field label="Source Frame">
+      <Field label="Foreign Frame">
         <Combobox
           options={frameOptions}
-          value={value.sourceFrame || null}
-          onChange={(option) => handleChange({ sourceFrame: option?.value ?? '' })}
+          value={value.foreignFrame || null}
+          onChange={(option) => handleChange({ foreignFrame: option?.value ?? '' })}
           isClearable={true}
           placeholder="Select a frame"
         />
       </Field>
-      <Field label="Source Field" description="Field from the joined frame">
+      <Field label="Foreign Field" description="Field from the foreign frame">
         <FieldCombobox
-          options={sourceFieldOptions}
-          value={value.sourceField || null}
-          onChange={(v) => handleChange({ sourceField: v ?? '' })}
+          options={foreignFieldOptions}
+          value={value.foreignField || null}
+          onChange={(v) => handleChange({ foreignField: v ?? '' })}
           isClearable={true}
           placeholder="Select a field"
         />
@@ -97,7 +97,7 @@ export function JoinEditor<T extends Join = Join>({
               key={i}
               value={pair}
               primaryFieldOptions={primaryFieldOptions}
-              foreignFieldOptions={sourceFieldOptions}
+              foreignFieldOptions={foreignFieldOptions}
               onChange={(updated) =>
                 handleChange({ keys: value.keys.map((k, j) => (j === i ? updated : k)) })
               }
@@ -206,7 +206,7 @@ export const KnownIdsJoinEditor: React.FC<KnownIdsJoinEditorProps> = ({
   primaryFieldOptions,
 }) => {
   const defaultValue = useMemo<Join>(
-    () => ({ id: crypto.randomUUID(), sourceFrame: '', sourceField: '', keys: [] }),
+    () => ({ id: crypto.randomUUID(), foreignFrame: '', foreignField: '', keys: [] }),
     []
   );
 
@@ -214,7 +214,7 @@ export const KnownIdsJoinEditor: React.FC<KnownIdsJoinEditorProps> = ({
     <JoinEditor
       value={value ?? defaultValue}
       onChange={(updated) => {
-        if (!updated.sourceFrame) {
+        if (!updated.foreignFrame) {
           onChange(undefined);
         } else {
           onChange(updated);

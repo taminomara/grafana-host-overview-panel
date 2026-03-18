@@ -3189,8 +3189,8 @@
               }
             ],
             "overridesBorderColor": false,
-            "sourceField": "memory",
-            "sourceFrame": "Secondary",
+            "foreignField": "memory",
+            "foreignFrame": "Secondary",
             "type": "join"
           }
         ],
@@ -3285,8 +3285,8 @@
               }
             ],
             "overridesBorderColor": false,
-            "sourceField": "memory",
-            "sourceFrame": "NoMatch",
+            "foreignField": "memory",
+            "foreignFrame": "NoMatch",
             "type": "join"
           }
         ],
@@ -3381,8 +3381,8 @@
               }
             ],
             "overridesBorderColor": false,
-            "sourceField": "memory",
-            "sourceFrame": "NonexistentFrame",
+            "foreignField": "memory",
+            "foreignFrame": "NonexistentFrame",
             "type": "join"
           }
         ],
@@ -3641,8 +3641,8 @@
         "knownIdsJoin": {
           "id": "e2e-92-kij",
           "keys": [],
-          "sourceField": "hostname",
-          "sourceFrame": "B"
+          "foreignField": "hostname",
+          "foreignFrame": "B"
         },
         "resourceDisplayMode": "cell-with-text",
         "statusField": "status",
@@ -3733,8 +3733,8 @@
             "knownIdsJoin": {
               "id": "6bc4cb60-6201-47d0-beb6-cc2602c528e1",
               "keys": [],
-              "sourceField": "region",
-              "sourceFrame": "B"
+              "foreignField": "region",
+              "foreignFrame": "B"
             },
             "showKeyName": false,
             "showTitle": true,
@@ -3755,8 +3755,8 @@
               "primaryKeyTemplate": ""
             }
           ],
-          "sourceField": "hostname",
-          "sourceFrame": "B"
+          "foreignField": "hostname",
+          "foreignFrame": "B"
         },
         "resourceDisplayMode": "cell-with-text",
         "statusField": "status",

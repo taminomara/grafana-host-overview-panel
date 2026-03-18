@@ -215,7 +215,7 @@ export function resolveKnownIdsFromJoin(
   groupValues: Record<string, unknown>
 ): Set<string> {
   const result = new Set<string>();
-  if (!join?.sourceField) {
+  if (!join?.foreignField) {
     return result;
   }
 
@@ -224,8 +224,8 @@ export function resolveKnownIdsFromJoin(
     return result;
   }
 
-  const sourceField = index.frame.fieldByName.get(join.sourceField);
-  if (!sourceField) {
+  const foreignField = index.frame.fieldByName.get(join.foreignField);
+  if (!foreignField) {
     return result;
   }
 
@@ -241,7 +241,7 @@ export function resolveKnownIdsFromJoin(
   }
 
   for (const rowIndex of matchedRows) {
-    result.add(String(sourceField.values[rowIndex]));
+    result.add(String(foreignField.values[rowIndex]));
   }
   return result;
 }

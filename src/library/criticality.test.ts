@@ -518,8 +518,8 @@ describe('getMostCriticalColor', () => {
     const joinEntry: JoinDisplayEntry = {
       id: 'j1',
       type: 'join',
-      sourceFrame: 'B',
-      sourceField: 'metric',
+      foreignFrame: 'B',
+      foreignField: 'metric',
       keys: [{ primaryKey: 'id', primaryKeyTemplate: '', foreignField: 'fk' }],
       overridesBorderColor: true,
     };
@@ -601,8 +601,8 @@ describe('getMostCriticalColor', () => {
     const joinEntry: JoinDisplayEntry = {
       id: 'j1',
       type: 'join',
-      sourceFrame: 'B',
-      sourceField: 'metric',
+      foreignFrame: 'B',
+      foreignField: 'metric',
       keys: [{ primaryKey: 'id', primaryKeyTemplate: '', foreignField: 'fk' }],
       overridesBorderColor: true,
     };

@@ -273,7 +273,7 @@ export const GroupView: React.FC<GroupViewProps> = ({ node, options }) => {
                   {section.matchedRows.map((joinedRowIndex) => (
                     <FieldRow
                       key={joinedRowIndex}
-                      field={section.sourceField}
+                      field={section.foreignField}
                       frame={section.index.frame}
                       rowIndex={joinedRowIndex}
                     />
@@ -284,7 +284,7 @@ export const GroupView: React.FC<GroupViewProps> = ({ node, options }) => {
             return (
               <FieldRow
                 key={entry.id}
-                field={section.sourceField}
+                field={section.foreignField}
                 frame={section.index.frame}
                 rowIndex={undefined}
               />

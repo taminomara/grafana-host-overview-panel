@@ -1,6 +1,17 @@
 import { PanelModel } from '@grafana/data';
 import { DisplayEntry, HeadingDisplayEntry, HostViewerOptions } from './types';
 
+function renameJoinFields(obj: Record<string, unknown>) {
+  if ('sourceFrame' in obj && !('foreignFrame' in obj)) {
+    obj.foreignFrame = obj.sourceFrame;
+    delete obj.sourceFrame;
+  }
+  if ('sourceField' in obj && !('foreignField' in obj)) {
+    obj.foreignField = obj.sourceField;
+    delete obj.sourceField;
+  }
+}
+
 export function migrationHandler(panel: PanelModel<Partial<HostViewerOptions>>) {
   console.log('!!!');
   const options = { ...panel.options };
@@ -27,6 +38,27 @@ export function migrationHandler(panel: PanelModel<Partial<HostViewerOptions>>) 
 
   delete (options as Record<string, unknown>).richEntries;
   delete (options as Record<string, unknown>).tooltipEntries;
+
+  for (const entry of options.displayEntries ?? []) {
+    if (entry.type === 'join') {
+      renameJoinFields(entry as unknown as Record<string, unknown>);
+    }
+  }
+
+  if (options.knownIdsJoin) {
+    renameJoinFields(options.knownIdsJoin as unknown as Record<string, unknown>);
+  }
+
+  for (const group of options.groups ?? []) {
+    for (const entry of group.entries ?? []) {
+      if (entry.type === 'join') {
+        renameJoinFields(entry as unknown as Record<string, unknown>);
+      }
+    }
+    if (group.knownIdsJoin) {
+      renameJoinFields(group.knownIdsJoin as unknown as Record<string, unknown>);
+    }
+  }
 
   return options;
 }

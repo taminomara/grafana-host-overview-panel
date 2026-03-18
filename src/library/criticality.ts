@@ -156,8 +156,8 @@ export function getMostCriticalColor(
       for (const section of sections) {
         for (const joinedRow of section.matchedRows) {
           const [score, color] = getCriticalityScore(
-            section.sourceField,
-            section.sourceField.values[joinedRow],
+            section.foreignField,
+            section.foreignField.values[joinedRow],
             severityMap,
             resolveColor
           );

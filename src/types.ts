@@ -19,8 +19,8 @@ export interface FieldDisplayEntry {
 
 export interface Join {
   id: string;
-  sourceFrame: string;
-  sourceField: string;
+  foreignFrame: string;
+  foreignField: string;
   keys: JoinKeyPair[];
 }
 

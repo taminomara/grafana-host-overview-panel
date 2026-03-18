@@ -7,11 +7,11 @@ import { Join } from '../types';
 let nextJoinId = 0;
 
 function makeJoin(
-  overrides: Partial<Join> & Pick<Join, 'sourceFrame' | 'keys'>
+  overrides: Partial<Join> & Pick<Join, 'foreignFrame' | 'keys'>
 ): Join {
   return {
     id: `join-${nextJoinId++}`,
-    sourceField: '',
+    foreignField: '',
     ...overrides,
   };
 }
@@ -26,7 +26,7 @@ describe('buildJoinIndices', () => {
 
   it('returns empty array for empty frames', () => {
     const join = makeJoin({
-      sourceFrame: 'B',
+      foreignFrame: 'B',
       keys: [{ primaryKey: 'id', primaryKeyTemplate: '', foreignField: 'fk' }],
     });
     expect(buildJoinIndices([], [join])).toEqual([]);
@@ -34,7 +34,7 @@ describe('buildJoinIndices', () => {
 
   it('builds index for cross-join (no keys)', () => {
     const frames = [makeFrame([makeField('a', FieldType.string, ['x', 'y', 'z'])], 'B')];
-    const join = makeJoin({ sourceFrame: 'B', keys: [] });
+    const join = makeJoin({ foreignFrame: 'B', keys: [] });
     const indices = buildJoinIndices(frames, [join]);
 
     expect(indices).toHaveLength(1);
@@ -44,10 +44,10 @@ describe('buildJoinIndices', () => {
     expect(map.get('')).toEqual([0, 1, 2]);
   });
 
-  it('skips joins referencing missing sourceFrame', () => {
+  it('skips joins referencing missing foreignFrame', () => {
     const frames = [makeFrame([makeField('a', FieldType.string, ['x'])], 'A')];
     const join = makeJoin({
-      sourceFrame: 'missing',
+      foreignFrame: 'missing',
       keys: [{ primaryKey: 'id', primaryKeyTemplate: '', foreignField: 'a' }],
     });
     expect(buildJoinIndices(frames, [join])).toEqual([]);
@@ -56,7 +56,7 @@ describe('buildJoinIndices', () => {
   it('skips joins where foreign field does not exist', () => {
     const frames = [makeFrame([makeField('a', FieldType.string, ['x'])], 'B')];
     const join = makeJoin({
-      sourceFrame: 'B',
+      foreignFrame: 'B',
       keys: [{ primaryKey: 'id', primaryKeyTemplate: '', foreignField: 'nonexistent' }],
     });
     expect(buildJoinIndices(frames, [join])).toEqual([]);
@@ -71,7 +71,7 @@ describe('buildJoinIndices', () => {
       'B'
     );
     const join = makeJoin({
-      sourceFrame: 'B',
+      foreignFrame: 'B',
       keys: [{ primaryKey: 'id', primaryKeyTemplate: '', foreignField: 'fk' }],
     });
     const indices = buildJoinIndices([secondaryFrame], [join]);
@@ -87,11 +87,11 @@ describe('buildJoinIndices', () => {
     const frameC = makeFrame([makeField('fk2', FieldType.string, ['y'])], 'C');
     const joins = [
       makeJoin({
-        sourceFrame: 'B',
+        foreignFrame: 'B',
         keys: [{ primaryKey: 'a', primaryKeyTemplate: '', foreignField: 'fk' }],
       }),
       makeJoin({
-        sourceFrame: 'C',
+        foreignFrame: 'C',
         keys: [{ primaryKey: 'b', primaryKeyTemplate: '', foreignField: 'fk2' }],
       }),
     ];
@@ -106,7 +106,7 @@ describe('getKeyMap', () => {
   it('returns cached instance on second call', () => {
     const secondaryFrame = makeFrame([makeField('fk', FieldType.string, ['a', 'b'])], 'B');
     const join = makeJoin({
-      sourceFrame: 'B',
+      foreignFrame: 'B',
       keys: [{ primaryKey: 'id', primaryKeyTemplate: '', foreignField: 'fk' }],
     });
     const [index] = buildJoinIndices([secondaryFrame], [join]);
@@ -119,7 +119,7 @@ describe('getKeyMap', () => {
   it('maps distinct keys to their row indices', () => {
     const secondaryFrame = makeFrame([makeField('fk', FieldType.string, ['a', 'b', 'c'])], 'B');
     const join = makeJoin({
-      sourceFrame: 'B',
+      foreignFrame: 'B',
       keys: [{ primaryKey: 'id', primaryKeyTemplate: '', foreignField: 'fk' }],
     });
     const [index] = buildJoinIndices([secondaryFrame], [join]);
@@ -136,7 +136,7 @@ describe('getKeyMap', () => {
       'B'
     );
     const join = makeJoin({
-      sourceFrame: 'B',
+      foreignFrame: 'B',
       keys: [{ primaryKey: 'id', primaryKeyTemplate: '', foreignField: 'fk' }],
     });
     const [index] = buildJoinIndices([secondaryFrame], [join]);
@@ -155,7 +155,7 @@ describe('getKeyMap', () => {
       'B'
     );
     const join = makeJoin({
-      sourceFrame: 'B',
+      foreignFrame: 'B',
       keys: [
         { primaryKey: 'k1', primaryKeyTemplate: '', foreignField: 'fk1' },
         { primaryKey: 'k2', primaryKeyTemplate: '', foreignField: 'fk2' },
@@ -184,7 +184,7 @@ describe('lookupJoinedRows', () => {
       'B'
     );
     const join = makeJoin({
-      sourceFrame: 'B',
+      foreignFrame: 'B',
       keys: [{ primaryKey: 'id', primaryKeyTemplate: '', foreignField: 'fk' }],
     });
     const [index] = buildJoinIndices([secondary], [join]);
@@ -199,7 +199,7 @@ describe('lookupJoinedRows', () => {
     const primary = indexFrame(makeFrame([makeField('id', FieldType.string, ['missing'])]));
     const secondary = makeFrame([makeField('fk', FieldType.string, ['a', 'b'])], 'B');
     const join = makeJoin({
-      sourceFrame: 'B',
+      foreignFrame: 'B',
       keys: [{ primaryKey: 'id', primaryKeyTemplate: '', foreignField: 'fk' }],
     });
     const [index] = buildJoinIndices([secondary], [join]);
@@ -224,7 +224,7 @@ describe('lookupJoinedRows', () => {
       'B'
     );
     const join = makeJoin({
-      sourceFrame: 'B',
+      foreignFrame: 'B',
       keys: [
         { primaryKey: 'k1', primaryKeyTemplate: '', foreignField: 'fk1' },
         { primaryKey: 'k2', primaryKeyTemplate: '', foreignField: 'fk2' },
@@ -251,8 +251,8 @@ describe('lookupJoinedRows', () => {
       'B'
     );
     const join = makeJoin({
-      sourceFrame: 'B',
-      sourceField: 'node',
+      foreignFrame: 'B',
+      foreignField: 'node',
       keys: [
         {
           primaryKey: '__template__',
@@ -282,7 +282,7 @@ describe('lookupJoinedRows', () => {
       'B'
     );
     const join = makeJoin({
-      sourceFrame: 'B',
+      foreignFrame: 'B',
       keys: [{ primaryKey: 'nonexistent', primaryKeyTemplate: '', foreignField: 'fk' }],
     });
     const [index] = buildJoinIndices([secondary], [join]);
@@ -309,8 +309,8 @@ describe('resolveJoinSections', () => {
   it('returns empty array when join ID is not in joinIndices map', () => {
     const primary = indexFrame(makeFrame([makeField('id', FieldType.string, ['a'])]));
     const join = makeJoin({
-      sourceFrame: 'B',
-      sourceField: 'val',
+      foreignFrame: 'B',
+      foreignField: 'val',
       keys: [{ primaryKey: 'id', primaryKeyTemplate: '', foreignField: 'fk' }],
     });
 
@@ -318,14 +318,14 @@ describe('resolveJoinSections', () => {
     expect(result).toEqual([]);
   });
 
-  it('returns empty array when join has no sourceField', () => {
+  it('returns empty array when join has no foreignField', () => {
     const secondary = makeFrame(
       [makeField('fk', FieldType.string, ['a']), makeField('val', FieldType.number, [10])],
       'B'
     );
     const join = makeJoin({
-      sourceFrame: 'B',
-      sourceField: '',
+      foreignFrame: 'B',
+      foreignField: '',
       keys: [{ primaryKey: 'id', primaryKeyTemplate: '', foreignField: 'fk' }],
     });
     const indicesMap = buildIndicesMap([secondary], [join]);
@@ -335,11 +335,11 @@ describe('resolveJoinSections', () => {
     expect(result).toEqual([]);
   });
 
-  it('returns empty array when sourceField does not exist in joined frame', () => {
+  it('returns empty array when foreignField does not exist in joined frame', () => {
     const secondary = makeFrame([makeField('fk', FieldType.string, ['a'])], 'B');
     const join = makeJoin({
-      sourceFrame: 'B',
-      sourceField: 'nonexistent',
+      foreignFrame: 'B',
+      foreignField: 'nonexistent',
       keys: [{ primaryKey: 'id', primaryKeyTemplate: '', foreignField: 'fk' }],
     });
     const indicesMap = buildIndicesMap([secondary], [join]);
@@ -355,8 +355,8 @@ describe('resolveJoinSections', () => {
       'B'
     );
     const join = makeJoin({
-      sourceFrame: 'B',
-      sourceField: 'val',
+      foreignFrame: 'B',
+      foreignField: 'val',
       keys: [{ primaryKey: 'id', primaryKeyTemplate: '', foreignField: 'fk' }],
     });
     const indicesMap = buildIndicesMap([secondary], [join]);
@@ -366,7 +366,7 @@ describe('resolveJoinSections', () => {
     expect(result).toHaveLength(1);
     expect(result[0].matchedRows).toEqual([]);
     expect(result[0].joinConfig).toBe(join);
-    expect(result[0].sourceField.name).toBe('val');
+    expect(result[0].foreignField.name).toBe('val');
   });
 
   it('returns section with correct matchedRows for a matching join', () => {
@@ -378,8 +378,8 @@ describe('resolveJoinSections', () => {
       'B'
     );
     const join = makeJoin({
-      sourceFrame: 'B',
-      sourceField: 'val',
+      foreignFrame: 'B',
+      foreignField: 'val',
       keys: [{ primaryKey: 'id', primaryKeyTemplate: '', foreignField: 'fk' }],
     });
     const indicesMap = buildIndicesMap([secondary], [join]);
@@ -388,7 +388,7 @@ describe('resolveJoinSections', () => {
     const result = resolveJoinSections([join], primary, 0, indicesMap, replaceVariables, []);
     expect(result).toHaveLength(1);
     expect(result[0].matchedRows).toEqual([0, 2]);
-    expect(result[0].sourceField.name).toBe('val');
+    expect(result[0].foreignField.name).toBe('val');
   });
 
   it('resolves multiple joins, one section per valid join', () => {
@@ -401,13 +401,13 @@ describe('resolveJoinSections', () => {
       'C'
     );
     const join1 = makeJoin({
-      sourceFrame: 'B',
-      sourceField: 'metric1',
+      foreignFrame: 'B',
+      foreignField: 'metric1',
       keys: [{ primaryKey: 'id', primaryKeyTemplate: '', foreignField: 'fk' }],
     });
     const join2 = makeJoin({
-      sourceFrame: 'C',
-      sourceField: 'metric2',
+      foreignFrame: 'C',
+      foreignField: 'metric2',
       keys: [{ primaryKey: 'id', primaryKeyTemplate: '', foreignField: 'fk' }],
     });
     const indicesMap = buildIndicesMap([frameB, frameC], [join1, join2]);
@@ -422,9 +422,9 @@ describe('resolveJoinSections', () => {
       []
     );
     expect(result).toHaveLength(2);
-    expect(result[0].sourceField.name).toBe('metric1');
+    expect(result[0].foreignField.name).toBe('metric1');
     expect(result[0].matchedRows).toEqual([0]);
-    expect(result[1].sourceField.name).toBe('metric2');
+    expect(result[1].foreignField.name).toBe('metric2');
     expect(result[1].matchedRows).toEqual([0]);
   });
 });

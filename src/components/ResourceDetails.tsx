@@ -155,7 +155,7 @@ export const ResourceDetails: React.FC<ResourceDetailsProps> = ({
             {section.matchedRows.map((joinedRowIndex) => (
               <FieldRow
                 key={joinedRowIndex}
-                field={section.sourceField}
+                field={section.foreignField}
                 frame={section.index.frame}
                 rowIndex={joinedRowIndex}
               />

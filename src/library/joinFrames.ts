@@ -46,10 +46,10 @@ export function buildJoinIndices(allFrames: DataFrame[], joins: Join[]): JoinInd
   const result: JoinIndex[] = [];
 
   for (const join of joins) {
-    if (!join.sourceFrame) {
+    if (!join.foreignFrame) {
       continue;
     }
-    const secondaryFrame = allFrames.find((f) => f.refId === join.sourceFrame);
+    const secondaryFrame = allFrames.find((f) => f.refId === join.foreignFrame);
     if (!secondaryFrame) {
       continue;
     }
@@ -74,12 +74,12 @@ export interface ResolvedJoinSection {
   index: JoinIndex;
   /** Row indices in index.frame that matched. Empty array means no match. */
   matchedRows: number[];
-  sourceField: Field;
+  foreignField: Field;
 }
 
 /**
  * Resolves a list of Join configs against a primary frame row, returning one
- * ResolvedJoinSection per join that has a valid sourceField. Sections where no
+ * ResolvedJoinSection per join that has a valid foreignField. Sections where no
  * rows matched are included with matchedRows = []; callers can filter them out
  * if they don't want to show placeholders.
  */
@@ -93,15 +93,15 @@ export function resolveJoinSections(
 ): ResolvedJoinSection[] {
   return joins.flatMap((joinConfig) => {
     const index = joinIndices.get(joinConfig.id);
-    if (!index || !joinConfig.sourceField) {
+    if (!index || !joinConfig.foreignField) {
       return [];
     }
     const matchedRows = lookupJoinedRows(index, frame, rowIndex, replaceVariables, allData) ?? [];
-    const sourceField = index.frame.fieldByName.get(joinConfig.sourceField);
-    if (!sourceField) {
+    const foreignField = index.frame.fieldByName.get(joinConfig.foreignField);
+    if (!foreignField) {
       return [];
     }
-    return [{ joinConfig, index, matchedRows, sourceField }];
+    return [{ joinConfig, index, matchedRows, foreignField }];
   });
 }
 
@@ -117,7 +117,7 @@ export function lookupJoinedRows(
   for (const pair of index.config.keys) {
     const isTemplate = pair.primaryKey === '__template__';
     const field = isTemplate
-      ? primaryFrame.fieldByName.get(index.config.sourceField)
+      ? primaryFrame.fieldByName.get(index.config.foreignField)
       : primaryFrame.fieldByName.get(pair.primaryKey);
     if (!field && !isTemplate) {
       parts.push('');

@@ -538,8 +538,8 @@ describe('groupFrame', () => {
       );
       const join: Join = {
         id: 'ki-1',
-        sourceFrame: 'Inventory',
-        sourceField: 'region',
+        foreignFrame: 'Inventory',
+        foreignField: 'region',
         keys: [],
       };
       const joinIndices = makeJoinIndices(foreignFrame, join);
@@ -574,8 +574,8 @@ describe('groupFrame', () => {
       );
       const join: Join = {
         id: 'ki-2',
-        sourceFrame: 'Racks',
-        sourceField: 'rack_id',
+        foreignFrame: 'Racks',
+        foreignField: 'rack_id',
         keys: [{ primaryKey: 'dc', foreignField: 'region', primaryKeyTemplate: '' }],
       };
       const joinIndices = makeJoinIndices(foreignFrame, join);
@@ -612,8 +612,8 @@ describe('groupFrame', () => {
       );
       const join: Join = {
         id: 'ki-3',
-        sourceFrame: 'Hosts',
-        sourceField: 'hostname',
+        foreignFrame: 'Hosts',
+        foreignField: 'hostname',
         keys: [],
       };
       const joinIndices = makeJoinIndices(foreignFrame, join);
@@ -646,8 +646,8 @@ describe('groupFrame', () => {
       );
       const join: Join = {
         id: 'ki-4',
-        sourceFrame: 'Hosts',
-        sourceField: 'hostname',
+        foreignFrame: 'Hosts',
+        foreignField: 'hostname',
         keys: [],
       };
       const joinIndices = makeJoinIndices(foreignFrame, join);
@@ -677,8 +677,8 @@ describe('groupFrame', () => {
       );
       const join: Join = {
         id: 'ki-5',
-        sourceFrame: 'NonExistent',
-        sourceField: 'hostname',
+        foreignFrame: 'NonExistent',
+        foreignField: 'hostname',
         keys: [],
       };
       const opts = makeOptions({
@@ -704,8 +704,8 @@ describe('groupFrame', () => {
       );
       const join: Join = {
         id: 'ki-6',
-        sourceFrame: 'Hosts',
-        sourceField: 'nonexistent',
+        foreignFrame: 'Hosts',
+        foreignField: 'nonexistent',
         keys: [],
       };
       const joinIndices = makeJoinIndices(foreignFrame, join);
@@ -734,8 +734,8 @@ describe('groupFrame', () => {
       );
       const join: Join = {
         id: 'ki-7',
-        sourceFrame: 'Hosts',
-        sourceField: 'hostname',
+        foreignFrame: 'Hosts',
+        foreignField: 'hostname',
         keys: [],
       };
       const joinIndices = makeJoinIndices(foreignFrame, join);
@@ -767,15 +767,15 @@ describe('resolveKnownIdsFromJoin', () => {
     expect(resolveKnownIdsFromJoin(undefined, ctx, {})).toEqual(new Set());
   });
 
-  it('returns empty set when sourceField is empty', () => {
+  it('returns empty set when foreignField is empty', () => {
     const ctx = makePanelContext();
-    const join: Join = { id: 'x', sourceFrame: 'A', sourceField: '', keys: [] };
+    const join: Join = { id: 'x', foreignFrame: 'A', foreignField: '', keys: [] };
     expect(resolveKnownIdsFromJoin(join, ctx, {})).toEqual(new Set());
   });
 
   it('returns empty set when join index not found', () => {
     const ctx = makePanelContext();
-    const join: Join = { id: 'missing', sourceFrame: 'A', sourceField: 'f', keys: [] };
+    const join: Join = { id: 'missing', foreignFrame: 'A', foreignField: 'f', keys: [] };
     expect(resolveKnownIdsFromJoin(join, ctx, {})).toEqual(new Set());
   });
 
@@ -784,7 +784,7 @@ describe('resolveKnownIdsFromJoin', () => {
       [makeField('host', FieldType.string, ['a', 'b', 'c'])],
       'Inv'
     );
-    const join: Join = { id: 'j1', sourceFrame: 'Inv', sourceField: 'host', keys: [] };
+    const join: Join = { id: 'j1', foreignFrame: 'Inv', foreignField: 'host', keys: [] };
     const ctx = makePanelContext({ joinIndices: makeJoinIndices(foreignFrame, join) });
 
     expect(resolveKnownIdsFromJoin(join, ctx, {})).toEqual(new Set(['a', 'b', 'c']));
@@ -800,8 +800,8 @@ describe('resolveKnownIdsFromJoin', () => {
     );
     const join: Join = {
       id: 'j2',
-      sourceFrame: 'Inv',
-      sourceField: 'rack',
+      foreignFrame: 'Inv',
+      foreignField: 'rack',
       keys: [{ primaryKey: 'dc', foreignField: 'dc', primaryKeyTemplate: '' }],
     };
     const ctx = makePanelContext({ joinIndices: makeJoinIndices(foreignFrame, join) });
@@ -816,7 +816,7 @@ describe('resolveKnownIdsFromJoin', () => {
       [makeField('host', FieldType.string, ['a', 'a', 'b'])],
       'Inv'
     );
-    const join: Join = { id: 'j3', sourceFrame: 'Inv', sourceField: 'host', keys: [] };
+    const join: Join = { id: 'j3', foreignFrame: 'Inv', foreignField: 'host', keys: [] };
     const ctx = makePanelContext({ joinIndices: makeJoinIndices(foreignFrame, join) });
 
     expect(resolveKnownIdsFromJoin(join, ctx, {})).toEqual(new Set(['a', 'b']));

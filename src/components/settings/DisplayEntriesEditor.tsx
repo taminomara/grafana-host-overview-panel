@@ -175,7 +175,7 @@ const EntryEditorRow: React.FC<EntryEditorRowProps> = ({
   dragHandleProps,
 }) => {
   const styles = useStyles2(getStyles);
-  const [isOpen, setIsOpen] = useState(value.type === 'join' ? !value.sourceFrame : false);
+  const [isOpen, setIsOpen] = useState(value.type === 'join' ? !value.foreignFrame : false);
 
   const comboboxValue =
     value.type === 'heading'
@@ -196,8 +196,8 @@ const EntryEditorRow: React.FC<EntryEditorRowProps> = ({
       onChange({
         id: value.id,
         type: 'join',
-        sourceFrame: '',
-        sourceField: '',
+        foreignFrame: '',
+        foreignField: '',
         keys: [],
         overridesBorderColor: value.type !== 'heading' ? value.overridesBorderColor : false,
       } satisfies JoinDisplayEntry);
