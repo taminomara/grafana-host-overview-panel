@@ -24,7 +24,6 @@ function addKnownIdsJoin(group: Group) {
 }
 
 export function migrationHandler(panel: PanelModel<Partial<HostViewerOptions>>) {
-  console.log('!!!');
   const options = { ...panel.options };
   const old = panel.options as Record<string, unknown>;
 
