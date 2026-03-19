@@ -23,6 +23,12 @@ const getStyles = (theme: GrafanaTheme2) => ({
     color: theme.colors.text.secondary,
     userSelect: 'none',
   }),
+  groupedBody: css({
+    padding: theme.spacing(1, 0, 1, 2),
+    borderLeftWidth: 1,
+    borderLeftStyle: 'solid',
+    borderLeftColor: theme.colors.border.weak,
+  }),
 });
 
 interface JoinEditorProps<T extends Join = Join> {
@@ -236,6 +242,7 @@ export const KnownIdsJoinEditorWrapper = ({
   onChange,
   context,
 }: StandardEditorProps<Join, unknown, HostViewerOptions>) => {
+  const styles = useStyles2(getStyles);
   const allFrames = context.data ?? [];
   const primaryFrame = findFrame(allFrames, context.options?.dataFrame);
 
@@ -257,12 +264,14 @@ export const KnownIdsJoinEditorWrapper = ({
   }, [primaryFieldOptions, context.options?.groups]);
 
   return (
-    <KnownIdsJoinEditor
-      value={value}
-      onChange={onChange}
-      allFrames={allFrames}
-      primaryFieldOptions={primaryFieldOptions}
-      hiddenKeyFields={hiddenKeyFields}
-    />
+    <div className={styles.groupedBody}>
+      <KnownIdsJoinEditor
+        value={value}
+        onChange={onChange}
+        allFrames={allFrames}
+        primaryFieldOptions={primaryFieldOptions}
+        hiddenKeyFields={hiddenKeyFields}
+      />
+    </div>
   );
 };

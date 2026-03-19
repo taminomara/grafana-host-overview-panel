@@ -1,9 +1,10 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, useState } from 'react';
 import { css } from '@emotion/css';
 import { DataFrame, GrafanaTheme2 } from '@grafana/data';
-import { ComboboxOption, Field, Input, Switch, useStyles2 } from '@grafana/ui';
+import { Button, ComboboxOption, Field, Input, Switch, TextArea, useStyles2 } from '@grafana/ui';
 import { GridType, Group, SortMode } from 'types';
 import { ClearableColorPicker } from './ClearableColorPicker';
+import { CollapsibleSection } from './CollapsibleSection';
 import { DisplayEntriesEditor } from './DisplayEntriesEditor';
 import { KnownIdsJoinEditor } from './JoinEditor';
 import { FieldCombobox } from './FieldCombobox';
@@ -49,6 +50,11 @@ export const GroupSettings: React.FC<GroupSettingsProps> = ({
   onChange,
 }) => {
   const styles = useStyles2(getStyles);
+
+  const [showKnownIds, setShowKnownIds] = useState(() => !!value.knownIds);
+  const [showKnownIdsJoin, setShowKnownIdsJoin] = useState(
+    () => !!value.knownIdsJoin?.foreignFrame
+  );
 
   const hiddenGroupKeyFields = useMemo(
     () => [...nonGroupableFields, ...parentGroupKeys],
@@ -183,23 +189,63 @@ export const GroupSettings: React.FC<GroupSettingsProps> = ({
           />
         </Field>
       )}
-      <Field
-        label="Known IDs"
-        description="List of IDs that will be shown even if datasource returns no data for them"
-      >
-        <Input
-          value={value.knownIds}
-          onChange={(e) => onChange({ ...value, knownIds: e.currentTarget.value })}
-          placeholder="id1, id2, ..."
-        />
-      </Field>
-      <KnownIdsJoinEditor
-        value={value.knownIdsJoin}
-        onChange={(knownIdsJoin) => onChange({ ...value, knownIdsJoin })}
-        allFrames={allFrames}
-        primaryFieldOptions={fieldOptions}
-        hiddenKeyFields={hiddenKeyFields}
-      />
+      {showKnownIds ? (
+        <Field>
+          <CollapsibleSection
+            title="Known IDs"
+            description="List of IDs that will be shown even if datasource returns no data for them"
+          >
+            <Field>
+              <TextArea
+                value={value.knownIds}
+                onChange={(e) => onChange({ ...value, knownIds: e.currentTarget.value })}
+                placeholder="id1, id2, ..."
+                rows={3}
+              />
+            </Field>
+          </CollapsibleSection>
+        </Field>
+      ) : (
+        <Field>
+          <Button
+            variant="secondary"
+            size="sm"
+            icon="plus"
+            tooltip="List of IDs that will be shown even if datasource returns no data for them"
+            onClick={() => setShowKnownIds(true)}
+          >
+            Add known IDs
+          </Button>
+        </Field>
+      )}
+      {showKnownIdsJoin ? (
+        <Field>
+          <CollapsibleSection
+            title="Known IDs from Join"
+            description="Read known IDs from a field in another data frame"
+          >
+            <KnownIdsJoinEditor
+              value={value.knownIdsJoin}
+              onChange={(knownIdsJoin) => onChange({ ...value, knownIdsJoin })}
+              allFrames={allFrames}
+              primaryFieldOptions={fieldOptions}
+              hiddenKeyFields={hiddenKeyFields}
+            />
+          </CollapsibleSection>
+        </Field>
+      ) : (
+        <Field>
+          <Button
+            variant="secondary"
+            size="sm"
+            icon="plus"
+            tooltip="Read known IDs from a field in another data frame"
+            onClick={() => setShowKnownIdsJoin(true)}
+          >
+            Add known IDs from join
+          </Button>
+        </Field>
+      )}
       <Field label="Fields and joins" description="Additional data to display for this group">
         <DisplayEntriesEditor
           value={value.entries ?? []}
