@@ -5519,7 +5519,7 @@
       "pluginVersion": "1.1.0",
       "targets": [
         {
-          "csvContent": "name,status,is_sidecar\r\nnode-a,1,false\r\nnode-b,1,true\r\nnode-c,0,false\r\nnode-d,1,yes\r\nnode-e,0,false",
+          "csvContent": "name,status,is_sidecar\r\nnode-a,1,no\r\nnode-b,1,yes\r\nnode-c,0,no\r\nnode-d,1,1\r\nnode-e,0,no",
           "datasource": {
             "type": "grafana-testdata-datasource",
             "uid": "trlxrdZVk"

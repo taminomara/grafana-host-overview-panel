@@ -768,8 +768,8 @@ test.describe('sidecar', () => {
     const panel = panelEditPage.panel.locator;
     await expect(panel).not.toContainText('No data');
 
-    // Data: node-a(s=1,sc=false), node-b(s=1,sc=true), node-c(s=0,sc=false),
-    //       node-d(s=1,sc=yes), node-e(s=0,sc=false)
+    // Data: node-a(s=1,sc=no), node-b(s=1,sc=yes), node-c(s=0,sc=no),
+    //       node-d(s=1,sc=1), node-e(s=0,sc=no)
     // Lexicographic sort: node-a, node-b, node-c, node-d, node-e
     // After sidecar partition: non-sidecars first, sidecars last
     // Non-sidecars: node-a, node-c, node-e  Sidecars: node-b, node-d
