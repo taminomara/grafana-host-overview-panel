@@ -756,6 +756,46 @@ test.describe('joins', () => {
   });
 });
 
+// ── Sidecar ──
+
+test.describe('sidecar', () => {
+  test('sidecar cells have thick border and appear after non-sidecars', async ({
+    gotoPanelEditPage,
+    readProvisionedDashboard,
+  }) => {
+    const dashboard = await readProvisionedDashboard({ fileName: E2E_DASHBOARD });
+    const panelEditPage = await gotoPanelEditPage({ dashboard, id: '140' });
+    const panel = panelEditPage.panel.locator;
+    await expect(panel).not.toContainText('No data');
+
+    // Data: node-a(s=1,sc=false), node-b(s=1,sc=true), node-c(s=0,sc=false),
+    //       node-d(s=1,sc=yes), node-e(s=0,sc=false)
+    // Lexicographic sort: node-a, node-b, node-c, node-d, node-e
+    // After sidecar partition: non-sidecars first, sidecars last
+    // Non-sidecars: node-a, node-c, node-e  Sidecars: node-b, node-d
+    const cells = panel.locator('[data-testid="resource-cell"]');
+    await expect(cells).toHaveCount(5);
+
+    const cellTexts = await cells.evaluateAll((els) =>
+      els.map((el) => el.textContent?.trim())
+    );
+    expect(cellTexts).toEqual(['node-a', 'node-c', 'node-e', 'node-b', 'node-d']);
+
+    // Sidecar cells (last two) have padding (wrapper div); non-sidecar cells do not
+    const paddings = await cells.evaluateAll((els) =>
+      els.map((el) => {
+        const inner = el.querySelector('div');
+        return parseInt(getComputedStyle(inner!).paddingTop, 10);
+      })
+    );
+    expect(paddings[0]).toBe(0); // node-a: not sidecar
+    expect(paddings[1]).toBe(0); // node-c: not sidecar
+    expect(paddings[2]).toBe(0); // node-e: not sidecar
+    expect(paddings[3]).toBeGreaterThanOrEqual(2); // node-b: sidecar
+    expect(paddings[4]).toBeGreaterThanOrEqual(2); // node-d: sidecar
+  });
+});
+
 // ── Known IDs ──
 
 test.describe('known IDs', () => {

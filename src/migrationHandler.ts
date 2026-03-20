@@ -79,6 +79,15 @@ export function migrationHandler(panel: PanelModel<Partial<HostViewerOptions>>) 
     };
   }
 
+  if (!('sidecarJoin' in old)) {
+    options.sidecarJoin = {
+      id: crypto.randomUUID(),
+      foreignFrame: '',
+      foreignField: '',
+      keys: [],
+    };
+  }
+
   for (const group of options.groups ?? []) {
     addKnownIdsJoin(group);
     for (const entry of group.entries ?? []) {

@@ -71,6 +71,9 @@ export interface HostViewerOptions {
   gridType: GridType;
   gridColumns: number;
   borderColor?: string;
+  sidecarField: string;
+  sidecarIds: string;
+  sidecarJoin: Join;
 }
 
 export interface Group {

@@ -147,11 +147,10 @@ export const TableView: React.FC<TableViewProps> = ({ node, frame, rowIndex, opt
 
   const overrideColor = useOverrideColor(entries, frame, rowIndex);
 
-  const borderColor =
-    overrideColor ??
-    (displayValue?.color
-      ? theme.visualization.getColorByName(displayValue.color)
-      : theme.colors.border.medium);
+  const borderColor = overrideColor ??
+      (displayValue?.color
+        ? theme.visualization.getColorByName(displayValue.color)
+        : theme.colors.border.medium);
 
   const config = useMemo(
     (): ResourceDetailsConfig => ({

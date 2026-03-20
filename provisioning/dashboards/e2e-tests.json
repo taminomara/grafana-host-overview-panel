@@ -5452,6 +5452,84 @@
       ],
       "title": "Status from join",
       "type": "taminomara-hostoverview-panel"
+    },
+    {
+      "datasource": {
+        "type": "grafana-testdata-datasource",
+        "uid": "trlxrdZVk"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "custom": {},
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "#ff0000",
+                "value": 0
+              },
+              {
+                "color": "#00ff00",
+                "value": 1
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 24,
+        "x": 0,
+        "y": 510
+      },
+      "id": 140,
+      "options": {
+        "cellSize": 20,
+        "cellTextField": "",
+        "cellTextPattern": "",
+        "dataFrame": "",
+        "displayEntries": [],
+        "gridColumns": 5,
+        "gridType": "flow",
+        "groups": [],
+        "idField": "name",
+        "idSortMode": "lexicographic",
+        "idSortPattern": "",
+        "knownIds": "",
+        "resourceDisplayMode": "cell-with-text",
+        "statusField": "status",
+        "statusJoin": {
+          "id": "e2e-140-status-join",
+          "foreignFrame": "",
+          "foreignField": "",
+          "keys": []
+        },
+        "titleField": "",
+        "titlePattern": "",
+        "sidecarField": "is_sidecar",
+        "sidecarIds": "",
+        "sidecarJoin": {
+          "id": "e2e-140-sidecar-join",
+          "foreignFrame": "",
+          "foreignField": "",
+          "keys": []
+        }
+      },
+      "pluginVersion": "1.1.0",
+      "targets": [
+        {
+          "csvContent": "name,status,is_sidecar\r\nnode-a,1,false\r\nnode-b,1,true\r\nnode-c,0,false\r\nnode-d,1,yes\r\nnode-e,0,false",
+          "datasource": {
+            "type": "grafana-testdata-datasource",
+            "uid": "trlxrdZVk"
+          },
+          "refId": "A",
+          "scenarioId": "csv_content"
+        }
+      ],
+      "title": "Sidecar field",
+      "type": "taminomara-hostoverview-panel"
     }
   ],
   "preload": false,

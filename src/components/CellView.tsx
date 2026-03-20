@@ -1,7 +1,7 @@
 import { css, cx } from '@emotion/css';
 import { DataFrameWithValue, GrafanaTheme2 } from '@grafana/data';
 import { useStyles2, useTheme2 } from '@grafana/ui';
-import { GroupNode } from 'library/groupFrames';
+import { GroupNode, isSidecarRow } from 'library/groupFrames';
 import React, { useMemo } from 'react';
 import { HostViewerOptions, ResourceDisplayMode } from 'types';
 import { getCellSizeTier } from '../library/cellSize';
@@ -15,17 +15,30 @@ import { CellTooltip } from './CellTooltip';
 
 function getStyles(theme: GrafanaTheme2, cellSize: number) {
   const tier = getCellSizeTier(cellSize);
+  const sidecarPad = Math.max(2, Math.min(10, Math.round(cellSize * 0.15)));
+  const innerSize = cellSize - sidecarPad * 2;
+  const borderRadius = String(tier === 'cellS' ? 0 : theme.shape.radius.sm);
+  const innerRadius = parseFloat(borderRadius) / 2;
+
   return {
     cell: css({
       cursor: 'pointer',
       outlineStyle: 'none',
       width: cellSize,
       height: cellSize,
-      borderRadius: {
-        cellS: 0,
-        cellM: theme.shape.radius.sm,
-        cellL: theme.shape.radius.sm,
-      }[tier],
+      borderRadius: borderRadius,
+      display: 'flex',
+    }),
+    cellSidecarOuter: css({
+      border: `1px solid ${theme.colors.border.strong}`,
+      padding: sidecarPad - 1,
+      boxSizing: 'border-box',
+      borderRadius: borderRadius,
+    }),
+    cellSidecarInner: css({
+      width: '100%',
+      height: '100%',
+      borderRadius: innerRadius,
       display: 'flex',
     }),
     cellText: css({
@@ -35,8 +48,13 @@ function getStyles(theme: GrafanaTheme2, cellSize: number) {
       wordBreak: 'break-all',
       overflow: 'hidden',
       margin: theme.spacing(0.5),
-      lineHeight: `calc(${cellSize}px - ${theme.spacing(1)})`,
+      lineHeight: `calc(${cellSize}px - ${theme.spacing(1)} + 1px)`,
       textTransform: 'uppercase',
+    }),
+    cellTextSidecar: css({
+      width: `calc(${innerSize}px - ${theme.spacing(1)})`,
+      height: `calc(${innerSize}px - ${theme.spacing(1)})`,
+      lineHeight: `calc(${innerSize}px - ${theme.spacing(1)} + 1px)`,
     }),
   };
 }
@@ -69,6 +87,8 @@ export const CellView: React.FC<CellViewProps> = ({ node, frame, rowIndex, optio
   const displayValue =
     statusField && statusField.display ? statusField.display(statusValue) : undefined;
 
+  const sidecar = isSidecarRow(frame, rowIndex);
+
   const cellColor = displayValue?.color ?? theme.colors.background.elevated;
   const overrideColor =
     useOverrideColor(options.displayEntries ?? [], frame, rowIndex) ?? cellColor;
@@ -92,25 +112,32 @@ export const CellView: React.FC<CellViewProps> = ({ node, frame, rowIndex, optio
     }
   }
 
+  const gradientStyle = {
+    background: `linear-gradient(to bottom right, ${cellColor} 0%, ${cellColor} 50%, ${overrideColor} 50%, ${overrideColor} 100%)`,
+  };
+
+  const textEl = cellText ? (
+    <div
+      className={cx(styles.cellText, sidecar && styles.cellTextSidecar)}
+      style={{ color: theme.colors.getContrastText(cellColor) }}
+    >
+      {cellText}
+    </div>
+  ) : null;
+
   return (
     <CellTooltip node={node} frame={frame} rowIndex={rowIndex} options={options}>
-      <div
-        className={cx(styles.cell)}
-        style={{
-          background: `linear-gradient(to bottom right, ${cellColor} 0%, ${cellColor} 50%, ${overrideColor} 50%, ${overrideColor} 100%)`,
-        }}
-      >
-        {cellText ? (
-          <div
-            className={styles.cellText}
-            style={{
-              color: theme.colors.getContrastText(cellColor),
-            }}
-          >
-            {cellText}
+      {sidecar ? (
+        <div className={cx(styles.cell, styles.cellSidecarOuter)}>
+          <div className={styles.cellSidecarInner} style={gradientStyle}>
+            {textEl}
           </div>
-        ) : null}
-      </div>
+        </div>
+      ) : (
+        <div className={styles.cell} style={gradientStyle}>
+          {textEl}
+        </div>
+      )}
     </CellTooltip>
   );
 };

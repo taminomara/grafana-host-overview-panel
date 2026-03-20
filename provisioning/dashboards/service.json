@@ -39,7 +39,7 @@
           "showLineNumbers": false,
           "showMiniMap": false
         },
-        "content": "# Service Overview\n\nProcesses grouped by **service \u2192 node \u2192 process type**. Each coloured square is one process instance (green = up, red = down). Node headers show CPU / Memory / Disk gauges from the joined `NodeMetrics` frame.\n",
+        "content": "# Service Overview\n\nProcesses grouped by **service → node → process type**. Each coloured square is one process instance (green = up, red = down). Node headers show CPU / Memory / Disk gauges from the joined `NodeMetrics` frame.\n",
         "mode": "markdown"
       },
       "pluginVersion": "12.3.2",
@@ -293,44 +293,42 @@
       },
       "id": 2,
       "options": {
-        "resourceDisplayMode": "cell-with-text",
         "cellSize": 30,
         "cellTextField": "",
         "cellTextPattern": "",
         "dataFrame": "Processes",
+        "displayEntries": [],
         "gridColumns": 4,
         "gridType": "flow",
         "groups": [
           {
             "disabled": false,
             "drawBorder": false,
+            "entries": [],
             "gridColumns": 6,
             "gridType": "vertical",
             "groupKey": "service",
             "id": "5a7a7f97-2c8c-401b-8d7f-587e66133a4e",
             "knownIds": "",
+            "knownIdsJoin": {
+              "foreignField": "",
+              "foreignFrame": "",
+              "id": "922678e0-7cfc-4c96-a26b-109988ea3533",
+              "keys": []
+            },
             "showKeyName": false,
             "showTitle": true,
             "sortMode": "lexicographic",
-            "transparentBackground": true,
-            "entries": []
+            "transparentBackground": true
           },
           {
             "borderColor": "transparent",
             "disabled": false,
             "drawBorder": true,
-            "gridColumns": 4,
-            "gridType": "flow",
-            "groupKey": "node",
-            "id": "1a2f13a0-5fae-430f-b55a-f99d82315811",
-            "knownIds": "",
-            "showKeyName": false,
-            "showTitle": true,
-            "sortMode": "custom",
-            "sortPattern": "\\w+?-(?<n1>\\d+)\\.example.com",
-            "transparentBackground": false,
             "entries": [
               {
+                "foreignField": "cpu",
+                "foreignFrame": "NodeMetrics",
                 "id": "048dc95c-fb21-4213-b1b0-7cc6f67c29b5",
                 "keys": [
                   {
@@ -339,12 +337,12 @@
                     "primaryKeyTemplate": ""
                   }
                 ],
-                "sourceField": "cpu",
-                "sourceFrame": "NodeMetrics",
                 "overridesBorderColor": true,
                 "type": "join"
               },
               {
+                "foreignField": "memory",
+                "foreignFrame": "NodeMetrics",
                 "id": "73479366-8b4d-4278-8a17-5771a399399c",
                 "keys": [
                   {
@@ -353,12 +351,12 @@
                     "primaryKeyTemplate": ""
                   }
                 ],
-                "sourceField": "memory",
-                "sourceFrame": "NodeMetrics",
                 "overridesBorderColor": true,
                 "type": "join"
               },
               {
+                "foreignField": "disk",
+                "foreignFrame": "NodeMetrics",
                 "id": "25af0293-6227-4663-b24d-e0143799039e",
                 "keys": [
                   {
@@ -367,24 +365,58 @@
                     "primaryKeyTemplate": ""
                   }
                 ],
-                "sourceField": "disk",
-                "sourceFrame": "NodeMetrics",
                 "overridesBorderColor": true,
                 "type": "join"
               }
-            ]
+            ],
+            "gridColumns": 4,
+            "gridType": "flow",
+            "groupKey": "node",
+            "id": "1a2f13a0-5fae-430f-b55a-f99d82315811",
+            "knownIds": "",
+            "knownIdsJoin": {
+              "foreignField": "",
+              "foreignFrame": "",
+              "id": "c480e52b-0497-4aba-84ab-5cf0f206ba5e",
+              "keys": []
+            },
+            "showKeyName": false,
+            "showTitle": true,
+            "sortMode": "custom",
+            "sortPattern": "\\w+?-(?<n1>\\d+)\\.example.com",
+            "transparentBackground": false
           }
         ],
-        "knownIds": "",
-        "tooltipTitleField": "",
-        "tooltipTitlePattern": "",
-        "statusField": "status",
         "idField": "process",
         "idSortMode": "lexicographic-insensitive",
         "idSortPattern": "",
-        "tooltipEntries": []
+        "knownIds": "",
+        "knownIdsJoin": {
+          "foreignField": "",
+          "foreignFrame": "",
+          "id": "__known_ids_join__",
+          "keys": []
+        },
+        "resourceDisplayMode": "cell-with-text",
+        "sidecarField": "",
+        "sidecarIds": "alloy, mongo-exporter",
+        "sidecarJoin": {
+          "foreignField": "",
+          "foreignFrame": "",
+          "id": "3eb7f87f-c34d-4d29-a6fb-9ea0352184ad",
+          "keys": []
+        },
+        "statusField": "status",
+        "statusJoin": {
+          "foreignField": "",
+          "foreignFrame": "",
+          "id": "4cc486cf-81a2-489b-84d8-9e3141ece6fb",
+          "keys": []
+        },
+        "titleField": "",
+        "titlePattern": ""
       },
-      "pluginVersion": "1.0.0",
+      "pluginVersion": "1.1.0",
       "targets": [
         {
           "csvContent": "service,node,process,status\r\napi,api-01.example.com,haproxy,up\r\napi,api-01.example.com,api,up\r\napi,api-01.example.com,alloy,up\r\napi,api-02.example.com,haproxy,up\r\napi,api-02.example.com,api,up\r\napi,api-02.example.com,alloy,up\r\napi,api-03.example.com,haproxy,up\r\napi,api-03.example.com,api,down\r\napi,api-03.example.com,alloy,up\r\napi,api-04.example.com,haproxy,up\r\napi,api-04.example.com,api,up\r\napi,api-04.example.com,alloy,up\r\nbackend,backend-01.example.com,haproxy,up\r\nbackend,backend-01.example.com,backend,up\r\nbackend,backend-01.example.com,alloy,up\r\nbackend,backend-01.example.com,worker,up\r\nbackend,backend-02.example.com,haproxy,up\r\nbackend,backend-02.example.com,backend,up\r\nbackend,backend-02.example.com,worker,up\r\nbackend,backend-02.example.com,alloy,up\r\nbackend,backend-03.example.com,haproxy,down\r\nbackend,backend-03.example.com,backend,down\r\nbackend,backend-03.example.com,alloy,up\r\nbackend,backend-03.example.com,worker,looping\r\nbackend,backend-04.example.com,haproxy,up\r\nbackend,backend-04.example.com,backend,up\r\nbackend,backend-04.example.com,alloy,up\r\nbackend,backend-04.example.com,worker,up\r\nfrontend,frontend-01.example.com,nginx,up\r\nfrontend,frontend-01.example.com,frontend,up\r\nfrontend,frontend-01.example.com,alloy,up\r\nfrontend,frontend-02.example.com,nginx,up\r\nfrontend,frontend-02.example.com,frontend,up\r\nfrontend,frontend-02.example.com,alloy,up\r\nfrontend,frontend-03.example.com,nginx,up\r\nfrontend,frontend-03.example.com,frontend,up\r\nfrontend,frontend-03.example.com,alloy,up\r\ndatabase,mongo-01.example.com,db,down\r\ndatabase,mongo-01.example.com,mongo-exporter,up\r\ndatabase,mongo-01.example.com,alloy,up\r\ndatabase,mongo-02.example.com,db,up\r\ndatabase,mongo-02.example.com,mongo-exporter,up\r\ndatabase,mongo-02.example.com,alloy,up",
@@ -413,7 +445,9 @@
   "preload": false,
   "refresh": "",
   "schemaVersion": 42,
-  "tags": ["Demo"],
+  "tags": [
+    "Demo"
+  ],
   "templating": {
     "list": []
   },
@@ -425,5 +459,5 @@
   "timezone": "browser",
   "title": "Service liveness",
   "uid": "b23a2d8e-47f4-409f-92de-a1123aaa8563",
-  "version": 13
+  "version": 3
 }

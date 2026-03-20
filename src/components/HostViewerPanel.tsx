@@ -77,8 +77,11 @@ export const HostViewerPanel: React.FC<Props> = ({
     if (options.statusField === '__join__' && options.statusJoin) {
       joins.push(options.statusJoin);
     }
+    if (options.sidecarJoin) {
+      joins.push(options.sidecarJoin);
+    }
     return joins;
-  }, [options.displayEntries, options.groups, options.knownIdsJoin, options.statusField, options.statusJoin]);
+  }, [options.displayEntries, options.groups, options.knownIdsJoin, options.statusField, options.statusJoin, options.sidecarJoin]);
 
   const joinIndices = useMemo(() => {
     const indices = buildJoinIndices(data.series, allJoins);

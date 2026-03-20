@@ -67,6 +67,14 @@ export function makeOptions(overrides?: Partial<HostViewerOptions>): HostViewerO
     idSortPattern: '',
     cellTextField: '',
     cellTextPattern: '',
+    sidecarField: '',
+    sidecarIds: '',
+    sidecarJoin: {
+      id: 'sidecar-join',
+      foreignFrame: '',
+      foreignField: '',
+      keys: [],
+    },
     ...overrides,
   };
 }

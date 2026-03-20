@@ -325,5 +325,39 @@ export const plugin = new PanelPlugin<HostViewerOptions, HostViewerFieldConfig>(
         editor: DisplayEntriesEditorWrapper,
         defaultValue: [],
         category: ['Resource content'],
+      })
+      .addCustomEditor({
+        id: 'sidecarField',
+        path: 'sidecarField',
+        name: 'Sidecar field',
+        description: 'Field that designates a resource as a sidecar (boolean, numeric, or string)',
+        editor: ValueFieldEditor,
+        defaultValue: '',
+        category: ['Sidecar'],
+      })
+      .addTextInput({
+        name: 'Sidecar IDs',
+        path: 'sidecarIds',
+        description: 'Comma-separated list of resource IDs that are sidecars',
+        defaultValue: '',
+        category: ['Sidecar'],
+        settings: {
+          placeholder: 'value1, value2, ...',
+        },
+        showIf: (options) => options.idField !== '',
+      })
+      .addCustomEditor({
+        id: 'sidecarJoin',
+        path: 'sidecarJoin',
+        name: 'Sidecar join',
+        description: 'Look up sidecar designation from a field in another data frame',
+        editor: StatusJoinEditorWrapper,
+        defaultValue: {
+          id: '__sidecar_join__',
+          foreignFrame: '',
+          foreignField: '',
+          keys: [],
+        } satisfies Join,
+        category: ['Sidecar'],
       });
   });

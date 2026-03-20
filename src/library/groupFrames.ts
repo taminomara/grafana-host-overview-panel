@@ -10,7 +10,7 @@ import {
   SortMode,
 } from '../types';
 import { createFrame, IndexedFrame } from './dataFrame';
-import { KEY_SEPARATOR } from './joinFrames';
+import { KEY_SEPARATOR, resolveStatusFromJoin } from './joinFrames';
 
 export interface GroupNode {
   groupKey: string;
@@ -209,6 +209,58 @@ export function parseKnownIds(knownIds: string): Set<string> {
   );
 }
 
+const SIDECAR_FIELD = '__hvp_sidecar__';
+
+export function isSidecarRow(frame: IndexedFrame, rowIndex: number): boolean {
+  const field = frame.fieldByName.get(SIDECAR_FIELD);
+  return field ? !!field.values[rowIndex] : false;
+}
+
+function isSidecarValue(fieldType: FieldType, value: unknown): boolean {
+  if (value == null) {
+    return false;
+  }
+  if (fieldType === FieldType.string) {
+    const s = String(value).toLowerCase();
+    return s === 'true' || s === 'yes' || s === '1';
+  }
+  return !!value;
+}
+
+function checkSidecar(
+  options: HostViewerOptions,
+  frame: IndexedFrame,
+  rowIndex: number,
+  context: HostViewerPanelContext,
+  sidecarIdSet: Set<string> | null,
+  idField: Field | undefined,
+  sidecarFieldRef: Field | undefined
+): boolean {
+  if (sidecarIdSet && idField && sidecarIdSet.has(String(idField.values[rowIndex]))) {
+    return true;
+  }
+
+  if (sidecarFieldRef && isSidecarValue(sidecarFieldRef.type, sidecarFieldRef.values[rowIndex])) {
+    return true;
+  }
+
+  if (options.sidecarJoin?.foreignField) {
+    const resolved = resolveStatusFromJoin(
+      options.sidecarJoin,
+      frame,
+      rowIndex,
+      context.joinIndices,
+      context.replaceVariables,
+      context.data
+    );
+    if (resolved && isSidecarValue(resolved.field.type, resolved.field.values[resolved.rowIndex])) {
+      return true;
+    }
+  }
+
+  return false;
+}
+
 export function resolveKnownIdsFromJoin(
   join: Join | undefined,
   context: HostViewerPanelContext,
@@ -322,50 +374,6 @@ function bucketByField(
   return buckets;
 }
 
-function sortFrame(
-  frame: IndexedFrame,
-  sortFieldName: string,
-  sortMode: SortMode,
-  sortPattern: string | undefined,
-  context: HostViewerPanelContext
-): IndexedFrame {
-  if (sortMode === SortMode.Disabled) {
-    return frame;
-  }
-
-  const field = frame.fieldByName.get(sortFieldName);
-  if (!field || frame.length <= 1) {
-    return frame;
-  }
-
-  const entries: SortEntry[] = [];
-  for (let i = 0; i < frame.length; i++) {
-    const { key, sortValue } = fieldValueToKey(field, field.values[i]);
-    entries.push({ index: i, key, sortValue });
-  }
-
-  let customGroups: CustomSortGroup[] | undefined;
-  if (sortMode === SortMode.Custom && sortPattern) {
-    const parsed = tryParseCustomSortPattern(sortPattern);
-    if (parsed) {
-      customGroups = parsed.groups;
-      for (const entry of entries) {
-        entry.customSortKeys = computeCustomSortKeys(entry.key, parsed);
-      }
-    }
-  }
-
-  entries.sort((a, b) => compareCustomSortables(a, b, sortMode, customGroups));
-
-  const sortedIndices = entries.map((e) => e.index);
-  const newFields = frame.fields.map((f) => ({
-    ...f,
-    values: sortedIndices.map((i) => f.values[i]),
-  }));
-
-  return createFrame({ ...frame, fields: newFields }, context);
-}
-
 export function groupFrame(
   frame: IndexedFrame,
   options: HostViewerOptions,
@@ -402,10 +410,87 @@ function applySortFrame(
   options: HostViewerOptions,
   context: HostViewerPanelContext
 ): IndexedFrame {
-  if (!options.idField || !options.idSortMode) {
+  const withSidecar = computeSidecars(frame, options, context);
+
+  const hasSortField =
+    !!options.idField && !!options.idSortMode && options.idSortMode !== SortMode.Disabled;
+  const sidecarField = withSidecar.fieldByName.get(SIDECAR_FIELD);
+
+  if (!hasSortField && !sidecarField) {
+    return withSidecar;
+  }
+  if (withSidecar.length <= 1) {
+    return withSidecar;
+  }
+
+  const sortField = hasSortField ? withSidecar.fieldByName.get(options.idField) : undefined;
+
+  const entries: Array<SortEntry & { isSidecar: boolean }> = [];
+  for (let i = 0; i < withSidecar.length; i++) {
+    const sc = sidecarField ? !!sidecarField.values[i] : false;
+    const { key, sortValue } = sortField
+      ? fieldValueToKey(sortField, sortField.values[i])
+      : { key: '', sortValue: '' };
+    entries.push({ index: i, key, sortValue, isSidecar: sc });
+  }
+
+  let customGroups: CustomSortGroup[] | undefined;
+  if (hasSortField && options.idSortMode === SortMode.Custom && options.idSortPattern) {
+    const parsed = tryParseCustomSortPattern(options.idSortPattern);
+    if (parsed) {
+      customGroups = parsed.groups;
+      for (const entry of entries) {
+        entry.customSortKeys = computeCustomSortKeys(entry.key, parsed);
+      }
+    }
+  }
+
+  entries.sort((a, b) => {
+    if (a.isSidecar !== b.isSidecar) {
+      return a.isSidecar ? 1 : -1;
+    }
+    if (sortField) {
+      return compareCustomSortables(a, b, options.idSortMode, customGroups);
+    }
+    return 0;
+  });
+
+  const sortedIndices = entries.map((e) => e.index);
+  const newFields = withSidecar.fields.map((f) => ({
+    ...f,
+    values: sortedIndices.map((i) => f.values[i]),
+  }));
+  return createFrame({ ...withSidecar, fields: newFields }, context);
+}
+
+function computeSidecars(
+  frame: IndexedFrame,
+  options: HostViewerOptions,
+  context: HostViewerPanelContext
+): IndexedFrame {
+  if (!options.sidecarField && !options.sidecarIds && !options.sidecarJoin?.foreignField) {
     return frame;
   }
-  return sortFrame(frame, options.idField, options.idSortMode, options.idSortPattern, context);
+
+  const sidecarIdSet = options.sidecarIds ? parseKnownIds(options.sidecarIds) : null;
+  const idField = options.idField ? frame.fieldByName.get(options.idField) : undefined;
+  const sidecarFieldRef = options.sidecarField
+    ? frame.fieldByName.get(options.sidecarField)
+    : undefined;
+
+  const values: boolean[] = new Array(frame.length);
+  for (let i = 0; i < frame.length; i++) {
+    values[i] = checkSidecar(options, frame, i, context, sidecarIdSet, idField, sidecarFieldRef);
+  }
+
+  const sidecarBoolField: Field = {
+    name: SIDECAR_FIELD,
+    type: FieldType.boolean,
+    values,
+    config: {},
+  };
+
+  return createFrame({ ...frame, fields: [...frame.fields, sidecarBoolField] }, context);
 }
 
 function groupFrameRecursive(
