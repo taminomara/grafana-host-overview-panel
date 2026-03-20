@@ -5,7 +5,7 @@
   "id": "taminomara-hostoverview-panel",
   "info": {
     "keywords": ["panel", "overview", "cluster", "compact"],
-    "description": "A compact panel for visualizing the status of fleets of resources — servers, database instances, containers, and anything similar.",
+    "description": "Visualize your resources in a compact table with powerful tooltips and grouping",
     "author": {
       "name": "Tamika Nomara",
       "email": "taminomara@gmail.com"
