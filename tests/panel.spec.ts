@@ -729,6 +729,31 @@ test.describe('joins', () => {
     await expect(panelEditPage.panel.locator).toContainText('node-a');
     await expect(panelEditPage.panel.locator).toContainText('node-e');
   });
+
+  test('status from join colors cells correctly', async ({
+    gotoPanelEditPage,
+    readProvisionedDashboard,
+  }) => {
+    const dashboard = await readProvisionedDashboard({ fileName: E2E_DASHBOARD });
+    const panelEditPage = await gotoPanelEditPage({ dashboard, id: '130' });
+    const panel = panelEditPage.panel.locator;
+    await expect(panel).not.toContainText('No data');
+
+    // Thresholds: status=0 → #ff0000, status=1 → #00ff00
+    // Status comes from StatusFrame via join on name
+    // Data: node-a(1), node-b(0), node-c(1), node-d(1), node-e(0)
+    const cells = panel.locator('div[style*="linear-gradient"]');
+    await expect(cells).toHaveCount(5);
+    const colorCounts = await cells.evaluateAll((els) => {
+      const bgs = els.map((el) => getComputedStyle(el).backgroundImage);
+      return {
+        green: bgs.filter((b) => b.includes('rgb(0, 255, 0)')).length,
+        red: bgs.filter((b) => b.includes('rgb(255, 0, 0)')).length,
+      };
+    });
+    expect(colorCounts.green).toBe(3);
+    expect(colorCounts.red).toBe(2);
+  });
 });
 
 // ── Known IDs ──

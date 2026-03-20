@@ -70,6 +70,15 @@ export function migrationHandler(panel: PanelModel<Partial<HostViewerOptions>>) 
     options.titlePattern = options.cellTextPattern;
   }
 
+  if (!('statusJoin' in old)) {
+    options.statusJoin = {
+      id: crypto.randomUUID(),
+      foreignFrame: '',
+      foreignField: '',
+      keys: [],
+    };
+  }
+
   for (const group of options.groups ?? []) {
     addKnownIdsJoin(group);
     for (const entry of group.entries ?? []) {

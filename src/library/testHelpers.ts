@@ -56,6 +56,12 @@ export function makeOptions(overrides?: Partial<HostViewerOptions>): HostViewerO
       foreignField: '',
       keys: [],
     },
+    statusJoin: {
+      id: `status-join`,
+      foreignFrame: '',
+      foreignField: '',
+      keys: [],
+    },
     idField: '',
     idSortMode: SortMode.Default,
     idSortPattern: '',

@@ -56,6 +56,7 @@ export interface HostViewerOptions {
   displayEntries: DisplayEntry[];
   groups: Group[];
   statusField: string;
+  statusJoin: Join;
   cellSize: number;
   idField: string;
   idSortMode: SortMode;

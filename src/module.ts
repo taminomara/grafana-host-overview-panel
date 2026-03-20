@@ -4,7 +4,7 @@ import { DataFrameEditor } from './components/settings/DataFrameEditor';
 import { GRID_TYPE_OPTIONS } from './components/settings/GridTypePicker';
 import { GroupsEditor } from './components/settings/GroupsEditor';
 import { DisplayEntriesEditorWrapper } from './components/settings/DisplayEntriesEditor';
-import { KnownIdsJoinEditorWrapper } from './components/settings/JoinEditor';
+import { KnownIdsJoinEditorWrapper, StatusJoinEditorWrapper } from './components/settings/JoinEditor';
 import { SortModeEditor, SortPatternEditor } from './components/settings/SortEditor';
 import { TemplatePatternEditor } from './components/settings/TemplatePatternEditor';
 import { ValueFieldEditor } from './components/settings/ValueFieldEditor';
@@ -187,6 +187,30 @@ export const plugin = new PanelPlugin<HostViewerOptions, HostViewerFieldConfig>(
         description: 'Field that represents status of the resource',
         editor: ValueFieldEditor,
         defaultValue: '',
+        category: ['Resource content'],
+        settings: {
+          additionalOptions: [
+            {
+              label: 'Use join',
+              value: '__join__',
+              description: 'Read status from a field in another data frame',
+            },
+          ],
+        },
+      })
+      .addCustomEditor({
+        id: 'statusJoin',
+        path: 'statusJoin',
+        name: 'Status join',
+        description: 'Configure join for status field',
+        editor: StatusJoinEditorWrapper,
+        defaultValue: {
+          id: '__status_join__',
+          foreignFrame: '',
+          foreignField: '',
+          keys: [],
+        } satisfies Join,
+        showIf: (options) => options.statusField === '__join__',
         category: ['Resource content'],
       })
       .addSelect({

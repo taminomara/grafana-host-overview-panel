@@ -5,7 +5,7 @@ import React from 'react';
 import { DisplayEntry, HostViewerOptions } from 'types';
 import { IndexedFrame } from '../library/dataFrame';
 import { interpolateWithDataContext } from '../library/interpolate';
-import { resolveJoinSections } from '../library/joinFrames';
+import { resolveJoinSections, resolveStatusField } from '../library/joinFrames';
 import { DataLinksButton } from './DataLinksButton';
 import { FieldRow, formatFieldValue } from './FieldRow';
 import { useHostViewerPanelContext } from './PanelContext';
@@ -68,7 +68,12 @@ export const ResourceDetails: React.FC<ResourceDetailsProps> = ({
   const context = useHostViewerPanelContext();
 
   const idField = frame.fieldByName.get(options.idField);
-  const statusField = showStatus ? frame.fieldByName.get(options.statusField) : undefined;
+  const resolvedStatus = showStatus
+    ? resolveStatusField(options, frame, rowIndex, context.joinIndices, context.replaceVariables, context.data)
+    : undefined;
+  const statusField = resolvedStatus?.field;
+  const statusFrame = resolvedStatus?.frame ?? frame;
+  const statusRowIndex = resolvedStatus?.rowIndex ?? rowIndex;
 
   let title: string | undefined = undefined;
   let titleField;
@@ -130,7 +135,7 @@ export const ResourceDetails: React.FC<ResourceDetailsProps> = ({
           <DataLinksButton links={links} />
         </div>
       ) : null}
-      {statusField ? <FieldRow field={statusField} frame={frame} rowIndex={rowIndex} /> : null}
+      {statusField ? <FieldRow field={statusField} frame={statusFrame} rowIndex={statusRowIndex} /> : null}
       {config.entries.map((entry) => {
         if (entry.hidden) {
           return null;

@@ -6,6 +6,8 @@ import React, { useCallback, useEffect, useId, useMemo, useRef, useState } from 
 import { HostViewerOptions } from 'types';
 import { useOverrideColor } from '../library/criticality';
 import { IndexedFrame } from '../library/dataFrame';
+import { resolveStatusField } from '../library/joinFrames';
+import { useHostViewerPanelContext } from './PanelContext';
 import { ResourceDetails, ResourceDetailsConfig } from './ResourceDetails';
 
 const getStyles = (theme: GrafanaTheme2) => ({
@@ -130,10 +132,17 @@ export const TableView: React.FC<TableViewProps> = ({ node, frame, rowIndex, opt
     return () => document.removeEventListener('mousedown', handleClick);
   }, [expanded]);
 
-  const statusField = frame.fieldByName.get(options.statusField);
+  const context = useHostViewerPanelContext();
+  const resolvedStatus = useMemo(
+    () => resolveStatusField(options, frame, rowIndex, context.joinIndices, context.replaceVariables, context.data),
+    [options, frame, rowIndex, context]
+  );
+
+  const statusField = resolvedStatus?.field;
+  const statusRowIndex = resolvedStatus?.rowIndex ?? rowIndex;
   const displayValue =
     statusField && statusField.display
-      ? statusField.display(statusField.values[rowIndex])
+      ? statusField.display(statusField.values[statusRowIndex])
       : undefined;
 
   const overrideColor = useOverrideColor(entries, frame, rowIndex);

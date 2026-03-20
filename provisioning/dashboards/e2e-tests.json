@@ -5359,6 +5359,99 @@
       ],
       "title": "Rendering types in table tooltip",
       "type": "taminomara-hostoverview-panel"
+    },
+    {
+      "datasource": {
+        "type": "grafana-testdata-datasource",
+        "uid": "trlxrdZVk"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "displayMode": "auto"
+          },
+          "fieldMinMax": true,
+          "mappings": [],
+          "noValue": "unknown",
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "#ff0000",
+                "value": 0
+              },
+              {
+                "color": "#00ff00",
+                "value": 1
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 24,
+        "x": 0,
+        "y": 500
+      },
+      "id": 130,
+      "options": {
+        "cellSize": 20,
+        "cellTextField": "",
+        "cellTextPattern": "",
+        "dataFrame": "",
+        "displayEntries": [],
+        "gridColumns": 5,
+        "gridType": "flow",
+        "groups": [],
+        "idField": "name",
+        "idSortMode": "disabled",
+        "idSortPattern": "",
+        "knownIds": "",
+        "resourceDisplayMode": "cell",
+        "statusField": "__join__",
+        "statusJoin": {
+          "id": "e2e-130-status-join",
+          "foreignFrame": "StatusFrame",
+          "foreignField": "status",
+          "keys": [
+            {
+              "foreignField": "name",
+              "primaryKey": "name",
+              "primaryKeyTemplate": ""
+            }
+          ]
+        },
+        "titleField": "",
+        "titlePattern": ""
+      },
+      "pluginVersion": "1.1.0",
+      "targets": [
+        {
+          "csvContent": "name,cpu\r\nnode-a,45\r\nnode-b,82\r\nnode-c,23\r\nnode-d,67\r\nnode-e,91",
+          "datasource": {
+            "type": "grafana-testdata-datasource",
+            "uid": "trlxrdZVk"
+          },
+          "refId": "A",
+          "scenarioId": "csv_content"
+        },
+        {
+          "csvContent": "name,status\r\nnode-a,1\r\nnode-b,0\r\nnode-c,1\r\nnode-d,1\r\nnode-e,0",
+          "datasource": {
+            "type": "grafana-testdata-datasource",
+            "uid": "trlxrdZVk"
+          },
+          "refId": "StatusFrame",
+          "scenarioId": "csv_content"
+        }
+      ],
+      "title": "Status from join",
+      "type": "taminomara-hostoverview-panel"
     }
   ],
   "preload": false,

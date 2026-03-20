@@ -1,6 +1,6 @@
 import { DataFrame, Field, InterpolateFunction } from '@grafana/data';
 import { IndexedFrame, indexFrame } from './dataFrame';
-import { Join } from '../types';
+import { HostViewerOptions, Join } from '../types';
 
 export const KEY_SEPARATOR = '\0';
 
@@ -141,4 +141,62 @@ export function lookupJoinedRows(
 
   const compositeKey = parts.join(KEY_SEPARATOR);
   return index.getKeyMap().get(compositeKey);
+}
+
+export interface ResolvedStatusField {
+  field: Field;
+  frame: IndexedFrame;
+  rowIndex: number;
+}
+
+/**
+ * Resolves the status field for a primary row. When `statusField` is
+ * `'__join__'`, looks up the value via `statusJoin`; otherwise resolves the
+ * named field directly from the primary frame.
+ */
+export function resolveStatusField(
+  options: HostViewerOptions,
+  frame: IndexedFrame,
+  rowIndex: number,
+  joinIndices: Map<string, JoinIndex>,
+  replaceVariables: InterpolateFunction,
+  allData: DataFrame[]
+): ResolvedStatusField | undefined {
+  if (options.statusField === '__join__') {
+    return options.statusJoin
+      ? resolveStatusFromJoin(options.statusJoin, frame, rowIndex, joinIndices, replaceVariables, allData)
+      : undefined;
+  }
+  const field = frame.fieldByName.get(options.statusField);
+  return field ? { field, frame, rowIndex } : undefined;
+}
+
+/**
+ * Resolves a status field from a join. Returns the foreign field and the first
+ * matched row, or undefined if the join cannot be resolved.
+ */
+export function resolveStatusFromJoin(
+  statusJoin: Join,
+  frame: IndexedFrame,
+  rowIndex: number,
+  joinIndices: Map<string, JoinIndex>,
+  replaceVariables: InterpolateFunction,
+  allData: DataFrame[]
+): ResolvedStatusField | undefined {
+  const index = joinIndices.get(statusJoin.id);
+  if (!index || !statusJoin.foreignField) {
+    return undefined;
+  }
+
+  const matchedRows = lookupJoinedRows(index, frame, rowIndex, replaceVariables, allData);
+  if (!matchedRows || matchedRows.length === 0) {
+    return undefined;
+  }
+
+  const foreignField = index.frame.fieldByName.get(statusJoin.foreignField);
+  if (!foreignField) {
+    return undefined;
+  }
+
+  return { field: foreignField, frame: index.frame, rowIndex: matchedRows[0] };
 }

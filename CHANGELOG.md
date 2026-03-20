@@ -6,6 +6,7 @@
 - Added custom severity overrides per threshold color, allowing users to assign explicit severity scores to specific threshold colors.
 - Added option to add tooltip sections. Merged tooltip content and resource content into a single section.
 - Added option to specify known IDs by joining another data frame.
+- Added option to specify resource status by joining another data frame.
 - Fixed incorrect suggestions when selecting fields for grouping and joining.
 - Fixed disappearing data links.
 - Fixed resource tooltip being clipped by panel bounds.

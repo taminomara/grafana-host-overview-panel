@@ -2,12 +2,13 @@ import { css, cx } from '@emotion/css';
 import { DataFrameWithValue, GrafanaTheme2 } from '@grafana/data';
 import { useStyles2, useTheme2 } from '@grafana/ui';
 import { GroupNode } from 'library/groupFrames';
-import React from 'react';
+import React, { useMemo } from 'react';
 import { HostViewerOptions, ResourceDisplayMode } from 'types';
 import { getCellSizeTier } from '../library/cellSize';
 import { useOverrideColor } from '../library/criticality';
 import { IndexedFrame } from '../library/dataFrame';
 import { interpolateWithDataContext } from '../library/interpolate';
+import { resolveStatusField } from '../library/joinFrames';
 import { formatFieldValue } from './FieldRow';
 import { useHostViewerPanelContext } from './PanelContext';
 import { CellTooltip } from './CellTooltip';
@@ -53,11 +54,17 @@ export const CellView: React.FC<CellViewProps> = ({ node, frame, rowIndex, optio
   const context = useHostViewerPanelContext();
 
   const idField = frame.fieldByName.get(options.idField);
-  const statusField = frame.fieldByName.get(options.statusField);
+  const resolvedStatus = useMemo(
+    () => resolveStatusField(options, frame, rowIndex, context.joinIndices, context.replaceVariables, context.data),
+    [options, frame, rowIndex, context]
+  );
+
+  const statusField = resolvedStatus?.field;
+  const statusRowIndex = resolvedStatus?.rowIndex ?? rowIndex;
   const statusValue = statusField
     ? statusField?.type === 'frame'
-      ? (statusField.values[rowIndex] as DataFrameWithValue).value
-      : statusField.values[rowIndex]
+      ? (statusField.values[statusRowIndex] as DataFrameWithValue).value
+      : statusField.values[statusRowIndex]
     : undefined;
   const displayValue =
     statusField && statusField.display ? statusField.display(statusValue) : undefined;

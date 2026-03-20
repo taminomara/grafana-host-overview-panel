@@ -275,3 +275,32 @@ export const KnownIdsJoinEditorWrapper = ({
     </div>
   );
 };
+
+export const StatusJoinEditorWrapper = ({
+  value,
+  onChange,
+  context,
+}: StandardEditorProps<Join, unknown, HostViewerOptions>) => {
+  const styles = useStyles2(getStyles);
+  const allFrames = context.data ?? [];
+  const primaryFrame = findFrame(allFrames, context.options?.dataFrame);
+
+  const primaryFieldOptions = useMemo<Array<ComboboxOption<string>>>(
+    () =>
+      primaryFrame
+        ? primaryFrame.fields.map((f) => ({ label: f.name, value: f.name, description: f.type }))
+        : [],
+    [primaryFrame]
+  );
+
+  return (
+    <div className={styles.groupedBody}>
+      <JoinEditor
+        value={value}
+        onChange={onChange}
+        allFrames={allFrames}
+        primaryFieldOptions={primaryFieldOptions}
+      />
+    </div>
+  );
+};
