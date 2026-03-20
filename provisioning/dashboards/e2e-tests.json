@@ -71,8 +71,8 @@
         "knownIds": "",
         "resourceDisplayMode": "cell",
         "statusField": "status",
-        "tooltipTitleField": "",
-        "tooltipTitlePattern": ""
+        "titleField": "",
+        "titlePattern": ""
       },
       "pluginVersion": "1.1.0",
       "targets": [
@@ -139,8 +139,8 @@
         "knownIds": "",
         "resourceDisplayMode": "cell",
         "statusField": "status",
-        "tooltipTitleField": "",
-        "tooltipTitlePattern": ""
+        "titleField": "",
+        "titlePattern": ""
       },
       "pluginVersion": "1.1.0",
       "targets": [
@@ -211,8 +211,8 @@
         "knownIds": "",
         "resourceDisplayMode": "cell-with-text",
         "statusField": "nonexistent",
-        "tooltipTitleField": "",
-        "tooltipTitlePattern": ""
+        "titleField": "",
+        "titlePattern": ""
       },
       "pluginVersion": "1.1.0",
       "targets": [
@@ -298,8 +298,8 @@
         "knownIds": "",
         "resourceDisplayMode": "cell-with-text",
         "statusField": "status",
-        "tooltipTitleField": "",
-        "tooltipTitlePattern": ""
+        "titleField": "",
+        "titlePattern": ""
       },
       "pluginVersion": "1.1.0",
       "targets": [
@@ -389,8 +389,8 @@
         "knownIds": "",
         "resourceDisplayMode": "cell-with-text",
         "statusField": "status",
-        "tooltipTitleField": "",
-        "tooltipTitlePattern": ""
+        "titleField": "",
+        "titlePattern": ""
       },
       "pluginVersion": "1.1.0",
       "targets": [
@@ -461,8 +461,8 @@
         "knownIds": "",
         "resourceDisplayMode": "cell-with-text",
         "statusField": "status",
-        "tooltipTitleField": "",
-        "tooltipTitlePattern": ""
+        "titleField": "",
+        "titlePattern": ""
       },
       "pluginVersion": "1.1.0",
       "targets": [
@@ -533,8 +533,8 @@
         "knownIds": "",
         "resourceDisplayMode": "cell",
         "statusField": "status",
-        "tooltipTitleField": "",
-        "tooltipTitlePattern": ""
+        "titleField": "",
+        "titlePattern": ""
       },
       "pluginVersion": "1.1.0",
       "targets": [
@@ -605,8 +605,8 @@
         "knownIds": "",
         "resourceDisplayMode": "cell",
         "statusField": "status",
-        "tooltipTitleField": "",
-        "tooltipTitlePattern": ""
+        "titleField": "",
+        "titlePattern": ""
       },
       "pluginVersion": "1.1.0",
       "targets": [
@@ -677,8 +677,8 @@
         "knownIds": "",
         "resourceDisplayMode": "cell-with-text",
         "statusField": "status",
-        "tooltipTitleField": "",
-        "tooltipTitlePattern": ""
+        "titleField": "",
+        "titlePattern": ""
       },
       "pluginVersion": "1.1.0",
       "targets": [
@@ -791,8 +791,8 @@
         "knownIds": "",
         "resourceDisplayMode": "rich",
         "statusField": "status",
-        "tooltipTitleField": "",
-        "tooltipTitlePattern": ""
+        "titleField": "",
+        "titlePattern": ""
       },
       "pluginVersion": "1.1.0",
       "targets": [
@@ -910,8 +910,8 @@
         "knownIds": "",
         "resourceDisplayMode": "rich",
         "statusField": "status",
-        "tooltipTitleField": "",
-        "tooltipTitlePattern": ""
+        "titleField": "",
+        "titlePattern": ""
       },
       "pluginVersion": "1.1.0",
       "targets": [
@@ -982,8 +982,8 @@
         "knownIds": "",
         "resourceDisplayMode": "cell-with-text",
         "statusField": "status",
-        "tooltipTitleField": "",
-        "tooltipTitlePattern": ""
+        "titleField": "",
+        "titlePattern": ""
       },
       "pluginVersion": "1.1.0",
       "targets": [
@@ -1069,8 +1069,8 @@
         "knownIds": "",
         "resourceDisplayMode": "cell-with-text",
         "statusField": "status",
-        "tooltipTitleField": "",
-        "tooltipTitlePattern": ""
+        "titleField": "",
+        "titlePattern": ""
       },
       "pluginVersion": "1.1.0",
       "targets": [
@@ -1170,8 +1170,8 @@
         "knownIds": "",
         "resourceDisplayMode": "cell-with-text",
         "statusField": "status",
-        "tooltipTitleField": "",
-        "tooltipTitlePattern": ""
+        "titleField": "",
+        "titlePattern": ""
       },
       "pluginVersion": "1.1.0",
       "targets": [
@@ -1271,8 +1271,8 @@
         "knownIds": "",
         "resourceDisplayMode": "cell-with-text",
         "statusField": "status",
-        "tooltipTitleField": "",
-        "tooltipTitlePattern": ""
+        "titleField": "",
+        "titlePattern": ""
       },
       "pluginVersion": "1.1.0",
       "targets": [
@@ -1358,8 +1358,8 @@
         "knownIds": "",
         "resourceDisplayMode": "cell-with-text",
         "statusField": "status",
-        "tooltipTitleField": "",
-        "tooltipTitlePattern": ""
+        "titleField": "",
+        "titlePattern": ""
       },
       "pluginVersion": "1.1.0",
       "targets": [
@@ -1426,8 +1426,8 @@
         "knownIds": "",
         "resourceDisplayMode": "cell-with-text",
         "statusField": "",
-        "tooltipTitleField": "",
-        "tooltipTitlePattern": ""
+        "titleField": "",
+        "titlePattern": ""
       },
       "pluginVersion": "1.1.0",
       "targets": [
@@ -1494,8 +1494,8 @@
         "knownIds": "",
         "resourceDisplayMode": "cell-with-text",
         "statusField": "",
-        "tooltipTitleField": "",
-        "tooltipTitlePattern": ""
+        "titleField": "",
+        "titlePattern": ""
       },
       "pluginVersion": "1.1.0",
       "targets": [
@@ -1562,8 +1562,8 @@
         "knownIds": "",
         "resourceDisplayMode": "cell-with-text",
         "statusField": "",
-        "tooltipTitleField": "",
-        "tooltipTitlePattern": ""
+        "titleField": "",
+        "titlePattern": ""
       },
       "pluginVersion": "1.1.0",
       "targets": [
@@ -1630,8 +1630,8 @@
         "knownIds": "",
         "resourceDisplayMode": "cell-with-text",
         "statusField": "",
-        "tooltipTitleField": "",
-        "tooltipTitlePattern": ""
+        "titleField": "",
+        "titlePattern": ""
       },
       "pluginVersion": "1.1.0",
       "targets": [
@@ -1717,8 +1717,8 @@
         "knownIds": "",
         "resourceDisplayMode": "cell-with-text",
         "statusField": "status",
-        "tooltipTitleField": "",
-        "tooltipTitlePattern": ""
+        "titleField": "",
+        "titlePattern": ""
       },
       "pluginVersion": "1.1.0",
       "targets": [
@@ -1804,8 +1804,8 @@
         "knownIds": "",
         "resourceDisplayMode": "cell-with-text",
         "statusField": "status",
-        "tooltipTitleField": "",
-        "tooltipTitlePattern": ""
+        "titleField": "",
+        "titlePattern": ""
       },
       "pluginVersion": "1.1.0",
       "targets": [
@@ -1876,8 +1876,8 @@
         "knownIds": "",
         "resourceDisplayMode": "cell-with-text",
         "statusField": "status",
-        "tooltipTitleField": "",
-        "tooltipTitlePattern": ""
+        "titleField": "",
+        "titlePattern": ""
       },
       "pluginVersion": "1.1.0",
       "targets": [
@@ -1948,8 +1948,8 @@
         "knownIds": "",
         "resourceDisplayMode": "cell-with-text",
         "statusField": "status",
-        "tooltipTitleField": "",
-        "tooltipTitlePattern": ""
+        "titleField": "",
+        "titlePattern": ""
       },
       "pluginVersion": "1.1.0",
       "targets": [
@@ -2020,8 +2020,8 @@
         "knownIds": "",
         "resourceDisplayMode": "cell-with-text",
         "statusField": "status",
-        "tooltipTitleField": "",
-        "tooltipTitlePattern": ""
+        "titleField": "",
+        "titlePattern": ""
       },
       "pluginVersion": "1.1.0",
       "targets": [
@@ -2092,8 +2092,8 @@
         "knownIds": "",
         "resourceDisplayMode": "cell-with-text",
         "statusField": "status",
-        "tooltipTitleField": "",
-        "tooltipTitlePattern": ""
+        "titleField": "",
+        "titlePattern": ""
       },
       "pluginVersion": "1.1.0",
       "targets": [
@@ -2179,8 +2179,8 @@
         "knownIds": "",
         "resourceDisplayMode": "cell-with-text",
         "statusField": "status",
-        "tooltipTitleField": "",
-        "tooltipTitlePattern": ""
+        "titleField": "",
+        "titlePattern": ""
       },
       "pluginVersion": "1.1.0",
       "targets": [
@@ -2266,8 +2266,8 @@
         "knownIds": "",
         "resourceDisplayMode": "cell-with-text",
         "statusField": "status",
-        "tooltipTitleField": "",
-        "tooltipTitlePattern": ""
+        "titleField": "",
+        "titlePattern": ""
       },
       "pluginVersion": "1.1.0",
       "targets": [
@@ -2354,8 +2354,8 @@
         "knownIds": "",
         "resourceDisplayMode": "cell-with-text",
         "statusField": "status",
-        "tooltipTitleField": "",
-        "tooltipTitlePattern": ""
+        "titleField": "",
+        "titlePattern": ""
       },
       "pluginVersion": "1.1.0",
       "targets": [
@@ -2441,8 +2441,8 @@
         "knownIds": "",
         "resourceDisplayMode": "cell-with-text",
         "statusField": "status",
-        "tooltipTitleField": "",
-        "tooltipTitlePattern": ""
+        "titleField": "",
+        "titlePattern": ""
       },
       "pluginVersion": "1.1.0",
       "targets": [
@@ -2529,8 +2529,8 @@
         "knownIds": "",
         "resourceDisplayMode": "cell-with-text",
         "statusField": "status",
-        "tooltipTitleField": "",
-        "tooltipTitlePattern": ""
+        "titleField": "",
+        "titlePattern": ""
       },
       "pluginVersion": "1.1.0",
       "targets": [
@@ -2617,8 +2617,8 @@
         "knownIds": "",
         "resourceDisplayMode": "cell-with-text",
         "statusField": "status",
-        "tooltipTitleField": "",
-        "tooltipTitlePattern": ""
+        "titleField": "",
+        "titlePattern": ""
       },
       "pluginVersion": "1.1.0",
       "targets": [
@@ -2702,8 +2702,8 @@
         "knownIds": "",
         "resourceDisplayMode": "cell",
         "statusField": "status",
-        "tooltipTitleField": "",
-        "tooltipTitlePattern": ""
+        "titleField": "",
+        "titlePattern": ""
       },
       "pluginVersion": "1.1.0",
       "targets": [
@@ -2781,8 +2781,8 @@
         "knownIds": "",
         "resourceDisplayMode": "cell",
         "statusField": "status",
-        "tooltipTitleField": "__use_pattern__",
-        "tooltipTitlePattern": "Host: ${__data.fields.name}"
+        "titleField": "__use_pattern__",
+        "titlePattern": "Host: ${__data.fields.name}"
       },
       "pluginVersion": "1.1.0",
       "targets": [
@@ -2889,8 +2889,8 @@
         "knownIds": "",
         "resourceDisplayMode": "rich",
         "statusField": "status",
-        "tooltipTitleField": "",
-        "tooltipTitlePattern": ""
+        "titleField": "",
+        "titlePattern": ""
       },
       "pluginVersion": "1.1.0",
       "targets": [
@@ -2997,8 +2997,8 @@
         "knownIds": "",
         "resourceDisplayMode": "rich",
         "statusField": "status",
-        "tooltipTitleField": "",
-        "tooltipTitlePattern": ""
+        "titleField": "",
+        "titlePattern": ""
       },
       "pluginVersion": "1.1.0",
       "targets": [
@@ -3116,8 +3116,8 @@
         "knownIds": "",
         "resourceDisplayMode": "rich",
         "statusField": "status",
-        "tooltipTitleField": "",
-        "tooltipTitlePattern": ""
+        "titleField": "",
+        "titlePattern": ""
       },
       "pluginVersion": "1.1.0",
       "targets": [
@@ -3203,8 +3203,8 @@
         "knownIds": "",
         "resourceDisplayMode": "rich",
         "statusField": "status",
-        "tooltipTitleField": "",
-        "tooltipTitlePattern": ""
+        "titleField": "",
+        "titlePattern": ""
       },
       "pluginVersion": "1.1.0",
       "targets": [
@@ -3299,8 +3299,8 @@
         "knownIds": "",
         "resourceDisplayMode": "rich",
         "statusField": "status",
-        "tooltipTitleField": "",
-        "tooltipTitlePattern": ""
+        "titleField": "",
+        "titlePattern": ""
       },
       "pluginVersion": "1.1.0",
       "targets": [
@@ -3395,8 +3395,8 @@
         "knownIds": "",
         "resourceDisplayMode": "rich",
         "statusField": "status",
-        "tooltipTitleField": "",
-        "tooltipTitlePattern": ""
+        "titleField": "",
+        "titlePattern": ""
       },
       "pluginVersion": "1.1.0",
       "targets": [
@@ -3467,8 +3467,8 @@
         "knownIds": "node-a,node-x,node-y",
         "resourceDisplayMode": "cell-with-text",
         "statusField": "status",
-        "tooltipTitleField": "",
-        "tooltipTitlePattern": ""
+        "titleField": "",
+        "titlePattern": ""
       },
       "pluginVersion": "1.1.0",
       "targets": [
@@ -3568,8 +3568,8 @@
         "knownIds": "node-a,node-b,node-x",
         "resourceDisplayMode": "cell-with-text",
         "statusField": "status",
-        "tooltipTitleField": "",
-        "tooltipTitlePattern": ""
+        "titleField": "",
+        "titlePattern": ""
       },
       "pluginVersion": "1.1.0",
       "targets": [
@@ -3646,8 +3646,8 @@
         },
         "resourceDisplayMode": "cell-with-text",
         "statusField": "status",
-        "tooltipTitleField": "",
-        "tooltipTitlePattern": ""
+        "titleField": "",
+        "titlePattern": ""
       },
       "pluginVersion": "1.1.0",
       "targets": [
@@ -3760,8 +3760,8 @@
         },
         "resourceDisplayMode": "cell-with-text",
         "statusField": "status",
-        "tooltipTitleField": "",
-        "tooltipTitlePattern": ""
+        "titleField": "",
+        "titlePattern": ""
       },
       "pluginVersion": "1.1.0",
       "targets": [
@@ -3877,8 +3877,8 @@
         "knownIds": "",
         "resourceDisplayMode": "cell",
         "statusField": "status",
-        "tooltipTitleField": "",
-        "tooltipTitlePattern": ""
+        "titleField": "",
+        "titlePattern": ""
       },
       "pluginVersion": "1.1.0",
       "targets": [
@@ -3949,8 +3949,8 @@
         "knownIds": "",
         "resourceDisplayMode": "cell",
         "statusField": "status",
-        "tooltipTitleField": "",
-        "tooltipTitlePattern": ""
+        "titleField": "",
+        "titlePattern": ""
       },
       "pluginVersion": "1.1.0",
       "targets": [
@@ -4021,8 +4021,8 @@
         "knownIds": "",
         "resourceDisplayMode": "cell",
         "statusField": "status",
-        "tooltipTitleField": "",
-        "tooltipTitlePattern": ""
+        "titleField": "",
+        "titlePattern": ""
       },
       "pluginVersion": "1.1.0",
       "targets": [
@@ -4129,8 +4129,8 @@
         "knownIds": "",
         "resourceDisplayMode": "rich",
         "statusField": "status",
-        "tooltipTitleField": "",
-        "tooltipTitlePattern": ""
+        "titleField": "",
+        "titlePattern": ""
       },
       "pluginVersion": "1.1.0",
       "targets": [
@@ -4252,8 +4252,8 @@
         "knownIds": "",
         "resourceDisplayMode": "cell",
         "statusField": "status",
-        "tooltipTitleField": "",
-        "tooltipTitlePattern": ""
+        "titleField": "",
+        "titlePattern": ""
       },
       "pluginVersion": "1.1.0",
       "targets": [
@@ -4396,8 +4396,8 @@
         "knownIds": "",
         "resourceDisplayMode": "cell",
         "statusField": "status",
-        "tooltipTitleField": "",
-        "tooltipTitlePattern": ""
+        "titleField": "",
+        "titlePattern": ""
       },
       "pluginVersion": "1.1.0",
       "targets": [
@@ -4626,8 +4626,8 @@
         "knownIds": "",
         "resourceDisplayMode": "rich",
         "statusField": "status",
-        "tooltipTitleField": "",
-        "tooltipTitlePattern": ""
+        "titleField": "",
+        "titlePattern": ""
       },
       "pluginVersion": "1.1.0",
       "targets": [
@@ -4856,8 +4856,8 @@
         "knownIds": "",
         "resourceDisplayMode": "cell",
         "statusField": "status",
-        "tooltipTitleField": "",
-        "tooltipTitlePattern": ""
+        "titleField": "",
+        "titlePattern": ""
       },
       "pluginVersion": "1.1.0",
       "targets": [
@@ -5101,8 +5101,8 @@
         "knownIds": "",
         "resourceDisplayMode": "cell-with-text",
         "statusField": "status",
-        "tooltipTitleField": "",
-        "tooltipTitlePattern": ""
+        "titleField": "",
+        "titlePattern": ""
       },
       "pluginVersion": "1.1.0",
       "targets": [
@@ -5342,8 +5342,8 @@
         "knownIds": "",
         "resourceDisplayMode": "rich",
         "statusField": "status",
-        "tooltipTitleField": "",
-        "tooltipTitlePattern": ""
+        "titleField": "",
+        "titlePattern": ""
       },
       "pluginVersion": "1.1.0",
       "targets": [

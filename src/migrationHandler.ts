@@ -1,5 +1,5 @@
 import { PanelModel } from '@grafana/data';
-import { DisplayEntry, Group, HostViewerOptions, SeparatorDisplayEntry } from './types';
+import { DisplayEntry, Group, HostViewerOptions, ResourceDisplayMode, SeparatorDisplayEntry } from './types';
 
 function renameJoinFields(obj: Record<string, unknown>) {
   if ('sourceFrame' in obj && !('foreignFrame' in obj)) {
@@ -56,6 +56,18 @@ export function migrationHandler(panel: PanelModel<Partial<HostViewerOptions>>) 
 
   if (options.knownIdsJoin) {
     renameJoinFields(options.knownIdsJoin as unknown as Record<string, unknown>);
+  }
+
+  if ('tooltipTitleField' in old && !('titleField' in old)) {
+    options.titleField = old.tooltipTitleField as string;
+    options.titlePattern = old.tooltipTitlePattern as string;
+  }
+  delete (options as Record<string, unknown>).tooltipTitleField;
+  delete (options as Record<string, unknown>).tooltipTitlePattern;
+
+  if (!options.titleField && options.cellTextField && options.resourceDisplayMode === ResourceDisplayMode.Rich) {
+    options.titleField = options.cellTextField;
+    options.titlePattern = options.cellTextPattern;
   }
 
   for (const group of options.groups ?? []) {

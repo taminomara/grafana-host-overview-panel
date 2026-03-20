@@ -342,8 +342,8 @@
             "type": "join"
           }
         ],
-        "tooltipTitleField": "",
-        "tooltipTitlePattern": ""
+        "titleField": "",
+        "titlePattern": ""
       },
       "pluginVersion": "1.0.0",
       "targets": [

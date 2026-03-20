@@ -265,10 +265,10 @@ export const plugin = new PanelPlugin<HostViewerOptions, HostViewerFieldConfig>(
         category: ['Resource content'],
       })
       .addCustomEditor({
-        id: 'richTitleField',
-        path: 'cellTextField',
+        id: 'titleField',
+        path: 'titleField',
         name: 'Title field',
-        description: 'The field to display as the resource title',
+        description: 'The field to display as the title in rich table cards and cell tooltips',
         editor: ValueFieldEditor,
         defaultValue: '',
         category: ['Resource content'],
@@ -282,19 +282,16 @@ export const plugin = new PanelPlugin<HostViewerOptions, HostViewerFieldConfig>(
             },
           ],
         },
-        showIf: (options) => options.resourceDisplayMode === ResourceDisplayMode.Rich,
       })
       .addCustomEditor({
-        id: 'richTitlePattern',
-        path: 'cellTextPattern',
+        id: 'titlePattern',
+        path: 'titlePattern',
         name: 'Title pattern',
         description: 'The pattern can use template variables',
         editor: TemplatePatternEditor,
         defaultValue: '',
+        showIf: (options) => options.titleField === '__use_pattern__',
         category: ['Resource content'],
-        showIf: (options) =>
-          options.resourceDisplayMode === ResourceDisplayMode.Rich &&
-          options.cellTextField === '__use_pattern__',
       })
       .addCustomEditor({
         id: 'displayEntries',
@@ -304,34 +301,5 @@ export const plugin = new PanelPlugin<HostViewerOptions, HostViewerFieldConfig>(
         editor: DisplayEntriesEditorWrapper,
         defaultValue: [],
         category: ['Resource content'],
-      })
-      .addCustomEditor({
-        id: 'tooltipTitleField',
-        path: 'tooltipTitleField',
-        name: 'Tooltip title field',
-        description: 'The field to display in tooltip title',
-        editor: ValueFieldEditor,
-        defaultValue: '',
-        category: ['Resource tooltip'],
-        settings: {
-          placeholder: 'Use resource ID',
-          additionalOptions: [
-            {
-              label: 'Use custom pattern',
-              value: '__use_pattern__',
-              description: 'Provide custom title using template language',
-            },
-          ],
-        },
-      })
-      .addCustomEditor({
-        id: 'tooltipTitlePattern',
-        path: 'tooltipTitlePattern',
-        name: 'Tooltip title pattern',
-        description: 'The pattern can use template variables',
-        editor: TemplatePatternEditor,
-        defaultValue: '',
-        showIf: (options) => options.tooltipTitleField === '__use_pattern__',
-        category: ['Resource tooltip'],
       });
   });

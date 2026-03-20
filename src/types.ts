@@ -65,8 +65,8 @@ export interface HostViewerOptions {
   resourceDisplayMode: ResourceDisplayMode;
   cellTextField: string;
   cellTextPattern: string;
-  tooltipTitleField: string;
-  tooltipTitlePattern: string;
+  titleField: string;
+  titlePattern: string;
   gridType: GridType;
   gridColumns: number;
   borderColor?: string;

@@ -146,11 +146,11 @@ export const TableView: React.FC<TableViewProps> = ({ node, frame, rowIndex, opt
 
   const config = useMemo(
     (): ResourceDetailsConfig => ({
-      titleField: options.cellTextField,
-      titlePattern: options.cellTextPattern,
+      titleField: options.titleField,
+      titlePattern: options.titlePattern,
       entries: mainEntries,
     }),
-    [options.cellTextField, options.cellTextPattern, mainEntries]
+    [options.titleField, options.titlePattern, mainEntries]
   );
 
   const moreConfig = useMemo(

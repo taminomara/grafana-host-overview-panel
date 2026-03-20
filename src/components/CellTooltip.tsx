@@ -125,11 +125,11 @@ const CellTooltipContent: React.FC<{
 
   const config = useMemo(
     (): ResourceDetailsConfig => ({
-      titleField: options.tooltipTitleField,
-      titlePattern: options.tooltipTitlePattern,
+      titleField: options.titleField,
+      titlePattern: options.titlePattern,
       entries: options.displayEntries ?? [],
     }),
-    [options.tooltipTitleField, options.tooltipTitlePattern, options.displayEntries]
+    [options.titleField, options.titlePattern, options.displayEntries]
   );
 
   return (
