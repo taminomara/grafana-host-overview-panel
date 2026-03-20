@@ -10,6 +10,7 @@
 - Fixed disappearing data links.
 - Fixed resource tooltip being clipped by panel bounds.
 - Fixed a bug when status field would show up twice in rich table rendering mode.
+- Reworked rich table layout to fix lags and jitter when editing its fields.
 
 ## 1.0.0
 

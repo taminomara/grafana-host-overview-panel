@@ -51,6 +51,7 @@ interface ResourceDetailsProps {
   options: HostViewerOptions;
   config: ResourceDetailsConfig;
   className?: string;
+  inline?: boolean;
   showStatus: Boolean;
 }
 
@@ -60,6 +61,7 @@ export const ResourceDetails: React.FC<ResourceDetailsProps> = ({
   options,
   config,
   className,
+  inline,
   showStatus,
 }) => {
   const styles = useStyles2(getStyles);
@@ -120,8 +122,8 @@ export const ResourceDetails: React.FC<ResourceDetailsProps> = ({
       : [];
   const joinSectionMap = new Map(joinSections.map((s) => [s.joinConfig.id, s]));
 
-  return (
-    <div className={cx(styles.container, className)}>
+  const children = (
+    <>
       {title || links.length > 0 ? (
         <div className={styles.title}>
           {title ? <span>{title}</span> : null}
@@ -167,6 +169,12 @@ export const ResourceDetails: React.FC<ResourceDetailsProps> = ({
           </React.Fragment>
         );
       })}
-    </div>
+    </>
   );
+
+  if (inline) {
+    return children;
+  }
+
+  return <div className={cx(styles.container, className)}>{children}</div>;
 };

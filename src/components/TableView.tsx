@@ -2,31 +2,27 @@ import { css, cx } from '@emotion/css';
 import { GrafanaTheme2 } from '@grafana/data';
 import { Icon, useStyles2, useTheme2 } from '@grafana/ui';
 import { GroupNode } from 'library/groupFrames';
-import React, {
-  useCallback,
-  useEffect,
-  useId,
-  useLayoutEffect,
-  useMemo,
-  useRef,
-  useState,
-} from 'react';
+import React, { useCallback, useEffect, useId, useMemo, useRef, useState } from 'react';
 import { HostViewerOptions } from 'types';
 import { useOverrideColor } from '../library/criticality';
 import { IndexedFrame } from '../library/dataFrame';
 import { ResourceDetails, ResourceDetailsConfig } from './ResourceDetails';
 
 const getStyles = (theme: GrafanaTheme2) => ({
-  cardWrapper: css({
+  wrapper: css({
     position: 'relative',
   }),
-  cardWrapperExpanded: css({
-    zIndex: 2,
-    boxShadow: theme.shadows.z2,
+  wrapperExpanded: css({
+    overflow: 'visible',
+    zIndex: 3,
+    filter: `drop-shadow(${theme.shadows.z2})`,
   }),
   card: css({
-    position: 'relative',
-    zIndex: 1,
+    display: 'grid',
+    gridTemplateColumns: '1fr auto auto',
+    alignItems: 'start',
+    alignContent: 'start',
+    columnGap: theme.spacing(0.5),
     padding: theme.spacing(0.5),
     borderWidth: 1,
     borderStyle: 'solid',
@@ -52,26 +48,23 @@ const getStyles = (theme: GrafanaTheme2) => ({
   showMoreIcon: css({
     marginLeft: -6,
   }),
-  cardExpanded: css({
-    borderBottomLeftRadius: 0,
-    borderBottomRightRadius: 0,
-    borderBottomStyle: 'none',
+  moreEntries: css({
+    display: 'contents',
   }),
-  tooltip: css({
-    padding: theme.spacing(0.5),
-    paddingTop: 0,
-    backgroundColor: theme.colors.background.primary,
-    '--row-hover-bg': theme.colors.background.primary,
-    fontSize: theme.typography.bodySmall.fontSize,
-    borderStyle: 'solid',
-    borderWidth: 1,
-    borderTopWidth: 0,
-    borderBottomLeftRadius: theme.shape.radius.default,
-    borderBottomRightRadius: theme.shape.radius.default,
-    boxShadow: theme.shadows.z2,
-  }),
-  tooltipCollapsed: css({
+  moreEntriesCollapsed: css({
+    display: 'contents',
     visibility: 'hidden',
+    '& > *': {
+      height: '0 !important',
+      overflow: 'hidden !important',
+      paddingTop: '0 !important',
+      paddingBottom: '0 !important',
+      marginTop: '0 !important',
+      marginBottom: '0 !important',
+      borderTopWidth: '0 !important',
+      borderBottomWidth: '0 !important',
+      lineHeight: '0 !important',
+    },
   }),
 });
 
@@ -86,10 +79,10 @@ export const TableView: React.FC<TableViewProps> = ({ node, frame, rowIndex, opt
   const styles = useStyles2(getStyles);
   const theme = useTheme2();
   const [expanded, setExpanded] = useState(false);
+  const [wrapperHeight, setWrapperHeight] = useState<number | undefined>(undefined);
   const wrapperRef = useRef<HTMLDivElement>(null);
-  const tooltipRef = useRef<HTMLDivElement>(null);
-  const [tooltipHeight, setTooltipHeight] = useState(0);
-  const tooltipId = useId();
+  const cardRef = useRef<HTMLDivElement>(null);
+  const moreEntriesId = useId();
 
   const allEntries = options.displayEntries;
   const entries = useMemo(() => allEntries.filter((e) => !e.hidden), [allEntries]);
@@ -104,24 +97,16 @@ export const TableView: React.FC<TableViewProps> = ({ node, frame, rowIndex, opt
   );
   const hasMoreEntries = moreEntries.length > 0;
 
-  const updateHeight = useCallback(() => {
-    if (tooltipRef.current) {
-      setTooltipHeight(tooltipRef.current.offsetHeight);
-    }
+  const toggleExpanded = useCallback(() => {
+    setExpanded((prev) => {
+      if (!prev && cardRef.current) {
+        setWrapperHeight(cardRef.current.offsetHeight);
+      } else {
+        setWrapperHeight(undefined);
+      }
+      return !prev;
+    });
   }, []);
-
-  useLayoutEffect(() => {
-    updateHeight();
-
-    const el = tooltipRef.current;
-    if (!el) {
-      return;
-    }
-
-    const observer = new ResizeObserver(updateHeight);
-    observer.observe(el);
-    return () => observer.disconnect();
-  }, [updateHeight, entries]);
 
   useEffect(() => {
     if (!expanded) {
@@ -129,9 +114,16 @@ export const TableView: React.FC<TableViewProps> = ({ node, frame, rowIndex, opt
     }
 
     const handleClick = (e: MouseEvent) => {
-      if (wrapperRef.current && !wrapperRef.current.contains(e.target as Node)) {
-        setExpanded(false);
+      const target = e.target as HTMLElement;
+      if (wrapperRef.current?.contains(target)) {
+        return;
       }
+      if (target.closest?.('[role="menu"]')) {
+        return;
+      }
+
+      setExpanded(false);
+      setWrapperHeight(undefined);
     };
 
     document.addEventListener('mousedown', handleClick);
@@ -173,22 +165,24 @@ export const TableView: React.FC<TableViewProps> = ({ node, frame, rowIndex, opt
   return (
     <div
       ref={wrapperRef}
-      className={cx(styles.cardWrapper, expanded && styles.cardWrapperExpanded)}
+      className={cx(styles.wrapper, expanded && styles.wrapperExpanded)}
+      style={wrapperHeight !== undefined ? { height: wrapperHeight } : undefined}
     >
-      <div className={cx(styles.card, expanded && styles.cardExpanded)} style={{ borderColor }}>
+      <div ref={cardRef} className={styles.card} style={{ borderColor }}>
         <ResourceDetails
           frame={frame}
           rowIndex={rowIndex}
           options={options}
           config={config}
+          inline={true}
           showStatus={true}
         />
         {hasMoreEntries && (
           <button
             className={styles.showMoreButton}
-            onClick={() => setExpanded((v) => !v)}
+            onClick={toggleExpanded}
             aria-expanded={expanded}
-            aria-controls={tooltipId}
+            aria-controls={moreEntriesId}
           >
             <Icon
               name={expanded ? 'angle-down' : 'angle-right'}
@@ -198,25 +192,24 @@ export const TableView: React.FC<TableViewProps> = ({ node, frame, rowIndex, opt
             {expanded ? 'show less' : 'show more'}
           </button>
         )}
+        {hasMoreEntries && (
+          <div
+            id={moreEntriesId}
+            role="region"
+            aria-hidden={!expanded}
+            className={cx(expanded ? styles.moreEntries : styles.moreEntriesCollapsed)}
+          >
+            <ResourceDetails
+              frame={frame}
+              rowIndex={rowIndex}
+              options={options}
+              config={moreConfig}
+              inline={true}
+              showStatus={false}
+            />
+          </div>
+        )}
       </div>
-      {hasMoreEntries && (
-        <div
-          id={tooltipId}
-          ref={tooltipRef}
-          role="region"
-          aria-hidden={!expanded}
-          className={cx(styles.tooltip, expanded ? null : styles.tooltipCollapsed)}
-          style={{ borderColor, marginBottom: -tooltipHeight }}
-        >
-          <ResourceDetails
-            frame={frame}
-            rowIndex={rowIndex}
-            options={options}
-            config={moreConfig}
-            showStatus={false}
-          />
-        </div>
-      )}
     </div>
   );
 };
