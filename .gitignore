@@ -45,3 +45,7 @@ ci/
 .claude
 
 .eslintcache
+
+# Built plugin
+taminomara-hostoverview-panel/
+taminomara-hostoverview-panel-*
