@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 1.1.0
 
 - Overhauled severity detection: criticality score is now based on normalized distance from a severity-0 anchor threshold (green by default), instead of simple index-based scoring.
 - Added custom severity overrides per threshold color, allowing users to assign explicit severity scores to specific threshold colors.
