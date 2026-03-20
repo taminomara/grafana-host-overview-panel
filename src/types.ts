@@ -12,6 +12,7 @@ export interface SeverityOverride {
 export interface FieldDisplayEntry {
   id: string;
   type: 'field';
+  hidden?: boolean;
   field: string;
   overridesBorderColor: boolean;
   severityOverrides?: SeverityOverride[];
@@ -26,6 +27,7 @@ export interface Join {
 
 export interface JoinDisplayEntry extends Join {
   type: 'join';
+  hidden?: boolean;
   overridesBorderColor: boolean;
   severityOverrides?: SeverityOverride[];
 }
@@ -33,10 +35,21 @@ export interface JoinDisplayEntry extends Join {
 export interface HeadingDisplayEntry {
   id: string;
   type: 'heading';
+  hidden?: boolean;
   title: string;
 }
 
-export type DisplayEntry = FieldDisplayEntry | JoinDisplayEntry | HeadingDisplayEntry;
+export interface SeparatorDisplayEntry {
+  id: string;
+  type: 'separator';
+  hidden?: boolean;
+}
+
+export type DisplayEntry =
+  | FieldDisplayEntry
+  | JoinDisplayEntry
+  | HeadingDisplayEntry
+  | SeparatorDisplayEntry;
 
 export interface HostViewerOptions {
   dataFrame?: string;

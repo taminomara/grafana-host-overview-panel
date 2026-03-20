@@ -3,11 +3,14 @@ import { DataFrame, GrafanaTheme2, StandardEditorProps } from '@grafana/data';
 import {
   Button,
   ComboboxOption,
+  Dropdown,
   Field,
   Icon,
   InlineField,
   InlineFieldRow,
   Input,
+  Menu,
+  MenuItem,
   Switch,
   useStyles2,
 } from '@grafana/ui';
@@ -19,15 +22,13 @@ import {
   HeadingDisplayEntry,
   HostViewerOptions,
   JoinDisplayEntry,
+  SeparatorDisplayEntry,
 } from '../../types';
 import { findFrame } from '../../library/dataFrame';
 import { FieldCombobox } from './FieldCombobox';
 import { JoinEditor } from './JoinEditor';
 import { SeverityOverridesEditor } from './SeverityOverridesEditor';
 import { SuggestionsFromEditorContext } from './TemplatePatternEditor';
-
-const JOIN_OPTION_VALUE = '__join__';
-const SECTION_OPTION_VALUE = '__section__';
 
 const getStyles = (theme: GrafanaTheme2) => ({
   dragHandle: css({
@@ -38,10 +39,30 @@ const getStyles = (theme: GrafanaTheme2) => ({
     },
   }),
   entryRow: css({
-    alignItems: 'center',
+    alignItems: 'baseline',
+  }),
+  entryLabelWrapper: css({
+    flex: '1 1 0',
+    minWidth: 0,
+    overflow: 'hidden',
+    textOverflow: 'ellipsis',
+    whiteSpace: 'nowrap',
+    cursor: 'pointer',
+    margin: theme.spacing(0, 0.5),
   }),
   entryLabelSecondary: css({
     color: theme.colors.text.secondary,
+  }),
+  separatorWrapper: css({
+    flex: '1 1 0',
+    display: 'flex',
+    alignItems: 'baseline',
+    margin: theme.spacing(0, 0.5),
+  }),
+  separatorLine: css({
+    borderBottom: `1px solid ${theme.colors.border.medium}`,
+    marginLeft: theme.spacing(4.5),
+    width: 100,
   }),
   entryBody: css({
     padding: theme.spacing(1, 0, 1, 2),
@@ -66,22 +87,6 @@ export const DisplayEntriesEditor: React.FC<DisplayEntriesEditorProps> = ({
   primaryFieldOptions,
   hiddenKeyFields,
 }) => {
-  const fieldComboboxOptions = useMemo((): Array<ComboboxOption<string>> => {
-    return [
-      ...primaryFieldOptions,
-      {
-        value: JOIN_OPTION_VALUE,
-        label: 'Join from another frame',
-        description: 'Join data from a secondary data frame',
-      },
-      {
-        value: SECTION_OPTION_VALUE,
-        label: 'Section heading',
-        description: 'Visual separator between entry groups',
-      },
-    ];
-  }, [primaryFieldOptions]);
-
   const hiddenValues = useMemo(
     () => value.filter((e): e is FieldDisplayEntry => e.type === 'field').map((e) => e.field),
     [value]
@@ -97,6 +102,66 @@ export const DisplayEntriesEditor: React.FC<DisplayEntriesEditorProps> = ({
     onChange(update);
   };
 
+  const addEntry = (entry: DisplayEntry) => {
+    onChange([...value, entry]);
+  };
+
+  const menu = (
+    <Menu>
+      <MenuItem
+        label="Field"
+        icon="text-fields"
+        description="Display a field from the primary frame"
+        onClick={() =>
+          addEntry({
+            id: crypto.randomUUID(),
+            type: 'field',
+            field: '',
+            overridesBorderColor: false,
+          } satisfies FieldDisplayEntry)
+        }
+      />
+      <MenuItem
+        label="Join"
+        icon="link"
+        description="Join data from another frame"
+        onClick={() =>
+          addEntry({
+            id: crypto.randomUUID(),
+            type: 'join',
+            foreignFrame: '',
+            foreignField: '',
+            keys: [],
+            overridesBorderColor: false,
+          } satisfies JoinDisplayEntry)
+        }
+      />
+      <MenuItem
+        label="Heading"
+        icon="paragraph"
+        description="Section heading text"
+        onClick={() =>
+          addEntry({
+            id: crypto.randomUUID(),
+            type: 'heading',
+            title: '',
+          } satisfies HeadingDisplayEntry)
+        }
+      />
+      <MenuItem
+        label="Separator"
+        icon="minus"
+        description="Horizontal rule"
+        onClick={() =>
+          addEntry({
+            id: crypto.randomUUID(),
+            type: 'separator',
+          } satisfies SeparatorDisplayEntry)
+        }
+      />
+    </Menu>
+  );
+
   return (
     <>
       <DragDropContext onDragEnd={onDragEnd}>
@@ -109,9 +174,9 @@ export const DisplayEntriesEditor: React.FC<DisplayEntriesEditorProps> = ({
                     <div ref={provided.innerRef} {...provided.draggableProps}>
                       <EntryEditorRow
                         value={entry}
+                        isLast={i === value.length - 1}
                         allFrames={allFrames}
                         primaryFieldOptions={primaryFieldOptions}
-                        fieldComboboxOptions={fieldComboboxOptions}
                         hiddenValues={hiddenValues}
                         hiddenKeyFields={hiddenKeyFields}
                         onChange={(updated) =>
@@ -131,25 +196,16 @@ export const DisplayEntriesEditor: React.FC<DisplayEntriesEditorProps> = ({
       </DragDropContext>
       <InlineFieldRow style={value.length === 0 ? undefined : { flexFlow: 'row-reverse' }}>
         <InlineField>
-          <Button
-            variant={value.length === 0 ? 'primary' : 'secondary'}
-            icon={value.length === 0 ? undefined : 'plus'}
-            aria-label="Add entry"
-            title="Add entry"
-            onClick={() =>
-              onChange([
-                ...value,
-                {
-                  id: crypto.randomUUID(),
-                  type: 'field',
-                  field: '',
-                  overridesBorderColor: false,
-                } satisfies FieldDisplayEntry,
-              ])
-            }
-          >
-            {value.length === 0 ? 'Add entry' : null}
-          </Button>
+          <Dropdown overlay={menu}>
+            <Button
+              variant={value.length === 0 ? 'primary' : 'secondary'}
+              icon={value.length === 0 ? undefined : 'plus'}
+              aria-label="Add entry"
+              title="Add entry"
+            >
+              {value.length === 0 ? 'Add entry' : null}
+            </Button>
+          </Dropdown>
         </InlineField>
       </InlineFieldRow>
     </>
@@ -158,9 +214,9 @@ export const DisplayEntriesEditor: React.FC<DisplayEntriesEditorProps> = ({
 
 interface EntryEditorRowProps {
   value: DisplayEntry;
+  isLast: boolean;
   allFrames: DataFrame[];
   primaryFieldOptions: Array<ComboboxOption<string>>;
-  fieldComboboxOptions: Array<ComboboxOption<string>>;
   hiddenValues: string[];
   hiddenKeyFields?: string[];
   onChange: (entry: DisplayEntry) => void;
@@ -170,9 +226,9 @@ interface EntryEditorRowProps {
 
 const EntryEditorRow: React.FC<EntryEditorRowProps> = ({
   value,
+  isLast,
   allFrames,
   primaryFieldOptions,
-  fieldComboboxOptions,
   hiddenValues,
   hiddenKeyFields,
   onChange,
@@ -180,42 +236,15 @@ const EntryEditorRow: React.FC<EntryEditorRowProps> = ({
   dragHandleProps,
 }) => {
   const styles = useStyles2(getStyles);
-  const [isOpen, setIsOpen] = useState(value.type === 'join' ? !value.foreignFrame : false);
 
-  const comboboxValue =
-    value.type === 'heading'
-      ? SECTION_OPTION_VALUE
-      : value.type === 'field'
-        ? value.field || null
-        : JOIN_OPTION_VALUE;
+  const isUnconfigured =
+    (value.type === 'field' && !value.field) ||
+    (value.type === 'join' && !value.foreignFrame) ||
+    (value.type === 'heading' && !value.title);
 
-  const handleComboboxChange = (selected: string | null) => {
-    if (selected === SECTION_OPTION_VALUE) {
-      onChange({
-        id: value.id,
-        type: 'heading',
-        title: '',
-      } satisfies HeadingDisplayEntry);
-      setIsOpen(false);
-    } else if (selected === JOIN_OPTION_VALUE) {
-      onChange({
-        id: value.id,
-        type: 'join',
-        foreignFrame: '',
-        foreignField: '',
-        keys: [],
-        overridesBorderColor: value.type !== 'heading' ? value.overridesBorderColor : false,
-      } satisfies JoinDisplayEntry);
-      setIsOpen(true);
-    } else {
-      onChange({
-        id: value.id,
-        type: 'field',
-        field: selected ?? '',
-        overridesBorderColor: value.type !== 'heading' ? value.overridesBorderColor : false,
-      } satisfies FieldDisplayEntry);
-    }
-  };
+  const [isOpen, setIsOpen] = useState(isLast && isUnconfigured);
+
+  const isSeparator = value.type === 'separator';
 
   return (
     <div>
@@ -223,25 +252,29 @@ const EntryEditorRow: React.FC<EntryEditorRowProps> = ({
         <InlineField {...dragHandleProps}>
           <Icon name="draggabledots" className={styles.dragHandle} />
         </InlineField>
+        {!isSeparator && (
+          <InlineField>
+            <Button
+              variant="secondary"
+              fill="text"
+              icon={isOpen ? 'angle-down' : 'angle-right'}
+              onClick={() => setIsOpen(!isOpen)}
+              aria-label={isOpen ? 'Collapse' : 'Expand'}
+              title={isOpen ? 'Collapse' : 'Expand'}
+            />
+          </InlineField>
+        )}
+        <EntryLabel
+          value={value}
+          onClick={isSeparator ? undefined : () => setIsOpen(!isOpen)}
+        />
         <InlineField>
           <Button
-            variant="secondary"
-            fill="text"
-            icon={isOpen ? 'angle-down' : 'angle-right'}
-            onClick={() => setIsOpen(!isOpen)}
-            aria-label={isOpen ? 'Collapse' : 'Expand'}
-            title={isOpen ? 'Collapse' : 'Expand'}
-          />
-        </InlineField>
-        <InlineField grow={true} shrink={true}>
-          <FieldCombobox
-            options={fieldComboboxOptions}
-            hiddenValues={hiddenValues}
-            value={comboboxValue}
-            onChange={handleComboboxChange}
-            isClearable={true}
-            placeholder="Select a field or join"
-            autoFocus={true}
+            variant={value.hidden ? 'destructive' : 'secondary'}
+            icon={value.hidden ? 'eye-slash' : 'eye'}
+            aria-label={value.hidden ? 'Show entry' : 'Hide entry'}
+            title={value.hidden ? 'Show entry' : 'Hide entry'}
+            onClick={() => onChange({ ...value, hidden: !value.hidden })}
           />
         </InlineField>
         <InlineField>
@@ -254,10 +287,10 @@ const EntryEditorRow: React.FC<EntryEditorRowProps> = ({
           />
         </InlineField>
       </InlineFieldRow>
-      {isOpen && (
+      {isOpen && !isSeparator && (
         <div className={styles.entryBody}>
           {value.type === 'heading' ? (
-            <Field label="Heading text" description="Leave empty to render a horizontal ruler">
+            <Field label="Heading text">
               <Input
                 value={value.title}
                 onChange={(e) =>
@@ -267,7 +300,19 @@ const EntryEditorRow: React.FC<EntryEditorRowProps> = ({
               />
             </Field>
           ) : value.type === 'field' ? (
-            <FieldEntrySettings value={value} onChange={onChange} />
+            <>
+              <Field label="Field">
+                <FieldCombobox
+                  options={primaryFieldOptions}
+                  hiddenValues={hiddenValues}
+                  value={value.field || null}
+                  onChange={(v) => onChange({ ...value, field: v ?? '' })}
+                  isClearable={true}
+                  placeholder="Select a field"
+                />
+              </Field>
+              <FieldEntrySettings value={value} onChange={onChange} />
+            </>
           ) : (
             <JoinEditor<JoinDisplayEntry>
               value={value}
@@ -303,6 +348,43 @@ const EntryEditorRow: React.FC<EntryEditorRowProps> = ({
           )}
         </div>
       )}
+    </div>
+  );
+};
+
+interface EntryLabelProps {
+  value: DisplayEntry;
+  onClick?: () => void;
+}
+
+const EntryLabel: React.FC<EntryLabelProps> = ({ value, onClick }) => {
+  const styles = useStyles2(getStyles);
+
+  if (value.type === 'separator') {
+    return (
+      <div className={styles.separatorWrapper}>
+        <div className={styles.separatorLine} />
+      </div>
+    );
+  }
+
+  let label: React.ReactNode;
+  let title: string | undefined;
+
+  if (value.type === 'heading') {
+    title = value.title || undefined;
+    label = value.title ? value.title : <span className={styles.entryLabelSecondary}>(empty heading)</span>;
+  } else if (value.type === 'field') {
+    title = value.field || undefined;
+    label = value.field ? value.field : <span className={styles.entryLabelSecondary}>(no field selected)</span>;
+  } else {
+    title = value.foreignField || undefined;
+    label = value.foreignField ? value.foreignField : <span className={styles.entryLabelSecondary}>(not configured)</span>;
+  }
+
+  return (
+    <div className={styles.entryLabelWrapper} onClick={onClick} title={title}>
+      {label}
     </div>
   );
 };

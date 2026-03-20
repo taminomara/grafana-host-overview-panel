@@ -1,5 +1,5 @@
 import { PanelModel } from '@grafana/data';
-import { DisplayEntry, Group, HeadingDisplayEntry, HostViewerOptions } from './types';
+import { DisplayEntry, Group, HostViewerOptions, SeparatorDisplayEntry } from './types';
 
 function renameJoinFields(obj: Record<string, unknown>) {
   if ('sourceFrame' in obj && !('foreignFrame' in obj)) {
@@ -35,12 +35,11 @@ export function migrationHandler(panel: PanelModel<Partial<HostViewerOptions>>) 
     const tooltip: DisplayEntry[] = (old.tooltipEntries as DisplayEntry[]) ?? [];
 
     if (rich.length > 0 && tooltip.length > 0) {
-      const heading: HeadingDisplayEntry = {
+      const separator: SeparatorDisplayEntry = {
         id: crypto.randomUUID(),
-        type: 'heading',
-        title: '',
+        type: 'separator',
       };
-      options.displayEntries = [...rich, heading, ...tooltip];
+      options.displayEntries = [...rich, separator, ...tooltip];
     } else {
       options.displayEntries = [...rich, ...tooltip];
     }

@@ -188,7 +188,7 @@ export const GroupView: React.FC<GroupViewProps> = ({ node, options }) => {
   }, [node.entries, node.frame, node.groupValues, context]);
 
   const joinEntries = useMemo(
-    () => node.entries.filter((e): e is JoinDisplayEntry => e.type === 'join'),
+    () => node.entries.filter((e): e is JoinDisplayEntry => e.type === 'join' && !e.hidden),
     [node.entries]
   );
   const joinSections = useMemo(() => {
@@ -240,13 +240,17 @@ export const GroupView: React.FC<GroupViewProps> = ({ node, options }) => {
       {node.entries.length > 0 && frameForEntries ? (
         <div className={styles.joinedData}>
           {node.entries.map((entry) => {
+            if (entry.hidden) {
+              return null;
+            }
+            if (entry.type === 'separator') {
+              return <hr key={entry.id} className={styles.headingRule} />;
+            }
             if (entry.type === 'heading') {
-              return entry.title ? (
+              return (
                 <span key={entry.id} className={styles.headingText}>
                   {entry.title}
                 </span>
-              ) : (
-                <hr key={entry.id} className={styles.headingRule} />
               );
             }
             if (entry.type === 'field') {

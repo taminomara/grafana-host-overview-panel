@@ -60,7 +60,6 @@ const getStyles = (theme: GrafanaTheme2) => ({
   tooltip: css({
     padding: theme.spacing(0.5),
     paddingTop: 0,
-    marginTop: theme.spacing(-0.5),
     backgroundColor: theme.colors.background.primary,
     '--row-hover-bg': theme.colors.background.primary,
     fontSize: theme.typography.bodySmall.fontSize,
@@ -92,8 +91,9 @@ export const TableView: React.FC<TableViewProps> = ({ node, frame, rowIndex, opt
   const [tooltipHeight, setTooltipHeight] = useState(0);
   const tooltipId = useId();
 
-  const entries = options.displayEntries;
-  const splitIndex = entries.findIndex((e) => e.type === 'heading');
+  const allEntries = options.displayEntries;
+  const entries = useMemo(() => allEntries.filter((e) => !e.hidden), [allEntries]);
+  const splitIndex = entries.findIndex((e) => e.type === 'heading' || e.type === 'separator');
   const mainEntries = useMemo(
     () => (splitIndex >= 0 ? entries.slice(0, splitIndex) : entries),
     [entries, splitIndex]
@@ -121,7 +121,7 @@ export const TableView: React.FC<TableViewProps> = ({ node, frame, rowIndex, opt
     const observer = new ResizeObserver(updateHeight);
     observer.observe(el);
     return () => observer.disconnect();
-  }, [updateHeight]);
+  }, [updateHeight, entries]);
 
   useEffect(() => {
     if (!expanded) {

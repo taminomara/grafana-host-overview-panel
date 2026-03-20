@@ -105,7 +105,7 @@ export const ResourceDetails: React.FC<ResourceDetailsProps> = ({
   }
 
   const joinEntries = config.entries.filter(
-    (e): e is import('types').JoinDisplayEntry => e.type === 'join'
+    (e): e is import('types').JoinDisplayEntry => e.type === 'join' && !e.hidden
   );
   const joinSections =
     joinEntries.length > 0
@@ -130,13 +130,17 @@ export const ResourceDetails: React.FC<ResourceDetailsProps> = ({
       ) : null}
       {statusField ? <FieldRow field={statusField} frame={frame} rowIndex={rowIndex} /> : null}
       {config.entries.map((entry) => {
+        if (entry.hidden) {
+          return null;
+        }
+        if (entry.type === 'separator') {
+          return <hr key={entry.id} className={styles.headingRule} />;
+        }
         if (entry.type === 'heading') {
-          return entry.title ? (
+          return (
             <span key={entry.id} className={styles.headingText}>
               {entry.title}
             </span>
-          ) : (
-            <hr key={entry.id} className={styles.headingRule} />
           );
         }
         if (entry.type === 'field') {
