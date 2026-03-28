@@ -230,7 +230,7 @@ export const GroupView: React.FC<GroupViewProps> = ({ node, options }) => {
       className={cx(
         styles.container,
         border ? styles.containerWithBorder : null,
-        node.transparentBackground
+        node.transparentBackground || !border
           ? styles.containerWithTransparentBackground
           : styles.containerWithNonTransparentBackground
       )}

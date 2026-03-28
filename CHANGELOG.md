@@ -1,5 +1,7 @@
 # Changelog
 
+- Fixed a bug when transparent background would not work for groupsthat have their borders hidden.
+
 ## 1.1.0
 
 - Overhauled severity detection: criticality score is now based on normalized distance from a severity-0 anchor threshold (green by default), instead of simple index-based scoring.
