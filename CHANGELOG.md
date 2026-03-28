@@ -1,5 +1,7 @@
 # Changelog
 
+## 1.1.1
+
 - Fixed a bug when transparent background would not work for groupsthat have their borders hidden.
 
 ## 1.1.0
