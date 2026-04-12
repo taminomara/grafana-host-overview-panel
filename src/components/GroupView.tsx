@@ -113,12 +113,8 @@ export const GroupView: React.FC<GroupViewProps> = ({ node, options }) => {
   const cellTier = getCellSizeTier(options.cellSize ?? 20);
   const isRichMode = options.resourceDisplayMode === ResourceDisplayMode.Rich;
 
-  const title = useMemo(() => {
-    if (!node.showTitle) {
-      return null;
-    }
-
-    const frameWithValues =
+  const frameWithValues = useMemo(
+    () =>
       node.frame.length > 0
         ? node.frame
         : createFrame(
@@ -133,7 +129,15 @@ export const GroupView: React.FC<GroupViewProps> = ({ node, options }) => {
               }),
             },
             context
-          );
+          ),
+    [node.frame, node.groupValues, context]
+  );
+
+  const title = useMemo(() => {
+    if (!node.showTitle) {
+      return null;
+    }
+
     const field = frameWithValues.fieldByName.get(node.groupKey);
     const rawValue = node.groupValues[node.groupKey];
     const displayValue = field?.display ? field.display(rawValue) : undefined;
@@ -166,54 +170,35 @@ export const GroupView: React.FC<GroupViewProps> = ({ node, options }) => {
         <DataLinksButton links={links} />
       </div>
     );
-  }, [node, context, styles]);
-
-  const frameForEntries = useMemo(() => {
-    if (node.entries.length === 0) {
-      return null;
-    }
-    return node.frame.length > 0
-      ? node.frame
-      : createFrame(
-          {
-            ...node.frame,
-            length: node.frame.length + 1,
-            fields: node.frame.fields.map((field) => ({
-              ...field,
-              values: [node.groupValues[field.name]],
-            })),
-          },
-          context
-        );
-  }, [node.entries, node.frame, node.groupValues, context]);
+  }, [node, context, styles, frameWithValues]);
 
   const joinEntries = useMemo(
     () => node.entries.filter((e): e is JoinDisplayEntry => e.type === 'join' && !e.hidden),
     [node.entries]
   );
   const joinSections = useMemo(() => {
-    if (joinEntries.length === 0 || !frameForEntries) {
+    if (joinEntries.length === 0 || !frameWithValues) {
       return null;
     }
     const sections = resolveJoinSections(
       joinEntries,
-      frameForEntries,
+      frameWithValues,
       0,
       context.joinIndices,
       context.replaceVariables,
       context.data
     );
     return sections.length === 0 ? null : sections;
-  }, [joinEntries, frameForEntries, context]);
+  }, [joinEntries, frameWithValues, context]);
   const joinSectionMap = useMemo(
     () => (joinSections ? new Map(joinSections.map((s) => [s.joinConfig.id, s])) : null),
     [joinSections]
   );
 
-  if (border && node.entries.length > 0 && frameForEntries) {
+  if (border && node.entries.length > 0 && frameWithValues) {
     const overrideColor = getMostCriticalColor(
       node.entries,
-      frameForEntries,
+      frameWithValues,
       0,
       context.joinIndices,
       context.replaceVariables,
@@ -237,7 +222,7 @@ export const GroupView: React.FC<GroupViewProps> = ({ node, options }) => {
       style={border ? { borderColor: theme.visualization.getColorByName(border.color) } : undefined}
     >
       {title}
-      {node.entries.length > 0 && frameForEntries ? (
+      {node.entries.length > 0 && frameWithValues ? (
         <div className={styles.joinedData}>
           {node.entries.map((entry) => {
             if (entry.hidden) {
@@ -254,7 +239,7 @@ export const GroupView: React.FC<GroupViewProps> = ({ node, options }) => {
               );
             }
             if (entry.type === 'field') {
-              const field = frameForEntries.fieldByName.get(entry.field);
+              const field = frameWithValues.fieldByName.get(entry.field);
               if (!field) {
                 return null;
               }
@@ -262,7 +247,7 @@ export const GroupView: React.FC<GroupViewProps> = ({ node, options }) => {
                 <FieldRow
                   key={entry.id}
                   field={field}
-                  frame={frameForEntries}
+                  frame={frameWithValues}
                   rowIndex={node.frame.length > 0 ? 0 : undefined}
                 />
               );
