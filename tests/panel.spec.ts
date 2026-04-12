@@ -1,6 +1,6 @@
 import { test, expect } from '@grafana/plugin-e2e';
 
-const E2E_DASHBOARD = 'e2e-tests.json';
+const E2E_DASHBOARD = 'tests/e2e-tests.json';
 
 // ── Data Anomalies ──
 
