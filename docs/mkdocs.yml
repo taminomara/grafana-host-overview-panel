@@ -1,6 +1,5 @@
 # yaml-language-server: $schema=https://squidfunk.github.io/mkdocs-material/schema.json
 site_name: Host Overview Panel
-site_url: https://grafana-host-overview-panel.readthedocs.io/
 theme:
   name: material
   palette:
