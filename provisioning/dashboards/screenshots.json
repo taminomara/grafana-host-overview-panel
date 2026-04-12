@@ -1,0 +1,3168 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": {
+          "type": "grafana",
+          "uid": "-- Grafana --"
+        },
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "id": 6,
+  "links": [],
+  "panels": [
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "displayMode": "auto"
+          },
+          "fieldMinMax": true,
+          "mappings": [],
+          "noValue": "unknown",
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Value"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Last seen"
+              },
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "green",
+                      "value": 0
+                    },
+                    {
+                      "color": "red",
+                      "value": 120
+                    }
+                  ]
+                }
+              },
+              {
+                "id": "unit",
+                "value": "s"
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 0
+      },
+      "id": 1,
+      "options": {
+        "cellSize": 30,
+        "cellTextField": "",
+        "cellTextPattern": "",
+        "dataFrame": "",
+        "displayEntries": [],
+        "gridColumns": 5,
+        "gridType": "grid",
+        "groups": [
+          {
+            "drawBorder": true,
+            "entries": [],
+            "gridColumns": 5,
+            "gridType": "flow",
+            "groupKey": "host",
+            "id": "c51217a9-82b1-43de-98ff-83e3babce623",
+            "knownIds": "",
+            "knownIdsJoin": {
+              "foreignField": "",
+              "foreignFrame": "",
+              "id": "c525e6ee-a52e-4c61-9748-536a392e3fd5",
+              "keys": []
+            },
+            "showKeyName": false,
+            "showTitle": true,
+            "sortMode": "disabled",
+            "transparentBackground": false
+          }
+        ],
+        "idField": "name",
+        "idSortMode": "default",
+        "idSortPattern": "",
+        "knownIds": "",
+        "knownIdsJoin": {
+          "foreignField": "",
+          "foreignFrame": "",
+          "id": "__known_ids_join__",
+          "keys": []
+        },
+        "resourceDisplayMode": "cell-with-text",
+        "sidecarField": "",
+        "sidecarIds": "",
+        "sidecarJoin": {
+          "foreignField": "",
+          "foreignFrame": "",
+          "id": "__sidecar_join__",
+          "keys": []
+        },
+        "statusField": "Value",
+        "statusJoin": {
+          "foreignField": "",
+          "foreignFrame": "",
+          "id": "__status_join__",
+          "keys": []
+        },
+        "titleField": "",
+        "titlePattern": ""
+      },
+      "pluginVersion": "1.1.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "time() - last_over_time(container_last_seen{name!=\"\"}[24h])",
+          "format": "table",
+          "instant": true,
+          "legendFormat": "__auto",
+          "range": false,
+          "refId": "UP"
+        }
+      ],
+      "title": "Docker containers",
+      "transformations": [
+        {
+          "id": "extractFields",
+          "options": {
+            "delimiter": ",",
+            "format": "regexp",
+            "regExp": "/(?<host>[^:]*)(?::(?<port>\\d+))?/",
+            "source": "instance"
+          }
+        }
+      ],
+      "type": "taminomara-hostoverview-panel"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "displayMode": "auto"
+          },
+          "fieldMinMax": true,
+          "mappings": [],
+          "noValue": "unknown",
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Value"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Last seen"
+              },
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "green",
+                      "value": 0
+                    },
+                    {
+                      "color": "red",
+                      "value": 120
+                    }
+                  ]
+                }
+              },
+              {
+                "id": "unit",
+                "value": "s"
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 8
+      },
+      "id": 2,
+      "options": {
+        "cellSize": 30,
+        "cellTextField": "",
+        "cellTextPattern": "",
+        "dataFrame": "UP",
+        "displayEntries": [],
+        "gridColumns": 5,
+        "gridType": "grid",
+        "groups": [
+          {
+            "drawBorder": true,
+            "entries": [],
+            "gridColumns": 5,
+            "gridType": "flow",
+            "groupKey": "host",
+            "id": "c51217a9-82b1-43de-98ff-83e3babce623",
+            "knownIds": "",
+            "knownIdsJoin": {
+              "foreignField": "",
+              "foreignFrame": "",
+              "id": "c525e6ee-a52e-4c61-9748-536a392e3fd5",
+              "keys": []
+            },
+            "showKeyName": false,
+            "showTitle": true,
+            "sortMode": "disabled",
+            "transparentBackground": false
+          }
+        ],
+        "idField": "name",
+        "idSortMode": "default",
+        "idSortPattern": "",
+        "knownIds": "",
+        "knownIdsJoin": {
+          "foreignField": "",
+          "foreignFrame": "",
+          "id": "__known_ids_join__",
+          "keys": []
+        },
+        "resourceDisplayMode": "cell-with-text",
+        "sidecarField": "",
+        "sidecarIds": "",
+        "sidecarJoin": {
+          "foreignField": "",
+          "foreignFrame": "",
+          "id": "__sidecar_join__",
+          "keys": []
+        },
+        "statusField": "Value",
+        "statusJoin": {
+          "foreignField": "",
+          "foreignFrame": "",
+          "id": "__status_join__",
+          "keys": []
+        },
+        "titleField": "",
+        "titlePattern": ""
+      },
+      "pluginVersion": "1.1.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "time() - last_over_time(container_last_seen{name!=\"\"}[24h])",
+          "format": "table",
+          "instant": true,
+          "legendFormat": "__auto",
+          "range": false,
+          "refId": "UP"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "editorMode": "code",
+          "expr": "sum by (instance, name) (\n    irate(container_cpu_usage_seconds_total{name!=\"\"}[$__rate_interval])\n)",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "CONTAINER_CPU"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "editorMode": "code",
+          "expr": "sum by (instance, name) (container_memory_working_set_bytes{name!=\"\"})",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "CONTAINER_MEM"
+        }
+      ],
+      "title": "Docker containers",
+      "transformations": [
+        {
+          "id": "extractFields",
+          "options": {
+            "delimiter": ",",
+            "format": "regexp",
+            "regExp": "/(?<host>[^:]*)(?::(?<port>\\d+))?/",
+            "source": "instance"
+          }
+        }
+      ],
+      "type": "taminomara-hostoverview-panel"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "displayMode": "auto"
+          },
+          "fieldMinMax": true,
+          "mappings": [],
+          "noValue": "unknown",
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Value"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Last seen"
+              },
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "green",
+                      "value": 0
+                    },
+                    {
+                      "color": "red",
+                      "value": 120
+                    }
+                  ]
+                }
+              },
+              {
+                "id": "unit",
+                "value": "s"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Trend #CONTAINER_CPU"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "CPU"
+              },
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "green",
+                      "value": 0
+                    },
+                    {
+                      "color": "#EAB839",
+                      "value": 0.8
+                    },
+                    {
+                      "color": "red",
+                      "value": 0.9
+                    }
+                  ]
+                }
+              },
+              {
+                "id": "unit",
+                "value": "percentunit"
+              },
+              {
+                "id": "decimals",
+                "value": 2
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Trend #CONTAINER_MEM"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "MEM"
+              },
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "green",
+                      "value": 0
+                    }
+                  ]
+                }
+              },
+              {
+                "id": "unit",
+                "value": "decbytes"
+              },
+              {
+                "id": "decimals",
+                "value": 2
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 16
+      },
+      "id": 3,
+      "options": {
+        "cellSize": 30,
+        "cellTextField": "",
+        "cellTextPattern": "",
+        "dataFrame": "UP",
+        "displayEntries": [
+          {
+            "foreignField": "Trend #CONTAINER_CPU",
+            "foreignFrame": "CONTAINER_CPU",
+            "id": "f9714fab-d255-4e3c-921d-c6fe8c7d3c09",
+            "keys": [
+              {
+                "foreignField": "instance",
+                "primaryKey": "instance",
+                "primaryKeyTemplate": ""
+              },
+              {
+                "foreignField": "name",
+                "primaryKey": "name",
+                "primaryKeyTemplate": ""
+              }
+            ],
+            "overridesBorderColor": false,
+            "type": "join"
+          },
+          {
+            "foreignField": "Trend #CONTAINER_MEM",
+            "foreignFrame": "CONTAINER_MEM",
+            "id": "987aef25-a117-4590-bd00-1e3e727bfd9c",
+            "keys": [
+              {
+                "foreignField": "instance",
+                "primaryKey": "instance",
+                "primaryKeyTemplate": ""
+              },
+              {
+                "foreignField": "name",
+                "primaryKey": "name",
+                "primaryKeyTemplate": ""
+              }
+            ],
+            "overridesBorderColor": false,
+            "type": "join"
+          }
+        ],
+        "gridColumns": 5,
+        "gridType": "grid",
+        "groups": [
+          {
+            "drawBorder": true,
+            "entries": [],
+            "gridColumns": 5,
+            "gridType": "flow",
+            "groupKey": "host",
+            "id": "c51217a9-82b1-43de-98ff-83e3babce623",
+            "knownIds": "",
+            "knownIdsJoin": {
+              "foreignField": "",
+              "foreignFrame": "",
+              "id": "c525e6ee-a52e-4c61-9748-536a392e3fd5",
+              "keys": []
+            },
+            "showKeyName": false,
+            "showTitle": true,
+            "sortMode": "disabled",
+            "transparentBackground": false
+          }
+        ],
+        "idField": "name",
+        "idSortMode": "default",
+        "idSortPattern": "",
+        "knownIds": "",
+        "knownIdsJoin": {
+          "foreignField": "",
+          "foreignFrame": "",
+          "id": "__known_ids_join__",
+          "keys": []
+        },
+        "resourceDisplayMode": "cell-with-text",
+        "sidecarField": "",
+        "sidecarIds": "",
+        "sidecarJoin": {
+          "foreignField": "",
+          "foreignFrame": "",
+          "id": "__sidecar_join__",
+          "keys": []
+        },
+        "statusField": "Value",
+        "statusJoin": {
+          "foreignField": "",
+          "foreignFrame": "",
+          "id": "__status_join__",
+          "keys": []
+        },
+        "titleField": "",
+        "titlePattern": ""
+      },
+      "pluginVersion": "1.1.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "time() - last_over_time(container_last_seen{name!=\"\"}[24h])",
+          "format": "table",
+          "instant": true,
+          "legendFormat": "__auto",
+          "range": false,
+          "refId": "UP"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "editorMode": "code",
+          "expr": "sum by (instance, name) (\n    irate(container_cpu_usage_seconds_total{name!=\"\"}[$__rate_interval])\n)",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "CONTAINER_CPU"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "editorMode": "code",
+          "expr": "sum by (instance, name) (container_memory_working_set_bytes{name!=\"\"})",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "CONTAINER_MEM"
+        }
+      ],
+      "title": "Docker containers",
+      "transformations": [
+        {
+          "id": "timeSeriesTable",
+          "options": {}
+        },
+        {
+          "id": "extractFields",
+          "options": {
+            "delimiter": ",",
+            "format": "regexp",
+            "regExp": "/(?<host>[^:]*)(?::(?<port>\\d+))?/",
+            "source": "instance"
+          }
+        }
+      ],
+      "type": "taminomara-hostoverview-panel"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "displayMode": "auto"
+          },
+          "fieldMinMax": true,
+          "mappings": [],
+          "noValue": "unknown",
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Value"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Last seen"
+              },
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "green",
+                      "value": 0
+                    },
+                    {
+                      "color": "red",
+                      "value": 120
+                    }
+                  ]
+                }
+              },
+              {
+                "id": "unit",
+                "value": "s"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Trend #CONTAINER_CPU"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "CPU"
+              },
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "green",
+                      "value": 0
+                    },
+                    {
+                      "color": "#EAB839",
+                      "value": 0.8
+                    },
+                    {
+                      "color": "red",
+                      "value": 0.9
+                    }
+                  ]
+                }
+              },
+              {
+                "id": "unit",
+                "value": "percentunit"
+              },
+              {
+                "id": "decimals",
+                "value": 2
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Trend #CONTAINER_MEM"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "MEM"
+              },
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "green",
+                      "value": 0
+                    },
+                    {
+                      "color": "red",
+                      "value": 200000000
+                    }
+                  ]
+                }
+              },
+              {
+                "id": "unit",
+                "value": "decbytes"
+              },
+              {
+                "id": "decimals",
+                "value": 2
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 24
+      },
+      "id": 4,
+      "options": {
+        "cellSize": 30,
+        "cellTextField": "",
+        "cellTextPattern": "",
+        "dataFrame": "UP",
+        "displayEntries": [
+          {
+            "foreignField": "Trend #CONTAINER_CPU",
+            "foreignFrame": "CONTAINER_CPU",
+            "id": "f9714fab-d255-4e3c-921d-c6fe8c7d3c09",
+            "keys": [
+              {
+                "foreignField": "instance",
+                "primaryKey": "instance",
+                "primaryKeyTemplate": ""
+              },
+              {
+                "foreignField": "name",
+                "primaryKey": "name",
+                "primaryKeyTemplate": ""
+              }
+            ],
+            "overridesBorderColor": true,
+            "type": "join"
+          },
+          {
+            "foreignField": "Trend #CONTAINER_MEM",
+            "foreignFrame": "CONTAINER_MEM",
+            "id": "987aef25-a117-4590-bd00-1e3e727bfd9c",
+            "keys": [
+              {
+                "foreignField": "instance",
+                "primaryKey": "instance",
+                "primaryKeyTemplate": ""
+              },
+              {
+                "foreignField": "name",
+                "primaryKey": "name",
+                "primaryKeyTemplate": ""
+              }
+            ],
+            "overridesBorderColor": true,
+            "type": "join"
+          }
+        ],
+        "gridColumns": 5,
+        "gridType": "grid",
+        "groups": [
+          {
+            "drawBorder": true,
+            "entries": [],
+            "gridColumns": 5,
+            "gridType": "flow",
+            "groupKey": "host",
+            "id": "c51217a9-82b1-43de-98ff-83e3babce623",
+            "knownIds": "",
+            "knownIdsJoin": {
+              "foreignField": "",
+              "foreignFrame": "",
+              "id": "c525e6ee-a52e-4c61-9748-536a392e3fd5",
+              "keys": []
+            },
+            "showKeyName": false,
+            "showTitle": true,
+            "sortMode": "disabled",
+            "transparentBackground": false
+          }
+        ],
+        "idField": "name",
+        "idSortMode": "default",
+        "idSortPattern": "",
+        "knownIds": "",
+        "knownIdsJoin": {
+          "foreignField": "",
+          "foreignFrame": "",
+          "id": "__known_ids_join__",
+          "keys": []
+        },
+        "resourceDisplayMode": "cell-with-text",
+        "sidecarField": "",
+        "sidecarIds": "",
+        "sidecarJoin": {
+          "foreignField": "",
+          "foreignFrame": "",
+          "id": "__sidecar_join__",
+          "keys": []
+        },
+        "statusField": "Value",
+        "statusJoin": {
+          "foreignField": "",
+          "foreignFrame": "",
+          "id": "__status_join__",
+          "keys": []
+        },
+        "titleField": "",
+        "titlePattern": ""
+      },
+      "pluginVersion": "1.1.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "time() - last_over_time(container_last_seen{name!=\"\"}[24h])",
+          "format": "table",
+          "instant": true,
+          "legendFormat": "__auto",
+          "range": false,
+          "refId": "UP"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "editorMode": "code",
+          "expr": "sum by (instance, name) (\n    irate(container_cpu_usage_seconds_total{name!=\"\"}[$__rate_interval])\n)",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "CONTAINER_CPU"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "editorMode": "code",
+          "expr": "sum by (instance, name) (container_memory_working_set_bytes{name!=\"\"})",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "CONTAINER_MEM"
+        }
+      ],
+      "title": "Docker containers",
+      "transformations": [
+        {
+          "id": "timeSeriesTable",
+          "options": {}
+        },
+        {
+          "id": "extractFields",
+          "options": {
+            "delimiter": ",",
+            "format": "regexp",
+            "regExp": "/(?<host>[^:]*)(?::(?<port>\\d+))?/",
+            "source": "instance"
+          }
+        }
+      ],
+      "type": "taminomara-hostoverview-panel"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "displayMode": "auto"
+          },
+          "fieldMinMax": true,
+          "mappings": [],
+          "noValue": "unknown",
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Value"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Last seen"
+              },
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "green",
+                      "value": 0
+                    },
+                    {
+                      "color": "red",
+                      "value": 120
+                    }
+                  ]
+                }
+              },
+              {
+                "id": "unit",
+                "value": "s"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Trend #CONTAINER_CPU"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "CPU"
+              },
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "green",
+                      "value": 0
+                    },
+                    {
+                      "color": "#EAB839",
+                      "value": 0.8
+                    },
+                    {
+                      "color": "red",
+                      "value": 0.9
+                    }
+                  ]
+                }
+              },
+              {
+                "id": "unit",
+                "value": "percentunit"
+              },
+              {
+                "id": "decimals",
+                "value": 2
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Trend #CONTAINER_MEM"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "MEM"
+              },
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "green",
+                      "value": 0
+                    },
+                    {
+                      "color": "red",
+                      "value": 200000000
+                    }
+                  ]
+                }
+              },
+              {
+                "id": "unit",
+                "value": "decbytes"
+              },
+              {
+                "id": "decimals",
+                "value": 2
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 32
+      },
+      "id": 5,
+      "options": {
+        "cellSize": 30,
+        "cellTextField": "",
+        "cellTextPattern": "",
+        "dataFrame": "UP",
+        "displayEntries": [
+          {
+            "foreignField": "Trend #CONTAINER_CPU",
+            "foreignFrame": "CONTAINER_CPU",
+            "id": "f9714fab-d255-4e3c-921d-c6fe8c7d3c09",
+            "keys": [
+              {
+                "foreignField": "instance",
+                "primaryKey": "instance",
+                "primaryKeyTemplate": ""
+              },
+              {
+                "foreignField": "name",
+                "primaryKey": "name",
+                "primaryKeyTemplate": ""
+              }
+            ],
+            "overridesBorderColor": true,
+            "type": "join"
+          },
+          {
+            "foreignField": "Trend #CONTAINER_MEM",
+            "foreignFrame": "CONTAINER_MEM",
+            "id": "987aef25-a117-4590-bd00-1e3e727bfd9c",
+            "keys": [
+              {
+                "foreignField": "instance",
+                "primaryKey": "instance",
+                "primaryKeyTemplate": ""
+              },
+              {
+                "foreignField": "name",
+                "primaryKey": "name",
+                "primaryKeyTemplate": ""
+              }
+            ],
+            "overridesBorderColor": true,
+            "type": "join"
+          }
+        ],
+        "gridColumns": 5,
+        "gridType": "grid",
+        "groups": [
+          {
+            "drawBorder": true,
+            "entries": [],
+            "gridColumns": 5,
+            "gridType": "flow",
+            "groupKey": "host",
+            "id": "c51217a9-82b1-43de-98ff-83e3babce623",
+            "knownIds": "",
+            "knownIdsJoin": {
+              "foreignField": "",
+              "foreignFrame": "",
+              "id": "c525e6ee-a52e-4c61-9748-536a392e3fd5",
+              "keys": []
+            },
+            "showKeyName": false,
+            "showTitle": true,
+            "sortMode": "disabled",
+            "transparentBackground": false
+          }
+        ],
+        "idField": "name",
+        "idSortMode": "default",
+        "idSortPattern": "",
+        "knownIds": "",
+        "knownIdsJoin": {
+          "foreignField": "",
+          "foreignFrame": "",
+          "id": "__known_ids_join__",
+          "keys": []
+        },
+        "resourceDisplayMode": "cell-with-text",
+        "sidecarField": "container_label_hostoverview_sidecar",
+        "sidecarIds": "",
+        "sidecarJoin": {
+          "foreignField": "",
+          "foreignFrame": "",
+          "id": "__sidecar_join__",
+          "keys": []
+        },
+        "statusField": "Value",
+        "statusJoin": {
+          "foreignField": "",
+          "foreignFrame": "",
+          "id": "__status_join__",
+          "keys": []
+        },
+        "titleField": "",
+        "titlePattern": ""
+      },
+      "pluginVersion": "1.1.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "time() - last_over_time(container_last_seen{name!=\"\"}[24h])",
+          "format": "table",
+          "instant": true,
+          "legendFormat": "__auto",
+          "range": false,
+          "refId": "UP"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "editorMode": "code",
+          "expr": "sum by (instance, name) (\n    irate(container_cpu_usage_seconds_total{name!=\"\"}[$__rate_interval])\n)",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "CONTAINER_CPU"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "editorMode": "code",
+          "expr": "sum by (instance, name) (container_memory_working_set_bytes{name!=\"\"})",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "CONTAINER_MEM"
+        }
+      ],
+      "title": "Docker containers",
+      "transformations": [
+        {
+          "id": "timeSeriesTable",
+          "options": {}
+        },
+        {
+          "id": "extractFields",
+          "options": {
+            "delimiter": ",",
+            "format": "regexp",
+            "regExp": "/(?<host>[^:]*)(?::(?<port>\\d+))?/",
+            "source": "instance"
+          }
+        }
+      ],
+      "type": "taminomara-hostoverview-panel"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "displayMode": "auto"
+          },
+          "fieldMinMax": true,
+          "mappings": [],
+          "noValue": "unknown",
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Value"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Last seen"
+              },
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "green",
+                      "value": 0
+                    },
+                    {
+                      "color": "red",
+                      "value": 120
+                    }
+                  ]
+                }
+              },
+              {
+                "id": "unit",
+                "value": "s"
+              },
+              {
+                "id": "mappings",
+                "value": [
+                  {
+                    "options": {
+                      "match": "null+nan",
+                      "result": {
+                        "color": "purple",
+                        "index": 1,
+                        "text": "No data"
+                      }
+                    },
+                    "type": "special"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Trend #CONTAINER_CPU"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "CPU"
+              },
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "green",
+                      "value": 0
+                    },
+                    {
+                      "color": "#EAB839",
+                      "value": 0.8
+                    },
+                    {
+                      "color": "red",
+                      "value": 0.9
+                    }
+                  ]
+                }
+              },
+              {
+                "id": "unit",
+                "value": "percentunit"
+              },
+              {
+                "id": "decimals",
+                "value": 2
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Trend #CONTAINER_MEM"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "MEM"
+              },
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "green",
+                      "value": 0
+                    },
+                    {
+                      "color": "red",
+                      "value": 200000000
+                    }
+                  ]
+                }
+              },
+              {
+                "id": "unit",
+                "value": "decbytes"
+              },
+              {
+                "id": "decimals",
+                "value": 2
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 40
+      },
+      "id": 6,
+      "options": {
+        "cellSize": 30,
+        "cellTextField": "",
+        "cellTextPattern": "",
+        "dataFrame": "UP",
+        "displayEntries": [
+          {
+            "foreignField": "Trend #CONTAINER_CPU",
+            "foreignFrame": "CONTAINER_CPU",
+            "id": "f9714fab-d255-4e3c-921d-c6fe8c7d3c09",
+            "keys": [
+              {
+                "foreignField": "instance",
+                "primaryKey": "instance",
+                "primaryKeyTemplate": ""
+              },
+              {
+                "foreignField": "name",
+                "primaryKey": "name",
+                "primaryKeyTemplate": ""
+              }
+            ],
+            "overridesBorderColor": true,
+            "type": "join"
+          },
+          {
+            "foreignField": "Trend #CONTAINER_MEM",
+            "foreignFrame": "CONTAINER_MEM",
+            "id": "987aef25-a117-4590-bd00-1e3e727bfd9c",
+            "keys": [
+              {
+                "foreignField": "instance",
+                "primaryKey": "instance",
+                "primaryKeyTemplate": ""
+              },
+              {
+                "foreignField": "name",
+                "primaryKey": "name",
+                "primaryKeyTemplate": ""
+              }
+            ],
+            "overridesBorderColor": true,
+            "type": "join"
+          }
+        ],
+        "gridColumns": 5,
+        "gridType": "grid",
+        "groups": [
+          {
+            "drawBorder": true,
+            "entries": [],
+            "gridColumns": 5,
+            "gridType": "flow",
+            "groupKey": "host",
+            "id": "c51217a9-82b1-43de-98ff-83e3babce623",
+            "knownIds": "",
+            "knownIdsJoin": {
+              "foreignField": "",
+              "foreignFrame": "",
+              "id": "c525e6ee-a52e-4c61-9748-536a392e3fd5",
+              "keys": []
+            },
+            "showKeyName": false,
+            "showTitle": true,
+            "sortMode": "disabled",
+            "transparentBackground": false
+          }
+        ],
+        "idField": "name",
+        "idSortMode": "default",
+        "idSortPattern": "",
+        "knownIds": "haproxy, api",
+        "knownIdsJoin": {
+          "foreignField": "",
+          "foreignFrame": "",
+          "id": "__known_ids_join__",
+          "keys": []
+        },
+        "resourceDisplayMode": "cell-with-text",
+        "sidecarField": "container_label_hostoverview_sidecar",
+        "sidecarIds": "",
+        "sidecarJoin": {
+          "foreignField": "",
+          "foreignFrame": "",
+          "id": "__sidecar_join__",
+          "keys": []
+        },
+        "statusField": "Value",
+        "statusJoin": {
+          "foreignField": "",
+          "foreignFrame": "",
+          "id": "__status_join__",
+          "keys": []
+        },
+        "titleField": "",
+        "titlePattern": ""
+      },
+      "pluginVersion": "1.1.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "time() - last_over_time(container_last_seen{name!=\"\"}[24h])",
+          "format": "table",
+          "instant": true,
+          "legendFormat": "__auto",
+          "range": false,
+          "refId": "UP"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "editorMode": "code",
+          "expr": "sum by (instance, name) (\n    irate(container_cpu_usage_seconds_total{name!=\"\"}[$__rate_interval])\n)",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "CONTAINER_CPU"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "editorMode": "code",
+          "expr": "sum by (instance, name) (container_memory_working_set_bytes{name!=\"\"})",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "CONTAINER_MEM"
+        }
+      ],
+      "title": "Docker containers",
+      "transformations": [
+        {
+          "id": "timeSeriesTable",
+          "options": {}
+        },
+        {
+          "id": "extractFields",
+          "options": {
+            "delimiter": ",",
+            "format": "regexp",
+            "regExp": "/(?<host>[^:]*)(?::(?<port>\\d+))?/",
+            "source": "instance"
+          }
+        }
+      ],
+      "type": "taminomara-hostoverview-panel"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "displayMode": "auto"
+          },
+          "fieldMinMax": true,
+          "mappings": [],
+          "noValue": "unknown",
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Value"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Last seen"
+              },
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "green",
+                      "value": 0
+                    },
+                    {
+                      "color": "red",
+                      "value": 120
+                    }
+                  ]
+                }
+              },
+              {
+                "id": "unit",
+                "value": "s"
+              },
+              {
+                "id": "mappings",
+                "value": [
+                  {
+                    "options": {
+                      "match": "null+nan",
+                      "result": {
+                        "color": "purple",
+                        "index": 1,
+                        "text": "No data"
+                      }
+                    },
+                    "type": "special"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Trend #CONTAINER_CPU"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "CPU"
+              },
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "green",
+                      "value": 0
+                    },
+                    {
+                      "color": "#EAB839",
+                      "value": 0.8
+                    },
+                    {
+                      "color": "red",
+                      "value": 0.9
+                    }
+                  ]
+                }
+              },
+              {
+                "id": "unit",
+                "value": "percentunit"
+              },
+              {
+                "id": "decimals",
+                "value": 2
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Trend #CONTAINER_MEM"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "MEM"
+              },
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "green",
+                      "value": 0
+                    },
+                    {
+                      "color": "red",
+                      "value": 200000000
+                    }
+                  ]
+                }
+              },
+              {
+                "id": "unit",
+                "value": "decbytes"
+              },
+              {
+                "id": "decimals",
+                "value": 2
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Trend #HOST_CPU"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "CPU"
+              },
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "dark-green",
+                      "value": 0
+                    },
+                    {
+                      "color": "dark-yellow",
+                      "value": 0.8
+                    },
+                    {
+                      "color": "dark-red",
+                      "value": 0.9
+                    }
+                  ]
+                }
+              },
+              {
+                "id": "unit",
+                "value": "percentunit"
+              },
+              {
+                "id": "decimals",
+                "value": 2
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Trend #HOST_MEM"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "MEM"
+              },
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "dark-green",
+                      "value": 0
+                    }
+                  ]
+                }
+              },
+              {
+                "id": "unit",
+                "value": "decbytes"
+              },
+              {
+                "id": "decimals",
+                "value": 2
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Trend #HOST_DISK"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Disk"
+              },
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "dark-green",
+                      "value": 0
+                    },
+                    {
+                      "color": "dark-yellow",
+                      "value": 0.8
+                    },
+                    {
+                      "color": "dark-red",
+                      "value": 0.9
+                    }
+                  ]
+                }
+              },
+              {
+                "id": "unit",
+                "value": "percentunit"
+              },
+              {
+                "id": "decimals",
+                "value": 2
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 48
+      },
+      "id": 7,
+      "options": {
+        "cellSize": 30,
+        "cellTextField": "",
+        "cellTextPattern": "",
+        "dataFrame": "UP",
+        "displayEntries": [
+          {
+            "foreignField": "Trend #CONTAINER_CPU",
+            "foreignFrame": "CONTAINER_CPU",
+            "id": "f9714fab-d255-4e3c-921d-c6fe8c7d3c09",
+            "keys": [
+              {
+                "foreignField": "instance",
+                "primaryKey": "instance",
+                "primaryKeyTemplate": ""
+              },
+              {
+                "foreignField": "name",
+                "primaryKey": "name",
+                "primaryKeyTemplate": ""
+              }
+            ],
+            "overridesBorderColor": true,
+            "type": "join"
+          },
+          {
+            "foreignField": "Trend #CONTAINER_MEM",
+            "foreignFrame": "CONTAINER_MEM",
+            "id": "987aef25-a117-4590-bd00-1e3e727bfd9c",
+            "keys": [
+              {
+                "foreignField": "instance",
+                "primaryKey": "instance",
+                "primaryKeyTemplate": ""
+              },
+              {
+                "foreignField": "name",
+                "primaryKey": "name",
+                "primaryKeyTemplate": ""
+              }
+            ],
+            "overridesBorderColor": true,
+            "type": "join"
+          }
+        ],
+        "gridColumns": 5,
+        "gridType": "grid",
+        "groups": [
+          {
+            "drawBorder": true,
+            "entries": [],
+            "gridColumns": 5,
+            "gridType": "flow",
+            "groupKey": "host",
+            "id": "c51217a9-82b1-43de-98ff-83e3babce623",
+            "knownIds": "",
+            "knownIdsJoin": {
+              "foreignField": "",
+              "foreignFrame": "",
+              "id": "c525e6ee-a52e-4c61-9748-536a392e3fd5",
+              "keys": []
+            },
+            "showKeyName": false,
+            "showTitle": true,
+            "sortMode": "disabled",
+            "transparentBackground": false
+          }
+        ],
+        "idField": "name",
+        "idSortMode": "default",
+        "idSortPattern": "",
+        "knownIds": "haproxy, api",
+        "knownIdsJoin": {
+          "foreignField": "",
+          "foreignFrame": "",
+          "id": "__known_ids_join__",
+          "keys": []
+        },
+        "resourceDisplayMode": "cell-with-text",
+        "sidecarField": "container_label_hostoverview_sidecar",
+        "sidecarIds": "",
+        "sidecarJoin": {
+          "foreignField": "",
+          "foreignFrame": "",
+          "id": "__sidecar_join__",
+          "keys": []
+        },
+        "statusField": "Value",
+        "statusJoin": {
+          "foreignField": "",
+          "foreignFrame": "",
+          "id": "__status_join__",
+          "keys": []
+        },
+        "titleField": "",
+        "titlePattern": ""
+      },
+      "pluginVersion": "1.1.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "time() - last_over_time(container_last_seen{name!=\"\"}[24h])",
+          "format": "table",
+          "instant": true,
+          "legendFormat": "__auto",
+          "range": false,
+          "refId": "UP"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "editorMode": "code",
+          "expr": "sum by (instance, name) (\n    irate(container_cpu_usage_seconds_total{name!=\"\"}[$__rate_interval])\n)",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "CONTAINER_CPU"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "editorMode": "code",
+          "expr": "sum by (instance, name) (container_memory_working_set_bytes{name!=\"\"})",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "CONTAINER_MEM"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "editorMode": "code",
+          "expr": "1 - avg by (instance) (rate(node_cpu_seconds_total{mode=\"idle\"}[$__rate_interval]))",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "HOST_CPU"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "editorMode": "code",
+          "expr": "1 - (node_memory_MemAvailable_bytes / node_memory_MemTotal_bytes)",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "HOST_MEM"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "editorMode": "code",
+          "expr": "max by (instance) (\n  (\n    sum by (instance, device) (node_filesystem_size_bytes{device!~\"rootfs\"})\n    - \n    sum by (instance, device) (node_filesystem_avail_bytes{device!~\"rootfs\"})\n  ) / (\n    sum by (instance, device) (node_filesystem_size_bytes{device!~\"rootfs\"})\n  )\n)",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "HOST_DISK"
+        }
+      ],
+      "title": "Docker containers",
+      "transformations": [
+        {
+          "id": "timeSeriesTable",
+          "options": {}
+        },
+        {
+          "id": "extractFields",
+          "options": {
+            "delimiter": ",",
+            "format": "regexp",
+            "regExp": "/(?<host>[^:]*)(?::(?<port>\\d+))?/",
+            "source": "instance"
+          }
+        }
+      ],
+      "type": "taminomara-hostoverview-panel"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "displayMode": "auto"
+          },
+          "fieldMinMax": true,
+          "mappings": [],
+          "noValue": "unknown",
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Value"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Last seen"
+              },
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "green",
+                      "value": 0
+                    },
+                    {
+                      "color": "red",
+                      "value": 120
+                    }
+                  ]
+                }
+              },
+              {
+                "id": "unit",
+                "value": "s"
+              },
+              {
+                "id": "mappings",
+                "value": [
+                  {
+                    "options": {
+                      "match": "null+nan",
+                      "result": {
+                        "color": "purple",
+                        "index": 1,
+                        "text": "No data"
+                      }
+                    },
+                    "type": "special"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Trend #CONTAINER_CPU"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "CPU"
+              },
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "green",
+                      "value": 0
+                    },
+                    {
+                      "color": "#EAB839",
+                      "value": 0.8
+                    },
+                    {
+                      "color": "red",
+                      "value": 0.9
+                    }
+                  ]
+                }
+              },
+              {
+                "id": "unit",
+                "value": "percentunit"
+              },
+              {
+                "id": "decimals",
+                "value": 2
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Trend #CONTAINER_MEM"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "MEM"
+              },
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "green",
+                      "value": 0
+                    },
+                    {
+                      "color": "red",
+                      "value": 200000000
+                    }
+                  ]
+                }
+              },
+              {
+                "id": "unit",
+                "value": "decbytes"
+              },
+              {
+                "id": "decimals",
+                "value": 2
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Trend #HOST_CPU"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "CPU"
+              },
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "dark-green",
+                      "value": 0
+                    },
+                    {
+                      "color": "dark-yellow",
+                      "value": 0.8
+                    },
+                    {
+                      "color": "dark-red",
+                      "value": 0.9
+                    }
+                  ]
+                }
+              },
+              {
+                "id": "unit",
+                "value": "percentunit"
+              },
+              {
+                "id": "decimals",
+                "value": 2
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Trend #HOST_MEM"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "MEM"
+              },
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "dark-green",
+                      "value": 0
+                    }
+                  ]
+                }
+              },
+              {
+                "id": "unit",
+                "value": "percentunit"
+              },
+              {
+                "id": "decimals",
+                "value": 2
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Trend #HOST_DISK"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Disk"
+              },
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "dark-green",
+                      "value": 0
+                    },
+                    {
+                      "color": "dark-yellow",
+                      "value": 0.8
+                    },
+                    {
+                      "color": "dark-red",
+                      "value": 0.9
+                    }
+                  ]
+                }
+              },
+              {
+                "id": "unit",
+                "value": "percentunit"
+              },
+              {
+                "id": "decimals",
+                "value": 2
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 56
+      },
+      "id": 8,
+      "options": {
+        "cellSize": 30,
+        "cellTextField": "",
+        "cellTextPattern": "",
+        "dataFrame": "UP",
+        "displayEntries": [
+          {
+            "foreignField": "Trend #CONTAINER_CPU",
+            "foreignFrame": "CONTAINER_CPU",
+            "id": "f9714fab-d255-4e3c-921d-c6fe8c7d3c09",
+            "keys": [
+              {
+                "foreignField": "instance",
+                "primaryKey": "instance",
+                "primaryKeyTemplate": ""
+              },
+              {
+                "foreignField": "name",
+                "primaryKey": "name",
+                "primaryKeyTemplate": ""
+              }
+            ],
+            "overridesBorderColor": true,
+            "type": "join"
+          },
+          {
+            "foreignField": "Trend #CONTAINER_MEM",
+            "foreignFrame": "CONTAINER_MEM",
+            "id": "987aef25-a117-4590-bd00-1e3e727bfd9c",
+            "keys": [
+              {
+                "foreignField": "instance",
+                "primaryKey": "instance",
+                "primaryKeyTemplate": ""
+              },
+              {
+                "foreignField": "name",
+                "primaryKey": "name",
+                "primaryKeyTemplate": ""
+              }
+            ],
+            "overridesBorderColor": true,
+            "type": "join"
+          }
+        ],
+        "gridColumns": 5,
+        "gridType": "grid",
+        "groups": [
+          {
+            "drawBorder": true,
+            "entries": [
+              {
+                "foreignField": "Trend #HOST_CPU",
+                "foreignFrame": "HOST_CPU",
+                "id": "93e55f90-34f2-4e98-a37c-c9a852f0aa8e",
+                "keys": [
+                  {
+                    "foreignField": "host",
+                    "primaryKey": "host",
+                    "primaryKeyTemplate": ""
+                  }
+                ],
+                "overridesBorderColor": true,
+                "type": "join"
+              },
+              {
+                "foreignField": "Trend #HOST_MEM",
+                "foreignFrame": "HOST_MEM",
+                "id": "8c27714b-3011-4fee-938f-245aba40837e",
+                "keys": [
+                  {
+                    "foreignField": "host",
+                    "primaryKey": "host",
+                    "primaryKeyTemplate": ""
+                  }
+                ],
+                "overridesBorderColor": true,
+                "type": "join"
+              },
+              {
+                "foreignField": "Trend #HOST_DISK",
+                "foreignFrame": "HOST_DISK",
+                "id": "5e827ec1-8b12-4a40-971b-68ec07c7ffe2",
+                "keys": [
+                  {
+                    "foreignField": "host",
+                    "primaryKey": "host",
+                    "primaryKeyTemplate": ""
+                  }
+                ],
+                "overridesBorderColor": true,
+                "type": "join"
+              }
+            ],
+            "gridColumns": 5,
+            "gridType": "flow",
+            "groupKey": "host",
+            "id": "c51217a9-82b1-43de-98ff-83e3babce623",
+            "knownIds": "",
+            "knownIdsJoin": {
+              "foreignField": "",
+              "foreignFrame": "",
+              "id": "c525e6ee-a52e-4c61-9748-536a392e3fd5",
+              "keys": []
+            },
+            "showKeyName": false,
+            "showTitle": true,
+            "sortMode": "disabled",
+            "transparentBackground": false
+          }
+        ],
+        "idField": "name",
+        "idSortMode": "default",
+        "idSortPattern": "",
+        "knownIds": "haproxy, api",
+        "knownIdsJoin": {
+          "foreignField": "",
+          "foreignFrame": "",
+          "id": "__known_ids_join__",
+          "keys": []
+        },
+        "resourceDisplayMode": "cell-with-text",
+        "sidecarField": "container_label_hostoverview_sidecar",
+        "sidecarIds": "",
+        "sidecarJoin": {
+          "foreignField": "",
+          "foreignFrame": "",
+          "id": "__sidecar_join__",
+          "keys": []
+        },
+        "statusField": "Value",
+        "statusJoin": {
+          "foreignField": "",
+          "foreignFrame": "",
+          "id": "__status_join__",
+          "keys": []
+        },
+        "titleField": "",
+        "titlePattern": ""
+      },
+      "pluginVersion": "1.1.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "time() - last_over_time(container_last_seen{name!=\"\"}[24h])",
+          "format": "table",
+          "instant": true,
+          "legendFormat": "__auto",
+          "range": false,
+          "refId": "UP"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "editorMode": "code",
+          "expr": "sum by (instance, name) (\n    irate(container_cpu_usage_seconds_total{name!=\"\"}[$__rate_interval])\n)",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "CONTAINER_CPU"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "editorMode": "code",
+          "expr": "sum by (instance, name) (container_memory_working_set_bytes{name!=\"\"})",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "CONTAINER_MEM"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "editorMode": "code",
+          "expr": "1 - avg by (instance) (rate(node_cpu_seconds_total{mode=\"idle\"}[$__rate_interval]))",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "HOST_CPU"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "editorMode": "code",
+          "expr": "1 - (node_memory_MemAvailable_bytes / node_memory_MemTotal_bytes)",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "HOST_MEM"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "editorMode": "code",
+          "expr": "max by (instance) (\n  (\n    sum by (instance, device) (node_filesystem_size_bytes{device!~\"rootfs\"})\n    - \n    sum by (instance, device) (node_filesystem_avail_bytes{device!~\"rootfs\"})\n  ) / (\n    sum by (instance, device) (node_filesystem_size_bytes{device!~\"rootfs\"})\n  )\n)",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "HOST_DISK"
+        }
+      ],
+      "title": "Docker containers",
+      "transformations": [
+        {
+          "id": "timeSeriesTable",
+          "options": {}
+        },
+        {
+          "id": "extractFields",
+          "options": {
+            "delimiter": ",",
+            "format": "regexp",
+            "regExp": "/(?<host>[^:]*)(?::(?<port>\\d+))?/",
+            "source": "instance"
+          }
+        }
+      ],
+      "type": "taminomara-hostoverview-panel"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "displayMode": "auto"
+          },
+          "fieldMinMax": true,
+          "mappings": [],
+          "noValue": "unknown",
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Value"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Last seen"
+              },
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "green",
+                      "value": 0
+                    },
+                    {
+                      "color": "red",
+                      "value": 120
+                    }
+                  ]
+                }
+              },
+              {
+                "id": "unit",
+                "value": "s"
+              },
+              {
+                "id": "mappings",
+                "value": [
+                  {
+                    "options": {
+                      "match": "null+nan",
+                      "result": {
+                        "color": "purple",
+                        "index": 1,
+                        "text": "No data"
+                      }
+                    },
+                    "type": "special"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Trend #CONTAINER_CPU"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "CPU"
+              },
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "green",
+                      "value": 0
+                    },
+                    {
+                      "color": "#EAB839",
+                      "value": 0.8
+                    },
+                    {
+                      "color": "red",
+                      "value": 0.9
+                    }
+                  ]
+                }
+              },
+              {
+                "id": "unit",
+                "value": "percentunit"
+              },
+              {
+                "id": "decimals",
+                "value": 2
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Trend #CONTAINER_MEM"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "MEM"
+              },
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "green",
+                      "value": 0
+                    },
+                    {
+                      "color": "red",
+                      "value": 200000000
+                    }
+                  ]
+                }
+              },
+              {
+                "id": "unit",
+                "value": "decbytes"
+              },
+              {
+                "id": "decimals",
+                "value": 2
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Trend #HOST_CPU"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "CPU"
+              },
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "dark-green",
+                      "value": 0
+                    },
+                    {
+                      "color": "dark-yellow",
+                      "value": 0.8
+                    },
+                    {
+                      "color": "dark-red",
+                      "value": 0.9
+                    }
+                  ]
+                }
+              },
+              {
+                "id": "unit",
+                "value": "percentunit"
+              },
+              {
+                "id": "decimals",
+                "value": 2
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Trend #HOST_MEM"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "MEM"
+              },
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "dark-green",
+                      "value": 0
+                    }
+                  ]
+                }
+              },
+              {
+                "id": "unit",
+                "value": "percentunit"
+              },
+              {
+                "id": "decimals",
+                "value": 2
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Trend #HOST_DISK"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Disk"
+              },
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "dark-green",
+                      "value": 0
+                    },
+                    {
+                      "color": "dark-yellow",
+                      "value": 0.8
+                    },
+                    {
+                      "color": "dark-red",
+                      "value": 0.9
+                    }
+                  ]
+                }
+              },
+              {
+                "id": "unit",
+                "value": "percentunit"
+              },
+              {
+                "id": "decimals",
+                "value": 2
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "host"
+            },
+            "properties": [
+              {
+                "id": "links",
+                "value": [
+                  {
+                    "targetBlank": true,
+                    "title": "Node exporter dashboard",
+                    "url": "/d/rYdddlPWk?var-nodename=${__data.fields.host}&${__url_time_range}"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "name"
+            },
+            "properties": [
+              {
+                "id": "links",
+                "value": [
+                  {
+                    "targetBlank": true,
+                    "title": "Docker dashboard",
+                    "url": "/d/gd2l5d/docker?var-instance=${__data.fields.instance}&var-name=${__data.fields.name}&${__url_time_range}"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 64
+      },
+      "id": 9,
+      "options": {
+        "cellSize": 30,
+        "cellTextField": "",
+        "cellTextPattern": "",
+        "dataFrame": "UP",
+        "displayEntries": [
+          {
+            "foreignField": "Trend #CONTAINER_CPU",
+            "foreignFrame": "CONTAINER_CPU",
+            "id": "f9714fab-d255-4e3c-921d-c6fe8c7d3c09",
+            "keys": [
+              {
+                "foreignField": "instance",
+                "primaryKey": "instance",
+                "primaryKeyTemplate": ""
+              },
+              {
+                "foreignField": "name",
+                "primaryKey": "name",
+                "primaryKeyTemplate": ""
+              }
+            ],
+            "overridesBorderColor": true,
+            "type": "join"
+          },
+          {
+            "foreignField": "Trend #CONTAINER_MEM",
+            "foreignFrame": "CONTAINER_MEM",
+            "id": "987aef25-a117-4590-bd00-1e3e727bfd9c",
+            "keys": [
+              {
+                "foreignField": "instance",
+                "primaryKey": "instance",
+                "primaryKeyTemplate": ""
+              },
+              {
+                "foreignField": "name",
+                "primaryKey": "name",
+                "primaryKeyTemplate": ""
+              }
+            ],
+            "overridesBorderColor": true,
+            "type": "join"
+          }
+        ],
+        "gridColumns": 5,
+        "gridType": "grid",
+        "groups": [
+          {
+            "drawBorder": true,
+            "entries": [
+              {
+                "foreignField": "Trend #HOST_CPU",
+                "foreignFrame": "HOST_CPU",
+                "id": "93e55f90-34f2-4e98-a37c-c9a852f0aa8e",
+                "keys": [
+                  {
+                    "foreignField": "host",
+                    "primaryKey": "host",
+                    "primaryKeyTemplate": ""
+                  }
+                ],
+                "overridesBorderColor": true,
+                "type": "join"
+              },
+              {
+                "foreignField": "Trend #HOST_MEM",
+                "foreignFrame": "HOST_MEM",
+                "id": "8c27714b-3011-4fee-938f-245aba40837e",
+                "keys": [
+                  {
+                    "foreignField": "host",
+                    "primaryKey": "host",
+                    "primaryKeyTemplate": ""
+                  }
+                ],
+                "overridesBorderColor": true,
+                "type": "join"
+              },
+              {
+                "foreignField": "Trend #HOST_DISK",
+                "foreignFrame": "HOST_DISK",
+                "id": "5e827ec1-8b12-4a40-971b-68ec07c7ffe2",
+                "keys": [
+                  {
+                    "foreignField": "host",
+                    "primaryKey": "host",
+                    "primaryKeyTemplate": ""
+                  }
+                ],
+                "overridesBorderColor": true,
+                "type": "join"
+              }
+            ],
+            "gridColumns": 5,
+            "gridType": "flow",
+            "groupKey": "host",
+            "id": "c51217a9-82b1-43de-98ff-83e3babce623",
+            "knownIds": "",
+            "knownIdsJoin": {
+              "foreignField": "",
+              "foreignFrame": "",
+              "id": "c525e6ee-a52e-4c61-9748-536a392e3fd5",
+              "keys": []
+            },
+            "showKeyName": false,
+            "showTitle": true,
+            "sortMode": "disabled",
+            "transparentBackground": false
+          }
+        ],
+        "idField": "name",
+        "idSortMode": "default",
+        "idSortPattern": "",
+        "knownIds": "haproxy, api",
+        "knownIdsJoin": {
+          "foreignField": "",
+          "foreignFrame": "",
+          "id": "__known_ids_join__",
+          "keys": []
+        },
+        "resourceDisplayMode": "cell-with-text",
+        "sidecarField": "container_label_hostoverview_sidecar",
+        "sidecarIds": "",
+        "sidecarJoin": {
+          "foreignField": "",
+          "foreignFrame": "",
+          "id": "__sidecar_join__",
+          "keys": []
+        },
+        "statusField": "Value",
+        "statusJoin": {
+          "foreignField": "",
+          "foreignFrame": "",
+          "id": "__status_join__",
+          "keys": []
+        },
+        "titleField": "",
+        "titlePattern": ""
+      },
+      "pluginVersion": "1.1.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "time() - last_over_time(container_last_seen{name!=\"\"}[24h])",
+          "format": "table",
+          "instant": true,
+          "legendFormat": "__auto",
+          "range": false,
+          "refId": "UP"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "editorMode": "code",
+          "expr": "sum by (instance, name) (\n    irate(container_cpu_usage_seconds_total{name!=\"\"}[$__rate_interval])\n)",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "CONTAINER_CPU"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "editorMode": "code",
+          "expr": "sum by (instance, name) (container_memory_working_set_bytes{name!=\"\"})",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "CONTAINER_MEM"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "editorMode": "code",
+          "expr": "1 - avg by (instance) (rate(node_cpu_seconds_total{mode=\"idle\"}[$__rate_interval]))",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "HOST_CPU"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "editorMode": "code",
+          "expr": "1 - (node_memory_MemAvailable_bytes / node_memory_MemTotal_bytes)",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "HOST_MEM"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "editorMode": "code",
+          "expr": "max by (instance) (\n  (\n    sum by (instance, device) (node_filesystem_size_bytes{device!~\"rootfs\"})\n    - \n    sum by (instance, device) (node_filesystem_avail_bytes{device!~\"rootfs\"})\n  ) / (\n    sum by (instance, device) (node_filesystem_size_bytes{device!~\"rootfs\"})\n  )\n)",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "HOST_DISK"
+        }
+      ],
+      "title": "Docker containers",
+      "transformations": [
+        {
+          "id": "timeSeriesTable",
+          "options": {}
+        },
+        {
+          "id": "extractFields",
+          "options": {
+            "delimiter": ",",
+            "format": "regexp",
+            "regExp": "/(?<host>[^:]*)(?::(?<port>\\d+))?/",
+            "source": "instance"
+          }
+        }
+      ],
+      "type": "taminomara-hostoverview-panel"
+    }
+  ],
+  "preload": false,
+  "schemaVersion": 42,
+  "tags": [
+    "Screenshots",
+    "Live"
+  ],
+  "templating": {
+    "list": []
+  },
+  "time": {
+    "from": "now-1h",
+    "to": "now"
+  },
+  "timepicker": {},
+  "timezone": "browser",
+  "title": "Documentation Screenshots",
+  "uid": "doc-screenshots",
+  "version": 8
+}

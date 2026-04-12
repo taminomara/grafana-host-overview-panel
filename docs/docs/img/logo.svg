@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 90 90" width="30pt" height="30pt">
+  <g>
+    <path d=" M 6.429 0 L 83.571 0 C 87.119 0 90 2.881 90 6.429 L 90 83.571 C 90 87.119 87.119 90 83.571 90 L 6.429 90 C 2.881 90 0 87.119 0 83.571 L 0 6.429 C 0 2.881 2.881 0 6.429 0 Z  M 6.429 6.429 L 83.571 6.429 L 83.571 83.571 L 6.429 83.571 L 6.429 6.429 Z " fill-rule="evenodd" fill="white"/>
+    <rect x="29.648" y="30.127" width="13.944" height="13.944" fill="white"/>
+    <rect x="29.648" y="46.887" width="13.944" height="13.944" fill="white"/>
+    <rect x="12.746" y="30.127" width="13.944" height="13.944" fill="white"/>
+    <rect x="12.746" y="46.887" width="13.944" height="13.944" fill="white"/>
+    <rect x="46.408" y="46.887" width="13.944" height="13.944" fill="white"/>
+    <rect x="29.648" y="13.225" width="13.944" height="13.944" fill="white"/>
+    <rect x="12.746" y="13.225" width="13.944" height="13.944" fill="white"/>
+    <rect x="46.408" y="13.225" width="30.845" height="30.845" fill="white"/>
+    <rect x="63.31" y="46.887" width="13.944" height="13.944" fill="white"/>
+    <rect x="29.648" y="63.789" width="13.944" height="13.944" fill="white"/>
+    <rect x="12.746" y="63.789" width="13.944" height="13.944" fill="white"/>
+    <rect x="46.408" y="63.789" width="13.944" height="13.944" fill="white"/>
+    <rect x="63.31" y="63.789" width="13.944" height="13.944" fill="white"/>
+  </g>
+</svg>

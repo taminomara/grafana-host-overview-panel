@@ -5,3 +5,4 @@ providers:
     type: file
     options:
       path: /etc/grafana/provisioning/dashboards
+      foldersFromFilesStructure: true

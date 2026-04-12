@@ -18,7 +18,7 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 3,
+  "id": 5,
   "links": [],
   "panels": [
     {
@@ -215,6 +215,7 @@
         "cellTextField": "",
         "cellTextPattern": "",
         "dataFrame": "UP",
+        "displayEntries": [],
         "gridColumns": 5,
         "gridType": "flow",
         "groups": [
@@ -222,6 +223,8 @@
             "drawBorder": true,
             "entries": [
               {
+                "foreignField": "Trend #CPU",
+                "foreignFrame": "CPU",
                 "id": "4064c5e2-5359-4538-8144-db78c9478f8a",
                 "keys": [
                   {
@@ -231,11 +234,11 @@
                   }
                 ],
                 "overridesBorderColor": true,
-                "sourceField": "Trend #CPU",
-                "sourceFrame": "CPU",
                 "type": "join"
               },
               {
+                "foreignField": "Trend #MEM",
+                "foreignFrame": "MEM",
                 "id": "f054d195-1e72-4d58-8e4d-b131c335b121",
                 "keys": [
                   {
@@ -245,8 +248,6 @@
                   }
                 ],
                 "overridesBorderColor": true,
-                "sourceField": "Trend #MEM",
-                "sourceFrame": "MEM",
                 "type": "join"
               }
             ],
@@ -255,6 +256,12 @@
             "groupKey": "host",
             "id": "17fcf001-b924-4dcc-bd15-663d1150d93c",
             "knownIds": "",
+            "knownIdsJoin": {
+              "foreignField": "",
+              "foreignFrame": "",
+              "id": "86064f85-b6d9-40bb-a2f3-bb71e0cef282",
+              "keys": []
+            },
             "showKeyName": false,
             "showTitle": true,
             "sortMode": "disabled",
@@ -265,14 +272,32 @@
         "idSortMode": "default",
         "idSortPattern": "",
         "knownIds": "",
+        "knownIdsJoin": {
+          "foreignField": "",
+          "foreignFrame": "",
+          "id": "__known_ids_join__",
+          "keys": []
+        },
         "resourceDisplayMode": "cell-with-text",
-        "richEntries": [],
+        "sidecarField": "",
+        "sidecarIds": "",
+        "sidecarJoin": {
+          "foreignField": "",
+          "foreignFrame": "",
+          "id": "3c9debba-8f33-43cd-9d27-d6e28fef4ac3",
+          "keys": []
+        },
         "statusField": "Value",
-        "tooltipEntries": [],
-        "tooltipTitleField": "",
-        "tooltipTitlePattern": ""
+        "statusJoin": {
+          "foreignField": "",
+          "foreignFrame": "",
+          "id": "922a151b-2a0b-4982-9c65-461bab5c0e37",
+          "keys": []
+        },
+        "titleField": "",
+        "titlePattern": ""
       },
-      "pluginVersion": "1.0.0",
+      "pluginVersion": "1.1.1",
       "targets": [
         {
           "datasource": {
@@ -358,7 +383,10 @@
   "preload": false,
   "refresh": "5s",
   "schemaVersion": 42,
-  "tags": ["Demo"],
+  "tags": [
+    "Demo",
+    "Live"
+  ],
   "templating": {
     "list": []
   },
@@ -370,5 +398,5 @@
   "timezone": "browser",
   "title": "Using data from Prometheus",
   "uid": "g2ms7r",
-  "version": 4
+  "version": 1
 }

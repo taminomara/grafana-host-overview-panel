@@ -16,6 +16,10 @@
     },
     "links": [
       {
+        "name": "Documentation",
+        "url": "https://grafana-host-overview-panel.readthedocs.io/"
+      },
+      {
         "name": "Source",
         "url": "https://github.com/taminomara/grafana-host-overview-panel/"
       },

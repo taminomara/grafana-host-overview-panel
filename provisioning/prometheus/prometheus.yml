@@ -5,8 +5,21 @@ global:
 scrape_configs:
   - job_name: prometheus
     static_configs:
-      - targets: ['localhost:9090']
+      - targets: ['prometheus:9090']
+    relabel_configs:
+      - target_label: instance
+        replacement: 'hostoverview.local:9090'
 
   - job_name: node-exporter
     static_configs:
-      - targets: ['localhost:9100']
+      - targets: ['node-exporter:9100']
+    relabel_configs:
+      - target_label: instance
+        replacement: 'hostoverview.local:9100'
+
+  - job_name: cadvisor
+    static_configs:
+      - targets: ['cadvisor:8080']
+    relabel_configs:
+      - target_label: instance
+        replacement: 'hostoverview.local:8080'

@@ -1,0 +1,44 @@
+# yaml-language-server: $schema=https://squidfunk.github.io/mkdocs-material/schema.json
+site_name: Host Overview Panel
+# site_url: https://grafana-host-overview-panel.readthedocs.io/
+theme:
+  name: material
+  palette:
+    - media: "(prefers-color-scheme)"
+      toggle:
+        icon: material/brightness-auto
+        name: Switch to light mode
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      toggle:
+        icon: material/brightness-4
+        name: Switch to system preference
+  features:
+    - navigation.instant
+    - navigation.instant.prefetch
+    - navigation.footer
+  logo: img/logo.svg
+  icon:
+    repo: fontawesome/brands/github
+repo_url: https://github.com/taminomara/grafana-host-overview-panel
+markdown_extensions:
+  - admonition
+  - attr_list
+nav:
+  - Home: index.md
+  - Data format: data-format.md
+  - Tutorial:
+      - tutorial/index.md
+      - Basic setup: tutorial/basic-setup.md
+      - Adding more data: tutorial/joins.md
+      - Displaying thresholds in cells: tutorial/cell-color-overrides.md
+      - Marking cells as side cars: tutorial/sidecars.md
+      - Adding known IDs: tutorial/adding-known-ids.md
+      - Adding data to host groups: tutorial/joins-groups.md
+      - Adding data links: tutorial/data-links.md
+      - Sorting: tutorial/sorting.md

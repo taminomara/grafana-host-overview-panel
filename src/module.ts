@@ -4,7 +4,10 @@ import { DataFrameEditor } from './components/settings/DataFrameEditor';
 import { GRID_TYPE_OPTIONS } from './components/settings/GridTypePicker';
 import { GroupsEditor } from './components/settings/GroupsEditor';
 import { DisplayEntriesEditorWrapper } from './components/settings/DisplayEntriesEditor';
-import { KnownIdsJoinEditorWrapper, StatusJoinEditorWrapper } from './components/settings/JoinEditor';
+import {
+  KnownIdsJoinEditorWrapper,
+  StatusJoinEditorWrapper,
+} from './components/settings/JoinEditor';
 import { SortModeEditor, SortPatternEditor } from './components/settings/SortEditor';
 import { TemplatePatternEditor } from './components/settings/TemplatePatternEditor';
 import { ValueFieldEditor } from './components/settings/ValueFieldEditor';
@@ -83,6 +86,7 @@ export const plugin = new PanelPlugin<HostViewerOptions, HostViewerFieldConfig>(
         description: 'Which data frame to visualize. Uses the first one when empty',
         editor: DataFrameEditor,
         defaultValue: '',
+        category: ['Host overview'],
       })
       .addCustomEditor({
         id: 'groups',
@@ -172,9 +176,9 @@ export const plugin = new PanelPlugin<HostViewerOptions, HostViewerFieldConfig>(
         description: 'Read known IDs from a field in another data frame',
         editor: KnownIdsJoinEditorWrapper,
         defaultValue: {
-          id: "__known_ids_join__",
-          foreignFrame: "",
-          foreignField: "",
+          id: '__known_ids_join__',
+          foreignFrame: '',
+          foreignField: '',
           keys: [],
         } satisfies Join,
         category: ['Resource'],

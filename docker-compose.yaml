@@ -1,20 +1,52 @@
+networks:
+  hostoverview-demo:
+
 services:
   grafana:
     extends:
       file: .config/docker-compose-base.yaml
       service: grafana
-    network_mode: host
+    networks:
+      - hostoverview-demo
     depends_on:
       - prometheus
       - node-exporter
+      - cadvisor
 
   prometheus:
     image: prom/prometheus:latest
-    network_mode: host
+    networks:
+      - hostoverview-demo
     volumes:
       - ./provisioning/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
 
   node-exporter:
     image: prom/node-exporter:latest
     privileged: true
-    network_mode: host
+    hostname: hostoverview.local
+    networks:
+      - hostoverview-demo
+    volumes:
+      - /proc:/host/proc:ro
+      - /sys:/host/sys:ro
+      - /:/rootfs:ro
+    command:
+      - '--path.procfs=/host/proc'
+      - '--path.sysfs=/host/sys'
+      - '--path.rootfs=/rootfs'
+    labels:
+      hostoverview.sidecar: true
+
+  cadvisor:
+    image: gcr.io/cadvisor/cadvisor:latest
+    privileged: true
+    hostname: hostoverview.local
+    networks:
+      - hostoverview-demo
+    volumes:
+      - /:/rootfs:ro
+      - /var/run:/var/run:ro
+      - /sys:/sys:ro
+      - /var/lib/docker/:/var/lib/docker:ro
+    labels:
+      hostoverview.sidecar: true

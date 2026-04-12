@@ -247,7 +247,7 @@ const EntryEditorRow: React.FC<EntryEditorRowProps> = ({
   const isSeparator = value.type === 'separator';
 
   return (
-    <div>
+    <div data-testid="hostoverview-panel-field-row">
       <InlineFieldRow style={{ flexWrap: 'nowrap' }} className={styles.entryRow}>
         <InlineField {...dragHandleProps}>
           <Icon name="draggabledots" className={styles.dragHandle} />
