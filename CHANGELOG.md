@@ -1,8 +1,14 @@
 # Changelog
 
+## 1.1.2
+
+- Moved plugin documentation to ReadTheDocs.
+- Added signature for Grafana Cloud.
+- Minor refactorings, should not affect functionality.
+
 ## 1.1.1
 
-- Fixed a bug when transparent background would not work for groupsthat have their borders hidden.
+- Fixed a bug when transparent background would not work for groups that have their borders hidden.
 
 ## 1.1.0
 
