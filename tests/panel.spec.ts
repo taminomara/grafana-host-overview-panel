@@ -2,6 +2,17 @@ import { test, expect } from '@grafana/plugin-e2e';
 
 const E2E_DASHBOARD = 'tests/e2e-tests.json';
 
+// Grafana 13+ shows a "What's new" dialog that overlays the entire page.
+// Automatically dismiss it whenever it blocks an interaction.
+test.beforeEach(async ({ page }) => {
+  await page.addLocatorHandler(
+    page.getByRole('dialog', { name: "What's new in Grafana" }),
+    async (dialog) => {
+      await dialog.getByRole('button', { name: 'Close' }).click();
+    }
+  );
+});
+
 // ── Data Anomalies ──
 
 test.describe('data anomalies', () => {
