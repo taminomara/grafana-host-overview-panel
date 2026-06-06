@@ -16,7 +16,7 @@ A Grafana panel plugin for visualizing the status of fleets of resources — ser
 - **Joins** — attach metrics from other data frames to groups or individual resources via key-based joins.
 - **Field visualizations** — text, colored text, colored background, gauges, and sparklines for joined or inline fields.
 - **Color overrides** — fields and joins can override cell colors based on threshold severity.
-- **Data links support** — defined data links for any group, resource, or metric.
+- **Data links support** — define data links for any group, resource, or metric.
 - **Tooltips** — hoverable tooltips with configurable title, fields, and joined data.
 
 ## Requirements
