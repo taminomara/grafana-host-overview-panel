@@ -290,6 +290,14 @@ export const plugin = new PanelPlugin<HostViewerOptions, HostViewerFieldConfig>(
           options.cellTextField === '__use_pattern__',
         category: ['Resource content'],
       })
+      .addBooleanSwitch({
+        path: 'capitalizeCellText',
+        name: 'Capitalize cell text',
+        description: 'Render cell text in upper case',
+        defaultValue: true,
+        category: ['Resource content'],
+        showIf: (options) => options.resourceDisplayMode === ResourceDisplayMode.CellWithText,
+      })
       .addCustomEditor({
         id: 'titleField',
         path: 'titleField',

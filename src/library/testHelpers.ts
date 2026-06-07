@@ -45,6 +45,7 @@ export function makeOptions(overrides?: Partial<HostViewerOptions>): HostViewerO
     groups: [],
     statusField: 'value',
     cellSize: { ...DEFAULT_CELL_SIZE },
+    capitalizeCellText: true,
     resourceDisplayMode: ResourceDisplayMode.Cell,
     titleField: '',
     titlePattern: '',

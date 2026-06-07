@@ -51,10 +51,12 @@ export type DisplayEntry =
   | HeadingDisplayEntry
   | SeparatorDisplayEntry;
 
+export type CellSizeMode = 'free' | 'locked' | 'fit';
+
 export interface CellSize {
   width: number;
   height: number;
-  locked: boolean;
+  mode: CellSizeMode;
 }
 
 export interface HostViewerOptions {
@@ -64,6 +66,7 @@ export interface HostViewerOptions {
   statusField: string;
   statusJoin: Join;
   cellSize: CellSize;
+  capitalizeCellText: boolean;
   idField: string;
   idSortMode: SortMode;
   idSortPattern: string;

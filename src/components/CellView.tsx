@@ -3,8 +3,8 @@ import { DataFrameWithValue, GrafanaTheme2 } from '@grafana/data';
 import { useStyles2, useTheme2 } from '@grafana/ui';
 import { GroupNode, isSidecarRow } from 'library/groupFrames';
 import React, { useMemo } from 'react';
-import { HostViewerOptions, ResourceDisplayMode } from 'types';
-import { getCellSizeTier } from '../library/cellSize';
+import { CellSizeMode, HostViewerOptions, ResourceDisplayMode } from 'types';
+import { getCellSizeTier, resolveCellSizeMode } from '../library/cellSize';
 import { useOverrideColor } from '../library/criticality';
 import { IndexedFrame } from '../library/dataFrame';
 import { interpolateWithDataContext } from '../library/interpolate';
@@ -13,20 +13,31 @@ import { formatFieldValue } from './FieldRow';
 import { useHostViewerPanelContext } from './PanelContext';
 import { CellTooltip } from './CellTooltip';
 
-function getStyles(theme: GrafanaTheme2, width: number, height: number) {
-  const minSize = Math.min(width, height);
-  const tier = getCellSizeTier(minSize);
-  const sidecarPad = Math.max(2, Math.min(10, Math.round(minSize * 0.15)));
+function getStyles(
+  theme: GrafanaTheme2,
+  width: number,
+  height: number,
+  mode: CellSizeMode,
+  allowFit: boolean,
+  capitalize: boolean
+) {
+  const effectiveMode: CellSizeMode = resolveCellSizeMode(mode, allowFit);
+  const fitMode = effectiveMode === 'fit';
+  const sizeBasis = fitMode ? height : Math.min(width, height);
+  const tier = getCellSizeTier(sizeBasis);
+  const sidecarPad = Math.max(2, Math.min(10, Math.round(sizeBasis * 0.15)));
   const innerWidth = width - sidecarPad * 2;
   const innerHeight = height - sidecarPad * 2;
   const borderRadius = String(tier === 'cellS' ? 0 : theme.shape.radius.sm);
   const innerRadius = parseFloat(borderRadius) / 2;
+  const textTransform = capitalize ? 'uppercase' : 'none';
 
   return {
     cell: css({
       cursor: 'pointer',
       outlineStyle: 'none',
-      width,
+      width: fitMode ? 'fit-content' : width,
+      minWidth: fitMode ? height : undefined,
       height,
       borderRadius: borderRadius,
       display: 'flex',
@@ -43,21 +54,41 @@ function getStyles(theme: GrafanaTheme2, width: number, height: number) {
       borderRadius: innerRadius,
       display: 'flex',
     }),
-    cellText: css({
-      width: `calc(${width}px - ${theme.spacing(1)})`,
-      height: `calc(${height}px - ${theme.spacing(1)})`,
-      textAlign: 'center',
-      wordBreak: 'break-all',
-      overflow: 'hidden',
-      margin: theme.spacing(0.5),
-      lineHeight: `calc(${height}px - ${theme.spacing(1)} + 1px)`,
-      textTransform: 'uppercase',
-    }),
-    cellTextSidecar: css({
-      width: `calc(${innerWidth}px - ${theme.spacing(1)})`,
-      height: `calc(${innerHeight}px - ${theme.spacing(1)})`,
-      lineHeight: `calc(${innerHeight}px - ${theme.spacing(1)} + 1px)`,
-    }),
+    cellText: fitMode
+      ? css({
+          width: 'fit-content',
+          minWidth: `calc(${height}px - ${theme.spacing(1)})`,
+          height: `calc(${height}px - ${theme.spacing(1)})`,
+          textAlign: 'center',
+          whiteSpace: 'nowrap',
+          margin: theme.spacing(0.5),
+          paddingLeft: theme.spacing(0.5),
+          paddingRight: theme.spacing(0.5),
+          lineHeight: `calc(${height}px - ${theme.spacing(1)} + 1px)`,
+          textTransform,
+        })
+      : css({
+          width: `calc(${width}px - ${theme.spacing(1)})`,
+          height: `calc(${height}px - ${theme.spacing(1)})`,
+          textAlign: 'center',
+          wordBreak: 'break-all',
+          overflow: 'hidden',
+          margin: theme.spacing(0.5),
+          lineHeight: `calc(${height}px - ${theme.spacing(1)} + 1px)`,
+          textTransform,
+        }),
+    cellTextSidecar: fitMode
+      ? css({
+          width: 'fit-content',
+          minWidth: `calc(${innerHeight}px - ${theme.spacing(1)})`,
+          height: `calc(${innerHeight}px - ${theme.spacing(1)})`,
+          lineHeight: `calc(${innerHeight}px - ${theme.spacing(1)} + 1px)`,
+        })
+      : css({
+          width: `calc(${innerWidth}px - ${theme.spacing(1)})`,
+          height: `calc(${innerHeight}px - ${theme.spacing(1)})`,
+          lineHeight: `calc(${innerHeight}px - ${theme.spacing(1)} + 1px)`,
+        }),
   };
 }
 
@@ -70,7 +101,15 @@ interface CellViewProps {
 
 export const CellView: React.FC<CellViewProps> = ({ node, frame, rowIndex, options }) => {
   const theme = useTheme2();
-  const styles = useStyles2(getStyles, options.cellSize.width, options.cellSize.height);
+  const allowFit = options.resourceDisplayMode === ResourceDisplayMode.CellWithText;
+  const styles = useStyles2(
+    getStyles,
+    options.cellSize.width,
+    options.cellSize.height,
+    options.cellSize.mode,
+    allowFit,
+    options.capitalizeCellText
+  );
   const context = useHostViewerPanelContext();
 
   const idField = frame.fieldByName.get(options.idField);

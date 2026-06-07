@@ -964,6 +964,52 @@ test.describe('cell size', () => {
     expect(box!.width).toBe(28);
     expect(box!.height).toBe(28);
   });
+
+  test('fit mode sizes cell width to text content', async ({
+    gotoPanelEditPage,
+    readProvisionedDashboard,
+  }) => {
+    const dashboard = await readProvisionedDashboard({ fileName: E2E_DASHBOARD });
+    const panelEditPage = await gotoPanelEditPage({ dashboard, id: '27' });
+    await expect(panelEditPage.panel.locator).not.toContainText('No data');
+    // cellSize.height = 24, mode = 'fit'. Labels: "a", "bb", "ccccccc" — distinct widths.
+    const cells = panelEditPage.panel.locator.locator('[data-testid="resource-cell"]');
+    await expect(cells.first()).toBeVisible();
+    expect(await cells.count()).toBe(3);
+
+    const boxes = await Promise.all(
+      [0, 1, 2].map(async (i) => (await cells.nth(i).boundingBox())!)
+    );
+    // All cells share the configured height.
+    for (const box of boxes) {
+      expect(box.height).toBe(24);
+    }
+    // Each cell is at least square (min-width = height).
+    for (const box of boxes) {
+      expect(box.width).toBeGreaterThanOrEqual(24);
+    }
+    // Longer labels render wider cells.
+    expect(boxes[2].width).toBeGreaterThan(boxes[0].width);
+  });
+
+  test('capitalizeCellText: false renders text without uppercase transform', async ({
+    gotoPanelEditPage,
+    readProvisionedDashboard,
+  }) => {
+    const dashboard = await readProvisionedDashboard({ fileName: E2E_DASHBOARD });
+    const panelEditPage = await gotoPanelEditPage({ dashboard, id: '28' });
+    await expect(panelEditPage.panel.locator).not.toContainText('No data');
+    // The cell text div is the direct child of the colored cell div (the one
+    // styled with linear-gradient). Read its computed textTransform.
+    const cellText = panelEditPage.panel.locator
+      .locator('div[style*="linear-gradient"]')
+      .first()
+      .locator('> div')
+      .first();
+    await expect(cellText).toBeVisible();
+    const textTransform = await cellText.evaluate((el) => getComputedStyle(el).textTransform);
+    expect(textTransform).toBe('none');
+  });
 });
 
 // ── Criticality ──

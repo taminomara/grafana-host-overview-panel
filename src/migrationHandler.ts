@@ -91,13 +91,25 @@ export function migrationHandler(panel: PanelModel<Partial<HostViewerOptions>>) 
 
   const cellSize = (options as Record<string, unknown>).cellSize;
   if (typeof cellSize === 'number') {
-    options.cellSize = { width: cellSize, height: cellSize, locked: true };
-  } else if (
-    cellSize === undefined ||
-    cellSize === null ||
-    typeof cellSize !== 'object'
-  ) {
+    options.cellSize = { width: cellSize, height: cellSize, mode: 'locked' };
+  } else if (cellSize && typeof cellSize === 'object') {
+    const obj = cellSize as Record<string, unknown>;
+    if (obj.mode === 'free' || obj.mode === 'locked' || obj.mode === 'fit') {
+      // Already in the new shape — leave alone.
+    } else {
+      const mode = obj.locked === false ? 'free' : 'locked';
+      options.cellSize = {
+        width: typeof obj.width === 'number' ? obj.width : DEFAULT_CELL_SIZE.width,
+        height: typeof obj.height === 'number' ? obj.height : DEFAULT_CELL_SIZE.height,
+        mode,
+      };
+    }
+  } else {
     options.cellSize = { ...DEFAULT_CELL_SIZE };
+  }
+
+  if (typeof options.capitalizeCellText !== 'boolean') {
+    options.capitalizeCellText = true;
   }
 
   for (const group of options.groups ?? []) {

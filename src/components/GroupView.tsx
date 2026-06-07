@@ -4,7 +4,7 @@ import { useStyles2, useTheme2 } from '@grafana/ui';
 import { DataLinksButton } from './DataLinksButton';
 import { createFrame } from 'library/dataFrame';
 import React, { useMemo } from 'react';
-import { getCellSizeTier } from '../library/cellSize';
+import { getCellSizeTier, resolveCellSizeMode } from '../library/cellSize';
 import { getMostCriticalColor } from '../library/criticality';
 import { GroupNode } from '../library/groupFrames';
 import { interpolateWithDataContext } from '../library/interpolate';
@@ -110,7 +110,10 @@ export const GroupView: React.FC<GroupViewProps> = ({ node, options }) => {
 
   const containerClass = useStyles2(getContainerStyles, node.gridType, node.gridColumns);
 
-  const cellTier = getCellSizeTier(Math.min(options.cellSize.width, options.cellSize.height));
+  const allowFit = options.resourceDisplayMode === ResourceDisplayMode.CellWithText;
+  const { width, height, mode } = options.cellSize;
+  const effectiveMode = resolveCellSizeMode(mode, allowFit);
+  const cellTier = getCellSizeTier(effectiveMode === 'fit' ? height : Math.min(width, height));
   const isRichMode = options.resourceDisplayMode === ResourceDisplayMode.Rich;
 
   const frameWithValues = useMemo(
