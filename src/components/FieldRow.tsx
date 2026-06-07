@@ -200,19 +200,21 @@ export const FieldRow: React.FC<FieldRowProps> = ({ field, frame, rowIndex }) =>
         <>
           {label}
           <div className={styles.gaugeContainer}>
-            <BarGauge
-              value={displayValue}
-              field={field.config}
-              display={field.display}
-              theme={theme}
-              width={VALUE_WIDTH}
-              height={VALUE_HEIGHT}
-              orientation={VizOrientation.Horizontal}
-              displayMode={BarGaugeDisplayMode.Basic}
-              showUnfilled={true}
-              isOverflow={false}
-              valueDisplayMode={BarGaugeValueMode.Hidden}
-            />
+            {displayValue && (
+              <BarGauge
+                value={displayValue}
+                field={field.config}
+                display={field.display}
+                theme={theme}
+                width={VALUE_WIDTH}
+                height={VALUE_HEIGHT}
+                orientation={VizOrientation.Horizontal}
+                displayMode={BarGaugeDisplayMode.Basic}
+                showUnfilled={true}
+                isOverflow={false}
+                valueDisplayMode={BarGaugeValueMode.Hidden}
+              />
+            )}
           </div>
           {displayValue ? (
             <span className={styles.value} style={{ color: displayValue.color }}>
