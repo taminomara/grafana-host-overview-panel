@@ -3145,6 +3145,308 @@
         }
       ],
       "type": "taminomara-hostoverview-panel"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "displayMode": "auto"
+          },
+          "fieldMinMax": true,
+          "mappings": [],
+          "noValue": "unknown",
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Value"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Last seen"
+              },
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "green",
+                      "value": 0
+                    },
+                    {
+                      "color": "red",
+                      "value": 120
+                    }
+                  ]
+                }
+              },
+              {
+                "id": "unit",
+                "value": "s"
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 80
+      },
+      "id": 10,
+      "options": {
+        "cellSize": { "width": 30, "height": 30, "mode": "locked" },
+        "cellTextField": "cellTitle",
+        "cellTextPattern": "",
+        "capitalizeCellText": true,
+        "dataFrame": "",
+        "displayEntries": [],
+        "gridColumns": 5,
+        "gridType": "grid",
+        "groups": [
+          {
+            "drawBorder": true,
+            "entries": [],
+            "gridColumns": 5,
+            "gridType": "flow",
+            "groupKey": "host",
+            "id": "cookbook-transform-group",
+            "knownIds": "",
+            "knownIdsJoin": {
+              "foreignField": "",
+              "foreignFrame": "",
+              "id": "cookbook-transform-known-ids",
+              "keys": []
+            },
+            "showKeyName": false,
+            "showTitle": true,
+            "sortMode": "disabled",
+            "transparentBackground": false
+          }
+        ],
+        "idField": "name",
+        "idSortMode": "default",
+        "idSortPattern": "",
+        "knownIds": "",
+        "knownIdsJoin": {
+          "foreignField": "",
+          "foreignFrame": "",
+          "id": "cookbook-transform-known-ids-root",
+          "keys": []
+        },
+        "resourceDisplayMode": "cell-with-text",
+        "sidecarField": "",
+        "sidecarIds": "",
+        "sidecarJoin": {
+          "foreignField": "",
+          "foreignFrame": "",
+          "id": "cookbook-transform-sidecar",
+          "keys": []
+        },
+        "statusField": "Value",
+        "statusJoin": {
+          "foreignField": "",
+          "foreignFrame": "",
+          "id": "cookbook-transform-status",
+          "keys": []
+        },
+        "titleField": "",
+        "titlePattern": ""
+      },
+      "pluginVersion": "1.1.2",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "time() - last_over_time(container_last_seen{name!=\"\"}[24h])",
+          "format": "table",
+          "instant": true,
+          "legendFormat": "__auto",
+          "range": false,
+          "refId": "UP"
+        }
+      ],
+      "title": "Docker containers",
+      "transformations": [
+        {
+          "id": "extractFields",
+          "options": {
+            "delimiter": ",",
+            "format": "regexp",
+            "regExp": "/(?<host>[^:]*)(?::(?<port>\\d+))?/",
+            "source": "instance"
+          }
+        },
+        {
+          "id": "extractFields",
+          "options": {
+            "delimiter": ",",
+            "format": "regexp",
+            "regExp": "/^(?:grafana-host-overview-panel-|taminomara-)?(?<cellTitle>.*)$/",
+            "source": "name"
+          }
+        }
+      ],
+      "type": "taminomara-hostoverview-panel"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "displayMode": "auto"
+          },
+          "fieldMinMax": true,
+          "mappings": [],
+          "noValue": "unknown",
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Value"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Last seen"
+              },
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "green",
+                      "value": 0
+                    },
+                    {
+                      "color": "red",
+                      "value": 120
+                    }
+                  ]
+                }
+              },
+              {
+                "id": "unit",
+                "value": "s"
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 80
+      },
+      "id": 11,
+      "options": {
+        "cellSize": { "width": 30, "height": 30, "mode": "fit" },
+        "cellTextField": "",
+        "cellTextPattern": "",
+        "capitalizeCellText": true,
+        "dataFrame": "",
+        "displayEntries": [],
+        "gridColumns": 5,
+        "gridType": "flow",
+        "groups": [],
+        "idField": "name",
+        "idSortMode": "default",
+        "idSortPattern": "",
+        "knownIds": "",
+        "knownIdsJoin": {
+          "foreignField": "",
+          "foreignFrame": "",
+          "id": "cookbook-fit-known-ids",
+          "keys": []
+        },
+        "resourceDisplayMode": "cell-with-text",
+        "sidecarField": "",
+        "sidecarIds": "",
+        "sidecarJoin": {
+          "foreignField": "",
+          "foreignFrame": "",
+          "id": "cookbook-fit-sidecar",
+          "keys": []
+        },
+        "statusField": "Value",
+        "statusJoin": {
+          "foreignField": "",
+          "foreignFrame": "",
+          "id": "cookbook-fit-status",
+          "keys": []
+        },
+        "titleField": "",
+        "titlePattern": ""
+      },
+      "pluginVersion": "1.1.2",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "time() - last_over_time(container_last_seen{name!=\"\"}[24h])",
+          "format": "table",
+          "instant": true,
+          "legendFormat": "__auto",
+          "range": false,
+          "refId": "UP"
+        }
+      ],
+      "title": "Docker containers",
+      "type": "taminomara-hostoverview-panel"
     }
   ],
   "preload": false,

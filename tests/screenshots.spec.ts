@@ -536,3 +536,65 @@ test.describe('data-links', () => {
     await screenshot(panelEditPage.panel.locator, `${DOCS_IMG}/data-links-result.png`);
   });
 });
+
+// ── Cookbook: long resource names ──
+
+test.describe('long-labels', () => {
+  test('Truncated text (before)', async ({
+    page,
+    readProvisionedDashboard,
+    gotoPanelEditPage,
+  }) => {
+    const dashboard = await readProvisionedDashboard({ fileName: SCREENSHOTS_DASHBOARD });
+    const panelEditPage = await gotoPanelEditPage({ dashboard, id: '1' });
+    await screenshot(panelEditPage.panel.locator, `${DOCS_IMG}/long-labels-before.png`);
+  });
+
+  test('Transformations editor', async ({
+    page,
+    readProvisionedDashboard,
+    gotoPanelEditPage,
+  }) => {
+    const dashboard = await readProvisionedDashboard({ fileName: SCREENSHOTS_DASHBOARD });
+    await gotoPanelEditPage({ dashboard, id: '10' });
+    await page.getByTestId('data-testid Tab Transformations').click();
+    const panel = page.getByTestId('data-testid Panel editor data pane content');
+    await screenshot(panel, `${DOCS_IMG}/long-labels-transform.png`, { padding: 0 });
+  });
+
+  test('Result after transformation', async ({
+    page,
+    readProvisionedDashboard,
+    gotoPanelEditPage,
+  }) => {
+    const dashboard = await readProvisionedDashboard({ fileName: SCREENSHOTS_DASHBOARD });
+    const panelEditPage = await gotoPanelEditPage({ dashboard, id: '10' });
+    await screenshot(panelEditPage.panel.locator, `${DOCS_IMG}/long-labels-after-transform.png`);
+  });
+
+  test('Cell size control with fit mode', async ({
+    page,
+    readProvisionedDashboard,
+    gotoPanelEditPage,
+  }) => {
+    const dashboard = await readProvisionedDashboard({ fileName: SCREENSHOTS_DASHBOARD });
+    const panelEditPage = await gotoPanelEditPage({ dashboard, id: '11' });
+    const optionsSection = panelEditPage.getCustomOptions('Resource content');
+    await optionsSection.expand();
+    const options = optionsSection.element.getByLabel(/Cell size/).first();
+    await options.scrollIntoViewIfNeeded();
+    await screenshot(options, `${DOCS_IMG}/long-labels-size-control.png`, {
+      padding: [60, 32, 32, 32],
+    });
+  });
+
+  test('Result with auto-fit', async ({
+    page,
+    readProvisionedDashboard,
+    gotoPanelEditPage,
+  }) => {
+    const dashboard = await readProvisionedDashboard({ fileName: SCREENSHOTS_DASHBOARD });
+    const panelEditPage = await gotoPanelEditPage({ dashboard, id: '11' });
+    await screenshot(panelEditPage.panel.locator, `${DOCS_IMG}/long-labels-after-fit.png`);
+  });
+});

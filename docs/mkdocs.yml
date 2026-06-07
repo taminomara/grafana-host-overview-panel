@@ -41,3 +41,6 @@ nav:
       - Adding data to host groups: tutorial/joins-groups.md
       - Adding data links: tutorial/data-links.md
       - Sorting: tutorial/sorting.md
+  - Cookbook:
+      - cookbook/index.md
+      - Working with long resource names: cookbook/long-labels.md
