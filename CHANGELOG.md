@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased
+
+- Added option to make resource cells rectangular. The cell size setting now accepts independent width and height with a lock toggle that keeps them equal. Existing dashboards keep their previous square cell appearance.
+
 ## 1.1.2
 
 - Moved plugin documentation to ReadTheDocs.

@@ -948,6 +948,150 @@
             "mode": "absolute",
             "steps": [
               {
+                "color": "#ff0000",
+                "value": 0
+              },
+              {
+                "color": "#00ff00",
+                "value": 1
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 12,
+        "x": 0,
+        "y": 96
+      },
+      "id": 25,
+      "options": {
+        "cellSize": { "width": 40, "height": 16, "locked": false },
+        "cellTextField": "",
+        "cellTextPattern": "",
+        "dataFrame": "",
+        "displayEntries": [],
+        "gridColumns": 5,
+        "gridType": "flow",
+        "groups": [],
+        "idField": "name",
+        "idSortMode": "disabled",
+        "idSortPattern": "",
+        "knownIds": "",
+        "resourceDisplayMode": "cell",
+        "statusField": "status",
+        "titleField": "",
+        "titlePattern": ""
+      },
+      "pluginVersion": "1.1.0",
+      "targets": [
+        {
+          "csvContent": "name,status\r\nnode-a,1\r\nnode-b,0\r\nnode-c,1\r\nnode-d,1\r\nnode-e,0",
+          "datasource": {
+            "type": "grafana-testdata-datasource",
+            "uid": "trlxrdZVk"
+          },
+          "refId": "A",
+          "scenarioId": "csv_content"
+        }
+      ],
+      "title": "Rectangular cells",
+      "type": "taminomara-hostoverview-panel"
+    },
+    {
+      "datasource": {
+        "type": "grafana-testdata-datasource",
+        "uid": "trlxrdZVk"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "displayMode": "auto"
+          },
+          "fieldMinMax": true,
+          "mappings": [],
+          "noValue": "unknown",
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "#ff0000",
+                "value": 0
+              },
+              {
+                "color": "#00ff00",
+                "value": 1
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 12,
+        "x": 12,
+        "y": 96
+      },
+      "id": 26,
+      "options": {
+        "cellSize": 28,
+        "cellTextField": "",
+        "cellTextPattern": "",
+        "dataFrame": "",
+        "displayEntries": [],
+        "gridColumns": 5,
+        "gridType": "flow",
+        "groups": [],
+        "idField": "name",
+        "idSortMode": "disabled",
+        "idSortPattern": "",
+        "knownIds": "",
+        "resourceDisplayMode": "cell",
+        "statusField": "status",
+        "titleField": "",
+        "titlePattern": ""
+      },
+      "pluginVersion": "1.1.0",
+      "targets": [
+        {
+          "csvContent": "name,status\r\nnode-a,1\r\nnode-b,0\r\nnode-c,1\r\nnode-d,1\r\nnode-e,0",
+          "datasource": {
+            "type": "grafana-testdata-datasource",
+            "uid": "trlxrdZVk"
+          },
+          "refId": "A",
+          "scenarioId": "csv_content"
+        }
+      ],
+      "title": "Legacy cellSize number",
+      "type": "taminomara-hostoverview-panel"
+    },
+    {
+      "datasource": {
+        "type": "grafana-testdata-datasource",
+        "uid": "trlxrdZVk"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "displayMode": "auto"
+          },
+          "fieldMinMax": true,
+          "mappings": [],
+          "noValue": "unknown",
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
                 "color": "red",
                 "value": 0
               },

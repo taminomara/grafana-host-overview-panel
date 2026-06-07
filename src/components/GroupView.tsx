@@ -110,7 +110,7 @@ export const GroupView: React.FC<GroupViewProps> = ({ node, options }) => {
 
   const containerClass = useStyles2(getContainerStyles, node.gridType, node.gridColumns);
 
-  const cellTier = getCellSizeTier(options.cellSize ?? 20);
+  const cellTier = getCellSizeTier(Math.min(options.cellSize.width, options.cellSize.height));
   const isRichMode = options.resourceDisplayMode === ResourceDisplayMode.Rich;
 
   const frameWithValues = useMemo(

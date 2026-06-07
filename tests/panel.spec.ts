@@ -930,6 +930,40 @@ test.describe('cell size', () => {
     expect(box!.width).toBeGreaterThanOrEqual(35);
     expect(box!.height).toBeGreaterThanOrEqual(35);
   });
+
+  test('rectangular cells render with independent width and height', async ({
+    gotoPanelEditPage,
+    readProvisionedDashboard,
+  }) => {
+    const dashboard = await readProvisionedDashboard({ fileName: E2E_DASHBOARD });
+    const panelEditPage = await gotoPanelEditPage({ dashboard, id: '25' });
+    await expect(panelEditPage.panel.locator).not.toContainText('No data');
+    // Cell size is { width: 40, height: 16, locked: false }
+    const cells = panelEditPage.panel.locator.locator('div[style*="linear-gradient"]');
+    await expect(cells.first()).toBeVisible();
+    expect(await cells.count()).toBe(5);
+    const box = await cells.first().boundingBox();
+    expect(box).not.toBeNull();
+    expect(box!.width).toBe(40);
+    expect(box!.height).toBe(16);
+  });
+
+  test('legacy number cellSize migrates to a square cell', async ({
+    gotoPanelEditPage,
+    readProvisionedDashboard,
+  }) => {
+    const dashboard = await readProvisionedDashboard({ fileName: E2E_DASHBOARD });
+    const panelEditPage = await gotoPanelEditPage({ dashboard, id: '26' });
+    await expect(panelEditPage.panel.locator).not.toContainText('No data');
+    // cellSize: 28 (legacy number) → migrated to { 28, 28, locked: true }
+    const cells = panelEditPage.panel.locator.locator('div[style*="linear-gradient"]');
+    await expect(cells.first()).toBeVisible();
+    expect(await cells.count()).toBe(5);
+    const box = await cells.first().boundingBox();
+    expect(box).not.toBeNull();
+    expect(box!.width).toBe(28);
+    expect(box!.height).toBe(28);
+  });
 });
 
 // ── Criticality ──

@@ -1,5 +1,6 @@
 import { PanelModel } from '@grafana/data';
 import { DisplayEntry, Group, HostViewerOptions, ResourceDisplayMode, SeparatorDisplayEntry } from './types';
+import { DEFAULT_CELL_SIZE } from './library/cellSize';
 
 function renameJoinFields(obj: Record<string, unknown>) {
   if ('sourceFrame' in obj && !('foreignFrame' in obj)) {
@@ -86,6 +87,17 @@ export function migrationHandler(panel: PanelModel<Partial<HostViewerOptions>>) 
       foreignField: '',
       keys: [],
     };
+  }
+
+  const cellSize = (options as Record<string, unknown>).cellSize;
+  if (typeof cellSize === 'number') {
+    options.cellSize = { width: cellSize, height: cellSize, locked: true };
+  } else if (
+    cellSize === undefined ||
+    cellSize === null ||
+    typeof cellSize !== 'object'
+  ) {
+    options.cellSize = { ...DEFAULT_CELL_SIZE };
   }
 
   for (const group of options.groups ?? []) {

@@ -11,8 +11,10 @@ import {
 import { SortModeEditor, SortPatternEditor } from './components/settings/SortEditor';
 import { TemplatePatternEditor } from './components/settings/TemplatePatternEditor';
 import { ValueFieldEditor } from './components/settings/ValueFieldEditor';
+import { CellSizeEditor } from './components/settings/CellSizeEditor';
 import { HostViewerPanel } from './components/HostViewerPanel';
 import { migrationHandler } from './migrationHandler';
+import { DEFAULT_CELL_SIZE } from './library/cellSize';
 import {
   ResourceDisplayMode,
   FieldDisplayMode,
@@ -243,18 +245,14 @@ export const plugin = new PanelPlugin<HostViewerOptions, HostViewerFieldConfig>(
           ],
         },
       })
-      .addNumberInput({
+      .addCustomEditor({
+        id: 'cellSize',
         path: 'cellSize',
         name: 'Cell size',
-        description: 'Size of each resource cell in pixels',
-        defaultValue: 20,
+        description: 'Width × height of each resource cell in pixels',
+        editor: CellSizeEditor,
+        defaultValue: DEFAULT_CELL_SIZE,
         category: ['Resource content'],
-        settings: {
-          min: 4,
-          max: 100,
-          step: 1,
-          integer: true,
-        },
         showIf: (options) =>
           [ResourceDisplayMode.Cell, ResourceDisplayMode.CellWithText].includes(
             options.resourceDisplayMode

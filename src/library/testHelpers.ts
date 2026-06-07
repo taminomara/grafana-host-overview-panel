@@ -1,6 +1,7 @@
 import { DataFrame, dateTime, Field, FieldType } from '@grafana/data';
 import { ResourceDisplayMode, GridType, Group, HostViewerOptions, SortMode } from '../types';
 import { HostViewerPanelContext } from '../components/PanelContext';
+import { DEFAULT_CELL_SIZE } from './cellSize';
 
 let nextId = 0;
 
@@ -43,7 +44,7 @@ export function makeOptions(overrides?: Partial<HostViewerOptions>): HostViewerO
     displayEntries: [],
     groups: [],
     statusField: 'value',
-    cellSize: 20,
+    cellSize: { ...DEFAULT_CELL_SIZE },
     resourceDisplayMode: ResourceDisplayMode.Cell,
     titleField: '',
     titlePattern: '',

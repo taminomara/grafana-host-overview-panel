@@ -13,10 +13,12 @@ import { formatFieldValue } from './FieldRow';
 import { useHostViewerPanelContext } from './PanelContext';
 import { CellTooltip } from './CellTooltip';
 
-function getStyles(theme: GrafanaTheme2, cellSize: number) {
-  const tier = getCellSizeTier(cellSize);
-  const sidecarPad = Math.max(2, Math.min(10, Math.round(cellSize * 0.15)));
-  const innerSize = cellSize - sidecarPad * 2;
+function getStyles(theme: GrafanaTheme2, width: number, height: number) {
+  const minSize = Math.min(width, height);
+  const tier = getCellSizeTier(minSize);
+  const sidecarPad = Math.max(2, Math.min(10, Math.round(minSize * 0.15)));
+  const innerWidth = width - sidecarPad * 2;
+  const innerHeight = height - sidecarPad * 2;
   const borderRadius = String(tier === 'cellS' ? 0 : theme.shape.radius.sm);
   const innerRadius = parseFloat(borderRadius) / 2;
 
@@ -24,8 +26,8 @@ function getStyles(theme: GrafanaTheme2, cellSize: number) {
     cell: css({
       cursor: 'pointer',
       outlineStyle: 'none',
-      width: cellSize,
-      height: cellSize,
+      width,
+      height,
       borderRadius: borderRadius,
       display: 'flex',
     }),
@@ -42,19 +44,19 @@ function getStyles(theme: GrafanaTheme2, cellSize: number) {
       display: 'flex',
     }),
     cellText: css({
-      width: `calc(${cellSize}px - ${theme.spacing(1)})`,
-      height: `calc(${cellSize}px - ${theme.spacing(1)})`,
+      width: `calc(${width}px - ${theme.spacing(1)})`,
+      height: `calc(${height}px - ${theme.spacing(1)})`,
       textAlign: 'center',
       wordBreak: 'break-all',
       overflow: 'hidden',
       margin: theme.spacing(0.5),
-      lineHeight: `calc(${cellSize}px - ${theme.spacing(1)} + 1px)`,
+      lineHeight: `calc(${height}px - ${theme.spacing(1)} + 1px)`,
       textTransform: 'uppercase',
     }),
     cellTextSidecar: css({
-      width: `calc(${innerSize}px - ${theme.spacing(1)})`,
-      height: `calc(${innerSize}px - ${theme.spacing(1)})`,
-      lineHeight: `calc(${innerSize}px - ${theme.spacing(1)} + 1px)`,
+      width: `calc(${innerWidth}px - ${theme.spacing(1)})`,
+      height: `calc(${innerHeight}px - ${theme.spacing(1)})`,
+      lineHeight: `calc(${innerHeight}px - ${theme.spacing(1)} + 1px)`,
     }),
   };
 }
@@ -68,7 +70,7 @@ interface CellViewProps {
 
 export const CellView: React.FC<CellViewProps> = ({ node, frame, rowIndex, options }) => {
   const theme = useTheme2();
-  const styles = useStyles2(getStyles, options.cellSize ?? 20);
+  const styles = useStyles2(getStyles, options.cellSize.width, options.cellSize.height);
   const context = useHostViewerPanelContext();
 
   const idField = frame.fieldByName.get(options.idField);

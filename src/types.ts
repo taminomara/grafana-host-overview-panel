@@ -51,13 +51,19 @@ export type DisplayEntry =
   | HeadingDisplayEntry
   | SeparatorDisplayEntry;
 
+export interface CellSize {
+  width: number;
+  height: number;
+  locked: boolean;
+}
+
 export interface HostViewerOptions {
   dataFrame?: string;
   displayEntries: DisplayEntry[];
   groups: Group[];
   statusField: string;
   statusJoin: Join;
-  cellSize: number;
+  cellSize: CellSize;
   idField: string;
   idSortMode: SortMode;
   idSortPattern: string;
