@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 1.2.0
 
 - Added a "Cell size" panel option that controls cell width and height independently. The control supports three modes: free (width and height edited separately), locked (height drives both dimensions), and — in "Cell with text" display mode — auto-fit to text content. Existing dashboards keep their previous square cell appearance.
 - Added a "Capitalize cell text" toggle (default on) that controls the uppercase styling of cell text in "Cell with text" display mode.
