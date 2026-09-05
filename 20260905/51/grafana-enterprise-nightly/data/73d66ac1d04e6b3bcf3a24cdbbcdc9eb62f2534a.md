@@ -1,0 +1,498 @@
+# Page snapshot
+
+```yaml
+- generic [ref=e3]:
+  - generic [ref=e4]:
+    - link "Skip to main content" [ref=e5] [cursor=pointer]:
+      - /url: "#pageContent"
+      - generic [ref=e6]: Skip to main content
+    - generic [ref=e7]:
+      - generic [ref=e8]:
+        - generic [ref=e9]:
+          - link "Grafana" [ref=e10] [cursor=pointer]:
+            - /url: /
+            - img "Grafana" [ref=e11]
+          - link "Grafana" [ref=e12] [cursor=pointer]:
+            - /url: /
+        - button "Close menu" [ref=e13] [cursor=pointer]:
+          - img [ref=e14]
+      - navigation "Navigation" [ref=e16]:
+        - list "Navigation" [ref=e21]:
+          - listitem [ref=e22]:
+            - generic [ref=e23]:
+              - link "Bookmarks" [ref=e26] [cursor=pointer]:
+                - /url: /bookmarks
+                - generic [ref=e28]:
+                  - img [ref=e29]
+                  - paragraph [ref=e31]: Bookmarks
+              - 'button "Expand section: Bookmarks" [ref=e33] [cursor=pointer]':
+                - img [ref=e34]
+          - listitem [ref=e36]:
+            - generic [ref=e37]:
+              - link "Starred" [ref=e40] [cursor=pointer]:
+                - /url: /dashboards?starred
+                - generic [ref=e42]:
+                  - img [ref=e43]
+                  - paragraph [ref=e45]: Starred
+              - 'button "Expand section: Starred" [ref=e48] [cursor=pointer]':
+                - img [ref=e49]
+          - listitem [ref=e51]:
+            - generic [ref=e52]:
+              - link "Dashboards" [ref=e55] [cursor=pointer]:
+                - /url: /dashboards
+                - generic [ref=e57]:
+                  - img [ref=e58]
+                  - paragraph [ref=e60]: Dashboards
+              - 'button "Expand section: Dashboards" [ref=e63] [cursor=pointer]':
+                - img [ref=e64]
+          - listitem [ref=e66]:
+            - link "Explore" [ref=e70] [cursor=pointer]:
+              - /url: /explore
+              - generic [ref=e72]:
+                - img [ref=e73]
+                - paragraph [ref=e75]: Explore
+          - listitem [ref=e77]:
+            - generic [ref=e78]:
+              - link "Drilldown" [ref=e81] [cursor=pointer]:
+                - /url: /drilldown
+                - generic [ref=e83]:
+                  - img [ref=e84]
+                  - paragraph [ref=e89]: Drilldown
+              - 'button "Expand section: Drilldown" [ref=e92] [cursor=pointer]':
+                - img [ref=e93]
+          - listitem [ref=e95]:
+            - generic [ref=e96]:
+              - link "AI" [ref=e99] [cursor=pointer]:
+                - /url: /a/grafana-assistant-app
+                - generic [ref=e101]:
+                  - img [ref=e102]
+                  - paragraph [ref=e105]: AI
+              - 'button "Expand section: AI" [ref=e108] [cursor=pointer]':
+                - img [ref=e109]
+          - listitem [ref=e111]:
+            - generic [ref=e112]:
+              - link "Alerting" [ref=e115] [cursor=pointer]:
+                - /url: /alerting
+                - generic [ref=e117]:
+                  - img [ref=e118]
+                  - paragraph [ref=e120]: Alerting
+              - 'button "Expand section: Alerting" [ref=e123] [cursor=pointer]':
+                - img [ref=e124]
+          - listitem [ref=e126]:
+            - generic [ref=e127]:
+              - link "Connections" [ref=e130] [cursor=pointer]:
+                - /url: /connections
+                - generic [ref=e132]:
+                  - img [ref=e133]
+                  - paragraph [ref=e135]: Connections
+              - 'button "Expand section: Connections" [ref=e138] [cursor=pointer]':
+                - img [ref=e139]
+          - listitem [ref=e141]:
+            - generic [ref=e142]:
+              - link "Administration" [ref=e145] [cursor=pointer]:
+                - /url: /admin
+                - generic [ref=e147]:
+                  - img [ref=e148]
+                  - paragraph [ref=e150]: Administration
+              - 'button "Expand section: Administration" [ref=e153] [cursor=pointer]':
+                - img [ref=e154]
+        - separator [ref=e156]
+        - button "Undock menu" [ref=e158] [cursor=pointer]:
+          - img [ref=e159]
+    - banner [ref=e161]:
+      - generic [ref=e162]:
+        - navigation "Breadcrumbs" [ref=e164]:
+          - list [ref=e165]:
+            - listitem [ref=e166]:
+              - link "Dashboards" [ref=e167] [cursor=pointer]:
+                - /url: /dashboards
+              - img [ref=e169]
+            - listitem [ref=e171]:
+              - link "tests" [ref=e172] [cursor=pointer]:
+                - /url: /dashboards/f/bfxb2fz4ukwlce/tests
+              - img [ref=e174]
+            - listitem [ref=e176]:
+              - link "E2E Tests" [ref=e177] [cursor=pointer]:
+                - /url: /d/e2e-tests/e2e-tests?from=now-1h&to=now&timezone=utc
+              - img [ref=e179]
+            - listitem [ref=e181]:
+              - generic "Edit panel" [ref=e182]
+        - generic [ref=e183]:
+          - generic [ref=e185]:
+            - img [ref=e187]
+            - button "Search..." [ref=e189] [cursor=pointer]
+            - generic [ref=e191]: ctrl+k
+          - button "New" [ref=e192] [cursor=pointer]:
+            - img [ref=e193]
+            - img [ref=e195]
+          - button "Help" [ref=e198] [cursor=pointer]:
+            - img [ref=e199]
+          - button "Open Grafana Assistant" [ref=e202] [cursor=pointer]:
+            - img [ref=e203]
+          - button "Profile" [ref=e207] [cursor=pointer]:
+            - img "User avatar" [ref=e208]
+    - main [ref=e211]:
+      - generic [ref=e214]:
+        - generic [ref=e215]:
+          - generic [ref=e216]:
+            - generic [ref=e217]:
+              - generic [ref=e218]:
+                - button "Move 30m backward" [ref=e219] [cursor=pointer]:
+                  - img [ref=e220]
+                - 'button "Time range selected: Last 1 hour" [ref=e222] [cursor=pointer]':
+                  - img [ref=e223]
+                  - generic [ref=e226]:
+                    - generic [ref=e227]: Last 1 hour
+                    - generic [ref=e228]: UTC
+                  - img [ref=e229]
+                - button "Move time range forwards" [ref=e231] [cursor=pointer]:
+                  - img [ref=e232]
+                - button "Zoom out time range" [ref=e234] [cursor=pointer]:
+                  - img [ref=e235]
+              - generic [ref=e237]:
+                - button "Refresh" [ref=e238] [cursor=pointer]:
+                  - img [ref=e239]
+                  - generic [ref=e243]: Refresh
+                - button "Auto refresh turned off. Choose refresh time interval" [ref=e244] [cursor=pointer]:
+                  - img [ref=e245]
+            - generic [ref=e247]:
+              - generic [ref=e248]:
+                - button "Save" [ref=e249] [cursor=pointer]:
+                  - generic [ref=e250]: Save
+                - button "More save options" [ref=e251] [cursor=pointer]:
+                  - img [ref=e252]
+              - button "Discard" [disabled] [ref=e254]:
+                - generic [ref=e255]: Discard
+              - button "Back" [ref=e256] [cursor=pointer]:
+                - img [ref=e257]
+                - generic [ref=e259]: Back
+          - generic [ref=e261]:
+            - generic [ref=e262] [cursor=pointer]: Table view
+            - generic [ref=e263]:
+              - switch "Toggle table view" [ref=e264]
+              - img
+        - generic [ref=e266]:
+          - generic [ref=e268]:
+            - region "Grid layout" [ref=e273]:
+              - heading "Grid layout" [level=2] [ref=e276]
+              - generic [ref=e280]:
+                - generic [ref=e283] [cursor=pointer]: node-a
+                - generic [ref=e286] [cursor=pointer]: node-b
+                - generic [ref=e289] [cursor=pointer]: node-c
+                - generic [ref=e292] [cursor=pointer]: node-d
+                - generic [ref=e295] [cursor=pointer]: node-e
+            - separator "Pane resize widget" [ref=e296]
+            - generic [ref=e298]:
+              - tablist [ref=e300]:
+                - tab "Queries1" [selected] [ref=e302] [cursor=pointer]:
+                  - img [ref=e303]
+                  - text: Queries1
+                - tab "Transformations0" [ref=e305] [cursor=pointer]:
+                  - img [ref=e306]
+                  - text: Transformations0
+              - generic [ref=e312]:
+                - generic [ref=e314]:
+                  - generic [ref=e315]: Data source
+                  - generic [ref=e320] [cursor=pointer]:
+                    - img "TestData logo" [ref=e322]
+                    - combobox "Select a data source" [ref=e323]
+                    - img [ref=e325]
+                  - button "Open data source help" [ref=e328] [cursor=pointer]:
+                    - img [ref=e329]
+                  - generic [ref=e334]:
+                    - button "Expand query row" [ref=e335] [cursor=pointer]:
+                      - img [ref=e336]
+                    - generic [ref=e339] [cursor=pointer]: Query options
+                    - generic [ref=e340]: MD = auto = 918
+                    - generic [ref=e341]: Interval = 5s
+                  - button "Query inspector" [ref=e343] [cursor=pointer]:
+                    - generic [ref=e344]: Query inspector
+                - generic [ref=e349]:
+                  - generic [ref=e350]:
+                    - button "Collapse query row" [expanded] [ref=e351] [cursor=pointer]:
+                      - img [ref=e352]
+                    - generic [ref=e354]:
+                      - button "A" [ref=e355] [cursor=pointer]:
+                        - generic [ref=e356]: A
+                      - emphasis [ref=e357]: (TestData DB)
+                  - generic [ref=e358]:
+                    - button "Duplicate query" [ref=e360] [cursor=pointer]:
+                      - img [ref=e361]
+                    - button "Hide response" [ref=e363] [cursor=pointer]:
+                      - img [ref=e364]
+                    - button "Remove query" [ref=e366] [cursor=pointer]:
+                      - img [ref=e367]
+                    - button "Drag and drop to reorder" [ref=e368]:
+                      - img [ref=e369]
+                - generic [ref=e370]:
+                  - button "Add query" [ref=e371] [cursor=pointer]:
+                    - img [ref=e372]
+                    - generic [ref=e374]: Add query
+                  - button "Add from saved queries" [ref=e375] [cursor=pointer]:
+                    - img [ref=e376]
+                    - generic [ref=e378]: Add from saved queries
+                  - button "Expression" [ref=e379] [cursor=pointer]:
+                    - img [ref=e380]
+                    - generic [ref=e382]: Expression
+          - separator "Pane resize widget" [ref=e383]
+          - generic [ref=e384]:
+            - generic [ref=e385]:
+              - generic [ref=e386]:
+                - img "Host Overview" [ref=e387]
+                - heading "Host Overview" [level=2] [ref=e388]
+                - button "Change visualization" [ref=e389] [cursor=pointer]:
+                  - generic [ref=e390]: Change
+              - generic [ref=e391]:
+                - button "Show only overrides" [ref=e392] [cursor=pointer]:
+                  - img [ref=e393]
+                - button "Search options" [ref=e394] [cursor=pointer]:
+                  - img [ref=e395]
+            - generic [ref=e398]:
+              - generic [ref=e399]:
+                - generic [ref=e400] [cursor=pointer]:
+                  - heading "Panel options" [level=3] [ref=e401]
+                  - button "Collapse Panel options category" [expanded] [ref=e402]:
+                    - img [ref=e403]
+                - generic [ref=e404]:
+                  - generic [ref=e405]:
+                    - generic [ref=e409]: Title
+                    - textbox "Title" [ref=e414]: Grid layout
+                  - generic [ref=e415]:
+                    - generic [ref=e419]: Description
+                    - textbox "Description" [ref=e422]
+                  - generic [ref=e423]:
+                    - generic [ref=e427]: Transparent background
+                    - generic [ref=e430]:
+                      - switch "Transparent background" [ref=e431]
+                      - img
+                  - generic [ref=e434] [cursor=pointer]:
+                    - heading "Panel links" [level=3] [ref=e435]
+                    - button "Expand Panel links category" [ref=e436]:
+                      - img [ref=e437]
+                  - generic [ref=e440] [cursor=pointer]:
+                    - heading "Repeat options" [level=3] [ref=e441]
+                    - button "Expand Repeat options category" [ref=e442]:
+                      - img [ref=e443]
+                  - generic [ref=e446] [cursor=pointer]:
+                    - heading "Show / hide rules" [level=3] [ref=e447]:
+                      - generic [ref=e448]:
+                        - generic [ref=e449]: Show / hide rules
+                        - img [ref=e450]
+                    - img [ref=e451]
+              - generic [ref=e452]:
+                - generic [ref=e453] [cursor=pointer]:
+                  - heading "Host overview" [level=3] [ref=e454]
+                  - button "Collapse Host overview category" [expanded] [ref=e455]:
+                    - img [ref=e456]
+                - generic [ref=e458]:
+                  - generic [ref=e461]:
+                    - generic [ref=e462]: Data frame
+                    - generic [ref=e463]: Which data frame to visualize. Uses the first one when empty
+                  - generic [ref=e467]:
+                    - combobox "Data frame Which data frame to visualize. Uses the first one when empty" [ref=e468] [cursor=pointer]
+                    - generic:
+                      - img
+              - generic [ref=e469]:
+                - generic [ref=e470] [cursor=pointer]:
+                  - heading "Grouping and layout" [level=3] [ref=e471]
+                  - button "Collapse Grouping and layout category" [expanded] [ref=e472]:
+                    - img [ref=e473]
+                - generic [ref=e474]:
+                  - generic [ref=e475]:
+                    - generic [ref=e479]: Resource groups
+                    - button "Add Group" [ref=e485] [cursor=pointer]:
+                      - generic [ref=e486]: Add new grouping rule
+                  - generic [ref=e487]:
+                    - generic [ref=e490]:
+                      - generic [ref=e491]: Resources layout
+                      - generic [ref=e492]: Layout of elements in the innermost group
+                    - generic [ref=e495] [cursor=pointer]:
+                      - log [ref=e497]
+                      - generic [ref=e498]:
+                        - generic [ref=e499]:
+                          - generic [ref=e500]:
+                            - img [ref=e501]
+                            - text: Grid
+                          - combobox "Resources layout Layout of elements in the innermost group" [ref=e503]
+                        - img [ref=e505]
+                  - generic [ref=e507]:
+                    - generic [ref=e511]: Grid columns
+                    - generic [ref=e514]:
+                      - spinbutton "Grid columns" [ref=e517]: "3"
+                      - generic [ref=e518]: "Minimum: 1"
+                  - generic [ref=e519]:
+                    - generic [ref=e522]:
+                      - generic [ref=e523]: Default border color
+                      - generic [ref=e524]: Uses theme border color when empty
+                    - button "Override theme default" [ref=e528] [cursor=pointer]:
+                      - generic [ref=e529]: Override theme default
+              - generic [ref=e530]:
+                - generic [ref=e531] [cursor=pointer]:
+                  - heading "Resource" [level=3] [ref=e532]
+                  - button "Collapse Resource category" [expanded] [ref=e533]:
+                    - img [ref=e534]
+                - generic "Resource" [ref=e535]:
+                  - generic [ref=e536]:
+                    - generic [ref=e539]:
+                      - generic [ref=e540]: ID field
+                      - generic [ref=e541]: Field that represents id of the resource, used primarily for sorting and detecting missing data
+                    - generic [ref=e545]:
+                      - combobox "ID field Field that represents id of the resource, used primarily for sorting and detecting missing data" [ref=e546] [cursor=pointer]: name
+                      - generic:
+                        - button "Clear value" [ref=e547] [cursor=pointer]
+                        - img
+                  - generic [ref=e549]:
+                    - generic [ref=e553]: Sort mode
+                    - generic [ref=e557]:
+                      - combobox "Sort mode" [ref=e558] [cursor=pointer]: Disabled
+                      - generic:
+                        - img
+                  - generic [ref=e559]:
+                    - generic [ref=e562]:
+                      - generic [ref=e563]: Known IDs
+                      - generic [ref=e564]: List of IDs that will be shown in each group even if datasource returns no data for them
+                    - textbox "Known IDs List of IDs that will be shown in each group even if datasource returns no data for them" [ref=e569]:
+                      - /placeholder: value1, value2, ...
+                  - generic [ref=e570]:
+                    - generic [ref=e573]:
+                      - generic [ref=e574]: Known IDs from join
+                      - generic [ref=e575]: Read known IDs from a field in another data frame
+                    - generic [ref=e578]:
+                      - generic [ref=e579]:
+                        - generic [ref=e582]: Foreign Frame
+                        - generic [ref=e586]:
+                          - combobox "Foreign Frame" [ref=e587] [cursor=pointer]
+                          - generic:
+                            - img
+                      - generic [ref=e588]:
+                        - generic [ref=e590]:
+                          - generic [ref=e591]: Foreign Field
+                          - generic [ref=e592]: Field from the foreign frame
+                        - generic [ref=e596]:
+                          - combobox "Foreign Field Field from the foreign frame" [ref=e597] [cursor=pointer]
+                          - generic:
+                            - img
+                      - generic [ref=e598]:
+                        - generic [ref=e600]:
+                          - generic [ref=e601]: Keys
+                          - generic [ref=e602]: How to match rows between frames
+                        - button "Add key" [ref=e605] [cursor=pointer]:
+                          - img [ref=e606]
+                          - generic [ref=e608]: Add key
+              - generic [ref=e609]:
+                - generic [ref=e610] [cursor=pointer]:
+                  - heading "Resource content" [level=3] [ref=e611]
+                  - button "Collapse Resource content category" [expanded] [ref=e612]:
+                    - img [ref=e613]
+                - generic "Resource" [ref=e614]:
+                  - generic [ref=e615]:
+                    - generic [ref=e618]:
+                      - generic [ref=e619]: Status field
+                      - generic [ref=e620]: Field that represents status of the resource
+                    - generic [ref=e624]:
+                      - combobox "Status field Field that represents status of the resource" [ref=e625] [cursor=pointer]: status
+                      - generic:
+                        - button "Clear value" [ref=e626] [cursor=pointer]
+                        - img
+                  - generic [ref=e628]:
+                    - generic [ref=e631]:
+                      - generic [ref=e632]: Resource display mode
+                      - generic [ref=e633]: How to display each resource
+                    - generic [ref=e636] [cursor=pointer]:
+                      - log [ref=e638]
+                      - generic [ref=e639]:
+                        - generic [ref=e640]:
+                          - generic [ref=e641]: Cell with text
+                          - combobox "Resource display mode How to display each resource" [ref=e643]
+                        - img [ref=e645]
+                  - generic [ref=e647]:
+                    - generic [ref=e650]:
+                      - generic [ref=e651]: Cell size
+                      - generic [ref=e652]: Width × height of each resource cell in pixels
+                    - generic [ref=e655]:
+                      - textbox "Cell width" [disabled] [ref=e658]: "20"
+                      - generic [ref=e659]: ×
+                      - spinbutton "Cell height" [ref=e662]: "20"
+                      - button "Width is locked to height. Click to fit cell width to text." [ref=e663] [cursor=pointer]:
+                        - img [ref=e664]
+                  - generic [ref=e665]:
+                    - generic [ref=e668]:
+                      - generic [ref=e669]: Cell text field
+                      - generic [ref=e670]: The field to display in the cell
+                    - generic [ref=e674]:
+                      - combobox "Cell text field The field to display in the cell" [ref=e675] [cursor=pointer]: name
+                      - generic:
+                        - button "Clear value" [ref=e676] [cursor=pointer]
+                        - img
+                  - generic [ref=e678]:
+                    - generic [ref=e681]:
+                      - generic [ref=e682]: Capitalize cell text
+                      - generic [ref=e683]: Render cell text in upper case
+                    - generic [ref=e686]:
+                      - switch "Capitalize cell text Render cell text in upper case" [checked] [ref=e687]
+                      - img
+                  - generic [ref=e689]:
+                    - generic [ref=e692]:
+                      - generic [ref=e693]: Title field
+                      - generic [ref=e694]: The field to display as the title in rich table cards and cell tooltips
+                    - generic [ref=e698]:
+                      - combobox "Title field The field to display as the title in rich table cards and cell tooltips" [ref=e699] [cursor=pointer]
+                      - generic:
+                        - img
+                  - generic [ref=e700]:
+                    - generic [ref=e703]:
+                      - generic [ref=e704]: Fields and joins
+                      - generic [ref=e705]: Fields and joined data to display in each resource
+                    - button "Add entry" [ref=e711] [cursor=pointer]:
+                      - generic [ref=e712]: Add entry
+              - generic [ref=e713]:
+                - generic [ref=e714] [cursor=pointer]:
+                  - heading "Sidecar" [level=3] [ref=e715]
+                  - button "Collapse Sidecar category" [expanded] [ref=e716]:
+                    - img [ref=e717]
+                - generic "Sidecar" [ref=e718]:
+                  - generic [ref=e719]:
+                    - generic [ref=e722]:
+                      - generic [ref=e723]: Sidecar field
+                      - generic [ref=e724]: Field that designates a resource as a sidecar (boolean, numeric, or string)
+                    - generic [ref=e728]:
+                      - combobox "Sidecar field Field that designates a resource as a sidecar (boolean, numeric, or string)" [ref=e729] [cursor=pointer]
+                      - generic:
+                        - img
+                  - generic [ref=e730]:
+                    - generic [ref=e733]:
+                      - generic [ref=e734]: Sidecar IDs
+                      - generic [ref=e735]: Comma-separated list of resource IDs that are sidecars
+                    - textbox "Sidecar IDs Comma-separated list of resource IDs that are sidecars" [ref=e740]:
+                      - /placeholder: value1, value2, ...
+                  - generic [ref=e741]:
+                    - generic [ref=e744]:
+                      - generic [ref=e745]: Sidecar join
+                      - generic [ref=e746]: Look up sidecar designation from a field in another data frame
+                    - generic [ref=e749]:
+                      - generic [ref=e750]:
+                        - generic [ref=e753]: Foreign Frame
+                        - generic [ref=e757]:
+                          - combobox "Foreign Frame" [ref=e758] [cursor=pointer]
+                          - generic:
+                            - img
+                      - generic [ref=e759]:
+                        - generic [ref=e761]:
+                          - generic [ref=e762]: Foreign Field
+                          - generic [ref=e763]: Field from the foreign frame
+                        - generic [ref=e767]:
+                          - combobox "Foreign Field Field from the foreign frame" [ref=e768] [cursor=pointer]
+                          - generic:
+                            - img
+                      - generic [ref=e769]:
+                        - generic [ref=e771]:
+                          - generic [ref=e772]: Keys
+                          - generic [ref=e773]: How to match rows between frames
+                        - button "Add key" [ref=e776] [cursor=pointer]:
+                          - img [ref=e777]
+                          - generic [ref=e779]: Add key
+              - button "Add field override" [ref=e781] [cursor=pointer]:
+                - img [ref=e782]
+                - generic [ref=e784]: Add field override
+  - log [ref=e785]
+```
